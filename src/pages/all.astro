@@ -20,8 +20,8 @@ const cards = (await getCollection("cards"))[0].data
 
 <Layout title="Grimoire" description="Toutes les cartes">
 	<Header h1="Grimoire" subtitle="Toutes les cartes" />
-	<div class="mx-4">
-		<div class="my-12 m-auto max-w-6xl">
+	<div class="mr-2 sm:mr-4 ml-10">
+		<div class="mb-12 mt-10 m-auto max-w-6xl">
 			<Grimoire themes={themes} cards={cards} />
 		</div>
 	</div>

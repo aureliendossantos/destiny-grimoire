@@ -15,7 +15,8 @@ const { card, platform, username } = Astro.props
 		? `/${platform}/${username}/${card.cardId}`
 		: `/${card.cardId}`}
 	style={cardImageStyle(card.highResolution.image, true)}
-	class="aspect-card !bg-contain shadow hover:shadow-xl rounded-sm transition duration-300 ease-out hover:scale-105 px-3 sm:px-4 md:px-5 py-3 md:py-4 flex flex-col justify-end"
+	class="aspect-card !bg-contain shadow hover:shadow-xl rounded-sm transition duration-300 ease-out hover:scale-105 px-3 sm:px-4 md:px-5 py-3 md:py-4 flex flex-col justify-end overflow-hidden"
+	transition:name={String(card.cardId)}
 >
 	<h3
 		class="font-bold text-slate-100 text-xs sm:text-sm lg:text-base lg:leading-snug drop-shadow-md"
