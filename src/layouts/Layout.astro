@@ -1,6 +1,7 @@
 ---
 import "$styles/fonts.css"
 import "@fontsource/eb-garamond/700.css"
+import { ViewTransitions } from "astro:transitions"
 
 interface Props {
 	title: string
@@ -19,6 +20,7 @@ const { title, description } = Astro.props
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<ViewTransitions />
 	</head>
 	<body class="bg-slate-50 text-slate-950">
 		<slot />

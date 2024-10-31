@@ -7,6 +7,7 @@ const { card, userCard, userBonus } = Astro.props
 		<div class="text-slate-700 grid gap-x-4 grid-cols-3 md:block">
 			<img
 				class="mb-4 shadow rounded-sm order-last md:order-first"
+				transition:name={String(card.cardId)}
 				src={"https://www.bungie.net" + card.highResolution.image.sheetPath}
 			/>
 			<div class="col-span-2 mb-7">
