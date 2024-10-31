@@ -5,6 +5,7 @@ export async function bungieQuery(path: string) {
 			headers: { "X-API-Key": import.meta.env.API_KEY },
 		})
 		const data = await response.json()
+		console.log("bungieQuery path:", path, "result:", data)
 		return data.Response
 	} catch (error) {
 		console.error("Error in bungieQuery:", error)
