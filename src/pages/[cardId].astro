@@ -14,6 +14,9 @@ export async function getStaticPaths() {
 const { card } = Astro.props
 ---
 
-<Layout title={`${card.cardName} · Grimoire`} description={card.cardIntro || card.cardDescription}>
+<Layout
+	title={`${card.cardName} · Grimoire`}
+	description={card.cardIntro || card.cardDescription || ""}
+>
 	<CardPage card={card} />
 </Layout>
