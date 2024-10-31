@@ -31,7 +31,10 @@ const themes = (await getCollection("grimoire"))[0].data.themeCollection.sort(
 const cards = (await getCollection("cards"))[0].data
 ---
 
-<Layout title={`Grimoire de ${username}`}>
+<Layout
+	title={`Grimoire de ${username}`}
+	description={`${userGrimoire.cardCollection.length} cartes // ${userGrimoire.score} points`}
+>
 	<Header
 		h1={username!}
 		subtitle={`${userGrimoire.cardCollection.length} cartes // ${userGrimoire.score} points`}

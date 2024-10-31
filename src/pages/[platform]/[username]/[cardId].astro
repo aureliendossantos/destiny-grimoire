@@ -25,6 +25,9 @@ const userCard = userGrimoire.cardCollection.find(
 const userBonus = userGrimoire.bonuses.find((b: any) => b.cardId == card.cardId)
 ---
 
-<Layout title={`${card.cardName} · Grimoire`}>
+<Layout
+	title={`${card.cardName} · Grimoire`}
+	description={card.cardIntro || card.cardDescription}
+>
 	<CardPage card={card} userCard={userCard} userBonus={userBonus} />
 </Layout>

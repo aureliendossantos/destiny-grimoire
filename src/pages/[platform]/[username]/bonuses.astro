@@ -23,9 +23,19 @@ const cards = Object.entries((await getCollection("cards"))[0].data).map(
 	([_, card]) => card
 )
 const userBonuses = userGrimoire.bonuses
+
+const activeBonuses = userBonuses.filter(
+	(b: any) => b.value >= b.threshold
+).length
+const inProgressBonuses = userBonuses.filter(
+	(b: any) => b.value < b.threshold
+).length
 ---
 
-<Layout title={`Grimoire de ${username}`}>
+<Layout
+	title={`Bonus de Grimoire de ${username}`}
+	description={`${activeBonuses} bonus actifs, ${inProgressBonuses} en progression`}
+>
 	<Header
 		h1={username!}
 		subtitle={`${userGrimoire.cardCollection.length} cartes // ${userGrimoire.score} points`}
@@ -41,7 +51,7 @@ const userBonuses = userGrimoire.bonuses
 					class="mb-4 text-slate-500 text-lg font-serif tracking-widest"
 					style={{ fontFeatureSettings: '"c2sc", "smcp"' }}
 				>
-					{userBonuses.filter((b: any) => b.value >= b.threshold).length} bonus actifs
+					{activeBonuses} bonus actifs
 				</h2>
 				<div class="flex flex-col divide-y divide-slate-200">
 					{
@@ -74,7 +84,7 @@ const userBonuses = userGrimoire.bonuses
 					class="mb-4 text-slate-500 text-lg font-serif tracking-widest"
 					style={{ fontFeatureSettings: '"c2sc", "smcp"' }}
 				>
-					{userBonuses.filter((b: any) => b.value < b.threshold).length} en progression
+					{inProgressBonuses} en progression
 				</h2>
 				<div class="flex flex-col divide-y divide-slate-200">
 					{

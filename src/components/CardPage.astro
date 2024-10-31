@@ -9,7 +9,7 @@ const { card, userCard, userBonus } = Astro.props
 				class="mb-4 shadow rounded-sm order-last md:order-first"
 				src={"https://www.bungie.net" + card.highResolution.image.sheetPath}
 			/>
-			<div class="col-span-2">
+			<div class="col-span-2 mb-7">
 			<h1 class="font-bold leading-snug mb-[2px]" set:html={card.cardName} />
 			<div class="text-sm text-slate-700">
 				<div>
