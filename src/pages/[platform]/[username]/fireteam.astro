@@ -1,0 +1,51 @@
+---
+export const prerender = false
+
+import Header from "$components/Header.astro"
+import Layout from "$layouts/Layout.astro"
+import {
+	getMembershipId,
+	getUserGrimoire,
+	getUserSummary,
+} from "../../../utils/helpers"
+
+const { platform, username } = Astro.params
+if (platform != "psn" && platform != "xbox" && !username)
+	return Astro.redirect("/404")
+const membershipType = platform == "xbox" ? 1 : 2
+const membershipId = await getMembershipId(membershipType, username!)
+if (!membershipId) return Astro.redirect("/404")
+
+const userGrimoire = await getUserGrimoire(membershipType, membershipId)
+if (!userGrimoire) return Astro.redirect("/404")
+
+const summary = await getUserSummary(membershipType, membershipId)
+const bestCharacter = summary.characters.sort(
+	(a: any, b: any) => b.characterBase.powerLevel - a.characterBase.powerLevel
+)[0]
+---
+
+<Layout title={`Escouade de ${username}`}>
+	<Header
+		h1={username!}
+		subtitle={`${userGrimoire.cardCollection.length} cartes // ${userGrimoire.score} points`}
+		grimoire={`/${platform}/${username}`}
+		bonus={`/${platform}/${username}/bonuses`}
+	/>
+	<div class="m-12">
+		<div>
+			<div class="flex h-[48px] relative">
+				<img src={`https://www.bungie.net${bestCharacter.emblemPath}`} />
+				<img src={`https://www.bungie.net${bestCharacter.backgroundPath}`} />
+				<div
+					class="absolute top-0 left-12 text-slate-50 text-base h-full leading-tight font-semibold px-2 flex flex-col justify-center drop-shadow"
+				>
+					<div>{username}</div>
+					<div class="text-xs font-semibold pb-[1px]">
+						{userGrimoire.cardCollection.length} cartes // {userGrimoire.score} points
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</Layout>

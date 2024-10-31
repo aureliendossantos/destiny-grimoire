@@ -1,0 +1,28 @@
+---
+import { getCollection } from "astro:content"
+import Layout from "$layouts/Layout.astro"
+import Grimoire from "$components/Grimoire.astro"
+import Header from "$components/Header.astro"
+
+const themesOrder = [
+	"Allies",
+	"Places",
+	"Enemies",
+	"Guardian",
+	"Inventory",
+	"Activities",
+]
+const themes = (await getCollection("grimoire"))[0].data.themeCollection.sort(
+	(a, b) => themesOrder.indexOf(a.themeId) - themesOrder.indexOf(b.themeId)
+)
+const cards = (await getCollection("cards"))[0].data
+---
+
+<Layout title="Grimoire">
+	<Header h1="Grimoire" subtitle="Toutes les cartes" />
+	<div class="mx-4">
+		<div class="my-12 m-auto max-w-6xl">
+			<Grimoire themes={themes} cards={cards} />
+		</div>
+	</div>
+</Layout>

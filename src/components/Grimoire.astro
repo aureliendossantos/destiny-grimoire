@@ -1,0 +1,70 @@
+---
+import type { CollectionEntry } from "astro:content"
+import CardPreview from "$components/CardPreview.astro"
+
+interface Props {
+	themes: CollectionEntry<"grimoire">["data"]["themeCollection"]
+	cards: CollectionEntry<"cards">["data"]
+	userGrimoire?: any
+}
+
+const { themes, userGrimoire } = Astro.props
+const cards = Object.entries(Astro.props.cards).map(([_, card]) => card)
+---
+
+{
+	themes.map((theme) => (
+		<div>
+			<h2
+				class="text-slate-300 font-serif text-[72px] -mb-5 -mt-2 sm:text-[96px] sm:-mb-7 -ml-10 sm:-mt-5"
+				set:html={theme.themeName}
+			/>
+			{theme.pageCollection.map((page) => {
+				const userCardsAmount = userGrimoire?.cardCollection.filter((c: any) =>
+					page.cardBriefs.find((b) => b.cardId == c.cardId)
+				).length
+				if (userCardsAmount == 0) return
+				return (
+					<div class="relative mb-2 sm:mb-4">
+						<div class="flex py-2 gap-3 items-baseline origin-top-left rotate-90 absolute top-0 border-l pl-4 bg-slate-50/70">
+							{/* Je replace() pour raccourcir les noms trop longs */}
+							<h3
+								class="font-serif text-slate-400 text-lg leading-[1.4] sm:text-xl"
+								style={{ fontFeatureSettings: '"smcp", "c2sc"' }}
+								set:html={page.pageName.replace("Histoire&#160;: ", "")}
+							/>
+							{userCardsAmount && (
+								<span
+									class="text-xs align-super font-serif text-slate-500"
+									style={{ fontFeatureSettings: '"lnum"' }}
+								>
+									<span class="-rotate-90 inline-block">{userCardsAmount}</span>
+									|
+									<span class="-rotate-90 inline-block">
+										{page.cardBriefs.length}
+									</span>
+								</span>
+							)}
+						</div>
+						<div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 sm:gap-4 gap-2">
+							{page.cardBriefs.map((brief) => {
+								if (
+									!userGrimoire ||
+									userGrimoire.cardCollection.find(
+										(c: any) => c.cardId == brief.cardId
+									)
+								) {
+									return (
+										<CardPreview
+											card={cards.find((c) => c.cardId == brief.cardId)}
+										/>
+									)
+								}
+							})}
+						</div>
+					</div>
+				)
+			})}
+		</div>
+	))
+}

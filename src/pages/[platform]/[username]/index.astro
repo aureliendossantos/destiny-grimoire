@@ -1,0 +1,46 @@
+---
+export const prerender = false
+
+import { getCollection } from "astro:content"
+import Layout from "$layouts/Layout.astro"
+import { getMembershipId, getUserGrimoire } from "../../../utils/helpers"
+import Grimoire from "$components/Grimoire.astro"
+import Header from "$components/Header.astro"
+
+const { platform, username } = Astro.params
+if (platform != "psn" && platform != "xbox" && !username)
+	return Astro.redirect("/404")
+const membershipType = platform == "xbox" ? 1 : 2
+const membershipId = await getMembershipId(membershipType, username!)
+if (!membershipId) return Astro.redirect("/404")
+
+const userGrimoire = await getUserGrimoire(membershipType, membershipId)
+if (!userGrimoire) return Astro.redirect("/404")
+
+const themesOrder = [
+	"Allies",
+	"Places",
+	"Enemies",
+	"Guardian",
+	"Inventory",
+	"Activities",
+]
+const themes = (await getCollection("grimoire"))[0].data.themeCollection.sort(
+	(a, b) => themesOrder.indexOf(a.themeId) - themesOrder.indexOf(b.themeId)
+)
+const cards = (await getCollection("cards"))[0].data
+---
+
+<Layout title={`Grimoire de ${username}`}>
+	<Header
+		h1={username!}
+		subtitle={`${userGrimoire.cardCollection.length} cartes // ${userGrimoire.score} points`}
+		bonus={`/${platform}/${username}/bonuses`}
+		fireteam={`/${platform}/${username}/fireteam`}
+	/>
+	<div class="mr-2 sm:mr-4 ml-10">
+		<div class="mb-12 mt-10 m-auto max-w-6xl">
+			<Grimoire themes={themes} cards={cards} userGrimoire={userGrimoire} />
+		</div>
+	</div>
+</Layout>
