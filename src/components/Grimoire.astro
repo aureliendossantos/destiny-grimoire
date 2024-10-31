@@ -6,9 +6,11 @@ interface Props {
 	themes: CollectionEntry<"grimoire">["data"]["themeCollection"]
 	cards: CollectionEntry<"cards">["data"]
 	userGrimoire?: any
+	platform?: string
+	username?: string
 }
 
-const { themes, userGrimoire } = Astro.props
+const { themes, userGrimoire, platform, username } = Astro.props
 const cards = Object.entries(Astro.props.cards).map(([_, card]) => card)
 ---
 
@@ -57,6 +59,8 @@ const cards = Object.entries(Astro.props.cards).map(([_, card]) => card)
 									return (
 										<CardPreview
 											card={cards.find((c) => c.cardId == brief.cardId)}
+											platform={platform}
+											username={username}
 										/>
 									)
 								}

@@ -40,7 +40,13 @@ const cards = (await getCollection("cards"))[0].data
 	/>
 	<div class="mr-2 sm:mr-4 ml-10">
 		<div class="mb-12 mt-10 m-auto max-w-6xl">
-			<Grimoire themes={themes} cards={cards} userGrimoire={userGrimoire} />
+			<Grimoire
+				themes={themes}
+				cards={cards}
+				userGrimoire={userGrimoire}
+				platform={platform}
+				username={username}
+			/>
 		</div>
 	</div>
 </Layout>

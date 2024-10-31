@@ -1,6 +1,12 @@
 ---
 import { cardImageStyle } from "../utils/helpers"
 
+interface Props {
+	card: any
+	platform?: string
+	username?: string
+}
+
 const { card, platform, username } = Astro.props
 ---
 
