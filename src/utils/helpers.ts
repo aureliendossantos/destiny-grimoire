@@ -1,12 +1,15 @@
 const host = "https://www.bungie.net/d1/Platform/Destiny/"
 export async function bungieQuery(path: string) {
-	return await fetch(host + path, {
-		headers: {
-			"X-API-Key": import.meta.env.API_KEY,
-		},
-	})
-		.then((response) => response.json())
-		.then((data) => data.Response)
+	try {
+		const response = await fetch(host + path, {
+			headers: { "X-API-Key": import.meta.env.API_KEY },
+		})
+		const data = await response.json()
+		return data.Response
+	} catch (error) {
+		console.error("Error in bungieQuery:", error)
+		throw error
+	}
 }
 
 export const getMembershipId = async (
