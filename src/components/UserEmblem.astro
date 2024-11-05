@@ -1,0 +1,39 @@
+---
+import { getUserSummary, membershipTypeToPath } from "$utils/helpers"
+
+interface Props {
+	membershipType: 1 | 2
+	membershipId: string
+	username: string
+}
+
+const { membershipType, membershipId, username } = Astro.props
+
+const summary = await getUserSummary(membershipType, membershipId)
+const bestCharacter = summary.characters.sort(
+	(a: any, b: any) => b.characterBase.powerLevel - a.characterBase.powerLevel
+)[0]
+---
+
+<a
+	href={`/${membershipTypeToPath(membershipType)}/${username}`}
+	class="flex relative shadow-sm ease-out hover:scale-105 hover:shadow-md transition duration-300"
+	style={{ height: "48px" }}
+>
+	<img
+		class="rounded-l-sm grow-0 shrink-0"
+		style={{ width: "48px", height: "48px" }}
+		src={`https://www.bungie.net${bestCharacter.emblemPath}`}
+	/>
+	<img
+		class="rounded-r-sm grow-0 shrink"
+		style={{ width: "237px", height: "48px" }}
+		src={`https://www.bungie.net${bestCharacter.backgroundPath}`}
+	/>
+	<div
+		class="absolute top-0 left-12 text-slate-50 text-base h-full leading-tight font-semibold px-2 flex flex-col justify-center drop-shadow"
+	>
+		<div>{username}</div>
+		<div class="text-xs font-semibold pb-[1px]">18 cartes // 240 points</div>
+	</div>
+</a>

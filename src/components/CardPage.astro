@@ -1,9 +1,27 @@
 ---
-const { card, userCard, userBonus } = Astro.props
+import { cards, rarityText } from "$utils/helpers"
+import CardNav from "./CardNav.astro"
+import Footer from "./Footer.astro"
+import FooterFallback from "./FooterFallback.astro"
+
+interface Props {
+	cardId: string,
+	user?: {
+		card:any
+		bonus:any
+		membershipType: 1 | 2
+		membershipId: string
+		username: string
+	}
+ }
+
+const { cardId, user } = Astro.props
+
+const card = cards[cardId]
 ---
 
-<div class="mx-4">
-	<div class="max-w-xl grid grid-cols-1 md:grid-cols-3 md:gap-x-12 m-auto my-12">
+<div class="mx-4 min-h-screen flex flex-col justify-between">
+	<div class="w-full max-w-xl grid grid-cols-1 md:grid-cols-3 md:gap-x-12 m-auto mt-12">
 		<div class="text-slate-700 grid gap-x-4 grid-cols-3 md:block">
 			<img
 				class="mb-4 shadow rounded-sm order-last md:order-first"
@@ -12,24 +30,15 @@ const { card, userCard, userBonus } = Astro.props
 			<div class="col-span-2 mb-7">
 			<h1 class="font-bold leading-snug mb-[2px]" set:html={card.cardName} />
 			<div class="text-sm text-slate-700">
-				<div>
-					Carte
-					{
-						card.rarity == 1
-							? "commune"
-							: card.rarity == 2
-								? "légendaire"
-								: "exotique"
-					}
-				</div>
+				<div>Carte {rarityText(card.rarity)}</div>
 				{card.points > 0 && <div>{card.points} points</div>}
 				{
 					card.statisticCollection && (
 						<h2 class="font-bold mt-4">Statistiques</h2>
 						<ul>
 							{card.statisticCollection.map((stat:any) => {
-                                const hasStats = Boolean(userCard?.statisticCollection)
-								const userStat = userCard?.statisticCollection.find((s:any) => s.statNumber == stat.statNumber)
+                                const hasStats = Boolean(user?.card.statisticCollection)
+								const userStat = user?.card.statisticCollection.find((s:any) => s.statNumber == stat.statNumber)
 								return (
 								<li>
 									{stat.statName}
@@ -53,11 +62,11 @@ const { card, userCard, userBonus } = Astro.props
 					)
 				}
 				{
-					userBonus && (
+					user?.bonus && (
 						<h2 class="font-bold mt-4">Bonus</h2>
-						<h3 class:list={["font-medium", {"text-slate-400": userBonus.value < userBonus.threshold, "text-green-600": userBonus.value >= userBonus.threshold}]}>{userBonus.bonusName}</h3>
-						<p>{userBonus.bonusDescription}</p>
-						<p>Débloqué en atteignant le <span class:list={{"text-slate-400": userBonus.value < userBonus.threshold, "text-green-600": userBonus.value >= userBonus.threshold}}>rang {userBonus.bonusRank.rank} de {card.statisticCollection.find((s: any) => s.statNumber == userBonus.bonusRank.statId).statName}</span>.</p>
+						<h3 class:list={["font-medium", {"text-slate-400": user.bonus.value < user.bonus.threshold, "text-green-600": user.bonus.value >= user.bonus.threshold}]}>{user.bonus.bonusName}</h3>
+						<p>{user.bonus.bonusDescription}</p>
+						<p>Débloqué en atteignant le <span class:list={{"text-slate-400": user.bonus.value < user.bonus.threshold, "text-green-600": user.bonus.value >= user.bonus.threshold}}>rang {user.bonus.bonusRank.rank} de {card.statisticCollection?.find((s: any) => s.statNumber == user.bonus.bonusRank.statId)?.statName}</span>.</p>
 				)
 				}
 			</div>
@@ -73,3 +82,10 @@ const { card, userCard, userBonus } = Astro.props
 			}
 		</div>
 	</div>
+	<div class="w-full max-w-xl grid grid-cols-1 md:grid-cols-3 md:gap-x-12 m-auto mb-12">
+	<CardNav cardId={Number(cardId)}/>
+	</div>
+</div>
+<Footer server:defer pathname={Astro.url.pathname} pathUser={user}>
+	<FooterFallback slot="fallback"></FooterFallback>
+</Footer>

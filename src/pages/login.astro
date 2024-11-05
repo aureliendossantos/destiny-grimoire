@@ -1,0 +1,48 @@
+---
+export const prerender = false
+
+import { getMembershipId, membershipTypeToPath } from "$utils/helpers"
+
+if (Astro.request.method != "POST") return Astro.redirect("/", 308)
+
+// POST request must include parameters "platform", "username", and optionally a redirect path
+const formData = await Astro.request.formData()
+const platform = formData.get("platform")
+const username = formData.get("username")
+const redirect = formData.get("redirect")
+
+if (typeof username != "string") return Astro.redirect("/")
+
+// platform: "true" is 1 (xbox), "false" is 2 (psn)
+const membershipType = platform ? 1 : 2
+const membershipId = await getMembershipId(membershipType, username)
+
+const errorMessage =
+	!membershipId &&
+	`Could not find a Bungie account with ${platform ? "Xbox" : "PSN"} username "${username}". Please check that the username is correct and that you have played Destiny 1 on this platform.`
+
+if (membershipId)
+	Astro.cookies.set("grimoireLogin", {
+		membershipType: membershipType,
+		membershipId: membershipId,
+		username: username,
+	})
+---
+
+{errorMessage}
+
+{
+	membershipId ? (
+		<div>
+			logged in as {username} ({membershipType}) go back to
+			<a
+				href={`/${membershipTypeToPath(membershipType)}/${username}${redirect ? redirect : ""}`}
+				class="underline"
+			>
+				{`/${membershipTypeToPath(membershipType)}/${username}${redirect ? redirect : ""}`}
+			</a>
+		</div>
+	) : (
+		<div>You are not logged in.</div>
+	)
+}

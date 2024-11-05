@@ -1,0 +1,35 @@
+---
+import playstation from "$images/icons/playstation.svg?raw"
+import xbox from "$images/icons/xbox.svg?raw"
+
+const redirect = "/" // TODO: get path
+---
+
+<form action="/login" method="post" class="group flex -ml-[1px]">
+	<input type="hidden" name="redirect" value={redirect} />
+	<label
+		class="text-slate-500 hover:text-slate-600 transition border-slate-50 border border-r-0 rounded-l w-[1lh] text-center hover:bg-slate-300 cursor-pointer"
+	>
+		<input type="checkbox" name="platform" checked="true" class="peer hidden" />
+		<div
+			class="inline-block peer-checked:hidden h-[1em] align-text-bottom"
+			set:html={playstation}
+		/>
+		<div
+			class="hidden peer-checked:inline-block w-[1em] h-[1em] align-text-bottom"
+			set:html={xbox}
+		/>
+	</label>
+	<input
+		type="text"
+		name="username"
+		class="text-slate-500 w-32 font-medium placeholder:font-normal transition-all border border-slate-50 rounded-r focus:outline-none focus:ring-2 ring-slate-400 bg-slate-50 hover:ring-1 px-1"
+		required
+		placeholder="Pseudo"
+	/>
+	<input
+		type="submit"
+		value="Se connecter"
+		class="ml-1 rounded-md text-slate-200 font-normal px-2 transition bg-slate-400 hover:bg-slate-500 cursor-pointer"
+	/>
+</form>

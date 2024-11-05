@@ -1,0 +1,67 @@
+---
+export const prerender = false
+
+import { getCollection } from "astro:content"
+import Layout from "$layouts/Layout.astro"
+import { getMembershipId, getUserGrimoire, rarityText } from "$utils/helpers"
+import Header from "$components/Header.astro"
+
+const { platform, username } = Astro.params
+if (platform != "psn" && platform != "xbox" && !username)
+	return Astro.redirect("/404")
+const membershipType = platform == "xbox" ? 1 : 2
+const membershipId = await getMembershipId(membershipType, username!)
+if (!membershipId) return Astro.redirect("/404")
+
+const userGrimoire = await getUserGrimoire(membershipType, membershipId)
+if (!userGrimoire) return Astro.redirect("/404")
+
+const cards = Object.entries((await getCollection("cards"))[0].data).map(
+	([_, card]) => card
+)
+const missingCards = cards.filter(
+	(card) =>
+		!userGrimoire.cardCollection.find((c: any) => c.cardId == card.cardId)
+)
+---
+
+<Layout title={`Bonus de Grimoire de ${username}`} description="">
+	<Header
+		h1={username!}
+		subtitle={`${userGrimoire.cardCollection.length} cartes // ${userGrimoire.score} points`}
+		grimoire={`/${platform}/${username}`}
+	/>
+	<div class="mx-10">
+		<div
+			class="max-w-xl grid grid-cols-1 sm:grid-cols-2 sm:gap-x-12 gap-y-4 m-auto my-12"
+		>
+			<div>
+				<h2 class="mb-4 text-slate-500 text-lg font-smcp tracking-widest">
+					{missingCards.length} cartes non obtenues
+				</h2>
+				<div class="flex flex-col divide-y divide-slate-200">
+					{
+						missingCards.map((c) => (
+							<a
+								href={`${c.cardId}`}
+								class="py-4 hover:bg-slate-100 transition"
+							>
+								<h3 class="font-serif" set:html={c.cardName} />
+								<div class="uppercase text-xs text-slate-700">
+									{rarityText(c.rarity)}
+									{c.points > 0 && <>// {c.points} points</>}
+								</div>
+							</a>
+						))
+					}
+				</div>
+			</div>
+			<div>
+				<h2 class="mb-4 text-slate-500 text-lg font-smcp tracking-widest">
+					{0} en progression
+				</h2>
+				<div class="flex flex-col divide-y divide-slate-200"></div>
+			</div>
+		</div>
+	</div>
+</Layout>

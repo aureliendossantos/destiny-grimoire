@@ -1,10 +1,9 @@
 ---
-import { getCollection } from "astro:content"
 import Layout from "../layouts/Layout.astro"
 import CardPage from "$components/CardPage.astro"
+import { cards } from "$utils/helpers"
 
 export async function getStaticPaths() {
-	const cards = (await getCollection("cards"))[0].data
 	return Object.entries(cards).map(([_key, card]) => ({
 		params: { cardId: card.cardId },
 		props: { card },
@@ -18,5 +17,5 @@ const { card } = Astro.props
 	title={`${card.cardName} · Grimoire`}
 	description={card.cardIntro || card.cardDescription || ""}
 >
-	<CardPage card={card} />
+	<CardPage cardId={String(card.cardId)} />
 </Layout>

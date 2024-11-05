@@ -6,11 +6,12 @@ interface Props {
 	themes: CollectionEntry<"grimoire">["data"]["themeCollection"]
 	cards: CollectionEntry<"cards">["data"]
 	userGrimoire?: any
-	platform?: string
+	membershipType?: 1 | 2
 	username?: string
 }
 
-const { themes, userGrimoire, platform, username } = Astro.props
+const { themes, userGrimoire, membershipType, username } =
+	Astro.props
 const cards = Object.entries(Astro.props.cards).map(([_, card]) => card)
 ---
 
@@ -31,8 +32,7 @@ const cards = Object.entries(Astro.props.cards).map(([_, card]) => card)
 						<div class="flex py-2 gap-3 items-baseline origin-top-left rotate-90 absolute top-0 border-l pl-4 bg-slate-50/70">
 							{/* Je replace() pour raccourcir les noms trop longs */}
 							<h3
-								class="font-serif text-slate-400 text-lg leading-[1.4] sm:text-xl"
-								style={{ fontFeatureSettings: '"smcp", "c2sc"' }}
+								class="font-smcp text-slate-400 text-lg leading-[1.4] sm:text-xl"
 								set:html={page.pageName.replace("Histoire&#160;: ", "")}
 							/>
 							{userCardsAmount && (
@@ -59,7 +59,7 @@ const cards = Object.entries(Astro.props.cards).map(([_, card]) => card)
 									return (
 										<CardPreview
 											card={cards.find((c) => c.cardId == brief.cardId)}
-											platform={platform}
+											membershipType={membershipType}
 											username={username}
 										/>
 									)

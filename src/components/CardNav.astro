@@ -1,0 +1,64 @@
+---
+import { cards, membershipTypeToPath, themes } from "$utils/helpers"
+import CardNavLink from "./CardNavLink.astro"
+
+interface WithoutUser {
+	cardId: number
+	membershipType?: undefined
+	username?: undefined
+}
+
+interface WithUser {
+	cardId: number
+	membershipType: 1 | 2
+	username: string
+}
+
+type Props = WithUser | WithoutUser
+
+const { cardId, membershipType, username } = Astro.props
+
+const data = themes
+	.map((theme) =>
+		theme.pageCollection.map((page) =>
+			page.cardBriefs.map((brief) => ({
+				theme: theme.themeName,
+				page: page.pageName,
+				card: cards[brief.cardId],
+			}))
+		)
+	)
+	.flat(2)
+const currentIndex = data.findIndex((entry) => entry.card.cardId === cardId)
+const currentEntry = data[currentIndex]
+const previousEntry = data[currentIndex - 1]
+const nextEntry = data[currentIndex + 1]
+---
+
+<div
+	class="col-span-3 border-t border-slate-200 mt-12 pt-10 grid grid-cols-2 gap-x-4 gap-y-10 font-serif items-center"
+>
+	{
+		previousEntry && (
+			<CardNavLink
+				card={previousEntry.card}
+				themeTitle={
+					previousEntry.theme != currentEntry.theme
+						? previousEntry.theme
+						: undefined
+				}
+			/>
+		)
+	}
+	{
+		nextEntry && (
+			<CardNavLink
+				card={nextEntry.card}
+				themeTitle={
+					nextEntry.theme != currentEntry.theme ? nextEntry.theme : undefined
+				}
+				next
+			/>
+		)
+	}
+</div>

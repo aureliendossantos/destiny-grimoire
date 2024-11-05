@@ -1,0 +1,30 @@
+---
+interface Props {
+	card: any
+	themeTitle?: string
+	next?: boolean
+}
+
+const { card, themeTitle, next } = Astro.props
+---
+
+<a
+	href={`/${card.cardId}`}
+	class:list={[
+		"flex gap-4 items-center leading-snug",
+		{ "flex-row-reverse text-right col-start-2": next },
+	]}
+>
+	<img
+		class="shadow-sm rounded-sm h-16"
+		src={"https://www.bungie.net" + card.highResolution.image.sheetPath}
+	/>
+	<div>
+		{
+			themeTitle && (
+				<div class="text-slate-400 font-smcp" set:html={themeTitle} />
+			)
+		}
+		<div set:html={card.cardName} />
+	</div>
+</a>

@@ -1,11 +1,12 @@
 ---
 export const prerender = false
 
-import { getCollection } from "astro:content"
 import Layout from "$layouts/Layout.astro"
-import { getMembershipId, getUserGrimoire } from "../../../utils/helpers"
+import { getMembershipId, getUserGrimoire, themes, cards } from "$utils/helpers"
 import Grimoire from "$components/Grimoire.astro"
 import Header from "$components/Header.astro"
+import Footer from "$components/Footer.astro"
+import FooterFallback from "$components/FooterFallback.astro"
 
 const { platform, username } = Astro.params
 if (platform != "psn" && platform != "xbox" && !username)
@@ -16,19 +17,6 @@ if (!membershipId) return Astro.redirect("/404")
 
 const userGrimoire = await getUserGrimoire(membershipType, membershipId)
 if (!userGrimoire) return Astro.redirect("/404")
-
-const themesOrder = [
-	"Allies",
-	"Places",
-	"Enemies",
-	"Guardian",
-	"Inventory",
-	"Activities",
-]
-const themes = (await getCollection("grimoire"))[0].data.themeCollection.sort(
-	(a, b) => themesOrder.indexOf(a.themeId) - themesOrder.indexOf(b.themeId)
-)
-const cards = (await getCollection("cards"))[0].data
 ---
 
 <Layout
@@ -39,7 +27,6 @@ const cards = (await getCollection("cards"))[0].data
 		h1={username!}
 		subtitle={`${userGrimoire.cardCollection.length} cartes // ${userGrimoire.score} points`}
 		bonus={`/${platform}/${username}/bonuses`}
-		fireteam={`/${platform}/${username}/fireteam`}
 	/>
 	<div class="mr-2 sm:mr-4 ml-10">
 		<div class="mb-12 mt-10 m-auto max-w-6xl">
@@ -47,9 +34,21 @@ const cards = (await getCollection("cards"))[0].data
 				themes={themes}
 				cards={cards}
 				userGrimoire={userGrimoire}
-				platform={platform}
+				membershipType={membershipType}
 				username={username}
 			/>
 		</div>
 	</div>
+	<Footer
+		server:defer
+		pathname={Astro.url.pathname}
+		onGrimoirePage
+		pathUser={{
+			membershipType,
+			membershipId,
+			username: username!,
+		}}
+	>
+		<FooterFallback slot="fallback" />
+	</Footer>
 </Layout>

@@ -1,0 +1,106 @@
+---
+export const prerender = false
+
+import Layout from "$layouts/Layout.astro"
+import Header from "$components/Header.astro"
+import playstation from "$images/icons/playstation.svg?raw"
+import xbox from "$images/icons/xbox.svg?raw"
+import UserEmblem from "$components/UserEmblem.astro"
+import { validateCookie } from "$utils/helpers"
+
+let cookie = validateCookie(Astro.cookies.get("grimoireLogin")?.json())
+if (!cookie) Astro.cookies.delete("grimoireLogin")
+---
+
+<Layout title="Grimoire de Destiny" description="">
+	<Header h1="Grimoire" subtitle="Se connecter" />
+	<div class="grid grid-cols-2 gap-12 my-12 max-w-3xl m-auto">
+		<p class="font-serif text-lg">
+			Les cartes de Grimoire recèlent des éléments d'histoire, des poèmes et
+			d'autres secrets à propos de l'univers de <i>Destiny</i>. Elles se
+			débloquent dans le jeu en participant à des activités ou en trouvant des
+			objets cachés, et se consultaient autrefois sur le site de Bungie.
+			Cependant, cette section du site a été supprimée à la sortie de <i
+				>Destiny 2</i
+			>, bien que les cartes puissent encore être débloquées et conférer des
+			effets dans le premier jeu. Grâce à l'<abbr
+				style={{ fontFeatureSettings: '"c2sc"' }}>API</abbr
+			>
+			de Bungie, toujours accessible, ce site restaure les fonctionnalités perdues
+			avec un confort de lecture amélioré.
+		</p>
+		<div>
+			<div class="flex flex-col gap-2 m-auto items-center">
+				<h2 class="text-xl text-slate-400 text-center font-smcp">
+					Consultez votre Grimoire
+				</h2>
+				{
+					cookie ? (
+						<>
+							<UserEmblem
+								membershipType={cookie.membershipType}
+								membershipId={cookie.membershipId}
+								username={cookie.username}
+							/>
+							<a
+								href="/logout"
+								class="text-slate-400 hover:text-slate-500 text-xs font-medium leading-[28px] text-center transition"
+							>
+								Changer d'utilisateur
+							</a>
+						</>
+					) : (
+						<form action="/login" method="post" class="flex flex-col gap-2">
+							<div class="flex gap-1 justify-center">
+								<label class="text-slate-400 hover:text-slate-500 transition group-hover:border-slate-400 border-slate-50 border border-r-0 rounded-md px-2 py-1 text-center hover:bg-slate-200 cursor-pointer">
+									<input type="checkbox" name="platform" class="peer hidden" />
+									<div
+										class="inline-block peer-checked:hidden align-text-bottom"
+										set:html={playstation}
+									/>
+									<div
+										class="hidden peer-checked:inline-block align-text-bottom"
+										set:html={xbox}
+									/>
+								</label>
+								<input
+									type="text"
+									name="username"
+									placeholder="Pseudo"
+									autofocus
+									required
+									class="rounded-md text-base font-medium py-2 px-4 transition focus:outline-none focus:ring-2 ring-slate-400 bg-slate-100 shadow-inner text-slate-500 w-[16ch]"
+								/>
+							</div>
+							<input
+								type="submit"
+								value="Se connecter"
+								class="rounded-md text-slate-400 font-medium py-[10px] px-4 transition bg-slate-200/60 hover:bg-slate-100  cursor-pointer"
+							/>
+						</form>
+					)
+				}
+				{
+					cookie ? (
+						<hr class="w-8 my-4 border-t-2 border-slate-200" />
+					) : (
+						<p class="text-xs mt-8 text-center text-slate-400">
+							Pas de compte sur Destiny ?
+						</p>
+					)
+				}
+				<a
+					href="/all"
+					class="bg-slate-200/60 hover:bg-slate-100 transition rounded-md py-2 px-8 text-sm text-slate-400 font-medium text-center"
+				>
+					Voir toutes les cartes
+					<div
+						class="text-[10px] text-slate-400 uppercase tracking-[0.15em] leading-tight pb-[2px]"
+					>
+						Spoilers
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</Layout>

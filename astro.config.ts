@@ -12,4 +12,7 @@ export default defineConfig({
 			nesting: true,
 		}),
 	],
+	experimental: {
+		serverIslands: true,
+	},
 })

@@ -20,13 +20,12 @@ const { h1, subtitle, grimoire, bonus, fireteam } = Astro.props
 				{subtitle}
 			</div>
 		</div>
-		<div class="flex gap-8 sm:gap-12">
+		<div class="group flex items-center gap-8 sm:gap-12">
 			{
 				grimoire && (
 					<a
 						href={grimoire}
-						class="text-slate-500 font-serif tracking-[0.15em] text-xl hover:text-slate-400 transition"
-						style={{ fontFeatureSettings: '"c2sc", "smcp"' }}
+						class="text-slate-500 tracking-[0.15em] text-xl hover:text-slate-400 transition group-has-[:focus]:hidden font-smcp"
 					>
 						<span class="hidden lg:inline">Cartes de </span>Grimoire
 					</a>
@@ -36,8 +35,7 @@ const { h1, subtitle, grimoire, bonus, fireteam } = Astro.props
 				bonus && (
 					<a
 						href={bonus}
-						class="text-slate-500 font-serif tracking-[0.15em] text-xl hover:text-slate-400 transition"
-						style={{ fontFeatureSettings: '"c2sc", "smcp"' }}
+						class="text-slate-500 tracking-[0.15em] text-xl hover:text-slate-400 transition group-has-[:focus]:hidden font-smcp"
 					>
 						<span class="hidden lg:inline">Progression des </span>Bonus
 					</a>
@@ -47,13 +45,35 @@ const { h1, subtitle, grimoire, bonus, fireteam } = Astro.props
 				fireteam && (
 					<a
 						href={fireteam}
-						class="text-slate-500 font-serif tracking-[0.15em] text-xl hover:text-slate-400 transition"
-						style={{ fontFeatureSettings: '"c2sc", "smcp"' }}
+						class="text-slate-500 tracking-[0.15em] text-xl hover:text-slate-400 transition group-has-[:focus]:hidden font-smcp"
 					>
 						Escouade
 					</a>
 				)
 			}
+			<form action="/search" method="get">
+				<label
+					class="flex items-center has-[:focus]:ring-2 ring-slate-300 rounded-md overflow-hidden transition"
+				>
+					<input
+						type="search"
+						name="term"
+						class="peer py-2 font-sans text-lg text-slate-700 bg-slate-50 border-y-0 focus:outline-none transition-all placeholder:text-slate-400 font-light w-0 focus:w-[138px] pl-2"
+						placeholder="Rechercher…"
+					/>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="32"
+						height="32"
+						viewBox="0 0 24 24"
+						class="h-[1lh] text-slate-400"
+						><path
+							fill="currentColor"
+							d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14"
+						></path></svg
+					>
+				</label>
+			</form>
 		</div>
 	</div>
 </header>

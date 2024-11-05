@@ -33,17 +33,15 @@ const bestCharacter = summary.characters.sort(
 		bonus={`/${platform}/${username}/bonuses`}
 	/>
 	<div class="m-12">
-		<div>
-			<div class="flex h-[48px] relative">
-				<img src={`https://www.bungie.net${bestCharacter.emblemPath}`} />
-				<img src={`https://www.bungie.net${bestCharacter.backgroundPath}`} />
-				<div
-					class="absolute top-0 left-12 text-slate-50 text-base h-full leading-tight font-semibold px-2 flex flex-col justify-center drop-shadow"
-				>
-					<div>{username}</div>
-					<div class="text-xs font-semibold pb-[1px]">
-						{userGrimoire.cardCollection.length} cartes // {userGrimoire.score} points
-					</div>
+		<div class="flex h-[48px] relative">
+			<img src={`https://www.bungie.net${bestCharacter.emblemPath}`} />
+			<img src={`https://www.bungie.net${bestCharacter.backgroundPath}`} />
+			<div
+				class="absolute top-0 left-12 text-slate-50 text-base h-full leading-tight font-semibold px-2 flex flex-col justify-center drop-shadow"
+			>
+				<div>{username}</div>
+				<div class="text-xs font-semibold pb-[1px]">
+					{userGrimoire.cardCollection.length} cartes // {userGrimoire.score} points
 				</div>
 			</div>
 		</div>

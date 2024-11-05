@@ -40,17 +40,13 @@ const inProgressBonuses = userBonuses.filter(
 		h1={username!}
 		subtitle={`${userGrimoire.cardCollection.length} cartes // ${userGrimoire.score} points`}
 		grimoire={`/${platform}/${username}`}
-		fireteam={`/${platform}/${username}/fireteam`}
 	/>
 	<div class="mx-10">
 		<div
 			class="max-w-xl grid grid-cols-1 sm:grid-cols-2 sm:gap-x-12 gap-y-4 m-auto my-12"
 		>
 			<div>
-				<h2
-					class="mb-4 text-slate-500 text-lg font-serif tracking-widest"
-					style={{ fontFeatureSettings: '"c2sc", "smcp"' }}
-				>
+				<h2 class="mb-4 text-slate-500 text-lg tracking-widest font-smcp">
 					{activeBonuses} bonus actifs
 				</h2>
 				<div class="flex flex-col divide-y divide-slate-200">
@@ -80,10 +76,7 @@ const inProgressBonuses = userBonuses.filter(
 				</div>
 			</div>
 			<div>
-				<h2
-					class="mb-4 text-slate-500 text-lg font-serif tracking-widest"
-					style={{ fontFeatureSettings: '"c2sc", "smcp"' }}
-				>
+				<h2 class="mb-4 text-slate-500 text-lg font-smcp tracking-widest">
 					{inProgressBonuses} en progression
 				</h2>
 				<div class="flex flex-col divide-y divide-slate-200">

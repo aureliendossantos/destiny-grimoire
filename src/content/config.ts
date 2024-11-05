@@ -28,7 +28,7 @@ export const cardSchema = z.object({
 	cardDescription: z.string().optional(),
 	unlockHowToText: z.string().optional(),
 	cardLabel: z.string().optional(),
-	rarity: z.number(),
+	rarity: z.literal(1).or(z.literal(2)).or(z.literal(3)),
 	unlockFlagHash: z.number(),
 	points: z.number(),
 	normalResolution: imageSchema,

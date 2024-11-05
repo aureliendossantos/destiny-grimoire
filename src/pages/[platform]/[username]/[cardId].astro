@@ -1,14 +1,13 @@
 ---
 export const prerender = false
 
-import { getCollection } from "astro:content"
 import Layout from "$layouts/Layout.astro"
-import { getMembershipId, getUserGrimoire } from "../../../utils/helpers"
+import { cards, getMembershipId, getUserGrimoire } from "$utils/helpers"
 import CardPage from "$components/CardPage.astro"
 
 const { platform, username, cardId } = Astro.params
 
-const card = (await getCollection("cards"))[0].data[cardId!]
+const card = cards[cardId!]
 if (platform != "psn" && platform != "xbox" && !card)
 	return Astro.redirect("/404")
 const membershipType = platform == "xbox" ? 1 : 2
@@ -29,5 +28,14 @@ const userBonus = userGrimoire.bonuses.find((b: any) => b.cardId == card.cardId)
 	title={`${card.cardName} · Grimoire`}
 	description={card.cardIntro || card.cardDescription || ""}
 >
-	<CardPage card={card} userCard={userCard} userBonus={userBonus} />
+	<CardPage
+		cardId={cardId!}
+		user={{
+			card: userCard,
+			bonus: userBonus,
+			membershipType,
+			membershipId,
+			username: username!,
+		}}
+	/>
 </Layout>
