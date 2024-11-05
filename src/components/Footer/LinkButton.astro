@@ -1,0 +1,14 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+interface Props extends Omit<HTMLAttributes<"a">, "class"> {}
+
+const { ...attributes } = Astro.props
+---
+
+<a
+	class="block hover:bg-slate-100 ring-1 ring-slate-300 rounded-md p-4 transition"
+	{...attributes}
+>
+	<slot />
+</a>

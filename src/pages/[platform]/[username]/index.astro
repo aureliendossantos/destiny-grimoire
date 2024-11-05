@@ -8,11 +8,13 @@ import Header from "$components/Header.astro"
 import Footer from "$components/Footer.astro"
 import FooterFallback from "$components/FooterFallback.astro"
 
-const { platform, username } = Astro.params
+const platform = Astro.params.platform as string
+const username = Astro.params.username as string
+
 if (platform != "psn" && platform != "xbox" && !username)
 	return Astro.redirect("/404")
 const membershipType = platform == "xbox" ? 1 : 2
-const membershipId = await getMembershipId(membershipType, username!)
+const membershipId = await getMembershipId(membershipType, username)
 if (!membershipId) return Astro.redirect("/404")
 
 const userGrimoire = await getUserGrimoire(membershipType, membershipId)
@@ -24,7 +26,7 @@ if (!userGrimoire) return Astro.redirect("/404")
 	description={`${userGrimoire.cardCollection.length} cartes // ${userGrimoire.score} points`}
 >
 	<Header
-		h1={username!}
+		h1={username}
 		subtitle={`${userGrimoire.cardCollection.length} cartes // ${userGrimoire.score} points`}
 		bonus={`/${platform}/${username}/bonuses`}
 	/>
@@ -46,7 +48,7 @@ if (!userGrimoire) return Astro.redirect("/404")
 		pathUser={{
 			membershipType,
 			membershipId,
-			username: username!,
+			name: username,
 		}}
 	>
 		<FooterFallback slot="fallback" />

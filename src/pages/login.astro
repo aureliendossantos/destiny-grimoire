@@ -1,6 +1,8 @@
 ---
 export const prerender = false
 
+import Header from "$components/Header.astro"
+import Layout from "$layouts/Layout.astro"
 import { getMembershipId, membershipTypeToPath } from "$utils/helpers"
 
 if (Astro.request.method != "POST") return Astro.redirect("/", 308)
@@ -21,28 +23,23 @@ const errorMessage =
 	!membershipId &&
 	`Could not find a Bungie account with ${platform ? "Xbox" : "PSN"} username "${username}". Please check that the username is correct and that you have played Destiny 1 on this platform.`
 
-if (membershipId)
+if (membershipId) {
 	Astro.cookies.set("grimoireLogin", {
 		membershipType: membershipType,
 		membershipId: membershipId,
 		username: username,
 	})
----
-
-{errorMessage}
-
-{
-	membershipId ? (
-		<div>
-			logged in as {username} ({membershipType}) go back to
-			<a
-				href={`/${membershipTypeToPath(membershipType)}/${username}${redirect ? redirect : ""}`}
-				class="underline"
-			>
-				{`/${membershipTypeToPath(membershipType)}/${username}${redirect ? redirect : ""}`}
-			</a>
-		</div>
-	) : (
-		<div>You are not logged in.</div>
+	return Astro.redirect(
+		`/${membershipTypeToPath(membershipType)}/${username}${redirect ? redirect : ""}`
 	)
 }
+---
+
+<Layout title="Connexion échouée" description="Compte Bungie introuvable">
+	<Header h1="Connexion échouée" subtitle="Compte Bungie introuvable" />
+	<div class="flex justify-center items-center h-96">
+		<div class="bg-slate-200 rounded-md p-8 max-w-md">
+			{errorMessage}
+		</div>
+	</div>
+</Layout>

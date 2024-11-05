@@ -1,17 +1,17 @@
 ---
 import type { CollectionEntry } from "astro:content"
 import CardPreview from "$components/CardPreview.astro"
+import type { UserGrimoire } from "$utils/types"
 
 interface Props {
 	themes: CollectionEntry<"grimoire">["data"]["themeCollection"]
 	cards: CollectionEntry<"cards">["data"]
-	userGrimoire?: any
+	userGrimoire?: UserGrimoire
 	membershipType?: 1 | 2
 	username?: string
 }
 
-const { themes, userGrimoire, membershipType, username } =
-	Astro.props
+const { themes, userGrimoire, membershipType, username } = Astro.props
 const cards = Object.entries(Astro.props.cards).map(([_, card]) => card)
 ---
 
@@ -23,7 +23,7 @@ const cards = Object.entries(Astro.props.cards).map(([_, card]) => card)
 				set:html={theme.themeName}
 			/>
 			{theme.pageCollection.map((page) => {
-				const userCardsAmount = userGrimoire?.cardCollection.filter((c: any) =>
+				const userCardsAmount = userGrimoire?.cardCollection.filter((c) =>
 					page.cardBriefs.find((b) => b.cardId == c.cardId)
 				).length
 				if (userCardsAmount == 0) return
@@ -53,12 +53,12 @@ const cards = Object.entries(Astro.props.cards).map(([_, card]) => card)
 								if (
 									!userGrimoire ||
 									userGrimoire.cardCollection.find(
-										(c: any) => c.cardId == brief.cardId
+										(c) => c.cardId == brief.cardId
 									)
 								) {
 									return (
 										<CardPreview
-											card={cards.find((c) => c.cardId == brief.cardId)}
+											card={cards.find((c) => c.cardId == brief.cardId)!}
 											membershipType={membershipType}
 											username={username}
 										/>

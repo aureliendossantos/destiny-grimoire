@@ -1,5 +1,6 @@
 ---
 import { deconstructUrl, membershipTypeToPath, validateCookie } from "$utils/helpers"
+import LinkButton from "./Footer/LinkButton.astro"
 import MiniLoginForm from "./MiniLoginForm.astro"
 import Username from "./Username.astro"
 
@@ -7,10 +8,10 @@ interface Props {
 	pathname: string
 	onGrimoirePage?: boolean
 	pathUser?: {
-	membershipType: 1 | 2
-	membershipId: string
-	username: string
-}
+		membershipType: 1 | 2
+		membershipId: string
+		name: string
+	}
 }
 
 const { pathname, onGrimoirePage, pathUser } = Astro.props
@@ -23,7 +24,7 @@ const isUserPage = cookie && pathUser && cookie.membershipId == pathUser.members
 
 <div class="bg-slate-200 py-12">
 	<div class="mx-4">
-		<div class="max-w-xl m-auto text-sm font-medium text-slate-500">
+		<div class="max-w-xl m-auto text-sm font-medium text-slate-500 flex flex-col gap-4">
 			{
 				pathUser ? (
 					(!cookie || !isUserPage) && (
@@ -31,39 +32,44 @@ const isUserPage = cookie && pathUser && cookie.membershipId == pathUser.members
 							<div class="mb-[1lh]">
 								Tiré de la
 								<a
-									href={`/${membershipTypeToPath(pathUser.membershipType)}/${pathUser.username}`}
+									href={`/${membershipTypeToPath(pathUser.membershipType)}/${pathUser.name}`}
 									class="rounded-md ring-1 ring-slate-300 px-1 py-[1px] -mx-[1px] -my-[1px] hover:bg-slate-100 transition"
 								>
 									collection de
 									<Username
 										membershipType={pathUser.membershipType}
 										membershipId={pathUser.membershipId}
-										username={pathUser.username}
+										username={pathUser.name}
 									/>
 								</a>
 							</div>
 						</>
 					)
 				) : (
-					<div class="mb-[1lh]">
+					<>
+					<div>
 						Displaying global data. May contain spoilers.
 					</div>
+					{!onGrimoirePage && <LinkButton href="/all">
+						Retour au Grimoire
+					</LinkButton>}
+					</>
 				)
 			}
 			{
 				cookie ? (
 					<>
-					{!(onGrimoirePage && isUserPage) && <a class="block hover:bg-slate-100 border border-slate-300 rounded-md p-4 transition mb-4" href={isUserPage ? `/${membershipTypeToPath(pathUser.membershipType)}/${pathUser.username}` : `/${membershipTypeToPath(cookie.membershipType)}/${cookie.username}${deconstructUrl(pathname).rest}`}>
-					<div>{isUserPage ? "Retour au grimoire" : "Switch to your collection"}</div>
+					{!(onGrimoirePage && isUserPage) && <LinkButton href={isUserPage ? `/${membershipTypeToPath(pathUser.membershipType)}/${pathUser.name}` : `/${membershipTypeToPath(cookie.membershipType)}/${cookie.username}${deconstructUrl(pathname).rest}`}>
+					<div>{isUserPage ? "Retour au Grimoire" : "Switch to your collection"}</div>
 					<Username
 						membershipType={cookie.membershipType}
 						membershipId={cookie.membershipId}
 						username={cookie.username}
 					/>
-					</a>}
-					<a class="block hover:bg-slate-100 border border-slate-300 rounded-md p-4 transition" href="/logout">
+					</LinkButton>}
+					<LinkButton href="/logout">
 						Déconnexion
-					</a>
+					</LinkButton>
 					</>
 				) : (
 					<div class="font-smcp text-base leading-relaxed">

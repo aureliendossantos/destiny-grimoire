@@ -1,3 +1,13 @@
+:root {
+	font-family: Inter, sans-serif;
+	font-feature-settings: "liga" 1, "calt" 1; /* fix for Chrome */
+}
+@supports (font-variation-settings: normal) {
+	:root {
+		font-family: InterVariable, sans-serif;
+	}
+}
+
 @font-face {
 	font-family: "EB Garamond";
 	src: url("/EBGaramond12-Regular.woff") format("woff");
@@ -12,6 +22,10 @@
 	font-weight: normal;
 	font-style: italic;
 	font-display: swap;
+}
+
+abbr {
+	font-feature-settings: "c2sc";
 }
 
 /* The bold version of EB Garamond is not complete, according to the website, so I'm temporarily using underline for bold text */

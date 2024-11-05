@@ -1,15 +1,24 @@
 ---
+import { membershipTypeToPath } from "$utils/helpers"
+import type { CollectionEntry } from "astro:content"
+
 interface Props {
-	card: any
+	card: CollectionEntry<"cards">["data"][string]
 	themeTitle?: string
 	next?: boolean
+	user?: {
+		membershipType: 1 | 2
+		name: string
+	}
 }
 
-const { card, themeTitle, next } = Astro.props
+const { card, themeTitle, next, user } = Astro.props
 ---
 
 <a
-	href={`/${card.cardId}`}
+	href={user
+		? `/${membershipTypeToPath(user.membershipType)}/${user.name}/${card.cardId}`
+		: `/${card.cardId}`}
 	class:list={[
 		"flex gap-4 items-center leading-snug",
 		{ "flex-row-reverse text-right col-start-2": next },

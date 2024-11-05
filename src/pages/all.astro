@@ -27,7 +27,7 @@ const cards = (await getCollection("cards"))[0].data
 			<Grimoire themes={themes} cards={cards} />
 		</div>
 	</div>
-	<Footer server:defer pathname={Astro.url.pathname}>
+	<Footer server:defer pathname={Astro.url.pathname} onGrimoirePage>
 		<FooterFallback slot="fallback" />
 	</Footer>
 </Layout>

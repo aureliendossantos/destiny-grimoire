@@ -5,23 +5,25 @@ import Layout from "$layouts/Layout.astro"
 import { cards, getMembershipId, getUserGrimoire } from "$utils/helpers"
 import CardPage from "$components/CardPage.astro"
 
-const { platform, username, cardId } = Astro.params
+const platform = Astro.params.platform as string
+const username = Astro.params.username as string
+const cardId = Astro.params.cardId as string
 
-const card = cards[cardId!]
-if (platform != "psn" && platform != "xbox" && !card)
+const card = cards[cardId]
+if ((platform != "psn" && platform != "xbox") || !card)
 	return Astro.redirect("/404")
 const membershipType = platform == "xbox" ? 1 : 2
-const membershipId = await getMembershipId(membershipType, username!)
+const membershipId = await getMembershipId(membershipType, username)
 if (!membershipId) return Astro.redirect("/404")
 
 const userGrimoire = await getUserGrimoire(membershipType, membershipId)
 if (!userGrimoire) return Astro.redirect("/404")
 
 const userCard = userGrimoire.cardCollection.find(
-	(c: any) => c.cardId == card.cardId
+	(c) => c.cardId == card.cardId
 )
 // It's safe to assume there is only one bonus per card (I checked)
-const userBonus = userGrimoire.bonuses.find((b: any) => b.cardId == card.cardId)
+const userBonus = userGrimoire.bonuses.find((b) => b.cardId == card.cardId)
 ---
 
 <Layout
@@ -29,13 +31,14 @@ const userBonus = userGrimoire.bonuses.find((b: any) => b.cardId == card.cardId)
 	description={card.cardIntro || card.cardDescription || ""}
 >
 	<CardPage
-		cardId={cardId!}
+		cardId={cardId}
 		user={{
 			card: userCard,
 			bonus: userBonus,
 			membershipType,
 			membershipId,
-			username: username!,
+			name: username,
+			grimoire: userGrimoire,
 		}}
 	/>
 </Layout>

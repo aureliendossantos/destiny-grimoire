@@ -20,8 +20,7 @@ const cards = Object.entries((await getCollection("cards"))[0].data).map(
 	([_, card]) => card
 )
 const missingCards = cards.filter(
-	(card) =>
-		!userGrimoire.cardCollection.find((c: any) => c.cardId == card.cardId)
+	(card) => !userGrimoire.cardCollection.find((c) => c.cardId == card.cardId)
 )
 ---
 

@@ -1,26 +1,26 @@
 ---
-import { cards, membershipTypeToPath, themes } from "$utils/helpers"
+import { cards, themes } from "$utils/helpers"
+import type { UserGrimoire } from "$utils/types"
 import CardNavLink from "./CardNavLink.astro"
 
-interface WithoutUser {
+interface Props {
 	cardId: number
-	membershipType?: undefined
-	username?: undefined
+	user?: {
+		membershipType: 1 | 2
+		name: string
+		grimoire: UserGrimoire
+	}
 }
 
-interface WithUser {
-	cardId: number
-	membershipType: 1 | 2
-	username: string
-}
+const { cardId, user } = Astro.props
 
-type Props = WithUser | WithoutUser
-
-const { cardId, membershipType, username } = Astro.props
+const userHasCard = user?.grimoire.cardCollection.some(
+	(userCard) => userCard.cardId == cardId
+)
 
 const data = themes
-	.map((theme) =>
-		theme.pageCollection.map((page) =>
+	.flatMap((theme) =>
+		theme.pageCollection.flatMap((page) =>
 			page.cardBriefs.map((brief) => ({
 				theme: theme.themeName,
 				page: page.pageName,
@@ -28,7 +28,12 @@ const data = themes
 			}))
 		)
 	)
-	.flat(2)
+	.filter(
+		(entry) =>
+			!user ||
+			!userHasCard ||
+			user.grimoire.cardCollection.find((c) => c.cardId == entry.card.cardId)
+	)
 const currentIndex = data.findIndex((entry) => entry.card.cardId === cardId)
 const currentEntry = data[currentIndex]
 const previousEntry = data[currentIndex - 1]
@@ -42,6 +47,7 @@ const nextEntry = data[currentIndex + 1]
 		previousEntry && (
 			<CardNavLink
 				card={previousEntry.card}
+				user={user}
 				themeTitle={
 					previousEntry.theme != currentEntry.theme
 						? previousEntry.theme
@@ -54,6 +60,7 @@ const nextEntry = data[currentIndex + 1]
 		nextEntry && (
 			<CardNavLink
 				card={nextEntry.card}
+				user={user}
 				themeTitle={
 					nextEntry.theme != currentEntry.theme ? nextEntry.theme : undefined
 				}

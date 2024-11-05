@@ -3,7 +3,7 @@ export const prerender = false
 
 import { getCollection } from "astro:content"
 import Layout from "$layouts/Layout.astro"
-import { bungieQuery } from "../../../utils/helpers"
+import { bungieQuery, getUserGrimoire } from "$utils/helpers"
 import Header from "$components/Header.astro"
 
 const { platform, username } = Astro.params
@@ -14,9 +14,7 @@ const membershipId = await bungieQuery(
 )
 if (!membershipId) return Astro.redirect("/404")
 
-const userGrimoire = (
-	await bungieQuery(`Vanguard/Grimoire/${membershipType}/${membershipId}/`)
-).data
+const userGrimoire = await getUserGrimoire(membershipType, membershipId)
 if (!userGrimoire) return Astro.redirect("/404")
 
 const cards = Object.entries((await getCollection("cards"))[0].data).map(
@@ -24,11 +22,9 @@ const cards = Object.entries((await getCollection("cards"))[0].data).map(
 )
 const userBonuses = userGrimoire.bonuses
 
-const activeBonuses = userBonuses.filter(
-	(b: any) => b.value >= b.threshold
-).length
+const activeBonuses = userBonuses.filter((b) => b.value >= b.threshold).length
 const inProgressBonuses = userBonuses.filter(
-	(b: any) => b.value < b.threshold
+	(b) => b.value < b.threshold
 ).length
 ---
 
@@ -52,8 +48,8 @@ const inProgressBonuses = userBonuses.filter(
 				<div class="flex flex-col divide-y divide-slate-200">
 					{
 						userBonuses
-							.filter((b: any) => b.value >= b.threshold)
-							.map((b: any) => (
+							.filter((b) => b.value >= b.threshold)
+							.map((b) => (
 								<a
 									href={`${b.cardId}`}
 									class="py-4 hover:bg-slate-100 transition"
@@ -82,8 +78,8 @@ const inProgressBonuses = userBonuses.filter(
 				<div class="flex flex-col divide-y divide-slate-200">
 					{
 						userBonuses
-							.filter((b: any) => b.value < b.threshold)
-							.map((b: any) => (
+							.filter((b) => b.value < b.threshold)
+							.map((b) => (
 								<a
 									href={`${b.cardId}`}
 									class="py-4 hover:bg-slate-100 transition"

@@ -1,8 +1,9 @@
 ---
-import { cardImageStyle, membershipTypeToPath } from "../utils/helpers"
+import { cardImageStyle, membershipTypeToPath } from "$utils/helpers"
+import type { CollectionEntry } from "astro:content"
 
 interface Props {
-	card: any
+	card: CollectionEntry<"cards">["data"][string]
 	membershipType?: 1 | 2
 	username?: string
 }
@@ -15,11 +16,12 @@ const { card, membershipType, username } = Astro.props
 		? `/${membershipTypeToPath(membershipType)}/${username}/${card.cardId}`
 		: `/${card.cardId}`}
 	style={cardImageStyle(card.highResolution.image, true)}
-	class="aspect-card !bg-contain shadow hover:shadow-xl rounded-sm transition duration-300 ease-out hover:scale-105 px-3 sm:px-4 md:px-5 py-3 md:py-4 flex flex-col justify-end overflow-hidden"
+	class="aspect-card !bg-contain shadow hover:shadow-xl rounded-sm transition duration-300 ease-out hover:scale-105 px-3 sm:px-4 md:px-5 py-3 md:py-[17px] flex flex-col justify-end overflow-hidden"
 	transition:name={String(card.cardId)}
 >
 	<h3
-		class="font-bold text-slate-100 text-xs sm:text-sm lg:text-base lg:leading-snug drop-shadow-md text-balance"
+		class="font-semibold text-slate-100 text-xs sm:text-sm lg:text-base lg:leading-snug text-balance"
+		style={{ textShadow: "0 0 0.1em #000" }}
 		set:html={card.cardName}
 	/>
 </a>

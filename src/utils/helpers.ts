@@ -1,4 +1,5 @@
 import { getCollection } from "astro:content"
+import type { UserGrimoire } from "./types"
 
 const host = "https://www.bungie.net/d1/Platform/Destiny/"
 export async function bungieQuery(path: string) {
@@ -32,7 +33,7 @@ export const getUserGrimoire = async (
 	membershipId: string
 ) =>
 	(await bungieQuery(`Vanguard/Grimoire/${membershipType}/${membershipId}/`))
-		.data
+		.data as UserGrimoire
 
 export const getUserSummary = async (
 	membershipType: 1 | 2,
