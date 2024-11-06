@@ -15,12 +15,18 @@ const { card, membershipType, username } = Astro.props
 	href={membershipType && username
 		? `/${membershipTypeToPath(membershipType)}/${username}/${card.cardId}`
 		: `/${card.cardId}`}
-	style={cardImageStyle(card.highResolution.image, true)}
-	class="aspect-card !bg-contain shadow hover:shadow-xl rounded-sm transition duration-300 ease-out hover:scale-105 px-3 sm:px-4 md:px-5 py-3 md:py-[17px] flex flex-col justify-end overflow-hidden"
-	transition:name={String(card.cardId)}
+	class="aspect-card shadow hover:shadow-xl rounded-sm transition duration-300 ease-out hover:scale-105 px-3 sm:px-4 md:px-5 py-3 md:py-[17px] flex flex-col justify-end overflow-hidden relative"
 >
+	<img
+		src={"https://www.bungie.net" + card.normalResolution.image.sheetPath}
+		alt="Illustration de carte"
+		class="absolute object-fill bg-slate-400"
+		loading="lazy"
+		decoding="async"
+		style={cardImageStyle(card.normalResolution.image)}
+	/>
 	<h3
-		class="font-semibold text-slate-100 text-xs sm:text-sm lg:text-base lg:leading-snug text-balance"
+		class="font-semibold text-slate-100 text-xs sm:text-sm lg:text-base lg:leading-snug text-balance z-10"
 		style={{ textShadow: "0 0 0.1em #000" }}
 		set:html={card.cardName}
 	/>

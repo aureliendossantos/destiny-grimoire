@@ -41,21 +41,24 @@ export const getUserSummary = async (
 ) =>
 	(await bungieQuery(`${membershipType}/Account/${membershipId}/Summary/`)).data
 
-export function cardImageStyle(image: any, small?: boolean) {
+export function cardImageStyle(image: any) {
+	const cardWidth = 323
+	const cardHeight = 419
+	const sheetCols = image.sheetSize.width / cardWidth
+	const sheetRows = image.sheetSize.height / cardHeight
+	if (Math.floor(sheetCols) != sheetCols || Math.floor(sheetRows) != sheetRows)
+		throw new Error(
+			`cols and rows must be a whole number. ${sheetCols}x${sheetRows} // ${image.sheetSize.width}x${image.sheetSize.height} // ${image.sheetPath}`
+		)
+	const col = image.rect.x / cardWidth
+	const row = image.rect.y / cardHeight
 	return {
-		background:
-			"url(https://www.bungie.net" +
-			image.sheetPath +
-			") -" +
-			(small ? image.rect.x / 2 : image.rect.x) +
-			"px -" +
-			(small ? image.rect.y / 2 : image.rect.y) +
-			"px",
-		backgroundSize:
-			(small ? image.sheetSize.width / 2 : image.sheetSize.width) +
-			"px " +
-			(small ? image.sheetSize.height / 2 : image.sheetSize.height) +
-			"px",
+		width: `${sheetCols * 100}%`,
+		height: `${sheetRows * 100}%`,
+		top: `-${row * 100}%`,
+		left: `-${col * 100}%`,
+		// override tailwind rule
+		maxWidth: "none",
 	}
 }
 

@@ -14,7 +14,7 @@ export default {
 		},
 		extend: {
 			aspectRatio: {
-				card: "0.78 / 1",
+				card: "323 / 419",
 			},
 		},
 	},

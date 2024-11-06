@@ -29,7 +29,8 @@ const description = card.cardDescription && he.decode(card.cardDescription).repl
 	<div class="w-full max-w-xl grid grid-cols-1 md:grid-cols-3 md:gap-x-12 m-auto mt-12">
 		<div class="text-slate-700 grid gap-x-4 grid-cols-3 md:block">
 			<img
-				class:list={["mb-4 shadow rounded-sm order-last md:order-first", {"grayscale transition hover:grayscale-0": user && !user.card}]}
+				width={323} height={419}
+				class:list={["mb-4 shadow rounded-sm order-last md:order-first bg-slate-400", {"grayscale transition hover:grayscale-0": user && !user.card}]}
 				src={"https://www.bungie.net" + card.highResolution.image.sheetPath}
 			/>
 			<div class="col-span-2 mb-7 md:mb-0">
