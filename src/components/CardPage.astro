@@ -25,7 +25,7 @@ const { t, card, cards, themes, user } = Astro.props
 const description = card.cardDescription && addAbbrs(card.cardDescription)
 ---
 
-<div class="mx-4 flex min-h-svh flex-col justify-between">
+<div class="mx-4">
 	<div
 		class="m-auto mt-12 grid w-full max-w-xl grid-cols-1 md:grid-cols-3 md:gap-x-12"
 	>
@@ -259,6 +259,9 @@ const description = card.cardDescription && addAbbrs(card.cardDescription)
 			}
 		</div>
 	</div>
+</div>
+<div class="grow"></div>
+<div class="mx-4">
 	<div
 		class="m-auto mb-12 grid w-full max-w-xl grid-cols-1 md:grid-cols-3 md:gap-x-12"
 	>

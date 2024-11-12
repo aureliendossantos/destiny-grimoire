@@ -41,8 +41,12 @@ const pathname =
 		: Astro.props.pathname.replace(`/${locale}`, "")
 const t = useTranslations(locale)
 
-let cookie = validateCookie(Astro.cookies.get("grimoireLogin")?.json())
-if (!cookie) Astro.cookies.delete("grimoireLogin")
+const tryCookie = Astro.cookies.get("grimoireLogin")
+const cookie = validateCookie(tryCookie?.json())
+if (tryCookie && !cookie) {
+	console.warn("Deleting invalid cookie:", cookie)
+	Astro.cookies.delete("grimoireLogin", { path: "/" })
+}
 
 const isUserPage =
 	cookie && userInPath && cookie.membershipId == userInPath.membershipId
@@ -136,7 +140,7 @@ const isUserPage =
 			)
 		}
 		<select
-			id="language-switcher"
+			id="footer-language-switcher"
 			class="rounded-md bg-transparent p-4 ring-1 ring-slate-300 transition hover:bg-slate-100"
 		>
 			{
@@ -158,7 +162,7 @@ const isUserPage =
 
 <script is:inline>
 	document
-		.getElementById("language-switcher")
+		.getElementById("footer-language-switcher")
 		?.addEventListener(
 			"change",
 			(t) =>

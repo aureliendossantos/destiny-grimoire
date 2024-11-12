@@ -25,6 +25,7 @@ const { card, cards, themes, t } = Astro.props
 <Layout
 	title={`${card.cardName} · Grimoire`}
 	description={card.cardIntro || card.cardDescription || ""}
+	contentHeightScreen
 	onGrimoireSection
 >
 	<CardPage {t} {card} {cards} {themes} />

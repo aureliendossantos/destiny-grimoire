@@ -26,14 +26,18 @@ const errorMessage =
 	`Could not find a Bungie account with ${platform ? "Xbox" : "PSN"} username "${username}". Please check that the username is correct and that you have played Destiny 1 on this platform.`
 
 if (membershipId) {
-	Astro.cookies.set("grimoireLogin", {
-		membershipType: membershipType,
-		membershipId: membershipId,
-		username: username,
-	})
+	Astro.cookies.set(
+		"grimoireLogin",
+		{
+			membershipType: membershipType,
+			membershipId: membershipId,
+			username: username,
+		},
+		{ path: "/" },
+	)
 	return Astro.redirect(
 		getRelativeLocaleUrl(
-			checkLocale(Astro.params.locale),
+			checkLocale(Astro.currentLocale),
 			`/user/${membershipTypeToPath(membershipType)}/${username}${redirect ? redirect : ""}`,
 		),
 	)

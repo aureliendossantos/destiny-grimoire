@@ -7,7 +7,7 @@ const { ...attributes } = Astro.props
 ---
 
 <a
-	class="px-4 py-2 transition hover:text-slate-400 group-has-[:focus]:hidden"
+	class="px-4 py-2 transition hover:text-slate-400 group-has-[input[type='search']:focus]:hidden"
 	{...attributes}
 >
 	<slot />

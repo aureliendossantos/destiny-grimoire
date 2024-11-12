@@ -6,6 +6,7 @@ import SubHeader from "$components/SubHeader.astro"
 import Layout from "$layouts/Layout.astro"
 import { getCards } from "$utils/helpers"
 import { checkLocale } from "$utils/i18n"
+import type { CollectionEntry } from "astro:content"
 
 const locale = checkLocale(Astro.currentLocale)
 const cards = await getCards(locale)
@@ -13,25 +14,70 @@ const cards = await getCards(locale)
 const term = Astro.url.searchParams.get("term")
 // if search term is present in card name or description
 const relevantCards = term
-	? Object.entries(cards)
-			.map(([_, card]) => card)
-			.filter(
-				(card) =>
-					card.cardName.toLowerCase().includes(term.toLowerCase()) ||
-					card.cardIntro
-						?.toLowerCase()
-						.includes(term.toLowerCase()) ||
-					card.cardIntroAttribution
-						?.toLowerCase()
-						.includes(term.toLowerCase()) ||
-					card.cardDescription
-						?.toLowerCase()
-						.includes(term.toLowerCase()) ||
-					String(card.cardId)
-						.toLowerCase()
-						.includes(term.toLowerCase()),
-			)
+	? Object.values(cards).filter(
+			(card) =>
+				card.cardName.toLowerCase().includes(term.toLowerCase()) ||
+				card.cardIntro?.toLowerCase().includes(term.toLowerCase()) ||
+				card.cardIntroAttribution
+					?.toLowerCase()
+					.includes(term.toLowerCase()) ||
+				card.cardDescription
+					?.toLowerCase()
+					.includes(term.toLowerCase()) ||
+				String(card.cardId).toLowerCase().includes(term.toLowerCase()),
+		)
 	: []
+const isolateSentenceWithTerm = (
+	card: CollectionEntry<"cards">["data"][string],
+) => {
+	const cardDescription = card.cardDescription
+	const cardIntro = card.cardIntro
+	const cardIntroAttribution = card.cardIntroAttribution
+	const cardName = card.cardName
+	const cardId = card.cardId
+	const termIndex = cardDescription
+		? cardDescription.toLowerCase().indexOf(term!.toLowerCase())
+		: cardIntro
+			? cardIntro.toLowerCase().indexOf(term!.toLowerCase())
+			: cardIntroAttribution
+				? cardIntroAttribution
+						.toLowerCase()
+						.indexOf(term!.toLowerCase())
+				: cardName
+					? cardName.toLowerCase().indexOf(term!.toLowerCase())
+					: cardId
+						? String(cardId)
+								.toLowerCase()
+								.indexOf(term!.toLowerCase())
+						: -1
+	if (termIndex === -1) return { sentence: null, termIndex }
+	const termLength = term!.length
+	const sentenceStart = Math.max(0, termIndex - 60)
+	const sourceLength = cardDescription
+		? cardDescription.length
+		: cardIntro
+			? cardIntro.length
+			: cardIntroAttribution
+				? cardIntroAttribution.length
+				: cardName
+					? cardName.length
+					: cardId
+						? String(cardId).length
+						: 0
+	const sentenceEnd = Math.min(termIndex + termLength + 80, sourceLength)
+	const sentence = cardDescription
+		? cardDescription.slice(sentenceStart, sentenceEnd)
+		: cardIntro
+			? cardIntro.slice(sentenceStart, sentenceEnd)
+			: cardIntroAttribution
+				? cardIntroAttribution.slice(sentenceStart, sentenceEnd)
+				: cardName
+					? cardName.slice(sentenceStart, sentenceEnd)
+					: cardId
+						? String(cardId).slice(sentenceStart, sentenceEnd)
+						: ""
+	return { sentence, sentenceStart, sentenceEnd, sourceLength }
+}
 ---
 
 <Layout
@@ -43,14 +89,55 @@ const relevantCards = term
 		subtitle="Résultats de la recherche"
 	/>
 	{
-		relevantCards.length > 0 ? (
+		term && relevantCards.length > 0 ? (
 			<div class="ml-10 mr-2 sm:mr-4">
 				<div class="m-auto mb-12 mt-10 max-w-6xl">
 					<div class="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-4 md:grid-cols-5 lg:grid-cols-6">
 						{Array.isArray(relevantCards) &&
-							relevantCards.map((card) => (
-								<CardPreview card={card} />
-							))}
+							relevantCards.map((card) => {
+								const {
+									sentence,
+									sentenceStart,
+									sentenceEnd,
+									sourceLength,
+								} = isolateSentenceWithTerm(card)
+								if (!sentence) return null
+								return (
+									<div>
+										<CardPreview card={card} />
+										<p
+											class:list={[
+												"relative -z-10 max-h-20 overflow-hidden rounded-b-sm border-x border-b border-slate-200 bg-slate-100 px-[0.5lh] text-[10px] leading-snug text-slate-500 sm:px-[1lh] md:text-xs",
+												{
+													"pt-[1lh]":
+														sentenceStart == 0,
+													"fade-in mt-0":
+														sentenceStart > 0,
+													"pb-[1lh]":
+														sentenceEnd ==
+														sourceLength,
+													"fade-out mb-0":
+														sentenceEnd <
+														sourceLength,
+												},
+											]}
+											set:html={sentence
+												.replaceAll("<b>", "")
+												.replaceAll("<i>", "")
+												.replaceAll(
+													"<br/><br/><br/>",
+													" ",
+												)
+												.replaceAll("<br/><br/>", " ")
+												.replaceAll("<br/>", " ")
+												.replaceAll(
+													new RegExp(term, "gi"),
+													'<span class="bg-slate-500 text-slate-100 font-bold rounded-sm">$&</span>',
+												)}
+										/>
+									</div>
+								)
+							})}
 					</div>
 				</div>
 			</div>
@@ -63,3 +150,32 @@ const relevantCards = term
 		)
 	}
 </Layout>
+
+<style is:global>
+	.fade-in,
+	.fade-out {
+		position: relative;
+	}
+	.fade-in::before,
+	.fade-out::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 10;
+		pointer-events: none; /* Allow text to be selectable */
+	}
+	.fade-in::before {
+		box-shadow: inset 0 2.1lh 1.2lh -1lh #f1f5f9;
+	}
+	.fade-out::before {
+		box-shadow: inset 0 -2.1lh 1.2lh -1lh #f1f5f9;
+	}
+	.fade-in.fade-out::before {
+		box-shadow:
+			inset 0 2.1lh 1.2lh -1lh #f1f5f9,
+			inset 0 -2.1lh 1.2lh -1lh #f1f5f9;
+	}
+</style>

@@ -18,7 +18,6 @@ const { locale, platform, username, cardId } = parseParamsWithUser(Astro.params)
 const t = useTranslations(locale)
 const themes = await getThemes(locale)
 const cards = await getCards(locale)
-const card = cards[cardId!]
 
 if (platform != "psn" && platform != "xbox" && !username)
 	return Astro.redirect("/404")

@@ -1,5 +1,9 @@
 ---
-import { getUserSummary, membershipTypeToPath } from "$utils/helpers"
+import {
+	getUserGrimoire,
+	getUserSummary,
+	membershipTypeToPath,
+} from "$utils/helpers"
 import { useTranslations, type SupportedLocale } from "$utils/i18n"
 
 interface Props {
@@ -12,7 +16,10 @@ interface Props {
 const { locale, membershipType, membershipId, username } = Astro.props
 const t = useTranslations(locale)
 
-const summary = await getUserSummary(membershipType, membershipId)
+const [summary, userGrimoire] = await Promise.all([
+	getUserSummary(membershipType, membershipId),
+	getUserGrimoire(membershipType, membershipId),
+])
 const bestCharacter = summary.characters.sort(
 	(a: any, b: any) => b.characterBase.powerLevel - a.characterBase.powerLevel,
 )[0]
@@ -38,7 +45,9 @@ const bestCharacter = summary.characters.sort(
 	>
 		<div>{username}</div>
 		<div class="pb-[1px] text-xs font-semibold">
-			__ {t("cards")} // __ {t("points")}
+			{userGrimoire.cardCollection.length}
+			{t("cards")} // {summary.grimoireScore}
+			{t("points")}
 		</div>
 	</div>
 </a>

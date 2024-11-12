@@ -9,8 +9,9 @@ import "@fontsource/eb-garamond/700.css"
 type Props = {
 	title: string
 	description: string
+	contentHeightScreen?: boolean
 } & FooterProps
-const { title, description, ...footerProps } = Astro.props
+const { title, description, contentHeightScreen, ...footerProps } = Astro.props
 const pathname = Astro.url.pathname
 const locale = checkLocale(Astro.currentLocale)
 ---
@@ -20,16 +21,22 @@ const locale = checkLocale(Astro.currentLocale)
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
+		<meta property="og:site_name" content="Cryptarch’s Vault" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="theme-color" content="#e2e8f0" />
 		<title>{title}</title>
 		<link rel="preconnect" href="https://rsms.me/" />
 		<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 	</head>
 	<body class="bg-slate-50 font-sans text-slate-950">
 		<div class="flex min-h-screen flex-col justify-between">
-			<div>
+			<div
+				class:list={{
+					"flex min-h-screen flex-col": contentHeightScreen,
+				}}
+			>
 				<Header />
 				<slot />
 			</div>

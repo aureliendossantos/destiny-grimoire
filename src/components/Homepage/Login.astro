@@ -12,8 +12,12 @@ interface Props {
 const { locale } = Astro.props
 const t = useTranslations(locale)
 
-let cookie = validateCookie(Astro.cookies.get("grimoireLogin")?.json())
-if (!cookie) Astro.cookies.delete("grimoireLogin")
+const tryCookie = Astro.cookies.get("grimoireLogin")
+const cookie = validateCookie(tryCookie?.json())
+if (tryCookie && !cookie) {
+	console.warn("Deleting invalid cookie:", cookie)
+	Astro.cookies.delete("grimoireLogin", { path: "/" })
+}
 ---
 
 {
@@ -66,7 +70,7 @@ if (!cookie) Astro.cookies.delete("grimoireLogin")
 			<input
 				type="submit"
 				value={t("login")}
-				class="cursor-pointer rounded-md bg-slate-200/60 px-4 py-[10px] font-medium text-slate-400 transition hover:bg-slate-100"
+				class="cursor-pointer rounded-md bg-slate-200/60 px-4 py-[10px] font-medium text-slate-400 transition hover:bg-slate-200 hover:text-slate-500"
 			/>
 		</form>
 	)

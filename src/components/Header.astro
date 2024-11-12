@@ -1,6 +1,6 @@
 ---
 import { deconstructUrl } from "$utils/helpers"
-import { checkLocale } from "$utils/i18n"
+import { checkLocale, localeParams } from "$utils/i18n"
 import { useTranslations } from "$utils/i18n"
 import { getRelativeLocaleUrl } from "astro:i18n"
 import HeaderLink from "./Layout/HeaderLink.astro"
@@ -15,22 +15,30 @@ const { platform, username } = deconstructUrl(pathname)
 const basePath = platform ? `/user/${platform}/${username}` : ``
 ---
 
-<header class="bg-slate-200 px-4">
-	<div
-		class="m-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-12"
-	>
+<header class="bg-slate-200 sm:px-4">
+	<div class="m-auto flex max-w-6xl flex-wrap items-center justify-between">
 		<div>
 			<a
 				href={getRelativeLocaleUrl(locale, "/")}
-				class="px-4 py-2 text-sm font-medium text-slate-500 transition hover:text-slate-400"
+				class="px-4 py-2 text-slate-500 transition hover:text-slate-400"
 			>
-				Sitename
+				<span
+					class="hidden font-serif text-lg italic leading-none sm:inline"
+				>
+					Guardian Compendium
+				</span>
+				<span class="text-sm font-medium sm:hidden">Home</span>
 			</a>
 		</div>
 		<div
 			class="group flex items-center py-4 text-sm font-medium text-slate-500 sm:gap-4"
 		>
-			<HeaderLink href={getRelativeLocaleUrl(locale, basePath)}>
+			<HeaderLink
+				href={getRelativeLocaleUrl(
+					locale,
+					platform ? basePath : "/all",
+				)}
+			>
 				{t("Grimoire")}
 			</HeaderLink>
 			<HeaderLink
@@ -43,22 +51,18 @@ const basePath = platform ? `/user/${platform}/${username}` : ``
 				{t("Books")}<sup>D2</sup>
 			</HeaderLink> */
 			}
-			{
-				/* <a
-				href={getRelativeLocaleUrl(locale, `${basePath}/fireteam`)}
-				class="transition group-has-[:focus]:hidden px-4 py-2 hover:text-slate-400 rounded-md"
+			<form
+				action={getRelativeLocaleUrl(locale, "/search")}
+				method="get"
+				class="pl-[10px]"
 			>
-				Escouade
-			</a> */
-			}
-			<form action={getRelativeLocaleUrl(locale, "/search")} method="get">
 				<label
 					class="flex cursor-pointer items-center overflow-hidden rounded-md ring-slate-300 transition has-[:focus]:ring-2"
 				>
 					<input
 						type="search"
 						name="term"
-						class="peer w-0 border-y-0 bg-slate-200 py-2 pl-3 font-sans text-sm font-medium text-slate-600 transition-all placeholder:text-slate-400 focus:w-[138px] focus:outline-none"
+						class="peer w-0 border-y-0 bg-slate-200 py-2 font-sans text-sm font-medium text-slate-600 placeholder:text-slate-400 focus:w-[138px] focus:pl-3 focus:outline-none focus:transition-all"
 						placeholder={t("Search")}
 					/>
 					<svg
@@ -66,7 +70,7 @@ const basePath = platform ? `/user/${platform}/${username}` : ``
 						width="32"
 						height="32"
 						viewBox="0 0 24 24"
-						class="h-[1lh] text-slate-500 hover:text-slate-400"
+						class="mr-2 h-[1lh] w-[1lh] text-slate-500 hover:text-slate-400"
 						><path
 							fill="currentColor"
 							d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14"
@@ -74,6 +78,37 @@ const basePath = platform ? `/user/${platform}/${username}` : ``
 					>
 				</label>
 			</form>
+			<select
+				id="header-language-switcher"
+				class="ml-2 mr-4 mt-[1px] rounded-md bg-transparent py-1 text-xs uppercase ring-slate-300 transition hover:bg-slate-100 hover:ring-1"
+			>
+				{
+					localeParams.map((localePath) => {
+						const curL = checkLocale(localePath)
+						return (
+							<option
+								value={`${localePath && localePath != "en" ? localePath : ""}${pathname}`}
+								selected={curL == locale}
+							>
+								{localePath == "pt-br"
+									? "pt"
+									: localePath || "en"}
+							</option>
+						)
+					})
+				}
+			</select>
 		</div>
 	</div>
 </header>
+
+<script>
+	document
+		.getElementById("header-language-switcher")
+		?.addEventListener(
+			"change",
+			(t) =>
+				t.currentTarget instanceof HTMLSelectElement &&
+				(window.location.pathname = t.currentTarget.value),
+		)
+</script>

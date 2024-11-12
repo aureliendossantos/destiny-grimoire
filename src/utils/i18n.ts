@@ -115,7 +115,7 @@ const headerFooter = {
 		Books: "Livres",
 		Grimoire: "Grimoire",
 		Tracker: "Progression",
-		Rechercher: "Rechercher…",
+		Search: "Rechercher…",
 	},
 }
 
