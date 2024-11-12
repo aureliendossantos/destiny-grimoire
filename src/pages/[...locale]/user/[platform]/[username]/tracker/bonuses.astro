@@ -1,0 +1,101 @@
+---
+export const prerender = false
+
+import Layout from "$layouts/Layout.astro"
+import {
+	getCards,
+	getMembershipId,
+	getThemes,
+	getUserGrimoire,
+	parseParamsWithUser,
+} from "$utils/helpers"
+import { useTranslations } from "$utils/i18n"
+import Bonus from "$components/Tracker/Bonus.astro"
+import SubHeader from "$components/SubHeader.astro"
+
+const { locale, platform, username } = parseParamsWithUser(Astro.params)
+
+const t = useTranslations(locale)
+const cards = Object.values(await getCards(locale))
+
+if (platform != "psn" && platform != "xbox") return Astro.redirect("/404")
+const membershipType = platform == "xbox" ? 1 : 2
+const membershipId = await getMembershipId(membershipType, username)
+if (!membershipId) return Astro.redirect("/404")
+
+const userGrimoire = await getUserGrimoire(membershipType, membershipId)
+if (!userGrimoire) return Astro.redirect("/404")
+
+const userBonuses = userGrimoire.bonuses
+
+const activeBonuses = userBonuses.filter((b) => b.value >= b.threshold).length
+const inProgressBonuses = userBonuses.filter(
+	(b) => b.value < b.threshold,
+).length
+---
+
+<Layout
+	title={`Bonus du Grimoire de ${username}`}
+	description={`${activeBonuses} bonus actifs, ${inProgressBonuses} en progression`}
+	userInPath={{ membershipType, membershipId, name: username }}
+	onGrimoireSection
+>
+	<SubHeader
+		title={`Bonus du Grimoire de ${username}`}
+		subtitle={`${activeBonuses} bonus actifs, ${inProgressBonuses} en progression`}
+	/>
+	<div class="mx-10">
+		<div
+			class="m-auto my-12 grid max-w-xl grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-12"
+		>
+			<div>
+				<h2
+					class="mb-4 font-smcp text-lg tracking-widest text-slate-500"
+				>
+					{activeBonuses} bonus actifs
+				</h2>
+				<div class="-ml-[10px] flex flex-col">
+					{
+						userBonuses
+							.filter((b) => b.value >= b.threshold)
+							.map((b) => (
+								<Bonus
+									{b}
+									{locale}
+									name={
+										cards.find((c) => c.cardId == b.cardId)!
+											.cardName
+									}
+									user={{ membershipType, name: username }}
+								/>
+							))
+					}
+				</div>
+			</div>
+			<div>
+				<h2
+					class="mb-4 font-smcp text-lg tracking-widest text-slate-500"
+				>
+					{inProgressBonuses} en progression
+				</h2>
+				<div class="-ml-[10px] flex flex-col">
+					{
+						userBonuses
+							.filter((b) => b.value < b.threshold)
+							.map((b) => (
+								<Bonus
+									{b}
+									{locale}
+									name={
+										cards.find((c) => c.cardId == b.cardId)!
+											.cardName
+									}
+									user={{ membershipType, name: username }}
+								/>
+							))
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</Layout>

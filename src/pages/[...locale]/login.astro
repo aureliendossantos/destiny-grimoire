@@ -4,6 +4,8 @@ export const prerender = false
 import Header from "$components/Header.astro"
 import Layout from "$layouts/Layout.astro"
 import { getMembershipId, membershipTypeToPath } from "$utils/helpers"
+import { checkLocale } from "$utils/i18n"
+import { getRelativeLocaleUrl } from "astro:i18n"
 
 if (Astro.request.method != "POST") return Astro.redirect("/", 308)
 
@@ -30,15 +32,18 @@ if (membershipId) {
 		username: username,
 	})
 	return Astro.redirect(
-		`/${membershipTypeToPath(membershipType)}/${username}${redirect ? redirect : ""}`
+		getRelativeLocaleUrl(
+			checkLocale(Astro.params.locale),
+			`/user/${membershipTypeToPath(membershipType)}/${username}${redirect ? redirect : ""}`,
+		),
 	)
 }
 ---
 
 <Layout title="Connexion échouée" description="Compte Bungie introuvable">
 	<Header h1="Connexion échouée" subtitle="Compte Bungie introuvable" />
-	<div class="flex justify-center items-center h-96">
-		<div class="bg-slate-200 rounded-md p-8 max-w-md">
+	<div class="flex h-96 items-center justify-center">
+		<div class="max-w-md rounded-md bg-slate-200 p-8">
 			{errorMessage}
 		</div>
 	</div>

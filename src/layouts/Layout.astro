@@ -1,13 +1,18 @@
 ---
+import Footer, { type FooterProps } from "$components/Footer.astro"
+import FooterFallback from "$components/FooterFallback.astro"
+import Header from "$components/Header.astro"
+import { checkLocale } from "$utils/i18n"
 import "$styles/fonts.css"
 import "@fontsource/eb-garamond/700.css"
 
-interface Props {
+type Props = {
 	title: string
 	description: string
-}
-
-const { title, description } = Astro.props
+} & FooterProps
+const { title, description, ...footerProps } = Astro.props
+const pathname = Astro.url.pathname
+const locale = checkLocale(Astro.currentLocale)
 ---
 
 <!doctype html>
@@ -22,7 +27,15 @@ const { title, description } = Astro.props
 		<link rel="preconnect" href="https://rsms.me/" />
 		<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 	</head>
-	<body class="bg-slate-50 text-slate-950">
-		<slot />
+	<body class="bg-slate-50 font-sans text-slate-950">
+		<div class="flex min-h-screen flex-col justify-between">
+			<div>
+				<Header />
+				<slot />
+			</div>
+			<Footer server:defer {locale} {pathname} {...footerProps}>
+				<FooterFallback slot="fallback" />
+			</Footer>
+		</div>
 	</body>
 </html>

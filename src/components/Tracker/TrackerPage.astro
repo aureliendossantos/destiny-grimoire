@@ -1,0 +1,211 @@
+---
+import SubHeader from "$components/SubHeader.astro"
+import { addAbbrs, getCards, getGuides } from "$utils/helpers"
+import { useTranslations, type SupportedLocale } from "$utils/i18n"
+import type { UserGrimoire } from "$utils/types"
+import { getRelativeLocaleUrl } from "astro:i18n"
+
+interface Props {
+	locale: SupportedLocale
+	user?: {
+		platform: "psn" | "xbox"
+		name: string
+		grimoire: UserGrimoire
+	}
+	guideSlug: string
+}
+const { locale, user, guideSlug } = Astro.props
+const t = useTranslations(locale)
+
+const guides = await getGuides(locale)
+const guide = guides.types.find((t) => t.slug == guideSlug)
+if (!guide) return Astro.redirect("/404")
+
+const cards = await getCards(locale)
+
+const idsInGuide = guide.areas.flatMap((area) =>
+	area.items.map((item) => item.id),
+)
+if (guide.other)
+	guide.areas = [
+		{
+			name: undefined,
+			items: Object.values(cards)
+				.filter((card) => !idsInGuide.includes(card.cardId))
+				.map((card) => ({
+					id: card.cardId,
+					note: undefined,
+					details: undefined,
+					video: undefined,
+				})),
+		},
+	]
+---
+
+<SubHeader title="Tracker" />
+<div class="mx-4">
+	<div
+		class="m-auto my-12 grid max-w-3xl grid-cols-1 gap-y-8 sm:grid-cols-3 sm:gap-x-8"
+	>
+		<div class="mx-4 font-serif sm:mx-0">
+			<h2 class="mb-4 text-5xl" set:html={addAbbrs(guide.name)} />
+			<div class="font-smcp leading-none tracking-widest text-slate-500">
+				Voir aussi
+			</div>
+			<div class="flex flex-col divide-y divide-slate-200">
+				{
+					guides.types
+						.filter((type) => type.name != guide.name)
+						.map((type) => (
+							<a
+								href={getRelativeLocaleUrl(
+									locale,
+									user
+										? `/user/${user.platform}/${user.name}/tracker/${type.slug}`
+										: `/tracker/${type.slug}`,
+								)}
+								class="pt-1 text-slate-500 transition hover:text-slate-400"
+							>
+								{type.name}
+							</a>
+						))
+				}
+			</div>
+		</div>
+		<div class="col-span-2 -mx-4 sm:mx-0">
+			{
+				guide.areas.map((area) => {
+					const areaCards = area.items
+						.map((item) => ({
+							...item,
+							...cards[item.id],
+							obtained: user?.grimoire.cardCollection.find(
+								(c) => c.cardId == item.id,
+							),
+						}))
+						.sort((a, b) =>
+							a.obtained === b.obtained ? 0 : a.obtained ? 1 : -1,
+						)
+					return (
+						<>
+							{area.name && (
+								<h3 class="mb-2 ml-8 font-smcp text-lg tracking-widest text-slate-500">
+									{area.name}
+									<span class="inline-block w-[0.2em]" />
+									<span
+										class="whitespace-nowrap text-sm"
+										style={{
+											fontFeatureSettings: '"lnum"',
+										}}
+									>
+										{areaCards.filter(
+											(card) => card.obtained,
+										).length > 0
+											? `${
+													areaCards.filter(
+														(card) => card.obtained,
+													).length
+												} / ${areaCards.length}`
+											: `${areaCards.length} ${
+													areaCards.length > 1
+														? t("cards")
+														: t("card")
+												}`}
+									</span>
+								</h3>
+							)}
+							<div class="mb-6 flex flex-col divide-y divide-slate-200 border-y border-slate-200">
+								{areaCards.map((card) => {
+									return (
+										<div
+											class:list={[
+												"group flex items-center justify-between transition",
+												{
+													"hover:bg-slate-100":
+														!card.obtained,
+													"bg-slate-100 hover:bg-slate-200":
+														card.obtained,
+												},
+											]}
+										>
+											{card.obtained && (
+												<svg
+													class="h-[1em] w-8 text-slate-500"
+													xmlns="http://www.w3.org/2000/svg"
+													width="32"
+													height="32"
+													viewBox="0 0 512 512"
+												>
+													<path
+														d="M362.6 192.9L345 174.8c-.7-.8-1.8-1.2-2.8-1.2-1.1 0-2.1.4-2.8 1.2l-122 122.9-44.4-44.4c-.8-.8-1.8-1.2-2.8-1.2-1 0-2 .4-2.8 1.2l-17.8 17.8c-1.6 1.6-1.6 4.1 0 5.7l56 56c3.6 3.6 8 5.7 11.7 5.7 5.3 0 9.9-3.9 11.6-5.5h.1l133.7-134.4c1.4-1.7 1.4-4.2-.1-5.7z"
+														fill="currentColor"
+													/>
+												</svg>
+											)}
+											<a
+												href={getRelativeLocaleUrl(
+													locale,
+													user
+														? `/user/${user.platform}/${user.name}/${card.cardId}`
+														: `/${card.cardId}`,
+												)}
+												class:list={[
+													"grow",
+													{
+														"pb-2 pl-8 pt-3":
+															!card.obtained,
+														"pb-2 pt-3 transition":
+															card.obtained,
+													},
+												]}
+											>
+												<h4
+													class:list={[
+														"font-serif",
+														{
+															"text-slate-500":
+																card.obtained,
+														},
+													]}
+													set:html={card.cardName}
+												/>
+												{card.note && (
+													<p
+														class="font-serif text-slate-500"
+														set:html={addAbbrs(
+															card.note,
+														)}
+													/>
+												)}
+											</a>
+											<div class="flex gap-1 pr-8">
+												{card.details && (
+													<a
+														href={card.details}
+														target="_blank"
+														class="rounded-md border border-slate-300 px-1 text-xs text-slate-500 transition hover:border-slate-400 hover:bg-slate-200 hover:text-slate-600"
+													>
+														Guide
+													</a>
+												)}
+												{card.video && (
+													<a
+														href={card.video}
+														target="_blank"
+														class="rounded-md border border-slate-300 px-1 text-xs text-slate-500 transition hover:border-slate-400 hover:bg-slate-200 hover:text-slate-600"
+													>
+														{t("Video")}
+													</a>
+												)}
+											</div>
+										</div>
+									)
+								})}
+							</div>
+						</>
+					)
+				})
+			}
+		</div>
+	</div>
+</div>

@@ -1,0 +1,31 @@
+---
+import TrackerPage from "$components/Tracker/TrackerPage.astro"
+import Layout from "$layouts/Layout.astro"
+import { getGuides } from "$utils/helpers"
+import { checkLocale, localeParams, useTranslations } from "$utils/i18n"
+
+export async function getStaticPaths() {
+	return (
+		await Promise.all(
+			localeParams.flatMap(async (localePath) => {
+				const locale = checkLocale(localePath)
+				const guides = await getGuides(locale)
+				return guides.types.map((guide) => ({
+					params: { locale: localePath, guide: guide.slug },
+					props: {
+						guide,
+						guides,
+						locale,
+						t: useTranslations(locale),
+					},
+				}))
+			}),
+		)
+	).flat()
+}
+const { guide, guides, locale, t } = Astro.props
+---
+
+<Layout title={`Tracker`} description="">
+	<TrackerPage {locale} guideSlug={guide.slug} />
+</Layout>

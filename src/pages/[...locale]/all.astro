@@ -1,0 +1,30 @@
+---
+import Layout from "$layouts/Layout.astro"
+import Grimoire from "$components/Grimoire.astro"
+import { checkLocale, localeParams, useTranslations } from "$utils/i18n"
+import { getCards, getThemes } from "$utils/helpers"
+
+export async function getStaticPaths() {
+	return await Promise.all(
+		localeParams.map(async (localePath) => {
+			const locale = checkLocale(localePath)
+			const themes = await getThemes(locale)
+			const cards = await getCards(locale)
+			return {
+				params: { locale: localePath },
+				props: { cards, themes, t: useTranslations(locale) },
+			}
+		}),
+	)
+}
+
+const { cards, themes, t } = Astro.props
+---
+
+<Layout title="Grimoire" description="Toutes les cartes" onGrimoirePage>
+	<div class="ml-10 mr-2 sm:mr-4">
+		<div class="m-auto mb-12 mt-10 max-w-6xl">
+			<Grimoire {themes} {cards} />
+		</div>
+	</div>
+</Layout>

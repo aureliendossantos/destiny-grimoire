@@ -1,0 +1,58 @@
+---
+export const prerender = false
+
+import Layout from "$layouts/Layout.astro"
+import {
+	getCards,
+	getMembershipId,
+	getThemes,
+	getUserGrimoire,
+	parseParamsWithUser,
+} from "$utils/helpers"
+import Grimoire from "$components/Grimoire.astro"
+import { useTranslations } from "$utils/i18n"
+import SubHeader from "$components/SubHeader.astro"
+
+const { locale, platform, username, cardId } = parseParamsWithUser(Astro.params)
+
+const t = useTranslations(locale)
+const themes = await getThemes(locale)
+const cards = await getCards(locale)
+const card = cards[cardId!]
+
+if (platform != "psn" && platform != "xbox" && !username)
+	return Astro.redirect("/404")
+const membershipType = platform == "xbox" ? 1 : 2
+const membershipId = await getMembershipId(membershipType, username)
+if (!membershipId) return //Astro.redirect("/404")
+
+const userGrimoire = await getUserGrimoire(membershipType, membershipId)
+if (!userGrimoire) return //Astro.redirect("/404")
+---
+
+<Layout
+	title={`Grimoire de ${username}`}
+	description={`${userGrimoire.cardCollection.length} cartes // ${userGrimoire.score} points`}
+	onGrimoirePage
+	userInPath={{
+		membershipType,
+		membershipId,
+		name: username,
+	}}
+>
+	<SubHeader
+		title={`Grimoire de ${username}`}
+		subtitle={`${userGrimoire.cardCollection.length} cartes // ${userGrimoire.score} points`}
+	/>
+	<div class="ml-10 mr-2 sm:mr-4">
+		<div class="m-auto mb-12 mt-10 max-w-6xl">
+			<Grimoire
+				{themes}
+				{cards}
+				{userGrimoire}
+				{membershipType}
+				{username}
+			/>
+		</div>
+	</div>
+</Layout>

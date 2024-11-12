@@ -1,10 +1,12 @@
 ---
-import { cards, themes } from "$utils/helpers"
 import type { UserGrimoire } from "$utils/types"
+import type { CollectionEntry } from "astro:content"
 import CardNavLink from "./CardNavLink.astro"
 
 interface Props {
 	cardId: number
+	cards: CollectionEntry<"cards">["data"]
+	themes: CollectionEntry<"grimoire">["data"]["themeCollection"]
 	user?: {
 		membershipType: 1 | 2
 		name: string
@@ -12,10 +14,10 @@ interface Props {
 	}
 }
 
-const { cardId, user } = Astro.props
+const { cardId, cards, themes, user } = Astro.props
 
 const userHasCard = user?.grimoire.cardCollection.some(
-	(userCard) => userCard.cardId == cardId
+	(userCard) => userCard.cardId == cardId,
 )
 
 const data = themes
@@ -25,14 +27,16 @@ const data = themes
 				theme: theme.themeName,
 				page: page.pageName,
 				card: cards[brief.cardId],
-			}))
-		)
+			})),
+		),
 	)
 	.filter(
 		(entry) =>
 			!user ||
 			!userHasCard ||
-			user.grimoire.cardCollection.find((c) => c.cardId == entry.card.cardId)
+			user.grimoire.cardCollection.find(
+				(c) => c.cardId == entry.card.cardId,
+			),
 	)
 const currentIndex = data.findIndex((entry) => entry.card.cardId === cardId)
 const currentEntry = data[currentIndex]
@@ -41,7 +45,7 @@ const nextEntry = data[currentIndex + 1]
 ---
 
 <div
-	class="col-span-3 border-t border-slate-200 mt-12 pt-10 grid grid-cols-2 gap-x-4 gap-y-10 font-serif items-center"
+	class="col-span-3 mt-12 grid grid-cols-2 items-center gap-x-4 gap-y-10 border-t border-slate-200 pt-10 font-serif"
 >
 	{
 		previousEntry && (
@@ -62,7 +66,9 @@ const nextEntry = data[currentIndex + 1]
 				card={nextEntry.card}
 				user={user}
 				themeTitle={
-					nextEntry.theme != currentEntry.theme ? nextEntry.theme : undefined
+					nextEntry.theme != currentEntry.theme
+						? nextEntry.theme
+						: undefined
 				}
 				next
 			/>

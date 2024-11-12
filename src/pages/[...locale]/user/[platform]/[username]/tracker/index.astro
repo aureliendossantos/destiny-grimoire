@@ -1,0 +1,13 @@
+---
+export const prerender = false
+
+import Layout from "$layouts/Layout.astro"
+import TrackerIndex from "$components/Tracker/TrackerIndex.astro"
+import { parseParamsWithUser } from "$utils/helpers"
+
+const { locale, platform, username } = parseParamsWithUser(Astro.params)
+---
+
+<Layout title="Tracker" description="">
+	<TrackerIndex {locale} user={{ platform, name: username }} />
+</Layout>

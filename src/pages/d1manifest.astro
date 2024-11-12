@@ -1,0 +1,9 @@
+---
+export const prerender = false
+
+import { bungieQuery } from "$utils/helpers"
+
+const manifest = await bungieQuery("Manifest/")
+---
+
+{JSON.stringify(manifest, null, 2)}

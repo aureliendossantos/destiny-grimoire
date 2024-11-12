@@ -1,0 +1,56 @@
+---
+import { cardImageStyle, membershipTypeToPath } from "$utils/helpers"
+import { type SupportedLocale } from "$utils/i18n"
+import { getRelativeLocaleUrl } from "astro:i18n"
+
+interface Props {
+	b: any
+	name: string
+	locale: SupportedLocale
+	user?: {
+		membershipType: 1 | 2
+		name: string
+	}
+}
+const { b, name, locale, user } = Astro.props
+---
+
+<a
+	href={getRelativeLocaleUrl(
+		locale,
+		user
+			? `/user/${membershipTypeToPath(user.membershipType)}/${user.name}/${b.cardId}`
+			: `/${b.cardId}`,
+	)}
+	class="flex items-center gap-4 rounded py-[10px] pl-[10px] ring-slate-200 transition hover:bg-slate-100 hover:ring-1"
+>
+	<div class="relative h-12 w-12 overflow-hidden rounded-sm">
+		<img
+			src={"https://www.bungie.net" + b.smallImage.sheetPath}
+			alt="Illustration de carte"
+			class:list={[
+				"absolute bg-slate-400 object-fill",
+				{
+					"brightness-125 contrast-75 grayscale":
+						b.value < b.threshold,
+				},
+			]}
+			loading="lazy"
+			decoding="async"
+			style={cardImageStyle(b.smallImage, true)}
+		/>
+	</div>
+	<div class="grow">
+		<h3 class="font-serif leading-tight" set:html={name} />
+		<div class="text-xs uppercase text-slate-500">
+			{b.bonusName.replace(" Bonus", "")}
+		</div>
+		{
+			b.value < b.threshold && (
+				<div class="text-xs uppercase leading-normal text-slate-500">
+					{b.value}/{b.threshold} {b.statName}
+				</div>
+			)
+		}
+	</div>
+</a>

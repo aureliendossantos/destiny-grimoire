@@ -1,72 +1,72 @@
 ---
-interface Props {
-	h1: string
-	subtitle: string
-	grimoire?: string
-	bonus?: string
-	fireteam?: string
-}
+import { deconstructUrl } from "$utils/helpers"
+import { checkLocale } from "$utils/i18n"
+import { useTranslations } from "$utils/i18n"
+import { getRelativeLocaleUrl } from "astro:i18n"
+import HeaderLink from "./Layout/HeaderLink.astro"
 
-const { h1, subtitle, grimoire, bonus, fireteam } = Astro.props
+const locale = checkLocale(Astro.currentLocale)
+const t = useTranslations(locale)
+const pathname =
+	locale == "en"
+		? Astro.url.pathname
+		: Astro.url.pathname.replace(`/${locale}`, "")
+const { platform, username } = deconstructUrl(pathname)
+const basePath = platform ? `/user/${platform}/${username}` : ``
 ---
 
-<header class="px-10 pt-12 pb-10 border-b border-slate-200">
+<header class="bg-slate-200 px-4">
 	<div
-		class="max-w-6xl flex flex-wrap gap-x-12 justify-between items-center m-auto"
+		class="m-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-12"
 	>
 		<div>
-			<h1 class="text-3xl font-bold text-slate-700">{h1}</h1>
-			<div class="text-xl font-semibold text-slate-500">
-				{subtitle}
-			</div>
+			<a
+				href={getRelativeLocaleUrl(locale, "/")}
+				class="px-4 py-2 text-sm font-medium text-slate-500 transition hover:text-slate-400"
+			>
+				Sitename
+			</a>
 		</div>
-		<div class="group flex items-center gap-8 sm:gap-12">
+		<div
+			class="group flex items-center py-4 text-sm font-medium text-slate-500 sm:gap-4"
+		>
+			<HeaderLink href={getRelativeLocaleUrl(locale, basePath)}>
+				{t("Grimoire")}
+			</HeaderLink>
+			<HeaderLink
+				href={getRelativeLocaleUrl(locale, `${basePath}/tracker`)}
+			>
+				{t("Tracker")}
+			</HeaderLink>
 			{
-				grimoire && (
-					<a
-						href={grimoire}
-						class="text-slate-500 tracking-[0.15em] text-xl hover:text-slate-400 transition group-has-[:focus]:hidden font-smcp"
-					>
-						<span class="hidden lg:inline">Cartes de </span>Grimoire
-					</a>
-				)
+				/* <HeaderLink href={getRelativeLocaleUrl(locale, "/books")}>
+				{t("Books")}<sup>D2</sup>
+			</HeaderLink> */
 			}
 			{
-				bonus && (
-					<a
-						href={bonus}
-						class="text-slate-500 tracking-[0.15em] text-xl hover:text-slate-400 transition group-has-[:focus]:hidden font-smcp"
-					>
-						<span class="hidden lg:inline">Progression des </span>Bonus
-					</a>
-				)
+				/* <a
+				href={getRelativeLocaleUrl(locale, `${basePath}/fireteam`)}
+				class="transition group-has-[:focus]:hidden px-4 py-2 hover:text-slate-400 rounded-md"
+			>
+				Escouade
+			</a> */
 			}
-			{
-				fireteam && (
-					<a
-						href={fireteam}
-						class="text-slate-500 tracking-[0.15em] text-xl hover:text-slate-400 transition group-has-[:focus]:hidden font-smcp"
-					>
-						Escouade
-					</a>
-				)
-			}
-			<form action="/search" method="get">
+			<form action={getRelativeLocaleUrl(locale, "/search")} method="get">
 				<label
-					class="flex items-center has-[:focus]:ring-2 ring-slate-300 rounded-md overflow-hidden transition"
+					class="flex cursor-pointer items-center overflow-hidden rounded-md ring-slate-300 transition has-[:focus]:ring-2"
 				>
 					<input
 						type="search"
 						name="term"
-						class="peer py-2 font-sans text-lg text-slate-700 bg-slate-50 border-y-0 focus:outline-none transition-all placeholder:text-slate-400 font-light w-0 focus:w-[138px] pl-2"
-						placeholder="Rechercher…"
+						class="peer w-0 border-y-0 bg-slate-200 py-2 pl-3 font-sans text-sm font-medium text-slate-600 transition-all placeholder:text-slate-400 focus:w-[138px] focus:outline-none"
+						placeholder={t("Search")}
 					/>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="32"
 						height="32"
 						viewBox="0 0 24 24"
-						class="h-[1lh] text-slate-400"
+						class="h-[1lh] text-slate-500 hover:text-slate-400"
 						><path
 							fill="currentColor"
 							d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14"

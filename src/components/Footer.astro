@@ -1,83 +1,168 @@
 ---
-import { deconstructUrl, membershipTypeToPath, validateCookie } from "$utils/helpers"
-import LinkButton from "./Footer/LinkButton.astro"
+import {
+	deconstructUrl,
+	membershipTypeToPath,
+	validateCookie,
+} from "$utils/helpers"
+import {
+	checkLocale,
+	localeNames,
+	localeParams,
+	useTranslations,
+	type SupportedLocale,
+} from "$utils/i18n"
+import { getRelativeLocaleUrl } from "astro:i18n"
+import LinkButton from "./Layout/LinkButton.astro"
 import MiniLoginForm from "./MiniLoginForm.astro"
 import Username from "./Username.astro"
 
-interface Props {
-	pathname: string
+export type FooterProps = {
+	onGrimoireSection?: boolean
 	onGrimoirePage?: boolean
-	pathUser?: {
+	userInPath?: {
 		membershipType: 1 | 2
 		membershipId: string
 		name: string
 	}
 }
 
-const { pathname, onGrimoirePage, pathUser } = Astro.props
+type Props = {
+	locale: SupportedLocale
+	pathname: string
+} & FooterProps
+
+const { locale, onGrimoireSection, onGrimoirePage, userInPath } = Astro.props
+const onGrimoire = onGrimoireSection || onGrimoirePage
+
+const hrefLocale = locale == "en" ? "" : `${locale}/`
+const pathname =
+	locale == "en"
+		? Astro.props.pathname
+		: Astro.props.pathname.replace(`/${locale}`, "")
+const t = useTranslations(locale)
 
 let cookie = validateCookie(Astro.cookies.get("grimoireLogin")?.json())
 if (!cookie) Astro.cookies.delete("grimoireLogin")
 
-const isUserPage = cookie && pathUser && cookie.membershipId == pathUser.membershipId
+const isUserPage =
+	cookie && userInPath && cookie.membershipId == userInPath.membershipId
 ---
 
-<div class="bg-slate-200 py-12">
-	<div class="mx-4">
-		<div class="max-w-xl m-auto text-sm font-medium text-slate-500 flex flex-col gap-4">
-			{
-				pathUser ? (
-					(!cookie || !isUserPage) && (
+<div class="bg-slate-200 px-4 py-12">
+	<div
+		class="m-auto flex max-w-xl flex-col gap-4 text-sm font-medium text-slate-500"
+	>
+		{
+			userInPath
+				? (!cookie || !isUserPage) && (
 						<>
-							<div class="mb-[1lh]">
-								Tiré de la
+							<div>
+								{t("data-from")}
 								<a
-									href={`/${membershipTypeToPath(pathUser.membershipType)}/${pathUser.name}`}
-									class="rounded-md ring-1 ring-slate-300 px-1 py-[1px] -mx-[1px] -my-[1px] hover:bg-slate-100 transition"
+									href={`/${hrefLocale}user/${membershipTypeToPath(userInPath.membershipType)}/${userInPath.name}`}
+									class="-mx-[1px] -my-[1px] rounded-md px-1 py-[1px] ring-1 ring-slate-300 transition hover:bg-slate-100"
 								>
-									collection de
+									{t("collection-of")}
 									<Username
-										membershipType={pathUser.membershipType}
-										membershipId={pathUser.membershipId}
-										username={pathUser.name}
+										membershipType={
+											userInPath.membershipType
+										}
+										membershipId={userInPath.membershipId}
+										username={userInPath.name}
 									/>
 								</a>
 							</div>
 						</>
 					)
+				: onGrimoire && (
+						<>
+							<div>{t("global-data")}</div>
+							{onGrimoireSection && (
+								<LinkButton href={`/${hrefLocale}all`}>
+									{t("back-to-grimoire")}
+								</LinkButton>
+							)}
+						</>
+					)
+		}
+		{
+			onGrimoire &&
+				(cookie ? (
+					<>
+						{!(onGrimoirePage && isUserPage) && (
+							<LinkButton
+								href={
+									isUserPage
+										? `/${hrefLocale}user/${membershipTypeToPath(userInPath.membershipType)}/${userInPath.name}`
+										: `/${hrefLocale}user/${membershipTypeToPath(cookie.membershipType)}/${cookie.username}${deconstructUrl(pathname).rest}`
+								}
+							>
+								<div>
+									{isUserPage
+										? t("back-to-grimoire")
+										: t("switch-to-your-collection")}
+								</div>
+								<Username
+									membershipType={cookie.membershipType}
+									membershipId={cookie.membershipId}
+									username={cookie.username}
+								/>
+							</LinkButton>
+						)}
+						<LinkButton
+							href={getRelativeLocaleUrl(locale, "/logout")}
+						>
+							{t("logout")}
+						</LinkButton>
+					</>
 				) : (
 					<>
-					<div>
-						Displaying global data. May contain spoilers.
-					</div>
-					{!onGrimoirePage && <LinkButton href="/all">
-						Retour au Grimoire
-					</LinkButton>}
+						<div class="font-smcp text-base leading-relaxed">
+							{t("browse-yours")}
+						</div>
+						<MiniLoginForm {locale} />
 					</>
-				)
-			}
-			{
-				cookie ? (
-					<>
-					{!(onGrimoirePage && isUserPage) && <LinkButton href={isUserPage ? `/${membershipTypeToPath(pathUser.membershipType)}/${pathUser.name}` : `/${membershipTypeToPath(cookie.membershipType)}/${cookie.username}${deconstructUrl(pathname).rest}`}>
-					<div>{isUserPage ? "Retour au Grimoire" : "Switch to your collection"}</div>
-					<Username
-						membershipType={cookie.membershipType}
-						membershipId={cookie.membershipId}
-						username={cookie.username}
-					/>
-					</LinkButton>}
-					<LinkButton href="/logout">
-						Déconnexion
+				))
+		}
+		{
+			!onGrimoire && (
+				<div class="grid grid-cols-2 gap-4">
+					<LinkButton href="/">{t("Grimoire")}</LinkButton>
+					<LinkButton href="/books">
+						{t("Books")}
+						<sup>D2</sup>
 					</LinkButton>
-					</>
-				) : (
-					<div class="font-smcp text-base leading-relaxed">
-						Explorez votre propre collection
-					</div>
-					<MiniLoginForm />
-				)
+				</div>
+			)
+		}
+		<select
+			id="language-switcher"
+			class="rounded-md bg-transparent p-4 ring-1 ring-slate-300 transition hover:bg-slate-100"
+		>
+			{
+				localeParams.map((localePath) => {
+					const curL = checkLocale(localePath)
+					return (
+						<option
+							value={`${localePath && localePath != "en" ? localePath : ""}${pathname}`}
+							selected={curL == locale}
+						>
+							{localeNames[curL]}
+						</option>
+					)
+				})
 			}
-		</div>
+		</select>
 	</div>
 </div>
+
+<script is:inline>
+	document
+		.getElementById("language-switcher")
+		?.addEventListener(
+			"change",
+			(t) =>
+				t.currentTarget instanceof HTMLSelectElement &&
+				(window.location.pathname = t.currentTarget.value),
+		)
+</script>

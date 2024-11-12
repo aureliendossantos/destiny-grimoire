@@ -1,0 +1,14 @@
+---
+import Layout from "$layouts/Layout.astro"
+import TrackerIndex from "$components/Tracker/TrackerIndex.astro"
+import { localePaths } from "$utils/i18n"
+
+export async function getStaticPaths() {
+	return localePaths
+}
+const { t, locale } = Astro.props
+---
+
+<Layout title="Tracker" description="">
+	<TrackerIndex {locale} />
+</Layout>

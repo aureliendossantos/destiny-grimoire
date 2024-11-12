@@ -1,0 +1,64 @@
+---
+import Layout from "$layouts/Layout.astro"
+import Login from "$components/Homepage/Login.astro"
+import SeeAllButton from "$components/Homepage/SeeAllButton.astro"
+import { checkLocale, localeParams, localePaths } from "$utils/i18n"
+
+export async function getStaticPaths() {
+	return localePaths
+}
+const { t, locale } = Astro.props
+---
+
+<Layout title="Grimoire de Destiny" description="">
+	<div class="mx-4">
+		<div
+			class="m-auto my-12 grid max-w-3xl grid-cols-1 gap-12 md:grid-cols-2"
+		>
+			<div>
+				<div
+					class="mb-4 grid grid-cols-7 gap-1 whitespace-nowrap text-center text-xs font-medium uppercase text-slate-400"
+				>
+					{
+						localeParams.map((localePath) => {
+							const curL = checkLocale(localePath)
+							if (locale == curL)
+								return (
+									<div class="rounded-md border border-slate-200 bg-slate-200 px-2 py-1">
+										{curL}
+									</div>
+								)
+							return (
+								<a
+									href={`/${localePath ? localePath : ""}`}
+									class="rounded-md border border-slate-200 bg-slate-100 px-2 py-1 transition hover:bg-slate-200"
+								>
+									{curL}
+								</a>
+							)
+						})
+					}
+				</div>
+				<p
+					class="order-last font-serif text-lg md:order-none"
+					set:html={t("description")}
+				/>
+			</div>
+			<div>
+				<div class="m-auto flex flex-col items-center gap-2">
+					<h2 class="text-center font-smcp text-xl text-slate-400">
+						{t("browse-your-grimoire")}
+					</h2>
+					<Login server:defer {locale}>
+						<div
+							slot="fallback"
+							class="h-32 w-3/4 animate-pulse rounded-xl bg-slate-100"
+						>
+						</div>
+					</Login>
+					<SeeAllButton />
+				</div>
+			</div>
+		</div>
+	</div>
+</Layout>

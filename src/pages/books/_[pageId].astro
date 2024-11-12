@@ -1,0 +1,99 @@
+---
+import Layout from "$layouts/Layout.astro"
+import { addAbbrs, bungieQuery, getBungieJson } from "$utils/helpers"
+import type { Lore, PresentationNode, RecordDef } from "$utils/types"
+
+export async function getStaticPaths() {
+	const manifest = await bungieQuery("/Destiny2/Manifest/", true)
+	const presentationNodes = (await getBungieJson(
+		manifest.jsonWorldComponentContentPaths.fr
+			.DestinyPresentationNodeDefinition,
+	)) as Record<string, PresentationNode>
+	const records = (await getBungieJson(
+		manifest.jsonWorldComponentContentPaths.fr.DestinyRecordDefinition,
+	)) as Record<string, RecordDef>
+	const lores = (await getBungieJson(
+		manifest.jsonWorldComponentContentPaths.fr.DestinyLoreDefinition,
+	)) as Record<string, Lore>
+	// TODO : les 4 main catégories
+	return presentationNodes["2261683515"].children.presentationNodes.flatMap(
+		(child) => {
+			const book = presentationNodes[child.presentationNodeHash]
+			return book.children.records.map((r, i) => {
+				const record = records[r.recordHash]
+				const prev = book.children.records[i - 1]
+				const previousRecord = prev
+					? records[prev.recordHash].loreHash
+						? records[prev.recordHash]
+						: null
+					: null
+				const nextRecord = book.children.records[i + 1]
+					? records[book.children.records[i + 1].recordHash]
+					: null
+				const lore = lores[record.loreHash]
+				return {
+					params: { pageId: record.hash },
+					props: { book, previousRecord, record, nextRecord, lore },
+				}
+			})
+		},
+	)
+}
+
+const { book, previousRecord, record, nextRecord, lore } = Astro.props
+
+const description = addAbbrs(lore.displayProperties.description)
+---
+
+<Layout
+	title={`${lore.displayProperties.name} · ${book.displayProperties.name} · Destiny Books`}
+	description=""
+>
+	<div class="mx-4">
+		<div class="m-auto my-[2lh] max-w-lg font-serif text-lg">
+			<div class="flex justify-between">
+				<a
+					class="order-last text-right font-smcp text-slate-500 transition hover:text-slate-400"
+					href="/books"
+				>
+					{book.displayProperties.name}
+				</a>
+				<h1 class="mb-[1lh] font-smcp">
+					{lore.displayProperties.name}
+				</h1>
+			</div>
+			<p class="whitespace-pre-line" set:html={description} />
+			<div class="mt-[2lh] grid grid-cols-2 gap-x-4 border-slate-200">
+				{
+					previousRecord && (
+						<a href={`/books/${previousRecord.hash}`} class="group">
+							<div class="text-slate-500 transition group-hover:text-slate-400">
+								Précédent
+							</div>
+							<div
+								class="font-smcp transition group-hover:text-slate-700"
+								set:html={previousRecord.displayProperties.name}
+							/>
+						</a>
+					)
+				}
+				{
+					nextRecord && (
+						<a
+							href={`/books/${nextRecord.hash}`}
+							class="group col-start-2 text-right"
+						>
+							<div class="text-slate-500 transition group-hover:text-slate-400">
+								Suivant
+							</div>
+							<div
+								class="font-smcp transition group-hover:text-slate-700"
+								set:html={nextRecord.displayProperties.name}
+							/>
+						</a>
+					)
+				}
+			</div>
+		</div>
+	</div>
+</Layout>

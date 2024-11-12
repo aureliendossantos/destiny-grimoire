@@ -1,6 +1,8 @@
 ---
 import { membershipTypeToPath } from "$utils/helpers"
+import { checkLocale } from "$utils/i18n"
 import type { CollectionEntry } from "astro:content"
+import { getRelativeLocaleUrl } from "astro:i18n"
 
 interface Props {
 	card: CollectionEntry<"cards">["data"][string]
@@ -13,27 +15,31 @@ interface Props {
 }
 
 const { card, themeTitle, next, user } = Astro.props
+const locale = checkLocale(Astro.currentLocale)
 ---
 
 <a
-	href={user
-		? `/${membershipTypeToPath(user.membershipType)}/${user.name}/${card.cardId}`
-		: `/${card.cardId}`}
+	href={getRelativeLocaleUrl(
+		locale,
+		user
+			? `/user/${membershipTypeToPath(user.membershipType)}/${user.name}/${card.cardId}`
+			: `/${card.cardId}`,
+	)}
 	class:list={[
-		"flex gap-4 items-center leading-snug",
-		{ "flex-row-reverse text-right col-start-2": next },
+		"flex items-center gap-4 leading-snug",
+		{ "col-start-2 flex-row-reverse text-right": next },
 	]}
 >
 	<img
 		width={323}
 		height={419}
-		class="shadow-sm rounded-sm h-16 w-auto bg-slate-400"
+		class="h-16 w-auto rounded-sm bg-slate-400 shadow-sm"
 		src={"https://www.bungie.net" + card.highResolution.image.sheetPath}
 	/>
 	<div>
 		{
 			themeTitle && (
-				<div class="text-slate-400 font-smcp" set:html={themeTitle} />
+				<div class="font-smcp text-slate-400" set:html={themeTitle} />
 			)
 		}
 		<div set:html={card.cardName} />

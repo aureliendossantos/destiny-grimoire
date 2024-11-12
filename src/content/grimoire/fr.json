@@ -7,7 +7,12 @@
 				"image": {
 					"rect": { "x": 0, "y": 0, "height": 419, "width": 323 },
 					"sheetPath": "/common/destiny_content/grimoire/images/themes-sprites_113f32d6872123b0c1d988ac607e7f85.jpg",
-					"sheetSize": { "x": 0, "y": 0, "height": 419, "width": 1938 }
+					"sheetSize": {
+						"x": 0,
+						"y": 0,
+						"height": 419,
+						"width": 1938
+					}
 				},
 				"smallImage": {
 					"rect": { "x": 0, "y": 0, "height": 83, "width": 83 },
@@ -33,26 +38,66 @@
 					"pageName": "Classes",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Guardian-psprites_e43728852557b6967b624e4061a75eff.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 0, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Guardian-psprites-sm_f3b72b9c5cb7d047d90d4ab2f32b1469.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 664 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 664
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/classes_85f921bc30d8a5d7a3488e32ef94b1fd.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 0, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Guardian-psprites-sm_5e96fc9f56737ba112234ad27dc3166e.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1160 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1160
+							}
 						}
 					},
 					"cardBriefs": [
@@ -72,26 +117,66 @@
 					"pageName": "Races",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 323, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 323,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Guardian-psprites_e43728852557b6967b624e4061a75eff.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 83, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 83,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Guardian-psprites-sm_f3b72b9c5cb7d047d90d4ab2f32b1469.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 664 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 664
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/races_13e2d758f4c71980dfafcf3812b3e488.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 145, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 145,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Guardian-psprites-sm_5e96fc9f56737ba112234ad27dc3166e.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1160 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1160
+							}
 						}
 					},
 					"cardBriefs": [
@@ -116,26 +201,66 @@
 					"pageName": "Spectre",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 646, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 646,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Guardian-psprites_e43728852557b6967b624e4061a75eff.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 166, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 166,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Guardian-psprites-sm_f3b72b9c5cb7d047d90d4ab2f32b1469.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 664 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 664
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/ghost_0c44e3cde1f0ff72848c37fe33727b07.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 290, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 290,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Guardian-psprites-sm_5e96fc9f56737ba112234ad27dc3166e.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1160 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1160
+							}
 						}
 					},
 					"cardBriefs": [
@@ -150,26 +275,66 @@
 					"pageName": "Doctrines",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 969, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 969,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Guardian-psprites_e43728852557b6967b624e4061a75eff.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 249, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 249,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Guardian-psprites-sm_f3b72b9c5cb7d047d90d4ab2f32b1469.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 664 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 664
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/sub-classes_8a4f5ff4355c1603adbf98594a35b810.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 435, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 435,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Guardian-psprites-sm_5e96fc9f56737ba112234ad27dc3166e.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1160 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1160
+							}
 						}
 					},
 					"cardBriefs": [
@@ -191,26 +356,66 @@
 					"pageName": "Attaques de m&#234;l&#233;e",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 0,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Guardian-psprites_e43728852557b6967b624e4061a75eff.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 332, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 332,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Guardian-psprites-sm_f3b72b9c5cb7d047d90d4ab2f32b1469.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 664 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 664
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/melee-abilities_4ad3eba1e631d810fead29d651417cf6.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 580, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 580,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Guardian-psprites-sm_5e96fc9f56737ba112234ad27dc3166e.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1160 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1160
+							}
 						}
 					},
 					"cardBriefs": [
@@ -224,26 +429,66 @@
 					"pageName": "Grenades",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 323, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 323,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Guardian-psprites_e43728852557b6967b624e4061a75eff.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 415, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 415,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Guardian-psprites-sm_f3b72b9c5cb7d047d90d4ab2f32b1469.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 664 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 664
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/grenade-abilities_fd7c46aa66a9ac2fe72ebaf8a83e34f8.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 725, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 725,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Guardian-psprites-sm_5e96fc9f56737ba112234ad27dc3166e.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1160 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1160
+							}
 						}
 					},
 					"cardBriefs": [
@@ -275,26 +520,66 @@
 					"pageName": "D&#233;placements",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 646, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 646,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Guardian-psprites_e43728852557b6967b624e4061a75eff.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 498, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 498,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Guardian-psprites-sm_f3b72b9c5cb7d047d90d4ab2f32b1469.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 664 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 664
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/movement-modes_61fa23ab5729caf0140fff9aa8a4a9d8.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 870, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 870,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Guardian-psprites-sm_5e96fc9f56737ba112234ad27dc3166e.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1160 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1160
+							}
 						}
 					},
 					"cardBriefs": [
@@ -309,26 +594,66 @@
 					"pageName": "Supers",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 969, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 969,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Guardian-psprites_e43728852557b6967b624e4061a75eff.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 581, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 581,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Guardian-psprites-sm_f3b72b9c5cb7d047d90d4ab2f32b1469.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 664 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 664
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/super-abilities_c33055e27025b398da8a043b7ba090af.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 1015, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 1015,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Guardian-psprites-sm_5e96fc9f56737ba112234ad27dc3166e.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1160 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1160
+							}
 						}
 					},
 					"cardBriefs": [
@@ -352,7 +677,12 @@
 				"image": {
 					"rect": { "x": 323, "y": 0, "height": 419, "width": 323 },
 					"sheetPath": "/common/destiny_content/grimoire/images/themes-sprites_113f32d6872123b0c1d988ac607e7f85.jpg",
-					"sheetSize": { "x": 0, "y": 0, "height": 419, "width": 1938 }
+					"sheetSize": {
+						"x": 0,
+						"y": 0,
+						"height": 419,
+						"width": 1938
+					}
 				},
 				"smallImage": {
 					"rect": { "x": 83, "y": 0, "height": 83, "width": 83 },
@@ -378,26 +708,66 @@
 					"pageName": "Armes principales",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Inventory-psprites_c67606bbaa7d9101797a11b46232340a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 419, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 419,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 0, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Inventory-psprites-sm_28e26479588ed5c4235266d5ad9305fc.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 498 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 498
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/primary-weapons_cc1968527ecc0c42eef15f1a351cf29b.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 0, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Inventory-psprites-sm_5169a82bed6c5d3fd3b5aefd5189f899.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 870 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 870
+							}
 						}
 					},
 					"cardBriefs": [
@@ -457,26 +827,66 @@
 					"pageName": "Armes sp&#233;ciales",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 323, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 323,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Inventory-psprites_c67606bbaa7d9101797a11b46232340a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 419, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 419,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 83, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 83,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Inventory-psprites-sm_28e26479588ed5c4235266d5ad9305fc.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 498 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 498
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/special-weapons_3493fabf7da9029ca3a708fc4e55547b.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 145, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 145,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Inventory-psprites-sm_5169a82bed6c5d3fd3b5aefd5189f899.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 870 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 870
+							}
 						}
 					},
 					"cardBriefs": [
@@ -511,26 +921,66 @@
 					"pageName": "Armes lourdes",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 646, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 646,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Inventory-psprites_c67606bbaa7d9101797a11b46232340a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 419, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 419,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 166, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 166,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Inventory-psprites-sm_28e26479588ed5c4235266d5ad9305fc.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 498 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 498
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/heavy-weapons_e34efa026360e331190941fc567676f4.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 290, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 290,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Inventory-psprites-sm_5169a82bed6c5d3fd3b5aefd5189f899.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 870 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 870
+							}
 						}
 					},
 					"cardBriefs": [
@@ -556,26 +1006,66 @@
 					"pageName": "Types de d&#233;g&#226;ts",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 969, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 969,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Inventory-psprites_c67606bbaa7d9101797a11b46232340a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 419, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 419,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 249, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 249,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Inventory-psprites-sm_28e26479588ed5c4235266d5ad9305fc.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 498 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 498
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/damage-types_e84c4eaed709519442f702c03057d391.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 435, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 435,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Inventory-psprites-sm_5169a82bed6c5d3fd3b5aefd5189f899.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 870 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 870
+							}
 						}
 					},
 					"cardBriefs": [
@@ -589,26 +1079,66 @@
 					"pageName": "V&#233;hicules des Gardiens",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 1292, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 1292,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Inventory-psprites_c67606bbaa7d9101797a11b46232340a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 419, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 419,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 332, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 332,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Inventory-psprites-sm_28e26479588ed5c4235266d5ad9305fc.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 498 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 498
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/guardian-vehicles_f0d56f2e596b9a5b090f6e452130eb04.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 580, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 580,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Inventory-psprites-sm_5169a82bed6c5d3fd3b5aefd5189f899.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 870 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 870
+							}
 						}
 					},
 					"cardBriefs": [
@@ -622,26 +1152,66 @@
 					"pageName": "&#201;conomie",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 1615, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 1615,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Inventory-psprites_c67606bbaa7d9101797a11b46232340a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 419, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 419,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 415, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 415,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Inventory-psprites-sm_28e26479588ed5c4235266d5ad9305fc.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 498 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 498
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/economy_7c514a6c0069d125d922c1380c59d734.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 725, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 725,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Inventory-psprites-sm_5169a82bed6c5d3fd3b5aefd5189f899.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 870 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 870
+							}
 						}
 					},
 					"cardBriefs": [
@@ -665,7 +1235,12 @@
 				"image": {
 					"rect": { "x": 646, "y": 0, "height": 419, "width": 323 },
 					"sheetPath": "/common/destiny_content/grimoire/images/themes-sprites_113f32d6872123b0c1d988ac607e7f85.jpg",
-					"sheetSize": { "x": 0, "y": 0, "height": 419, "width": 1938 }
+					"sheetSize": {
+						"x": 0,
+						"y": 0,
+						"height": 419,
+						"width": 1938
+					}
 				},
 				"smallImage": {
 					"rect": { "x": 166, "y": 0, "height": 83, "width": 83 },
@@ -691,26 +1266,66 @@
 					"pageName": "Le Voyageur",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Allies-psprites_2cc3922d6ecb1afe1072d5ae0b38d0a3.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1615 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1615
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 0, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Allies-psprites-sm_a38bc5cce84ee2bb9f53e32e2291f7a2.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 747 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 747
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/the-traveler_c0682cf5f989d6e5c830386a8202ceb6.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 0, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Allies-psprites-sm_097cff5b975145455eb918032c2bb676.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -725,26 +1340,66 @@
 					"pageName": "Alli&#233;s de la Tour",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 323, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 323,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Allies-psprites_2cc3922d6ecb1afe1072d5ae0b38d0a3.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1615 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1615
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 83, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 83,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Allies-psprites-sm_a38bc5cce84ee2bb9f53e32e2291f7a2.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 747 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 747
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/tower-allies_aee63d709141a7138c7c4371a4093cef.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 145, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 145,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Allies-psprites-sm_097cff5b975145455eb918032c2bb676.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -782,26 +1437,66 @@
 					"pageName": "Factions de la Cit&#233;",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 646, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 646,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Allies-psprites_2cc3922d6ecb1afe1072d5ae0b38d0a3.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1615 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1615
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 166, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 166,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Allies-psprites-sm_a38bc5cce84ee2bb9f53e32e2291f7a2.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 747 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 747
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/city-factions_be2a237fe1793371edbb75cebf7a3445.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 290, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 290,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Allies-psprites-sm_097cff5b975145455eb918032c2bb676.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -819,26 +1514,66 @@
 					"pageName": "L&#39;Exo inconnue",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 969, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 969,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Allies-psprites_2cc3922d6ecb1afe1072d5ae0b38d0a3.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1615 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1615
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 249, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 249,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Allies-psprites-sm_a38bc5cce84ee2bb9f53e32e2291f7a2.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 747 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 747
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/the-exo-stranger_53a28381f5523a0581219365720fb6d2.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 435, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 435,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Allies-psprites-sm_097cff5b975145455eb918032c2bb676.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -852,26 +1587,66 @@
 					"pageName": "La Reine",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 1292, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 1292,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Allies-psprites_2cc3922d6ecb1afe1072d5ae0b38d0a3.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1615 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1615
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 332, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 332,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Allies-psprites-sm_a38bc5cce84ee2bb9f53e32e2291f7a2.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 747 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 747
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/the-queen_0d2c0338efb8ca461ebc5c2d9821c434.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 580, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 580,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Allies-psprites-sm_097cff5b975145455eb918032c2bb676.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -894,26 +1669,66 @@
 					"pageName": "Raspoutine",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 0,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Allies-psprites_2cc3922d6ecb1afe1072d5ae0b38d0a3.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1615 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1615
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 415, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 415,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Allies-psprites-sm_a38bc5cce84ee2bb9f53e32e2291f7a2.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 747 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 747
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/rasputin_c9489762802b863ec9c5354135b348a0.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 725, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 725,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Allies-psprites-sm_097cff5b975145455eb918032c2bb676.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -931,26 +1746,66 @@
 					"pageName": "Osiris",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 323, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 323,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Allies-psprites_2cc3922d6ecb1afe1072d5ae0b38d0a3.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1615 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1615
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 498, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 498,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Allies-psprites-sm_a38bc5cce84ee2bb9f53e32e2291f7a2.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 747 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 747
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/osiris_3c47f6ff0978d2e76830a52512489a5f.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 870, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 870,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Allies-psprites-sm_097cff5b975145455eb918032c2bb676.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -965,26 +1820,66 @@
 					"pageName": "L&#233;gendes et myst&#232;res",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 646, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 646,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Allies-psprites_2cc3922d6ecb1afe1072d5ae0b38d0a3.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1615 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1615
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 581, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 581,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Allies-psprites-sm_a38bc5cce84ee2bb9f53e32e2291f7a2.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 747 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 747
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/legends--mysteries_254247856e5b1ae73b38746933128f0b.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 1015, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 1015,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Allies-psprites-sm_097cff5b975145455eb918032c2bb676.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1019,26 +1914,66 @@
 					"pageName": "Les Seigneurs de Fer",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 969, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 969,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Allies-psprites_2cc3922d6ecb1afe1072d5ae0b38d0a3.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1615 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1615
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 664, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 664,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Allies-psprites-sm_a38bc5cce84ee2bb9f53e32e2291f7a2.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 747 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 747
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/iron-lords_c86daf309f0238559e2573aee32b5f34.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 1160, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 1160,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Allies-psprites-sm_097cff5b975145455eb918032c2bb676.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1062,7 +1997,12 @@
 				"image": {
 					"rect": { "x": 969, "y": 0, "height": 419, "width": 323 },
 					"sheetPath": "/common/destiny_content/grimoire/images/themes-sprites_113f32d6872123b0c1d988ac607e7f85.jpg",
-					"sheetSize": { "x": 0, "y": 0, "height": 419, "width": 1938 }
+					"sheetSize": {
+						"x": 0,
+						"y": 0,
+						"height": 419,
+						"width": 1938
+					}
 				},
 				"smallImage": {
 					"rect": { "x": 249, "y": 0, "height": 83, "width": 83 },
@@ -1088,26 +2028,66 @@
 					"pageName": "Les D&#233;chus",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites_09248de77edb5edbdf33af1738c28799.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1257, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1257,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 0, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites-sm_d07450389ba9027f0bcec2f2389ae4b0.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1411 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1411
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/fallen_361d8302169123e181addf23ebf77724.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 0, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Enemies-psprites-sm_a84ea9383b6dd600f85e9fcb7e64ca55.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 290, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 290,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1136,26 +2116,66 @@
 					"pageName": "Arsenal des D&#233;chus",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 323, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 323,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites_09248de77edb5edbdf33af1738c28799.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1257, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1257,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 83, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 83,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites-sm_d07450389ba9027f0bcec2f2389ae4b0.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1411 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1411
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/fallen-arsenal_ac1d895081129ad75e08e7b5c0f3b324.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 145, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 145,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Enemies-psprites-sm_a84ea9383b6dd600f85e9fcb7e64ca55.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 290, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 290,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1182,26 +2202,66 @@
 					"pageName": "Hi&#233;rarchie des D&#233;chus",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 646, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 646,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites_09248de77edb5edbdf33af1738c28799.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1257, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1257,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 166, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 166,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites-sm_d07450389ba9027f0bcec2f2389ae4b0.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1411 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1411
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/fallen-leadership_35d1c5d13d7a8647b37a03821b615349.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 290, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 290,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Enemies-psprites-sm_a84ea9383b6dd600f85e9fcb7e64ca55.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 290, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 290,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1231,26 +2291,66 @@
 					"pageName": "Les D&#233;chus traqu&#233;s",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 969, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 969,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites_09248de77edb5edbdf33af1738c28799.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1257, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1257,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 249, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 249,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites-sm_d07450389ba9027f0bcec2f2389ae4b0.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1411 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1411
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/fallen-hunted_284c2f388ccdca2d3b4a4c54b95e05cc.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 435, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 435,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Enemies-psprites-sm_a84ea9383b6dd600f85e9fcb7e64ca55.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 290, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 290,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1286,26 +2386,66 @@
 					"pageName": "La Ruche",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 1292, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 1292,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites_09248de77edb5edbdf33af1738c28799.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1257, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1257,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 332, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 332,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites-sm_d07450389ba9027f0bcec2f2389ae4b0.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1411 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1411
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/hive_e79948552750da644f11fd5cca9b7974.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 580, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 580,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Enemies-psprites-sm_a84ea9383b6dd600f85e9fcb7e64ca55.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 290, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 290,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1330,26 +2470,66 @@
 					"pageName": "Arsenal de la&#160;Ruche",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 1615, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 1615,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites_09248de77edb5edbdf33af1738c28799.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1257, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1257,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 415, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 415,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites-sm_d07450389ba9027f0bcec2f2389ae4b0.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1411 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1411
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/hive-arsenal_f05d4bb8949a352aeae447da03f3651c.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 725, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 725,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Enemies-psprites-sm_a84ea9383b6dd600f85e9fcb7e64ca55.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 290, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 290,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1366,26 +2546,66 @@
 					"pageName": "La Ruche exalt&#233;e",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 0,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites_09248de77edb5edbdf33af1738c28799.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1257, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1257,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 498, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 498,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites-sm_d07450389ba9027f0bcec2f2389ae4b0.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1411 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1411
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/exalted-hive_4a416b34b8129d142469e58136399040.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 870, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 870,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Enemies-psprites-sm_a84ea9383b6dd600f85e9fcb7e64ca55.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 290, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 290,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1431,26 +2651,66 @@
 					"pageName": "Les Vex",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 323, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 323,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites_09248de77edb5edbdf33af1738c28799.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1257, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1257,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 581, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 581,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites-sm_d07450389ba9027f0bcec2f2389ae4b0.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1411 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1411
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/vex_70d1f01c85edd347409e47a0c2a0070b.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 1015, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 1015,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Enemies-psprites-sm_a84ea9383b6dd600f85e9fcb7e64ca55.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 290, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 290,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1478,26 +2738,66 @@
 					"pageName": "Arsenal vex",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 646, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 646,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites_09248de77edb5edbdf33af1738c28799.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1257, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1257,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 664, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 664,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites-sm_d07450389ba9027f0bcec2f2389ae4b0.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1411 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1411
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/vex-arsenal_42c709fa54861379b3b7da42199819e8.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 1160, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 1160,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Enemies-psprites-sm_a84ea9383b6dd600f85e9fcb7e64ca55.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 290, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 290,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1513,26 +2813,66 @@
 					"pageName": "Esprits vex axiaux",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 969, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 969,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites_09248de77edb5edbdf33af1738c28799.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1257, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1257,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 747, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 747,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites-sm_d07450389ba9027f0bcec2f2389ae4b0.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1411 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1411
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/vex-axis-minds_2975f669b3e3bf01266102daccd69e05.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 0, "y": 145, "height": 145, "width": 145 },
+							"rect": {
+								"x": 0,
+								"y": 145,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Enemies-psprites-sm_a84ea9383b6dd600f85e9fcb7e64ca55.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 290, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 290,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1554,26 +2894,66 @@
 					"pageName": "Les Cabals",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 1292, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 1292,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites_09248de77edb5edbdf33af1738c28799.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1257, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1257,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 830, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 830,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites-sm_d07450389ba9027f0bcec2f2389ae4b0.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1411 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1411
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/cabal_e9cd5fd946cb92f77e51c564b079f29d.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 145, "y": 145, "height": 145, "width": 145 },
+							"rect": {
+								"x": 145,
+								"y": 145,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Enemies-psprites-sm_a84ea9383b6dd600f85e9fcb7e64ca55.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 290, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 290,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1600,26 +2980,66 @@
 					"pageName": "Arsenal cabal",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 1615, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 1615,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites_09248de77edb5edbdf33af1738c28799.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1257, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1257,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 913, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 913,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites-sm_d07450389ba9027f0bcec2f2389ae4b0.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1411 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1411
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/cabal-arsenal_705cb3340a40c2312689c166198e0945.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 290, "y": 145, "height": 145, "width": 145 },
+							"rect": {
+								"x": 290,
+								"y": 145,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Enemies-psprites-sm_a84ea9383b6dd600f85e9fcb7e64ca55.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 290, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 290,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1637,26 +3057,66 @@
 					"pageName": "Hi&#233;rarchie cabale",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 838, "height": 419, "width": 323 },
+							"rect": {
+								"x": 0,
+								"y": 838,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites_09248de77edb5edbdf33af1738c28799.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1257, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1257,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 996, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 996,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites-sm_d07450389ba9027f0bcec2f2389ae4b0.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1411 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1411
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/cabal-command_73bc7b4135e9d8d11b7236e57c46615b.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 435, "y": 145, "height": 145, "width": 145 },
+							"rect": {
+								"x": 435,
+								"y": 145,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Enemies-psprites-sm_a84ea9383b6dd600f85e9fcb7e64ca55.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 290, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 290,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1676,26 +3136,66 @@
 					"pageName": "Les T&#233;n&#232;bres",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 323, "y": 838, "height": 419, "width": 323 },
+							"rect": {
+								"x": 323,
+								"y": 838,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites_09248de77edb5edbdf33af1738c28799.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1257, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1257,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 1079, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 1079,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites-sm_d07450389ba9027f0bcec2f2389ae4b0.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1411 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1411
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/darkness_4dad1fe17c8691de0989c66e3b20ffb2.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 580, "y": 145, "height": 145, "width": 145 },
+							"rect": {
+								"x": 580,
+								"y": 145,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Enemies-psprites-sm_a84ea9383b6dd600f85e9fcb7e64ca55.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 290, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 290,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1713,26 +3213,66 @@
 					"pageName": "Les Tomes du malheur",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 646, "y": 838, "height": 419, "width": 323 },
+							"rect": {
+								"x": 646,
+								"y": 838,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites_09248de77edb5edbdf33af1738c28799.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1257, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1257,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 1162, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 1162,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites-sm_d07450389ba9027f0bcec2f2389ae4b0.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1411 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1411
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/books-of-sorrow_f5cf3b739d5149de679b6b3c025aaae8.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 725, "y": 145, "height": 145, "width": 145 },
+							"rect": {
+								"x": 725,
+								"y": 145,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Enemies-psprites-sm_a84ea9383b6dd600f85e9fcb7e64ca55.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 290, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 290,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1793,26 +3333,66 @@
 					"pageName": "Les Corrompus",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 969, "y": 838, "height": 419, "width": 323 },
+							"rect": {
+								"x": 969,
+								"y": 838,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites_09248de77edb5edbdf33af1738c28799.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1257, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1257,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 1245, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 1245,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites-sm_d07450389ba9027f0bcec2f2389ae4b0.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1411 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1411
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/the-taken_fcb20ac79473f89d11edc604b8077a34.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 870, "y": 145, "height": 145, "width": 145 },
+							"rect": {
+								"x": 870,
+								"y": 145,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Enemies-psprites-sm_a84ea9383b6dd600f85e9fcb7e64ca55.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 290, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 290,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1848,26 +3428,66 @@
 					"pageName": "L&#39;ARIA",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 1292, "y": 838, "height": 419, "width": 323 },
+							"rect": {
+								"x": 1292,
+								"y": 838,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites_09248de77edb5edbdf33af1738c28799.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1257, "width": 1938 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1257,
+								"width": 1938
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 1328, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 1328,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Enemies-psprites-sm_d07450389ba9027f0bcec2f2389ae4b0.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1411 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1411
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/siva_fef827c97ca5d1efa39ae8b120955e57.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 1015, "y": 145, "height": 145, "width": 145 },
+							"rect": {
+								"x": 1015,
+								"y": 145,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Enemies-psprites-sm_a84ea9383b6dd600f85e9fcb7e64ca55.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 290, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 290,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1914,7 +3534,12 @@
 				"image": {
 					"rect": { "x": 1292, "y": 0, "height": 419, "width": 323 },
 					"sheetPath": "/common/destiny_content/grimoire/images/themes-sprites_113f32d6872123b0c1d988ac607e7f85.jpg",
-					"sheetSize": { "x": 0, "y": 0, "height": 419, "width": 1938 }
+					"sheetSize": {
+						"x": 0,
+						"y": 0,
+						"height": 419,
+						"width": 1938
+					}
 				},
 				"smallImage": {
 					"rect": { "x": 332, "y": 0, "height": 83, "width": 83 },
@@ -1940,26 +3565,66 @@
 					"pageName": "Mercure",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Places-psprites_2487cdad6a8f5369154c2fe67b0aa9e5.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1615 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1615
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 0, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Places-psprites-sm_37667491f3b744dae062e618178478a6.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 747 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 747
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/mercury_b9934dbcfd896e59ce7d2517b1fb3500.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 0, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Places-psprites-sm_202a9b01dc0cebada2cc3dabe4df306f.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -1973,26 +3638,66 @@
 					"pageName": "V&#233;nus",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 323, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 323,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Places-psprites_2487cdad6a8f5369154c2fe67b0aa9e5.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1615 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1615
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 83, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 83,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Places-psprites-sm_37667491f3b744dae062e618178478a6.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 747 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 747
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/venus_097aaf589528ce3d74c022392dec3624.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 145, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 145,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Places-psprites-sm_202a9b01dc0cebada2cc3dabe4df306f.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2007,26 +3712,66 @@
 					"pageName": "La Terre",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 646, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 646,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Places-psprites_2487cdad6a8f5369154c2fe67b0aa9e5.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1615 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1615
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 166, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 166,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Places-psprites-sm_37667491f3b744dae062e618178478a6.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 747 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 747
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/earth_6a1384fdd45b165261c876da87ab7b47.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 290, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 290,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Places-psprites-sm_202a9b01dc0cebada2cc3dabe4df306f.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2048,26 +3793,66 @@
 					"pageName": "La Cit&#233;",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 969, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 969,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Places-psprites_2487cdad6a8f5369154c2fe67b0aa9e5.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1615 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1615
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 249, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 249,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Places-psprites-sm_37667491f3b744dae062e618178478a6.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 747 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 747
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/the-city_87f0e8f77e6d0a2e35298edf6874dc00.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 435, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 435,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Places-psprites-sm_202a9b01dc0cebada2cc3dabe4df306f.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2090,26 +3875,66 @@
 					"pageName": "La Lune",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 1292, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 1292,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Places-psprites_2487cdad6a8f5369154c2fe67b0aa9e5.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1615 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1615
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 332, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 332,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Places-psprites-sm_37667491f3b744dae062e618178478a6.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 747 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 747
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/moon_425f91d94326ffa749b649aa19fa8a11.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 580, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 580,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Places-psprites-sm_202a9b01dc0cebada2cc3dabe4df306f.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2127,26 +3952,66 @@
 					"pageName": "Mars",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 0,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Places-psprites_2487cdad6a8f5369154c2fe67b0aa9e5.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1615 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1615
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 415, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 415,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Places-psprites-sm_37667491f3b744dae062e618178478a6.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 747 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 747
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/mars_68a04d8e06dcb7c0d370d7d1cffeb5b5.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 725, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 725,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Places-psprites-sm_202a9b01dc0cebada2cc3dabe4df306f.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2164,26 +4029,66 @@
 					"pageName": "L&#39;Anneau d&#39;ast&#233;ro&#239;des",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 323, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 323,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Places-psprites_2487cdad6a8f5369154c2fe67b0aa9e5.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1615 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1615
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 498, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 498,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Places-psprites-sm_37667491f3b744dae062e618178478a6.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 747 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 747
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/the-asteroid-belt_c9b551b19dd7ed1e2cbb37b8f29306cb.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 870, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 870,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Places-psprites-sm_202a9b01dc0cebada2cc3dabe4df306f.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2201,26 +4106,66 @@
 					"pageName": "Jupiter",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 646, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 646,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Places-psprites_2487cdad6a8f5369154c2fe67b0aa9e5.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1615 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1615
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 581, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 581,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Places-psprites-sm_37667491f3b744dae062e618178478a6.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 747 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 747
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/jupiter_a72adfff6cbf65ff21e5ad5f4dc0fbbd.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 1015, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 1015,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Places-psprites-sm_202a9b01dc0cebada2cc3dabe4df306f.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2233,26 +4178,66 @@
 					"pageName": "Saturne",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 969, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 969,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Places-psprites_2487cdad6a8f5369154c2fe67b0aa9e5.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 838, "width": 1615 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 838,
+								"width": 1615
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 664, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 664,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Places-psprites-sm_37667491f3b744dae062e618178478a6.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 747 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 747
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/saturn_bca92373f41126696ff33287fac1ed69.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 1160, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 1160,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Places-psprites-sm_202a9b01dc0cebada2cc3dabe4df306f.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1305 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1305
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2270,7 +4255,12 @@
 				"image": {
 					"rect": { "x": 1615, "y": 0, "height": 419, "width": 323 },
 					"sheetPath": "/common/destiny_content/grimoire/images/themes-sprites_113f32d6872123b0c1d988ac607e7f85.jpg",
-					"sheetSize": { "x": 0, "y": 0, "height": 419, "width": 1938 }
+					"sheetSize": {
+						"x": 0,
+						"y": 0,
+						"height": 419,
+						"width": 1938
+					}
 				},
 				"smallImage": {
 					"rect": { "x": 415, "y": 0, "height": 83, "width": 83 },
@@ -2296,26 +4286,66 @@
 					"pageName": "Histoire&#160;: Terre, Ancienne Russie",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites_1d5da8ba92a2ba4e1b9100fea7cc238a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1676, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1676,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 0, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites-sm_7f3d3682b24b005bbc2f73a0f3004582.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1079 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1079
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/story-earth-old-russia_82b16c3b682a75e49455515422740a41.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 0, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Activities-psprites-sm_48d5c5b406c9ef9cf18c52aaa63e0509.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1885 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1885
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2332,26 +4362,66 @@
 					"pageName": "Histoire&#160;: Lune, Oc&#233;an des temp&#234;tes",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 323, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 323,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites_1d5da8ba92a2ba4e1b9100fea7cc238a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1676, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1676,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 83, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 83,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites-sm_7f3d3682b24b005bbc2f73a0f3004582.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1079 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1079
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/story-moon-ocean-of-storms_75e26935430b7474b0e8ae6b17698bd7.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 145, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 145,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Activities-psprites-sm_48d5c5b406c9ef9cf18c52aaa63e0509.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1885 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1885
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2367,26 +4437,66 @@
 					"pageName": "Histoire&#160;: V&#233;nus, D&#233;pression d&#39;Ishtar",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 646, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 646,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites_1d5da8ba92a2ba4e1b9100fea7cc238a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1676, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1676,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 166, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 166,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites-sm_7f3d3682b24b005bbc2f73a0f3004582.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1079 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1079
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/story-venus-ishtar-sink_52dba4601d0cec20cbea342df185cb2c.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 290, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 290,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Activities-psprites-sm_48d5c5b406c9ef9cf18c52aaa63e0509.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1885 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1885
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2402,26 +4512,66 @@
 					"pageName": "Histoire&#160;: Mars, Baie du m&#233;ridien",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 969, "y": 0, "height": 419, "width": 323 },
+							"rect": {
+								"x": 969,
+								"y": 0,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites_1d5da8ba92a2ba4e1b9100fea7cc238a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1676, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1676,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 249, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 249,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites-sm_7f3d3682b24b005bbc2f73a0f3004582.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1079 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1079
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/story-mars-meridian-bay_3b58687dcb8afffce922edc07f292402.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 435, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 435,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Activities-psprites-sm_48d5c5b406c9ef9cf18c52aaa63e0509.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1885 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1885
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2437,26 +4587,66 @@
 					"pageName": "Les T&#233;n&#232;bres souterraines",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 0,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites_1d5da8ba92a2ba4e1b9100fea7cc238a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1676, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1676,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 332, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 332,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites-sm_7f3d3682b24b005bbc2f73a0f3004582.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1079 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1079
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/the-dark-below_775e79d43a1c64cc27649c414351bea1.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 580, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 580,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Activities-psprites-sm_48d5c5b406c9ef9cf18c52aaa63e0509.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1885 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1885
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2473,26 +4663,66 @@
 					"pageName": "Maison des Loups",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 323, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 323,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites_1d5da8ba92a2ba4e1b9100fea7cc238a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1676, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1676,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 415, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 415,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites-sm_7f3d3682b24b005bbc2f73a0f3004582.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1079 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1079
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/house-of-wolves_b8b947f3d315d23b741ef303f99358a6.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 725, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 725,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Activities-psprites-sm_48d5c5b406c9ef9cf18c52aaa63e0509.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1885 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1885
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2513,26 +4743,66 @@
 					"pageName": "Le Roi des Corrompus",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 646, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 646,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites_1d5da8ba92a2ba4e1b9100fea7cc238a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1676, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1676,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 498, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 498,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites-sm_7f3d3682b24b005bbc2f73a0f3004582.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1079 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1079
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/the-taken-king_46eaba1e4c91f6e0c033a2ff67a39003.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 870, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 870,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Activities-psprites-sm_48d5c5b406c9ef9cf18c52aaa63e0509.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1885 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1885
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2563,26 +4833,66 @@
 					"pageName": "Les Assauts",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 969, "y": 419, "height": 419, "width": 323 },
+							"rect": {
+								"x": 969,
+								"y": 419,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites_1d5da8ba92a2ba4e1b9100fea7cc238a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1676, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1676,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 581, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 581,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites-sm_7f3d3682b24b005bbc2f73a0f3004582.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1079 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1079
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/strikes_f65a7f112e33758905451c106c5e7508.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 1015, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 1015,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Activities-psprites-sm_48d5c5b406c9ef9cf18c52aaa63e0509.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1885 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1885
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2617,26 +4927,66 @@
 					"pageName": "Les Raids",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 838, "height": 419, "width": 323 },
+							"rect": {
+								"x": 0,
+								"y": 838,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites_1d5da8ba92a2ba4e1b9100fea7cc238a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1676, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1676,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 664, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 664,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites-sm_7f3d3682b24b005bbc2f73a0f3004582.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1079 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1079
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/raids_5d08a2b0cd628edf0b96005817723226.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 1160, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 1160,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Activities-psprites-sm_48d5c5b406c9ef9cf18c52aaa63e0509.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1885 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1885
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2654,26 +5004,66 @@
 					"pageName": "Programmes de l&#39;&#201;preuve",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 323, "y": 838, "height": 419, "width": 323 },
+							"rect": {
+								"x": 323,
+								"y": 838,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites_1d5da8ba92a2ba4e1b9100fea7cc238a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1676, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1676,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 747, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 747,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites-sm_7f3d3682b24b005bbc2f73a0f3004582.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1079 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1079
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/crucible-playlists_03de24b84192e664f98cfb39c9f247b5.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 1305, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 1305,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Activities-psprites-sm_48d5c5b406c9ef9cf18c52aaa63e0509.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1885 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1885
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2701,26 +5091,66 @@
 					"pageName": "Ar&#232;nes de l&#39;&#201;preuve",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 646, "y": 838, "height": 419, "width": 323 },
+							"rect": {
+								"x": 646,
+								"y": 838,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites_1d5da8ba92a2ba4e1b9100fea7cc238a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1676, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1676,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 830, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 830,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites-sm_7f3d3682b24b005bbc2f73a0f3004582.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1079 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1079
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/crucible-arenas_39cfc75004320cb73c6c725d3c9a99b7.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 1450, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 1450,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Activities-psprites-sm_48d5c5b406c9ef9cf18c52aaa63e0509.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1885 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1885
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2794,26 +5224,66 @@
 					"pageName": "Autres activit&#233;s",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 969, "y": 838, "height": 419, "width": 323 },
+							"rect": {
+								"x": 969,
+								"y": 838,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites_1d5da8ba92a2ba4e1b9100fea7cc238a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1676, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1676,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 913, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 913,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites-sm_7f3d3682b24b005bbc2f73a0f3004582.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1079 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1079
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/other-activities_a8177f46f0fea254dd02388aa3bf184b.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 1595, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 1595,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Activities-psprites-sm_48d5c5b406c9ef9cf18c52aaa63e0509.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1885 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1885
+							}
 						}
 					},
 					"cardBriefs": [
@@ -2839,26 +5309,66 @@
 					"pageName": "Les Seigneurs de Fer",
 					"normalResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 1257, "height": 419, "width": 323 },
+							"rect": {
+								"x": 0,
+								"y": 1257,
+								"height": 419,
+								"width": 323
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites_1d5da8ba92a2ba4e1b9100fea7cc238a.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 1676, "width": 1292 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 1676,
+								"width": 1292
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 996, "y": 0, "height": 83, "width": 83 },
+							"rect": {
+								"x": 996,
+								"y": 0,
+								"height": 83,
+								"width": 83
+							},
 							"sheetPath": "/common/destiny_content/grimoire/images/Activities-psprites-sm_7f3d3682b24b005bbc2f73a0f3004582.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 83, "width": 1079 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 83,
+								"width": 1079
+							}
 						}
 					},
 					"highResolution": {
 						"image": {
-							"rect": { "x": 0, "y": 0, "height": 728, "width": 560 },
+							"rect": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/rise-of-iron_acfd9acc9e0884ba62dd6b6ec290a6c8.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 728, "width": 560 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 728,
+								"width": 560
+							}
 						},
 						"smallImage": {
-							"rect": { "x": 1740, "y": 0, "height": 145, "width": 145 },
+							"rect": {
+								"x": 1740,
+								"y": 0,
+								"height": 145,
+								"width": 145
+							},
 							"sheetPath": "/common/destiny_content/grimoire/hr_images/Activities-psprites-sm_48d5c5b406c9ef9cf18c52aaa63e0509.jpg",
-							"sheetSize": { "x": 0, "y": 0, "height": 145, "width": 1885 }
+							"sheetSize": {
+								"x": 0,
+								"y": 0,
+								"height": 145,
+								"width": 1885
+							}
 						}
 					},
 					"cardBriefs": [

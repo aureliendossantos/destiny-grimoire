@@ -47,10 +47,10 @@ export const cardSchema = z.object({
 							threshold: z.number(),
 							unlockFlagHash: z.number(),
 							points: z.number(),
-						})
+						}),
 					)
 					.optional(),
-			})
+			}),
 		)
 		.optional(),
 })
@@ -78,16 +78,41 @@ export const collections = {
 									cardId: z.number(),
 									points: z.number(),
 									totalPoints: z.number(),
-								})
+								}),
 							),
-						})
+						}),
 					),
-				})
+				}),
 			),
 		}),
 	}),
 	cards: defineCollection({
 		type: "data",
 		schema: z.record(z.string(), cardSchema),
+	}),
+	guides: defineCollection({
+		type: "data",
+		schema: z.object({
+			types: z.array(
+				z.object({
+					slug: z.string(),
+					name: z.string(),
+					other: z.boolean().optional(),
+					areas: z.array(
+						z.object({
+							name: z.string().optional(),
+							items: z.array(
+								z.object({
+									id: z.number(),
+									video: z.string().optional(),
+									note: z.string().optional(),
+									details: z.string().optional(),
+								}),
+							),
+						}),
+					),
+				}),
+			),
+		}),
 	}),
 }

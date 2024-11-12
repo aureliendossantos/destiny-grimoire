@@ -1,9 +1,15 @@
+---
+import { checkLocale, useTranslations } from "$utils/i18n"
+
+const t = useTranslations(checkLocale(Astro.currentLocale))
+---
+
 <a
 	href="/all"
-	class="bg-slate-200/60 hover:bg-slate-200 transition rounded-md py-2 px-8 text-sm text-slate-400 hover:text-slate-500 font-medium text-center"
+	class="rounded-md bg-slate-200/60 px-8 py-2 text-center text-sm font-medium text-slate-400 transition hover:bg-slate-200 hover:text-slate-500"
 >
-	Voir toutes les cartes
-	<div class="text-[10px] uppercase tracking-[0.15em] leading-tight pb-[2px]">
-		Spoilers
+	{t("see-all-cards")}
+	<div class="pb-[2px] text-[10px] uppercase leading-tight tracking-[0.15em]">
+		{t("spoilers")}
 	</div>
 </a>

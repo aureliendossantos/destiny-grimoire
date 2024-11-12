@@ -1,39 +1,44 @@
 ---
 import { getUserSummary, membershipTypeToPath } from "$utils/helpers"
+import { useTranslations, type SupportedLocale } from "$utils/i18n"
 
 interface Props {
+	locale: SupportedLocale
 	membershipType: 1 | 2
 	membershipId: string
 	username: string
 }
 
-const { membershipType, membershipId, username } = Astro.props
+const { locale, membershipType, membershipId, username } = Astro.props
+const t = useTranslations(locale)
 
 const summary = await getUserSummary(membershipType, membershipId)
 const bestCharacter = summary.characters.sort(
-	(a: any, b: any) => b.characterBase.powerLevel - a.characterBase.powerLevel
+	(a: any, b: any) => b.characterBase.powerLevel - a.characterBase.powerLevel,
 )[0]
 ---
 
 <a
-	href={`/${membershipTypeToPath(membershipType)}/${username}`}
-	class="flex relative shadow-sm ease-out hover:scale-105 hover:shadow-md transition duration-300"
+	href={`/user/${membershipTypeToPath(membershipType)}/${username}`}
+	class="relative flex shadow-sm transition duration-300 ease-out hover:scale-105 hover:shadow-md"
 	style={{ height: "48px" }}
 >
 	<img
-		class="rounded-l-sm grow-0 shrink-0"
+		class="shrink-0 grow-0 rounded-l-sm"
 		style={{ width: "48px", height: "48px" }}
 		src={`https://www.bungie.net${bestCharacter.emblemPath}`}
 	/>
 	<img
-		class="rounded-r-sm grow-0 shrink"
+		class="shrink grow-0 rounded-r-sm"
 		style={{ width: "237px", height: "48px" }}
 		src={`https://www.bungie.net${bestCharacter.backgroundPath}`}
 	/>
 	<div
-		class="absolute top-0 left-12 text-slate-50 text-base h-full leading-tight font-semibold px-2 flex flex-col justify-center drop-shadow"
+		class="absolute left-12 top-0 flex h-full flex-col justify-center px-2 text-base font-semibold leading-tight text-slate-50 drop-shadow"
 	>
 		<div>{username}</div>
-		<div class="text-xs font-semibold pb-[1px]">18 cartes // 240 points</div>
+		<div class="pb-[1px] text-xs font-semibold">
+			__ {t("cards")} // __ {t("points")}
+		</div>
 	</div>
 </a>

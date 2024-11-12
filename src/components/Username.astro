@@ -11,12 +11,12 @@ const { membershipType, membershipId, username } = Astro.props
 
 const summary = await getUserSummary(membershipType, membershipId)
 const bestCharacter = summary.characters.sort(
-	(a: any, b: any) => b.characterBase.powerLevel - a.characterBase.powerLevel
+	(a: any, b: any) => b.characterBase.powerLevel - a.characterBase.powerLevel,
 )[0]
 ---
 
 <img
-	class="inline-block w-[1em] h-[1em] rounded-sm align-[-10%]"
+	class="inline-block h-[1em] w-[1em] rounded-sm align-[-10%]"
 	src={`https://www.bungie.net${bestCharacter.emblemPath}`}
 />
 <span class="font-medium">{username}</span>

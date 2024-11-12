@@ -1,13 +1,15 @@
 ---
-import { cards, rarityText } from "$utils/helpers"
+import { addAbbrs } from "$utils/helpers"
 import type { UserBonus, UserCard, UserGrimoire } from "$utils/types"
+import type { CollectionEntry } from "astro:content"
 import CardNav from "./CardNav.astro"
-import Footer from "./Footer.astro"
-import FooterFallback from "./FooterFallback.astro"
-import he from 'he';
+import type { Translator } from "$utils/i18n"
 
 interface Props {
-	cardId: string,
+	t: Translator
+	card: CollectionEntry<"cards">["data"][string]
+	cards: CollectionEntry<"cards">["data"]
+	themes: CollectionEntry<"grimoire">["data"]["themeCollection"]
 	user?: {
 		card: UserCard | undefined
 		bonus: UserBonus | undefined
@@ -16,91 +18,250 @@ interface Props {
 		name: string
 		grimoire: UserGrimoire
 	}
- }
+}
 
-const { cardId, user } = Astro.props
+const { t, card, cards, themes, user } = Astro.props
 
-const card = cards[cardId]
-// Regex to match capital words and style them with small caps. Decoding HTML entities to detect accents like in SAVATHÛN (SAVATH&#219;N)
-const description = card.cardDescription && he.decode(card.cardDescription).replace(/\b(?<!<abbr>)(?=[A-ZÀŸŸÉÈÊËÙÛÜÇ]+)[A-Z0-9-ÀŸŸÉÈÊËÙÛÜÇ'\s]{3,}(?:\.[A-Z0-9-ÀŸŸÉÈÊËÙÛÜÇ']+)*\b/g, "<abbr>$&</abbr>")
+const description = card.cardDescription && addAbbrs(card.cardDescription)
 ---
 
-<div class="mx-4 min-h-svh flex flex-col justify-between">
-	<div class="w-full max-w-xl grid grid-cols-1 md:grid-cols-3 md:gap-x-12 m-auto mt-12">
-		<div class="text-slate-700 grid gap-x-4 grid-cols-3 md:block">
+<div class="mx-4 flex min-h-svh flex-col justify-between">
+	<div
+		class="m-auto mt-12 grid w-full max-w-xl grid-cols-1 md:grid-cols-3 md:gap-x-12"
+	>
+		<div class="grid grid-cols-3 gap-x-4 text-slate-700 md:block">
 			<img
-				width={323} height={419}
-				class:list={["mb-4 shadow rounded-sm order-last md:order-first bg-slate-400", {"grayscale transition hover:grayscale-0": user && !user.card}]}
-				src={"https://www.bungie.net" + card.highResolution.image.sheetPath}
+				width={323}
+				height={419}
+				class:list={[
+					"order-last mb-4 rounded-sm bg-slate-400 shadow md:order-first",
+					{
+						"grayscale transition hover:grayscale-0":
+							user && !user.card,
+					},
+				]}
+				src={"https://www.bungie.net" +
+					card.highResolution.image.sheetPath}
 			/>
 			<div class="col-span-2 mb-7 md:mb-0">
-			<h1 class="font-bold leading-snug mb-[2px]" set:html={card.cardName} />
-			<div class="text-sm text-slate-700">
-				<div>Carte {rarityText(card.rarity)}</div>
-				{card.points > 0 && <div>{card.points} points</div>}
-				{user && !user.card && <div class="text-slate-400">Non débloquée</div>}
-				{
-					card.statisticCollection && (
-						<h2 class="font-bold mt-4">Statistiques</h2>
-						<ul>
-							{card.statisticCollection.map((stat) => {
-                                const hasStats = Boolean(user?.card?.statisticCollection)
-								const userStat = user?.card?.statisticCollection?.find((s) => s.statNumber == stat.statNumber)
-								return (
-								<li>
-									{stat.statName}
-									{hasStats && (userStat ? (
-										<>: <span class="text-green-600">{userStat.displayValue}</span></>
-									) : <span class="text-slate-400">Privé</span>)}
-									{stat.rankCollection && (
-										<div class="grid grid-cols-3 gap-[2px] my-1">
-											{stat.rankCollection.map((rank, index) => {
-												const gaugeValue = userStat ? userStat.value - (index > 0 ? stat.rankCollection![index - 1].threshold : 0) : 0
-												const gaugeThreshold = rank.threshold - (index > 0 ? stat.rankCollection![index - 1].threshold : 0)
-												// If user has a rank in its collection, it is gained (above the threshold)
-												const userRank = userStat?.rankCollection?.find((r) => r.rank == rank.rank)
-												return (
-													<div>
-												<div class:list={["border-b-2 h-[10px]", {"border-green-600": userRank, "border-slate-400": !userRank, "bg-slate-200": !hasStats}]}>
-													<div class:list={["h-full", {"bg-green-600": userRank, "bg-slate-400": !userRank}]} style={{width: `${Math.max(0, Math.min(100, gaugeValue / gaugeThreshold * 100))}%`}}></div>
-												</div>
-												<div class:list={["text-xs text-right leading-none font-medium pt-1", {"text-green-600": userRank, "text-slate-400": !userRank}]}>
-													{rank.threshold}<br/>+{rank.points} pts
-												</div>
-												</div>
-											)})}
-										</div>
-									)}
-								</li>
-							)})}
-						</ul>
-					)
-				}
-				{
-					user?.bonus && (
-						<h2 class="font-bold mt-4">Bonus</h2>
-						<h3 class:list={["font-medium", {"text-slate-400": user.bonus.value < user.bonus.threshold, "text-green-600": user.bonus.value >= user.bonus.threshold}]}>{user.bonus.bonusName}</h3>
-						<p>{user.bonus.bonusDescription}</p>
-						<p>Débloqué en atteignant le <span class:list={{"text-slate-400": user.bonus.value < user.bonus.threshold, "text-green-600": user.bonus.value >= user.bonus.threshold}}>rang {user.bonus.bonusRank.rank} de {card.statisticCollection?.find((s) => s.statNumber == user.bonus?.bonusRank.statId)?.statName}</span>.</p>
-				)
-				}
-			</div>
+				<h1
+					class="mb-[2px] font-bold leading-snug"
+					set:html={card.cardName}
+				/>
+				<div class="text-sm text-slate-700">
+					<div>{t(`rarity-${card.rarity}`)}</div>
+					{card.points > 0 && <div>{card.points} points</div>}
+					{
+						user && !user.card && (
+							<div class="text-slate-400">{t("not-found")}</div>
+						)
+					}
+					{
+						card.statisticCollection && (
+							<>
+								<h2 class="mt-4 font-bold">{t("stats")}</h2>
+								<ul>
+									{card.statisticCollection.map((stat) => {
+										const hasStats = Boolean(
+											user?.card?.statisticCollection,
+										)
+										const userStat =
+											user?.card?.statisticCollection?.find(
+												(s) =>
+													s.statNumber ==
+													stat.statNumber,
+											)
+										return (
+											<li>
+												{stat.statName}
+												{hasStats &&
+													(userStat ? (
+														<>
+															:{" "}
+															<span class="text-green-600">
+																{
+																	userStat.displayValue
+																}
+															</span>
+														</>
+													) : (
+														<span class="text-slate-400">
+															{t("private")}
+														</span>
+													))}
+												{stat.rankCollection && (
+													<div class="my-1 grid max-w-40 grid-cols-3 gap-[2px]">
+														{stat.rankCollection.map(
+															(rank, index) => {
+																const gaugeValue =
+																	userStat
+																		? userStat.value -
+																			(index >
+																			0
+																				? stat
+																						.rankCollection![
+																						index -
+																							1
+																					]
+																						.threshold
+																				: 0)
+																		: 0
+																const gaugeThreshold =
+																	rank.threshold -
+																	(index > 0
+																		? stat
+																				.rankCollection![
+																				index -
+																					1
+																			]
+																				.threshold
+																		: 0)
+																// If user has a rank in its collection, it is gained (above the threshold)
+																const userRank =
+																	userStat?.rankCollection?.find(
+																		(r) =>
+																			r.rank ==
+																			rank.rank,
+																	)
+																return (
+																	<div>
+																		<div
+																			class:list={[
+																				"h-[10px] border-b-2",
+																				{
+																					"border-green-600":
+																						userRank,
+																					"border-slate-400":
+																						!userRank,
+																					"bg-slate-200":
+																						!hasStats,
+																				},
+																			]}
+																		>
+																			<div
+																				class:list={[
+																					"h-full",
+																					{
+																						"bg-green-600":
+																							userRank,
+																						"bg-slate-400":
+																							!userRank,
+																					},
+																				]}
+																				style={{
+																					width: `${Math.max(0, Math.min(100, (gaugeValue / gaugeThreshold) * 100))}%`,
+																				}}
+																			/>
+																		</div>
+																		<div
+																			class:list={[
+																				"pt-1 text-right text-xs font-medium leading-none",
+																				{
+																					"text-green-600":
+																						userRank,
+																					"text-slate-400":
+																						!userRank,
+																				},
+																			]}
+																		>
+																			{
+																				rank.threshold
+																			}
+																			<br />
+																			+
+																			{
+																				rank.points
+																			}{" "}
+																			pts
+																		</div>
+																	</div>
+																)
+															},
+														)}
+													</div>
+												)}
+											</li>
+										)
+									})}
+								</ul>
+							</>
+						)
+					}
+					{
+						user?.bonus && (
+							<>
+								<h2 class="mt-4 font-bold">Bonus</h2>
+								<h3
+									class:list={[
+										"font-medium",
+										{
+											"text-slate-400":
+												user.bonus.value <
+												user.bonus.threshold,
+											"text-green-600":
+												user.bonus.value >=
+												user.bonus.threshold,
+										},
+									]}
+								>
+									{user.bonus.bonusName}
+								</h3>
+								<p>{user.bonus.bonusDescription}</p>
+								<p>
+									{t("unlocked-by")}{" "}
+									<span
+										class:list={{
+											"text-slate-400":
+												user.bonus.value <
+												user.bonus.threshold,
+											"text-green-600":
+												user.bonus.value >=
+												user.bonus.threshold,
+										}}
+									>
+										{t("rank")} {user.bonus.bonusRank.rank}{" "}
+										{t("of")}{" "}
+										{
+											card.statisticCollection?.find(
+												(s) =>
+													s.statNumber ==
+													user.bonus?.bonusRank
+														.statId,
+											)?.statName
+										}
+									</span>
+									.
+								</p>
+							</>
+						)
+					}
+				</div>
 			</div>
 		</div>
 		<div class="col-span-2 text-slate-950">
-			{card.cardIntro && <div class="mb-7 text-slate-700"><p set:html={card.cardIntro} />
-			{card.cardIntroAttribution && <p set:html={card.cardIntroAttribution} />}</div>}
+			{
+				card.cardIntro && (
+					<div class="mb-7 text-slate-700">
+						<p set:html={card.cardIntro} />
+						{card.cardIntroAttribution && (
+							<p set:html={card.cardIntroAttribution} />
+						)}
+					</div>
+				)
+			}
 			{
 				description && (
-					<p class="card-description font-serif text-lg" set:html={description} />
+					<p
+						class="card-description font-serif text-lg"
+						set:html={description}
+					/>
 				)
 			}
 		</div>
 	</div>
-	<div class="w-full max-w-xl grid grid-cols-1 md:grid-cols-3 md:gap-x-12 m-auto mb-12">
-	<CardNav cardId={Number(cardId)} user={user}/>
+	<div
+		class="m-auto mb-12 grid w-full max-w-xl grid-cols-1 md:grid-cols-3 md:gap-x-12"
+	>
+		<CardNav cardId={Number(card.cardId)} {cards} {themes} {user} />
 	</div>
 </div>
-<Footer server:defer pathname={Astro.url.pathname} pathUser={user}>
-	<FooterFallback slot="fallback"></FooterFallback>
-</Footer>

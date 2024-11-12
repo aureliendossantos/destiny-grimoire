@@ -1,0 +1,618 @@
+---
+types:
+    - name: Spectres défunts
+      slug: dead-ghosts
+      areas:
+          - name: La Tour
+            items:
+                - id: 403100
+                  video: https://youtu.be/30zKZer6N2U?t=11s
+                - id: 101100
+                  video: https://youtu.be/30zKZer6N2U?t=32s
+                - id: 302110
+                  video: https://youtu.be/30zKZer6N2U?t=1m1s
+                - id: 403110
+                  video: https://youtu.be/30zKZer6N2U?t=1m34s
+                - id: 801105
+                  video: https://youtu.be/3OL2dR-JjbU?t=0s
+          - name: Le Cosmodrome
+            items:
+                - id: 209020
+                  video: https://youtu.be/y2q2NgswbgM?t=5s
+                - id: 404030
+                  video: https://youtu.be/y2q2NgswbgM?t=9m43s
+                - id: 106050
+                  video: https://youtu.be/y2q2NgswbgM?t=8m49s
+                - id: 404040
+                  video: https://youtu.be/y2q2NgswbgM?t=10m5s
+                - id: 104020
+                  video: https://youtu.be/y2q2NgswbgM?t=10m56s
+                - id: 106080
+                  video: https://youtu.be/xt8wRA_Fuqk
+                - id: 207020
+                  video: https://youtu.be/y2q2NgswbgM?t=58s
+                - id: 403070
+                  video: https://youtu.be/y2q2NgswbgM?t=1m31s
+                - id: 404050
+                  video: https://youtu.be/y2q2NgswbgM?t=4m38s
+                - id: 209050
+                  video: https://youtu.be/y2q2NgswbgM?t=2m20s
+                - id: 103050
+                  video: https://youtu.be/y2q2NgswbgM?t=3m27s
+                - id: 408020
+                  video: https://youtu.be/y2q2NgswbgM?t=5m35s
+                - id: 301010
+                  video: https://youtu.be/y2q2NgswbgM?t=6m19s
+                - id: 106030
+                  video: https://youtu.be/y2q2NgswbgM?t=7m8s
+                - id: 102040
+                  video: https://youtu.be/y2q2NgswbgM?t=7m49s
+                - id: 101080
+                  video: https://youtu.be/y2q2NgswbgM?t=11m40s
+                - id: 302120
+                  video: https://youtu.be/y2q2NgswbgM?t=12m23s
+                - id: 207030
+                  video: https://youtu.be/y2q2NgswbgM?t=13m34s
+                - id: 201154
+                  note: Histoire&nbsp;&#58; Le Siège de l'Esprit tutélaire
+                  video: https://youtu.be/QEmAOIynwo0
+                - id: 107020
+                  note: Histoire&nbsp;&#58; Le Siège de l'Esprit tutélaire
+                  video: https://youtu.be/q1ycl-DGOWY
+                - id: 107030
+                  note: Histoire&nbsp;&#58; Le Siège de l'Esprit tutélaire
+                  video: https://youtu.be/Z6a8Oo8Jlyo
+                - id: 700030
+                  note: Histoire&nbsp;&#58; La Maison au pouvoir
+                  video: https://youtu.be/h1j3_Rz-EVs
+                - id: 207034
+                  note: Histoire&nbsp;&#58; La Maison au pouvoir
+                  video: https://youtu.be/EpX77kbDji8
+                - id: 105040
+                  note: Histoire&nbsp;&#58; La Maison au pouvoir
+                  video: https://youtu.be/VAdNNPG9iv8
+                - id: 700370
+                  note: Histoire&nbsp;&#58; La cachette de Cayde
+                  video: https://youtu.be/TYp1Lo4UEM0
+                - id: 701380
+                  note: Histoire&nbsp;&#58; La cachette de Cayde
+                  video: https://youtu.be/ui6qEBICTrc
+                - id: 700010
+                  note: Histoire&nbsp;&#58; La cachette de Cayde
+                  video: https://youtu.be/GyoNHgAykfs
+                - id: 700350
+                  note: Histoire&nbsp;&#58; Le code prométhéen
+                  video: https://youtu.be/yLqNdjB9Yd4
+                - id: 700020
+                  note: Histoire&nbsp;&#58; Le code prométhéen
+                  video: https://youtu.be/KbH1Ips3WPc
+                - id: 700190
+                  note: Assaut&nbsp;&#58; S.A.B.R.E. déchu
+                  video: https://youtu.be/T0To90Ow9_o
+                - id: 700340
+                  note: Assaut&nbsp;&#58; S.A.B.R.E. déchu
+                  video: https://youtu.be/-bxNFfVV_sc
+                - id: 201150
+                  video: https://youtu.be/kjl3AVu2Yak?t=6m45s
+          - name: La Lune
+            items:
+                - id: 201020
+                  video: https://youtu.be/eaYdpHTmMyk?t=5s
+                - id: 405030
+                  video: https://youtu.be/eaYdpHTmMyk?t=2m55s
+                - id: 108040
+                  video: https://youtu.be/eaYdpHTmMyk?t=1m12s
+                - id: 409020
+                  video: https://youtu.be/eaYdpHTmMyk?t=2m2s
+                - id: 405040
+                  video: https://youtu.be/eaYdpHTmMyk?t=3m38s
+                - id: 101110
+                  video: https://youtu.be/eaYdpHTmMyk?t=4m37s
+                - id: 209030
+                  video: https://youtu.be/eaYdpHTmMyk?t=6m21s
+                - id: 401020
+                  video: https://youtu.be/eaYdpHTmMyk?t=7m15s
+                - id: 103030
+                  note: Histoire&nbsp;&#58; Le Temple d'Oryx
+                  video: https://youtu.be/eaYdpHTmMyk?t=8m13s
+                - id: 107040
+                  note: Histoire&nbsp;&#58; L'Éveil
+                  video: https://youtu.be/JZMl7Pm6u8M
+                - id: 201158
+                  note: Histoire&nbsp;&#58; L'Éveil
+                  video: https://youtu.be/hNHhRvUHTJ0
+                - id: 302130
+                  note: Histoire&nbsp;&#58; L'Éveil
+                  video: https://youtu.be/g7mq0myBFSg
+                - id: 700200
+                  note: Histoire&nbsp;&#58; Ultimes rites
+                  video: https://youtu.be/UAFEcLyLrwg
+                - id: 701395
+                  note: Histoire&nbsp;&#58; Ultimes rites
+                  video: https://youtu.be/zIrB5P2qkaA
+                - id: 701390
+                  note: Histoire&nbsp;&#58; Ultimes rites
+                  video: https://youtu.be/L33Y3P5j_rY
+                - id: 770090
+                  video: https://www.youtube.com/watch?v=XeeDC-vOUPc
+                - id: 770100
+                  video: https://www.youtube.com/watch?v=ebjU2CtN6s0
+                - id: 770110
+                  video: https://www.youtube.com/watch?v=DWrpOimxo08
+                - id: 770120
+                  video: https://www.youtube.com/watch?v=X4dK6FfUgaE
+                - id: 801101
+                  note: Cropta, entrée (LL 390)
+                  video: https://youtu.be/3OL2dR-JjbU?t=25s
+          - name: Vénus
+            items:
+                - id: 402040
+                  video: https://youtu.be/Kkv8wVQhevA?t=5s
+                - id: 102050
+                  video: https://youtu.be/Kkv8wVQhevA?t=58s
+                - id: 108060
+                  video: https://youtu.be/Kkv8wVQhevA?t=1m35s
+                - id: 102140
+                  video: https://youtu.be/Kkv8wVQhevA?t=2m36s
+                - id: 106020
+                  video: https://youtu.be/Kkv8wVQhevA?t=3m48s
+                - id: 203020
+                  video: https://youtu.be/Kkv8wVQhevA?t=3m22s
+                - id: 102150
+                  video: https://youtu.be/Kkv8wVQhevA?t=4m49s
+                - id: 402030
+                  video: https://youtu.be/Kkv8wVQhevA?t=7m18s
+                - id: 103100
+                  video: https://youtu.be/Kkv8wVQhevA?t=8m24s
+                - id: 203030
+                  video: https://youtu.be/Kkv8wVQhevA?t=9m27s
+                - id: 209060
+                  video: https://youtu.be/Kkv8wVQhevA?t=10m29s
+                - id: 302160
+                  video: https://youtu.be/Kkv8wVQhevA?t=11m45s
+                - id: 403080
+                  video: https://youtu.be/Kkv8wVQhevA?t=12m40s
+                - id: 203040
+                  note: Assaut&nbsp;&#58; Le Nexus
+                  video: https://youtu.be/Kkv8wVQhevA?t=6m15s
+                - id: 207038
+                  note: Histoire&nbsp;&#58; La rançon de la Reine
+                  video: https://youtu.be/mSHRM1LLXuw
+                - id: 203044
+                  note: Histoire&nbsp;&#58; La rançon de la Reine
+                  video: https://youtu.be/hRfsRVZvMuk
+                - id: 302180
+                  note: Histoire&nbsp;&#58; La rançon de la Reine
+                  video: https://youtu.be/7igzodC7r_Y
+                - id: 701370
+                  note: Assaut&nbsp;&#58; La Chambre de l'Écho, Exclusivité PlayStation
+                  video: https://youtu.be/lcFdCG7tU50
+          - name: Mars
+            items:
+                - id: 205020
+                  video: https://youtu.be/fPtvnodColk?t=5s
+                - id: 106040
+                  video: https://youtu.be/fPtvnodColk?t=12m21s
+                - id: 403040
+                  video: https://youtu.be/fPtvnodColk?t=13m23s
+                - id: 102100
+                  video: https://youtu.be/fPtvnodColk?t=14m31s
+                - id: 102060
+                  video: https://youtu.be/fPtvnodColk?t=9m22s
+                - id: 403050
+                  video: https://youtu.be/fPtvnodColk?t=10m18s
+                - id: 406040
+                  video: https://youtu.be/Gk2ywuSsvmo
+                - id: 102130
+                  video: https://youtu.be/fPtvnodColk?t=8m21s
+                - id: 406030
+                  video: https://youtu.be/fPtvnodColk?t=1m10s
+                - id: 108020
+                  video: https://youtu.be/fPtvnodColk?t=2m26s
+                - id: 205030
+                  video: https://youtu.be/fPtvnodColk?t=3m16s
+                - id: 101060
+                  video: https://youtu.be/fPtvnodColk?t=7m24s
+                - id: 302170
+                  video: https://youtu.be/fPtvnodColk?t=4m46s
+                - id: 102070
+                  video: https://youtu.be/fPtvnodColk?t=5m57s
+                - id: 106060
+                  video: https://youtu.be/fPtvnodColk?t=6m43s
+                - id: 103040
+                  note: Histoire&nbsp;&#58; La Flèche du Jardin
+                  video: https://youtu.be/fPtvnodColk?t=15m30s
+                - id: 105080
+                  note: Histoire&nbsp;&#58; Le Jardin noir
+                  video: https://youtu.be/fPtvnodColk?t=16m45s
+                - id: 700330
+                  note: Histoire&nbsp;&#58; Le Jardin noir
+                  video: https://youtu.be/5D7iuRZI5y8
+                - id: 700360
+                  note: Histoire&nbsp;&#58; Le Jardin noir
+                  video: https://youtu.be/Nnopa9oK4Y8
+                - id: 105020
+                  note: Histoire&nbsp;&#58; Le Jardin noir
+                  video: https://youtu.be/fPtvnodColk?t=18m16s
+                - id: 701410
+                  note: Histoire&nbsp;&#58; La guerre à venir
+                  video: https://youtu.be/tHwH0cIX9uU
+                - id: 700620
+                  note: Histoire&nbsp;&#58; La guerre à venir
+                  video: https://youtu.be/an6EgyzCBzM
+                - id: 700610
+                  note: Histoire&nbsp;&#58; La guerre à venir
+                  video: https://youtu.be/wb1Fwiqhx2w
+          - name: Le Récif
+            items:
+                - id: 407028
+                  video: https://youtu.be/AVbriynnWYw?t=22s
+                - id: 407029
+                  video: https://youtu.be/AVbriynnWYw?t=1m5s
+                - id: 407030
+                  video: https://youtu.be/AVbriynnWYw?t=42s
+          - name: La Prison des Vétérans
+            items:
+                - id: 790030
+                  video: https://www.youtube.com/watch?v=g0c5H_HoArQ
+          - name: L'Épreuve
+            items:
+                - id: 800108
+                  video: https://youtu.be/StgHw-qZOR8?t=5m13s
+                - id: 800109
+                  video: https://youtu.be/StgHw-qZOR8?t=4m43s
+                - id: 800110
+                  note: Exclusivité PS4
+                  video: https://youtu.be/StgHw-qZOR8?t=4m8s
+                - id: 800111
+                  video: https://youtu.be/StgHw-qZOR8?t=3m47s
+                - id: 800112
+                  video: https://youtu.be/WZEZdcnjoa4?t=11m26s
+                - id: 800113
+                  video: https://youtu.be/WZEZdcnjoa4?t=1m19s
+                - id: 800114
+                  video: https://youtu.be/WZEZdcnjoa4?t=10m16s
+                - id: 800115
+                  video: https://youtu.be/WZEZdcnjoa4?t=6m57s
+                - id: 800116
+                  video: https://youtu.be/WZEZdcnjoa4?t=7m18s
+                - id: 800117
+                  video: https://youtu.be/WZEZdcnjoa4?t=5m14s
+                - id: 800118
+                  video: https://youtu.be/WZEZdcnjoa4?t=5m38s
+                - id: 800119
+                  video: https://youtu.be/WZEZdcnjoa4?t=4m18s
+                - id: 800120
+                  video: https://youtu.be/WZEZdcnjoa4?t=13m31s
+                - id: 800121
+                  video: https://youtu.be/WZEZdcnjoa4?t=43s
+                - id: 800122
+                  video: https://youtu.be/WZEZdcnjoa4?t=7m53s
+                - id: 800123
+                  video: https://youtu.be/WZEZdcnjoa4?t=2m27s
+                - id: 800124
+                  video: https://youtu.be/WZEZdcnjoa4?t=3m55s
+                - id: 800125
+                  video: https://youtu.be/WZEZdcnjoa4?t=9m23s
+                - id: 800126
+                  video: https://youtu.be/WZEZdcnjoa4?t=11m56s
+                - id: 800127
+                  video: https://youtu.be/WZEZdcnjoa4?t=3m21s
+                - id: 800128
+                  video: https://youtu.be/WZEZdcnjoa4?t=12m29s
+                - id: 800129
+                  video: https://youtu.be/WZEZdcnjoa4?t=13m1s
+                - id: 800130
+                  video: https://youtu.be/WZEZdcnjoa4?t=14m21s
+                - id: 800131
+                  note: Exclusivité PS4
+                  video: https://youtu.be/WZEZdcnjoa4?t=11m
+                - id: 800132
+                  video: https://youtu.be/WZEZdcnjoa4?t=1m51s
+                - id: 800133
+                  video: https://youtu.be/WZEZdcnjoa4?t=8m55s
+                - id: 800134
+                  video: https://youtu.be/WZEZdcnjoa4?t=6m35s
+                - id: 800135
+                  video: https://youtu.be/WZEZdcnjoa4?t=6m8s
+                - id: 800136
+                  video: https://youtu.be/WZEZdcnjoa4?t=8m28s
+                - id: 800137
+                  video: https://youtu.be/WZEZdcnjoa4?t=13m57s
+                - id: 800138
+                  video: https://youtu.be/WZEZdcnjoa4?t=4m37s
+                - id: 801102
+                  video: https://youtu.be/3OL2dR-JjbU?t=2m3s
+                - id: 801103
+                  video: https://youtu.be/3OL2dR-JjbU?t=2m51s
+                - id: 801104
+                  video: https://youtu.be/3OL2dR-JjbU?t=3m21s
+                - id: 801106
+                  video: https://youtu.be/3OL2dR-JjbU?t=1m34s
+                - id: 801107
+                  note: Exclusivité PS4
+                  video: https://youtu.be/3OL2dR-JjbU?t=3m35s
+                - id: 801108
+                  video: https://youtu.be/3OL2dR-JjbU?t=1m10s
+                - id: 801109
+                  video: https://youtu.be/3OL2dR-JjbU?t=50s
+                - id: 801110
+                  video: https://youtu.be/3OL2dR-JjbU?t=2m28s
+                - id: 801032
+                  video: https://www.youtube.com/watch?v=3qX4rkkEwD4
+          - name: Le Temple de Fer
+            items:
+                - id: 800106
+                  video: https://recap.us/p/57e133a8592a930f00d3f356
+          - name: Autres
+            items:
+                - id: 800100
+                  video: https://youtu.be/StgHw-qZOR8?t=1m58s
+                - id: 800101
+                  video: https://youtu.be/StgHw-qZOR8?t=3m26s
+                - id: 800102
+                  video: https://youtu.be/StgHw-qZOR8?t=2m53s
+                - id: 800103
+                  video: https://youtu.be/StgHw-qZOR8?t=27s
+                - id: 800104
+                  video: https://youtu.be/StgHw-qZOR8?t=1m33s
+                - id: 800105
+                  video: https://youtu.be/StgHw-qZOR8?t=1m
+                - id: 800107
+                  video: https://youtu.be/StgHw-qZOR8?t=2m27s
+    - name: Fragments calcifiés
+      slug: calcified-fragments
+      areas:
+          - name: Le Cuirassé
+            items:
+                - id: 700680
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#I
+                  video: https://youtu.be/TIHSEF_r-mQ?t=48s
+                - id: 700690
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#II
+                  video: https://youtu.be/TIHSEF_r-mQ?t=48s
+                - id: 700700
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#III
+                  video: https://youtu.be/TIHSEF_r-mQ?t=48s
+                - id: 700710
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#IV
+                  video: https://youtu.be/TIHSEF_r-mQ?t=1m36s
+                - id: 700720
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#V
+                  video: https://youtu.be/TIHSEF_r-mQ?t=1m51s
+                - id: 700730
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#VI
+                  video: https://youtu.be/TIHSEF_r-mQ?t=2m11s
+                - id: 700740
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#VII
+                  video: https://youtu.be/TIHSEF_r-mQ?t=2m47s
+                - id: 700750
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#VIII
+                  video: https://youtu.be/TIHSEF_r-mQ?t=3m6s
+                - id: 700760
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#IX
+                  video: https://youtu.be/TIHSEF_r-mQ?t=3m18s
+                - id: 700770
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#X
+                  video: https://youtu.be/TIHSEF_r-mQ?t=3m31s
+                - id: 700780
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XI
+                  video: https://youtu.be/TIHSEF_r-mQ?t=4m2s
+                - id: 700790
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XII
+                  video: https://youtu.be/TIHSEF_r-mQ?t=4m21s
+                - id: 700800
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XIII
+                  video: https://youtu.be/TIHSEF_r-mQ?t=4m44s
+                - id: 700810
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XIV
+                  video: https://youtu.be/TIHSEF_r-mQ?t=5m
+                - id: 700820
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XV
+                  video: https://youtu.be/TIHSEF_r-mQ?t=5m
+                - id: 700830
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XVI
+                  video: https://youtu.be/TIHSEF_r-mQ?t=5m39s
+                - id: 700840
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XVII
+                  video: https://youtu.be/TIHSEF_r-mQ?t=6m6s
+                - id: 700850
+                  note: Histoire&nbsp;&#58; Regicide
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XVIII
+                  video: https://youtu.be/w3w41bVRvHM?t=52s
+                - id: 700860
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XIX
+                  video: https://youtu.be/TIHSEF_r-mQ?t=6m21s
+                - id: 700870
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XX
+                  video: https://youtu.be/TIHSEF_r-mQ?t=6m21s
+                - id: 700880
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XXI
+                  video: https://youtu.be/TIHSEF_r-mQ?t=7m17s
+                - id: 700890
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XXII
+                  video: https://youtu.be/TIHSEF_r-mQ?t=7m17s
+                - id: 700900
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XXIII
+                  video: https://youtu.be/TIHSEF_r-mQ?t=7m17s
+                - id: 700910
+                  note: Histoire&nbsp;&#58; Regicide
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XXIV
+                  video: https://youtu.be/w3w41bVRvHM?t=13s
+                - id: 700920
+                  note: Histoire&nbsp;&#58; Regicide
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XXV
+                  video: https://youtu.be/w3w41bVRvHM?t=13s
+                - id: 700930
+                  note: Assaut&nbsp;&#58; The Sunless Cell
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XXVI
+                  video: https://youtu.be/w3w41bVRvHM?t=1m08s
+                - id: 700940
+                  note: Histoire&nbsp;&#58; Regicide
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XXVII
+                  video: https://youtu.be/w3w41bVRvHM?t=57s
+                - id: 700950
+                  note: Assaut&nbsp;&#58; Shield Brothers
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XXVIII
+                  video: https://youtu.be/w3w41bVRvHM?t=1m22s
+                - id: 700960
+                  note: King's Fall Raid
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XXIX
+                  video: https://youtu.be/CMMRnFhQ2_U?t=47s
+                - id: 700970
+                  note: King's Fall Raid
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XXX
+                  video: https://youtu.be/CMMRnFhQ2_U?t=1m03s
+                - id: 700980
+                  note: King's Fall Raid
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XXXI
+                  video: https://youtu.be/CMMRnFhQ2_U?t=1m12s
+                - id: 700990
+                  note: King's Fall Raid
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XXXII
+                  video: https://youtu.be/CMMRnFhQ2_U?t=4m13s
+                - id: 701000
+                  note: King's Fall Raid
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XXXIII
+                  video: https://youtu.be/CMMRnFhQ2_U?t=4m33s
+                - id: 701010
+                  note: Coffre de Patrouille, Scent of the Worm
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XXXIV
+                  video: https://youtu.be/w3w41bVRvHM?t=2m
+                - id: 701020
+                  note: Sword Shield
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XXXV
+                  video: https://youtu.be/w3w41bVRvHM?t=3m6s
+                - id: 701030
+                  note: Rune des Agonarques
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XXXVI
+                  video: https://youtu.be/w3w41bVRvHM?t=3m45s
+                - id: 701040
+                  note: Skyburners Command Pass
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XXXVII
+                  video: https://youtu.be/w3w41bVRvHM?t=4m34s
+                - id: 701050
+                  note: Wormsinger Rune
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XXXVIII
+                  video: https://youtu.be/w3w41bVRvHM?t=5m37s
+                - id: 701060
+                  note: T2, Cour, Wizard with Knights
+                  details: https://www.reddit.com/r/DestinyTheGame/comments/3pcv22/each_t2_coo_calcified_fragment_has_2_boss/
+                - id: 701070
+                  note: T2, Cour, Cabal with 3 Wizards or 2 Knights
+                  details: https://www.reddit.com/r/DestinyTheGame/comments/3pcv22/each_t2_coo_calcified_fragment_has_2_boss/
+                - id: 701080
+                  note: T2, Cour, 2 Knights with Ogre or 1 Knight with Cabal
+                  details: https://www.reddit.com/r/DestinyTheGame/comments/3pcv22/each_t2_coo_calcified_fragment_has_2_boss/
+                - id: 701090
+                  note: T2, Cour, Ogre with 3 Wizards or 1 Knight
+                  details: https://www.reddit.com/r/DestinyTheGame/comments/3pcv22/each_t2_coo_calcified_fragment_has_2_boss/
+                - id: 701100
+                  note: Warpriest Challenge Mode
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XLIII
+                - id: 701110
+                  note: Golgoroth Challenge Mode
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XLIV
+                - id: 701120
+                  note: Oryx Challenge Mode
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XLV
+                - id: 701130
+                  note: Nightfall Reward
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XLVI
+                - id: 701140
+                  note: T3, Cour, Thalnok
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XLVII
+                - id: 701150
+                  note: T3, Cour, Balwur
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XLVIII
+                - id: 701160
+                  note: T3, Cour, Kagoor
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#XLIX
+                - id: 701170
+                  note: Contrat de la Cour d'Oryx
+                  details: http://www.ign.com/wikis/destiny/Calcified_Fragments#L
+    - name: Fragments d'ARIA dormant
+      slug: siva
+      areas:
+          - name: "Mission 1 : Combat au sommet"
+            items:
+                - id: 800220
+                  video: https://recap.us/p/57e14077592a930f00d3f37a
+                - id: 800221
+                  video: https://recap.us/p/57e35a4ca8003f000f685866
+          - name: "Mission 2 : La chute du Mur"
+            items:
+                - id: 800204
+                  video: https://recap.us/p/57e138f8592a930f00d3f364
+                - id: 800210
+                  video: https://recap.us/p/57e16814cd44b1000fdb9dcb
+                - id: 800211
+                  video: https://recap.us/p/57e13a4d592a930f00d3f369
+                - id: 800212
+                  video: https://recap.us/p/57e1ec01cd44b1000fdb9e1c
+                - id: 800213
+                  video: https://recap.us/p/57e13c1e592a930f00d3f36e
+          - name: "Mission 3 : La Contrée infestée"
+            items:
+                - id: 800216
+                  video: https://recap.us/p/57e15064592a930f00d3f3a7
+                - id: 800205
+                  video: https://recap.us/p/57e14288592a930f00d3f37f
+                - id: 800206
+                  video: https://recap.us/p/57e15687592a930f00d3f3b5
+                - id: 800209
+                  video: https://recap.us/p/57e15945592a930f00d3f3bc
+          - name: "Mission 4 : Téléchargement terminé"
+            items:
+                - id: 800223
+                  video: https://recap.us/p/57e13453592a930f00d3f35c
+          - name: "Mission 5 : Le Tombeau de Fer"
+            items:
+                - id: 800202
+                  video: https://recap.us/p/57e1489c592a930f00d3f389
+                - id: 800203
+                  video: https://recap.us/p/57e13415592a930f00d3f359
+                - id: 800201
+                  video: https://recap.us/p/57e14ac4592a930f00d3f392
+                - id: 800219
+                  video: https://recap.us/p/57e14c24592a930f00d3f399
+                - id: 800217
+                  video: https://recap.us/p/57e14e5c592a930f00d3f3a2
+                - id: 800218
+                  video: https://recap.us/p/57e15cf4592a930f00d3f3c1
+          - name: "Le Temple de Fer"
+            items:
+                - id: 800222
+                  video: https://www.youtube.com/watch?v=CmN1-u9Y2J4
+          - name: "Assaut : Mauvais œil"
+            items:
+                - id: 800207
+                  video: https://recap.us/p/57e161f2cd44b1000fdb9dbb
+                - id: 800224
+                  video: https://recap.us/p/57e1e58acd44b1000fdb9e10
+                - id: 800225
+                  video: https://recap.us/p/57e1e6a5cd44b1000fdb9e15
+          - name: "Assaut : Sepiks Parfait"
+            items:
+                - id: 800208
+                  video: https://recap.us/p/57e13d68592a930f00d3f375
+                - id: 800215
+                  video: https://recap.us/p/57e35990a8003f000f68585e
+                - id: 800214
+                  video: https://recap.us/p/57e1525f592a930f00d3f3ae
+                - id: 800226
+                  video: https://recap.us/p/57e359bda8003f000f685861
+          - name: "Raid : Fureur mécanique"
+            items:
+                - id: 800229
+                  video: https://recap.us/p/57e58489997668000f79c691
+                - id: 800230
+                  video: https://recap.us/p/57e70d42920b14000fd657d7
+                - id: 800228
+                  video: https://recap.us/p/57e5e56a997668000f79c6bc
+                - id: 800227
+                  video: https://recap.us/p/57e5f729997668000f79c6c1
+    - name: Autres cartes
+      slug: other
+      areas: []
+      other: true

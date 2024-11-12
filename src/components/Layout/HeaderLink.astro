@@ -1,0 +1,14 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+interface Props extends Omit<HTMLAttributes<"a">, "class"> {}
+
+const { ...attributes } = Astro.props
+---
+
+<a
+	class="px-4 py-2 transition hover:text-slate-400 group-has-[:focus]:hidden"
+	{...attributes}
+>
+	<slot />
+</a>

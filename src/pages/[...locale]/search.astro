@@ -1,0 +1,65 @@
+---
+export const prerender = false
+
+import CardPreview from "$components/CardPreview.astro"
+import SubHeader from "$components/SubHeader.astro"
+import Layout from "$layouts/Layout.astro"
+import { getCards } from "$utils/helpers"
+import { checkLocale } from "$utils/i18n"
+
+const locale = checkLocale(Astro.currentLocale)
+const cards = await getCards(locale)
+
+const term = Astro.url.searchParams.get("term")
+// if search term is present in card name or description
+const relevantCards = term
+	? Object.entries(cards)
+			.map(([_, card]) => card)
+			.filter(
+				(card) =>
+					card.cardName.toLowerCase().includes(term.toLowerCase()) ||
+					card.cardIntro
+						?.toLowerCase()
+						.includes(term.toLowerCase()) ||
+					card.cardIntroAttribution
+						?.toLowerCase()
+						.includes(term.toLowerCase()) ||
+					card.cardDescription
+						?.toLowerCase()
+						.includes(term.toLowerCase()) ||
+					String(card.cardId)
+						.toLowerCase()
+						.includes(term.toLowerCase()),
+			)
+	: []
+---
+
+<Layout
+	title={(term ? `“${term}” · ` : "") + "Recherche dans le Grimoire"}
+	description="Résultats de recherche dans les cartes de Grimoire de Destiny."
+>
+	<SubHeader
+		title={term ? `“${term}”` : "Recherche vide"}
+		subtitle="Résultats de la recherche"
+	/>
+	{
+		relevantCards.length > 0 ? (
+			<div class="ml-10 mr-2 sm:mr-4">
+				<div class="m-auto mb-12 mt-10 max-w-6xl">
+					<div class="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-4 md:grid-cols-5 lg:grid-cols-6">
+						{Array.isArray(relevantCards) &&
+							relevantCards.map((card) => (
+								<CardPreview card={card} />
+							))}
+					</div>
+				</div>
+			</div>
+		) : (
+			<div class="m-auto my-12 max-w-3xl">
+				<p class="text-center font-medium text-slate-500">
+					Aucun résultat pour la recherche “{term}”.
+				</p>
+			</div>
+		)
+	}
+</Layout>

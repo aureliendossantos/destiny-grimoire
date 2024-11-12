@@ -1,0 +1,70 @@
+---
+import SubHeader from "$components/SubHeader.astro"
+import Layout from "$layouts/Layout.astro"
+import { bungieQuery, getBungieJson } from "$utils/helpers"
+import type { PresentationNode, RecordDef } from "$utils/types"
+
+const manifest = await bungieQuery("/Destiny2/Manifest/", true)
+const presentationNodes = (await getBungieJson(
+	manifest.jsonWorldComponentContentPaths.fr
+		.DestinyPresentationNodeDefinition,
+)) as Record<string, PresentationNode>
+const records = (await getBungieJson(
+	manifest.jsonWorldComponentContentPaths.fr.DestinyRecordDefinition,
+)) as Record<string, RecordDef>
+---
+
+<Layout title="Books" description="">
+	<SubHeader
+		title="Destiny 2 Books"
+		subtitle="This page is a work in progress."
+	/>
+	<h1>La Lumière</h1>
+	{
+		presentationNodes["2261683515"].children.presentationNodes.map(
+			(child) => {
+				const node = presentationNodes[child.presentationNodeHash]
+				return (
+					<div class="mx-4 my-8 grid grid-cols-2">
+						<img
+							src={`https://www.bungie.net${node.displayProperties.iconSequences[1].frames[0]}`}
+						/>
+						<div class="border-y border-slate-200 pt-4">
+							<h2 class="text-xl font-semibold text-slate-700">
+								{node.displayProperties.name}
+							</h2>
+							{node.redacted && <p>REDACTED</p>}
+							{records[node.children.records[0].recordHash]
+								.displayProperties.description && (
+								<p class="font-serif italic">
+									{
+										records[
+											node.children.records[0].recordHash
+										].displayProperties.description
+									}
+								</p>
+							)}
+							<div class="flex max-h-[6lh] flex-col overflow-auto font-serif">
+								{node.children.records.map((r) => {
+									const record = records[r.recordHash]
+									if (!record.loreHash) return null
+									return (
+										<a
+											class="px-4 pt-[2px] transition hover:bg-slate-200"
+											href={`/books/${record.hash}`}
+										>
+											<h3>
+												{record.displayProperties.name}
+											</h3>
+											{record.redacted && <p>REDACTED</p>}
+										</a>
+									)
+								})}
+							</div>
+						</div>
+					</div>
+				)
+			},
+		)
+	}
+</Layout>

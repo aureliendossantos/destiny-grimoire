@@ -1,0 +1,32 @@
+---
+export const prerender = false
+
+import TrackerPage from "$components/Tracker/TrackerPage.astro"
+import Layout from "$layouts/Layout.astro"
+import {
+	getMembershipId,
+	getUserGrimoire,
+	parseParamsWithUser,
+} from "$utils/helpers"
+
+const { locale, platform, username, guideSlug } = parseParamsWithUser(
+	Astro.params,
+)
+
+if (!guideSlug && platform != "psn" && platform != "xbox")
+	return Astro.redirect("/404")
+const membershipType = platform == "xbox" ? 1 : 2
+const membershipId = await getMembershipId(membershipType, username!)
+if (!membershipId) return Astro.redirect("/404")
+
+const userGrimoire = await getUserGrimoire(membershipType, membershipId)
+if (!userGrimoire) return Astro.redirect("/404")
+---
+
+<Layout title={`Bonus de Grimoire de ${username}`} description="">
+	<TrackerPage
+		{locale}
+		user={{ platform, name: username, grimoire: userGrimoire }}
+		guideSlug={guideSlug!}
+	/>
+</Layout>

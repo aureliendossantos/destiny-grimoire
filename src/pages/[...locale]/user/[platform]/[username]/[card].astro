@@ -1,0 +1,65 @@
+---
+export const prerender = false
+
+import Layout from "$layouts/Layout.astro"
+import {
+	getCards,
+	getMembershipId,
+	getThemes,
+	getUserGrimoire,
+	parseParamsWithUser,
+} from "$utils/helpers"
+import CardPage from "$components/CardPage.astro"
+import { useTranslations } from "$utils/i18n"
+
+const { locale, platform, username, cardId } = parseParamsWithUser(Astro.params)
+
+const t = useTranslations(locale)
+const themes = await getThemes(locale)
+const cards = await getCards(locale)
+const card = cards[cardId!]
+
+if ((platform != "psn" && platform != "xbox") || !card) return //Astro.redirect("/404")
+const membershipType = platform == "xbox" ? 1 : 2
+const membershipId = await getMembershipId(membershipType, username)
+if (!membershipId) return //Astro.redirect("/404")
+
+const userGrimoire = await getUserGrimoire(membershipType, membershipId)
+if (!userGrimoire) return //Astro.redirect("/404")
+
+const userCard = userGrimoire.cardCollection.find(
+	(c) => c.cardId == card.cardId,
+)
+// It's safe to assume there is only one bonus per card (I checked)
+const userBonus = userGrimoire.bonuses.find((b) => b.cardId == card.cardId)
+const user = {
+	card: userCard,
+	bonus: userBonus,
+	membershipType,
+	membershipId,
+	name: username,
+	grimoire: userGrimoire,
+}
+---
+
+<Layout
+	title={`${card.cardName} · Grimoire`}
+	description={card.cardIntro || card.cardDescription || ""}
+	userInPath={{ membershipType, membershipId, name: username }}
+	onGrimoireSection
+>
+	<CardPage
+		{t}
+		{card}
+		{cards}
+		{themes}
+		user={{
+			card: userCard,
+			bonus: userBonus,
+			membershipType,
+			membershipId,
+			name: username,
+			grimoire: userGrimoire,
+		}}
+	/>
+</Layout>

@@ -1,35 +1,52 @@
 ---
 import playstation from "$images/icons/playstation.svg?raw"
 import xbox from "$images/icons/xbox.svg?raw"
+import { useTranslations, type SupportedLocale } from "$utils/i18n"
+import { getRelativeLocaleUrl } from "astro:i18n"
+
+interface Props {
+	locale: SupportedLocale
+}
+const { locale } = Astro.props
+const t = useTranslations(locale)
 
 const redirect = "/" // TODO: get path
 ---
 
-<form action="/login" method="post" class="group flex -ml-[1px]">
+<form
+	action={getRelativeLocaleUrl(locale, "/login")}
+	method="post"
+	class="group -ml-[1px] flex"
+>
 	<input type="hidden" name="redirect" value={redirect} />
 	<label
-		class="text-slate-500 hover:text-slate-600 transition border-slate-50 border border-r-0 rounded-l w-[1lh] text-center hover:bg-slate-300 cursor-pointer"
+		class="w-[1lh] cursor-pointer rounded-l border border-r-0 border-slate-50 text-center text-slate-500 transition hover:bg-slate-300 hover:text-slate-600"
 	>
-		<input type="checkbox" name="platform" checked="true" class="peer hidden" />
+		<input
+			type="checkbox"
+			name="platform"
+			checked="true"
+			class="peer hidden"
+		/>
 		<div
-			class="inline-block peer-checked:hidden h-[1em] align-text-bottom"
+			class="inline-block h-[1em] align-text-bottom peer-checked:hidden"
 			set:html={playstation}
 		/>
 		<div
-			class="hidden peer-checked:inline-block w-[1em] h-[1em] align-text-bottom"
+			class="hidden h-[1em] w-[1em] align-text-bottom peer-checked:inline-block"
 			set:html={xbox}
 		/>
 	</label>
 	<input
 		type="text"
 		name="username"
-		class="text-slate-500 w-32 font-medium placeholder:font-normal transition-all border border-slate-50 rounded-r focus:outline-none focus:ring-2 ring-slate-400 bg-slate-50 hover:ring-1 px-1"
+		class="w-32 rounded-r border border-slate-50 bg-slate-50 px-1 font-medium text-slate-500 ring-slate-400 transition-all placeholder:font-normal hover:ring-1 focus:outline-none focus:ring-2"
 		required
-		placeholder="Pseudo"
+		placeholder={t("username")}
 	/>
 	<input
 		type="submit"
-		value="Se connecter"
-		class="ml-1 rounded-md text-slate-200 font-normal px-2 transition bg-slate-400 hover:bg-slate-500 cursor-pointer"
+		value={t("login")}
+		class="ml-1 cursor-pointer rounded-md bg-slate-400 px-2 font-normal text-slate-200 transition hover:bg-slate-500"
 	/>
 </form>

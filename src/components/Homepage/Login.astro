@@ -3,6 +3,14 @@ import UserEmblem from "$components/UserEmblem.astro"
 import playstation from "$images/icons/playstation.svg?raw"
 import xbox from "$images/icons/xbox.svg?raw"
 import { validateCookie } from "$utils/helpers"
+import { useTranslations, type SupportedLocale } from "$utils/i18n"
+import { getRelativeLocaleUrl } from "astro:i18n"
+
+interface Props {
+	locale: SupportedLocale
+}
+const { locale } = Astro.props
+const t = useTranslations(locale)
 
 let cookie = validateCookie(Astro.cookies.get("grimoireLogin")?.json())
 if (!cookie) Astro.cookies.delete("grimoireLogin")
@@ -12,54 +20,61 @@ if (!cookie) Astro.cookies.delete("grimoireLogin")
 	cookie ? (
 		<>
 			<UserEmblem
+				{locale}
 				membershipType={cookie.membershipType}
 				membershipId={cookie.membershipId}
 				username={cookie.username}
 			/>
 			<a
-				href="/logout"
-				class="text-slate-400 hover:text-slate-500 text-xs font-medium leading-[28px] text-center transition"
+				href={getRelativeLocaleUrl(locale, "/logout")}
+				class="text-center text-xs font-medium leading-[28px] text-slate-400 transition hover:text-slate-500"
 			>
-				Changer d'utilisateur
+				{t("switch-user")}
 			</a>
 		</>
 	) : (
-		<form action="/login" method="post" class="flex flex-col gap-2">
-			<div class="flex gap-1 justify-center">
-				<label class="text-slate-400 hover:text-slate-500 transition group-hover:border-slate-400 border-slate-50 border border-r-0 rounded-md px-2 py-1 text-center hover:bg-slate-200 cursor-pointer">
-					<input type="checkbox" name="platform" class="peer hidden" />
+		<form
+			action={getRelativeLocaleUrl(locale, "/login")}
+			method="post"
+			class="flex flex-col gap-2"
+		>
+			<div class="flex justify-center gap-1">
+				<label class="cursor-pointer rounded-md border border-r-0 border-slate-50 px-2 py-1 text-center text-slate-400 transition hover:bg-slate-200 hover:text-slate-500 group-hover:border-slate-400">
+					<input
+						type="checkbox"
+						name="platform"
+						class="peer hidden"
+					/>
 					<div
-						class="inline-block peer-checked:hidden align-text-bottom"
+						class="inline-block align-text-bottom peer-checked:hidden"
 						set:html={playstation}
 					/>
 					<div
-						class="hidden peer-checked:inline-block align-text-bottom"
+						class="hidden align-text-bottom peer-checked:inline-block"
 						set:html={xbox}
 					/>
 				</label>
 				<input
 					type="text"
 					name="username"
-					placeholder="Pseudo"
+					placeholder={t("username")}
 					autofocus
 					required
-					class="rounded-md text-base font-medium py-2 px-4 transition focus:outline-none focus:ring-2 ring-slate-400 bg-slate-100 shadow-inner text-slate-500 w-[16ch]"
+					class="w-[16ch] rounded-md bg-slate-100 px-4 py-2 text-base font-medium text-slate-500 shadow-inner ring-slate-400 transition focus:outline-none focus:ring-2"
 				/>
 			</div>
 			<input
 				type="submit"
-				value="Se connecter"
-				class="rounded-md text-slate-400 font-medium py-[10px] px-4 transition bg-slate-200/60 hover:bg-slate-100  cursor-pointer"
+				value={t("login")}
+				class="cursor-pointer rounded-md bg-slate-200/60 px-4 py-[10px] font-medium text-slate-400 transition hover:bg-slate-100"
 			/>
 		</form>
 	)
 }
 {
 	cookie ? (
-		<hr class="w-8 my-4 border-t-2 border-slate-200" />
+		<hr class="my-4 w-8 border-t-2 border-slate-200" />
 	) : (
-		<p class="text-xs mt-8 text-center text-slate-400">
-			Pas de compte sur Destiny ?
-		</p>
+		<p class="mt-8 text-center text-xs text-slate-400">{t("no-account")}</p>
 	)
 }

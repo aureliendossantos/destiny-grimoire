@@ -1,0 +1,11 @@
+---
+export const prerender = false
+
+import { getRelativeLocaleUrl } from "astro:i18n"
+import { checkLocale } from "$utils/i18n"
+
+Astro.cookies.delete("grimoireLogin")
+return Astro.redirect(
+	getRelativeLocaleUrl(checkLocale(Astro.currentLocale), "/"),
+)
+---

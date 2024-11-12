@@ -5,7 +5,10 @@ export default {
 	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
 	theme: {
 		fontFamily: {
-			sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+			sans: [
+				["Inter var", ...defaultTheme.fontFamily.sans],
+				{ fontFeatureSettings: "normal" },
+			],
 			serif: ['"EB Garamond"', ...defaultTheme.fontFamily.serif],
 			smcp: [
 				['"EB Garamond"', ...defaultTheme.fontFamily.serif],
