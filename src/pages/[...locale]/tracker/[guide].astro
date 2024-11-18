@@ -25,6 +25,10 @@ export async function getStaticPaths() {
 const { guide, locale, t } = Astro.props
 ---
 
-<Layout title={`Tracker`} description="">
+<Layout
+	title={`${guide.name} · ${t("Tracker")} · Destiny`}
+	description=""
+	onGrimoirePage
+>
 	<TrackerPage {locale} guideSlug={guide.slug} />
 </Layout>

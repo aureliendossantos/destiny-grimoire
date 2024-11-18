@@ -14,6 +14,7 @@ export default {
 				['"EB Garamond"', ...defaultTheme.fontFamily.serif],
 				{ fontFeatureSettings: '"c2sc", "smcp"' },
 			],
+			accent: ["Cromwell", ...defaultTheme.fontFamily.serif],
 		},
 		extend: {
 			aspectRatio: {

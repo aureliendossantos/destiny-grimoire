@@ -9,11 +9,13 @@ import {
 	getUserGrimoire,
 	parseParamsWithUser,
 } from "$utils/helpers"
-import Grimoire from "$components/Grimoire.astro"
+import Grimoire from "$components/Grimoire/Grimoire.astro"
 import { useTranslations } from "$utils/i18n"
-import SubHeader from "$components/SubHeader.astro"
+import SubHeader from "$components/Layout/SubHeader.astro"
+import UserIconFallback from "$components/User/UserIconFallback.astro"
+import UserIcon from "$components/User/UserIcon.astro"
 
-const { locale, platform, username, cardId } = parseParamsWithUser(Astro.params)
+const { locale, platform, username } = parseParamsWithUser(Astro.params)
 
 const t = useTranslations(locale)
 const themes = await getThemes(locale)
@@ -23,15 +25,15 @@ if (platform != "psn" && platform != "xbox" && !username)
 	return Astro.redirect("/404")
 const membershipType = platform == "xbox" ? 1 : 2
 const membershipId = await getMembershipId(membershipType, username)
-if (!membershipId) return //Astro.redirect("/404")
+if (!membershipId) return Astro.redirect("/404")
 
 const userGrimoire = await getUserGrimoire(membershipType, membershipId)
-if (!userGrimoire) return //Astro.redirect("/404")
+if (!userGrimoire) return Astro.redirect("/404")
 ---
 
 <Layout
-	title={`Grimoire de ${username}`}
-	description={`${userGrimoire.cardCollection.length} cartes // ${userGrimoire.score} points`}
+	title={`${t("grimoire-cards")} · Destiny · ${username}`}
+	description={`${userGrimoire.cardCollection.length} ${t("cards")} // ${userGrimoire.score} ${t("points")}`}
 	onGrimoirePage
 	userInPath={{
 		membershipType,
@@ -39,10 +41,17 @@ if (!userGrimoire) return //Astro.redirect("/404")
 		name: username,
 	}}
 >
-	<SubHeader
-		title={`Grimoire de ${username}`}
-		subtitle={`${userGrimoire.cardCollection.length} cartes // ${userGrimoire.score} points`}
-	/>
+	<SubHeader title={t("grimoire-cards")}>
+		<div slot="subtitle">
+			{t("g-Collection of")}
+			<UserIcon server:defer {membershipType} {membershipId}>
+				<UserIconFallback slot="fallback" />
+			</UserIcon>
+			{username} // {userGrimoire.cardCollection.length}
+			{t("cards")} // {userGrimoire.score}
+			{t("points")}
+		</div>
+	</SubHeader>
 	<div class="ml-10 mr-2 sm:mr-4">
 		<div class="m-auto mb-12 mt-10 max-w-6xl">
 			<Grimoire

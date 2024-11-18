@@ -127,7 +127,8 @@ export const deconstructUrl = (url: string) => {
 	return {
 		platform: parts[2],
 		username: parts[3],
-		rest: parts.slice(4).join("/"),
+		// ensure the string begins with a slash
+		rest: `/${parts.slice(4).join("/")}`.replace("//", "/"),
 	}
 }
 

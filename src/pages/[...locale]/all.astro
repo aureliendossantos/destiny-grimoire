@@ -1,8 +1,10 @@
 ---
 import Layout from "$layouts/Layout.astro"
-import Grimoire from "$components/Grimoire.astro"
+import Grimoire from "$components/Grimoire/Grimoire.astro"
 import { checkLocale, localeParams, useTranslations } from "$utils/i18n"
 import { getCards, getThemes } from "$utils/helpers"
+import SubHeader from "$components/Layout/SubHeader.astro"
+import { getRelativeLocaleUrl } from "astro:i18n"
 
 export async function getStaticPaths() {
 	return await Promise.all(
@@ -12,16 +14,30 @@ export async function getStaticPaths() {
 			const cards = await getCards(locale)
 			return {
 				params: { locale: localePath },
-				props: { cards, themes, t: useTranslations(locale) },
+				props: { cards, themes, locale, t: useTranslations(locale) },
 			}
 		}),
 	)
 }
 
-const { cards, themes, t } = Astro.props
+const { cards, themes, locale, t } = Astro.props
 ---
 
-<Layout title="Grimoire" description="Toutes les cartes" onGrimoirePage>
+<Layout
+	title={`${t("grimoire-cards")} · Destiny`}
+	description=""
+	onGrimoirePage
+>
+	<SubHeader title={t("grimoire-cards")}>
+		<Fragment slot="subtitle">
+			{`${t("global-data")} `}
+			<a
+				class="font-medium underline"
+				href={getRelativeLocaleUrl(locale, "/")}>{t("g-Login")}</a
+			>
+			{t("g-to see yours")}
+		</Fragment>
+	</SubHeader>
 	<div class="ml-10 mr-2 sm:mr-4">
 		<div class="m-auto mb-12 mt-10 max-w-6xl">
 			<Grimoire {themes} {cards} />

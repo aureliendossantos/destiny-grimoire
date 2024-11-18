@@ -15,14 +15,16 @@
 		"@astrojs/vercel": "^7.8.2",
 		"@fontsource/eb-garamond": "^5.1.1",
 		"@vercel/analytics": "^1.3.2",
-		"astro": "^4.16.10",
+		"astro": "^4.16.13",
 		"he": "^1.2.0",
+		"js-cookie": "^3.0.5",
 		"tailwindcss": "^3.4.14",
 		"typescript": "^5.6.3"
 	},
 	"packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1",
 	"devDependencies": {
 		"@types/he": "^1.2.3",
+		"@types/js-cookie": "^3.0.6",
 		"prettier": "^3.3.3",
 		"prettier-plugin-astro": "^0.14.1",
 		"prettier-plugin-tailwindcss": "^0.6.8"

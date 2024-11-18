@@ -6,11 +6,10 @@ import { getRelativeLocaleUrl } from "astro:i18n"
 
 interface Props {
 	locale: SupportedLocale
+	redirect: string
 }
-const { locale } = Astro.props
+const { locale, redirect } = Astro.props
 const t = useTranslations(locale)
-
-const redirect = "/" // TODO: get path
 ---
 
 <form
@@ -22,12 +21,7 @@ const redirect = "/" // TODO: get path
 	<label
 		class="w-[1lh] cursor-pointer rounded-l border border-r-0 border-slate-50 text-center text-slate-500 transition hover:bg-slate-300 hover:text-slate-600"
 	>
-		<input
-			type="checkbox"
-			name="platform"
-			checked="true"
-			class="peer hidden"
-		/>
+		<input type="checkbox" name="platform" class="peer hidden" />
 		<div
 			class="inline-block h-[1em] align-text-bottom peer-checked:hidden"
 			set:html={playstation}

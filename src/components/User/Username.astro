@@ -1,0 +1,14 @@
+---
+import UserIcon from "./UserIcon.astro"
+
+interface Props {
+	membershipType: 1 | 2
+	membershipId: string
+	username: string
+}
+
+const { membershipType, membershipId, username } = Astro.props
+---
+
+<UserIcon {membershipType} {membershipId} />
+<span class="font-medium">{username}</span>

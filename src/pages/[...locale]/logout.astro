@@ -4,8 +4,10 @@ export const prerender = false
 import { getRelativeLocaleUrl } from "astro:i18n"
 import { checkLocale } from "$utils/i18n"
 
+const redirect = Astro.url.searchParams.get("redirect")
+
 Astro.cookies.delete("grimoireLogin", { path: "/" })
 return Astro.redirect(
-	getRelativeLocaleUrl(checkLocale(Astro.currentLocale), "/"),
+	getRelativeLocaleUrl(checkLocale(Astro.currentLocale), redirect || "/"),
 )
 ---

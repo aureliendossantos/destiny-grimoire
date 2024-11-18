@@ -4,10 +4,12 @@ export const prerender = false
 import TrackerPage from "$components/Tracker/TrackerPage.astro"
 import Layout from "$layouts/Layout.astro"
 import {
+	getGuides,
 	getMembershipId,
 	getUserGrimoire,
 	parseParamsWithUser,
 } from "$utils/helpers"
+import { useTranslations } from "$utils/i18n"
 
 const { locale, platform, username, guideSlug } = parseParamsWithUser(
 	Astro.params,
@@ -21,9 +23,16 @@ if (!membershipId) return Astro.redirect("/404")
 
 const userGrimoire = await getUserGrimoire(membershipType, membershipId)
 if (!userGrimoire) return Astro.redirect("/404")
+
+const t = useTranslations(locale)
+const guide = (await getGuides(locale)).types.find((g) => g.slug == guideSlug)
 ---
 
-<Layout title={`Bonus de Grimoire de ${username}`} description="">
+<Layout
+	title={`${guide?.name} · ${t("Tracker")} · Destiny · ${username}`}
+	description=""
+	onGrimoirePage
+>
 	<TrackerPage
 		{locale}
 		user={{ platform, name: username, grimoire: userGrimoire }}

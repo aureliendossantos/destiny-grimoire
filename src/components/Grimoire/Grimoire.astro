@@ -1,0 +1,111 @@
+---
+import type { CollectionEntry } from "astro:content"
+import CardPreview from "$components/Grimoire/CardPreview.astro"
+import type { UserGrimoire } from "$utils/types"
+
+interface Props {
+	themes: CollectionEntry<"grimoire">["data"]["themeCollection"]
+	cards: CollectionEntry<"cards">["data"]
+	userGrimoire?: UserGrimoire
+	membershipType?: 1 | 2
+	username?: string
+}
+
+const { themes, userGrimoire, membershipType, username } = Astro.props
+const cards = Object.entries(Astro.props.cards).map(([_, card]) => card)
+---
+
+{
+	themes.map((theme) => (
+		<div>
+			<h2
+				class="-mb-5 -ml-10 -mt-2 font-serif text-[72px] text-slate-300 sm:-mb-7 sm:-mt-5 sm:text-[96px]"
+				set:html={theme.themeName}
+			/>
+			{theme.pageCollection.map((page) => {
+				const userCardsAmount = userGrimoire?.cardCollection.filter(
+					(c) => page.cardBriefs.find((b) => b.cardId == c.cardId),
+				).length
+				if (userCardsAmount == 0) return
+				return (
+					<div class="relative mb-2 sm:mb-4">
+						<div class="absolute top-0 flex origin-top-left rotate-90 items-baseline gap-3 border-l border-slate-200 bg-slate-50/70 py-2 pl-4">
+							{/* I replace() to shorten some unnecessarily long titles */}
+							<h3
+								class="font-smcp text-lg leading-[1.4] text-slate-400 sm:text-xl"
+								set:html={page.pageName
+									.replace("Histoire&#160;: ", "")
+									.replace("Story: ", "")}
+							/>
+							{userCardsAmount && (
+								<span
+									class="align-super font-serif text-xs text-slate-500"
+									style={{ fontFeatureSettings: '"lnum"' }}
+								>
+									<span class="inline-block -rotate-90">
+										{userCardsAmount}
+									</span>
+									|
+									<span class="inline-block -rotate-90">
+										{page.cardBriefs.length}
+									</span>
+								</span>
+							)}
+						</div>
+						<div class="grid grid-cols-3 gap-2 overflow-x-clip sm:grid-cols-4 sm:gap-4 md:grid-cols-5 lg:grid-cols-6">
+							{page.cardBriefs
+								.filter(
+									(brief) =>
+										!userGrimoire ||
+										userGrimoire.cardCollection.find(
+											(c) => c.cardId == brief.cardId,
+										),
+								)
+								.map((brief) => (
+									<CardPreview
+										card={
+											cards.find(
+												(c) => c.cardId == brief.cardId,
+											)!
+										}
+										membershipType={membershipType}
+										username={username}
+									/>
+								))}
+						</div>
+						{/* page.cardBriefs.length > 6 ? (
+							<div class="flex items-center gap-1">
+								<div
+									class="h-[1.5px] grow bg-slate-200"
+									style={{
+										boxShadow:
+											"inset 32px 0 20px -20px #f8fafc, inset -32px 0 16px -16px #f8fafc",
+									}}
+								/>
+								<button class="block font-smcp text-lg leading-8 text-slate-400 transition hover:text-slate-500">
+									See 14 more
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="32"
+										height="32"
+										viewBox="0 0 24 24"
+										class="inline-block h-[1em] w-[1em] align-text-bottom"
+									>
+										<path
+											fill="currentColor"
+											fill-rule="evenodd"
+											d="M4.43 6.512a.75.75 0 0 1 1.058-.081L12 12.012l6.512-5.581a.75.75 0 0 1 .976 1.138l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.057m0 4a.75.75 0 0 1 1.058-.081L12 16.012l6.512-5.581a.75.75 0 1 1 .976 1.139l-7 6a.75.75 0 0 1-.976 0l-7-6a.75.75 0 0 1-.081-1.058"
+											clip-rule="evenodd"
+										/>
+									</svg>
+								</button>
+							</div>
+						) : (
+							<div class="mb-2 sm:mb-4" />
+						) */}
+					</div>
+				)
+			})}
+		</div>
+	))
+}

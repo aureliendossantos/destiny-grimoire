@@ -1,5 +1,5 @@
 ---
-import SubHeader from "$components/SubHeader.astro"
+import SubHeader from "$components/Layout/SubHeader.astro"
 import { addAbbrs, getCards, getGuides } from "$utils/helpers"
 import { useTranslations, type SupportedLocale } from "$utils/i18n"
 import type { UserGrimoire } from "$utils/types"
@@ -42,7 +42,7 @@ if (guide.other)
 	]
 ---
 
-<SubHeader title="Tracker" />
+<SubHeader title={t("Tracker")} />
 <div class="mx-4">
 	<div
 		class="m-auto my-12 grid max-w-3xl grid-cols-1 gap-y-8 sm:grid-cols-3 sm:gap-x-8"
@@ -50,7 +50,7 @@ if (guide.other)
 		<div class="mx-4 font-serif sm:mx-0">
 			<h2 class="mb-4 text-5xl" set:html={addAbbrs(guide.name)} />
 			<div class="font-smcp leading-none tracking-widest text-slate-500">
-				Voir aussi
+				{t("See also")}
 			</div>
 			<div class="flex flex-col divide-y divide-slate-200">
 				{

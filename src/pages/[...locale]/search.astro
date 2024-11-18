@@ -1,14 +1,15 @@
 ---
 export const prerender = false
 
-import CardPreview from "$components/CardPreview.astro"
-import SubHeader from "$components/SubHeader.astro"
+import CardPreview from "$components/Grimoire/CardPreview.astro"
+import SubHeader from "$components/Layout/SubHeader.astro"
 import Layout from "$layouts/Layout.astro"
 import { getCards } from "$utils/helpers"
-import { checkLocale } from "$utils/i18n"
+import { checkLocale, useTranslations } from "$utils/i18n"
 import type { CollectionEntry } from "astro:content"
 
 const locale = checkLocale(Astro.currentLocale)
+const t = useTranslations(locale)
 const cards = await getCards(locale)
 
 const term = Astro.url.searchParams.get("term")
@@ -81,12 +82,13 @@ const isolateSentenceWithTerm = (
 ---
 
 <Layout
-	title={(term ? `“${term}” · ` : "") + "Recherche dans le Grimoire"}
-	description="Résultats de recherche dans les cartes de Grimoire de Destiny."
+	title={`${term ? `“${term}” · ` : ""}${t("s-Search results")}`}
+	description={t("s-Search results")}
 >
 	<SubHeader
+		sans
 		title={term ? `“${term}”` : "Recherche vide"}
-		subtitle="Résultats de la recherche"
+		subtitle={t("s-Search results")}
 	/>
 	{
 		term && relevantCards.length > 0 ? (
@@ -144,7 +146,7 @@ const isolateSentenceWithTerm = (
 		) : (
 			<div class="m-auto my-12 max-w-3xl">
 				<p class="text-center font-medium text-slate-500">
-					Aucun résultat pour la recherche “{term}”.
+					{t("s-No results")} “{term}”.
 				</p>
 			</div>
 		)

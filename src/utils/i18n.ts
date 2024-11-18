@@ -102,6 +102,7 @@ const headerFooter = {
 		Grimoire: "Grimoire",
 		Tracker: "Tracker",
 		Search: "Search…",
+		Home: "Home",
 	},
 	fr: {
 		"global-data":
@@ -116,13 +117,14 @@ const headerFooter = {
 		Grimoire: "Grimoire",
 		Tracker: "Progression",
 		Search: "Rechercher…",
+		Home: "Accueil",
 	},
 }
 
 const home = {
 	en: {
 		description:
-			"Grimoire cards contain story elements, poems, and other secrets about the <i>Destiny</i> universe. They are unlocked in-game by participating in activities or finding hidden objects, and were once consulted on Bungie's website. However, this section of the official website was removed upon the release of <i>Destiny 2</i>, although the cards can still be unlocked and confer effects in the first game. Thanks to Bungie's <abbr>API</abbr>, still accessible, this site restores the lost features with improved readability.",
+			"Grimoire Cards contain story elements, poems, and other secrets about the <i>Destiny</i> universe. They can be unlocked in-game by participating in various activities or discovering hidden objects and were once accessible on Bungie's official website. However, with the release of <i>Destiny 2</i>, this section was removed from the site. Although the cards can still be unlocked and confer benefits in the first game, they are no longer officially available online. Using Bungie's <abbr>API</abbr>, still accessible, this site restores those lost features with enhanced readability.",
 		"browse-your-grimoire": "Browse your Grimoire",
 		"see-all-cards": "See all cards",
 		spoilers: "Spoilers",
@@ -133,6 +135,7 @@ const home = {
 		login: "Login",
 		"switch-user": "Switch user",
 		"no-account": "No account on Destiny?",
+		"grimoire-cards": "Grimoire Cards",
 	},
 	fr: {
 		description:
@@ -147,14 +150,37 @@ const home = {
 		login: "Se connecter",
 		"switch-user": "Changer d'utilisateur",
 		"no-account": "Pas de compte sur Destiny ?",
+		"grimoire-cards": "Cartes de Grimoire",
 	},
 	de: {
 		description:
 			"Grimoire-Karten enthalten Story-Elemente, Gedichte und andere Geheimnisse über das <i>Destiny</i>-Universum. Sie werden im Spiel freigeschaltet durch die Teilnahme an Aktivitäten oder das Finden versteckter Objekte und wurden einst auf der Website von Bungie konsultiert. Allerdings wurde dieser Abschnitt der offiziellen Website bei der Veröffentlichung von <i>Destiny 2</i> entfernt, obwohl die Karten immer noch freigeschaltet und Effekte im ersten Spiel verleihen können. Dank Bungies <abbr>API</abbr>, die immer noch zugänglich ist, stellt diese Website die verlorenen Funktionen mit verbesserter Lesbarkeit wieder her.",
+		"browse-your-grimoire": "Durchsuche dein Grimoire",
+		"see-all-cards": "Alle Karten anzeigen",
+		spoilers: "Spoiler",
+		card: "Karte",
+		cards: "Karten",
+		points: "Punkte",
+		username: "Benutzername",
+		login: "Anmelden",
+		"switch-user": "Benutzer wechseln",
+		"no-account": "Kein Konto auf Destiny?",
+		"grimoire-cards": "Grimoire-Karten",
 	},
 	es: {
 		description:
 			"Las cartas del Grimorio contienen elementos de la historia, poemas y otros secretos sobre el universo de <i>Destiny</i>. Se desbloquean en el juego participando en actividades o encontrando objetos ocultos, y una vez se consultaban en el sitio web de Bungie. Sin embargo, esta sección del sitio web oficial fue eliminada al lanzamiento de <i>Destiny 2</i>, aunque las cartas todavía pueden desbloquearse y conferir efectos en el primer juego. Gracias a la <abbr>API</abbr> de Bungie, aún accesible, este sitio restaura las funciones perdidas con una legibilidad mejorada.",
+		"browse-your-grimoire": "Consulta tu Grimorio",
+		"see-all-cards": "Ver todas las cartas",
+		spoilers: "Spoilers",
+		card: "carta",
+		cards: "cartas",
+		points: "puntos",
+		username: "Nombre de usuario",
+		login: "Iniciar sesión",
+		"switch-user": "Cambiar de usuario",
+		"no-account": "¿No tienes una cuenta en Destiny?",
+		"grimoire-cards": "Cartas del Grimorio",
 	},
 	it: {
 		description:
@@ -167,24 +193,67 @@ const home = {
 	ja: {
 		description:
 			"グリモアカードには、<i>Destiny</i>の世界に関するストーリー要素、詩、その他の秘密が含まれています。これらは、ゲーム内で活動に参加したり、隠しオブジェクトを見つけたりすることでアンロックされ、かつてはBungieのウェブサイトで参照されていました。ただし、この公式ウェブサイトのセクションは<i>Destiny 2</i>のリリース時に削除されましたが、カードは引き続きアンロックされ、最初のゲームで効果をもたらすことができます。Bungieの<abbr>API</abbr>のおかげで、引き続きアクセス可能なこのサイトは、失われた機能を改善された読みやすさで復元します。",
+		"grimoire-cards": "グリモアカード",
+	},
+}
+
+const grimoire = {
+	en: {
+		"g-Login": "Login",
+		"g-to see yours": "to see your own collection.",
+		"g-Collection of": "Collection of",
+	},
+	fr: {
+		"g-Login": "Connectez-vous",
+		"g-to see yours": "pour voir votre propre collection.",
+		"g-Collection of": "Collection de",
 	},
 }
 
 const tracker = {
 	en: {
+		"t-places": "places",
 		"Bonus tracker": "Bonus tracker",
 		"Must be logged in": "You must be logged in to see this page.",
+		"See also": "See also",
 	},
 	fr: {
+		"t-places": "lieux",
 		"Bonus tracker": "Progression des bonus",
 		"Must be logged in":
 			"Vous devez être connecté pour accéder à cette page.",
+		"See also": "Voir aussi",
+	},
+}
+
+const search = {
+	en: {
+		"s-Search results": "Search results",
+		"s-No results": "No results for search",
+	},
+	fr: {
+		"s-Search results": "Résultats de recherche",
+		"s-No results": "Aucun résultat pour la recherche",
 	},
 }
 
 const translations = {
-	en: { ...card.en, ...headerFooter.en, ...tracker.en, ...home.en },
-	fr: { ...card.fr, ...headerFooter.fr, ...tracker.fr, ...home.fr },
+	en: {
+		...card.en,
+		...headerFooter.en,
+		...grimoire.en,
+		...tracker.en,
+		...search.en,
+		...home.en,
+	},
+	fr: {
+		...card.fr,
+		...headerFooter.fr,
+		...grimoire.fr,
+		...tracker.fr,
+		...search.fr,
+		...home.fr,
+	},
 	de: { ...home.de },
 	es: { ...home.es },
 	it: { ...home.it },

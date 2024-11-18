@@ -4,17 +4,11 @@ import {
 	membershipTypeToPath,
 	validateCookie,
 } from "$utils/helpers"
-import {
-	checkLocale,
-	localeNames,
-	localeParams,
-	useTranslations,
-	type SupportedLocale,
-} from "$utils/i18n"
+import { useTranslations, type SupportedLocale } from "$utils/i18n"
 import { getRelativeLocaleUrl } from "astro:i18n"
-import LinkButton from "./Layout/LinkButton.astro"
-import MiniLoginForm from "./MiniLoginForm.astro"
-import Username from "./Username.astro"
+import LinkButton from "$components/Layout/LinkButton.astro"
+import MiniLoginForm from "$components/User/MiniLoginForm.astro"
+import Username from "$components/User/Username.astro"
 
 export type FooterProps = {
 	onGrimoireSection?: boolean
@@ -39,6 +33,7 @@ const pathname =
 	locale == "en"
 		? Astro.props.pathname
 		: Astro.props.pathname.replace(`/${locale}`, "")
+const pathnameRest = deconstructUrl(pathname).rest
 const t = useTranslations(locale)
 
 const tryCookie = Astro.cookies.get("grimoireLogin")
@@ -98,7 +93,7 @@ const isUserPage =
 								href={
 									isUserPage
 										? `/${hrefLocale}user/${membershipTypeToPath(userInPath.membershipType)}/${userInPath.name}`
-										: `/${hrefLocale}user/${membershipTypeToPath(cookie.membershipType)}/${cookie.username}${deconstructUrl(pathname).rest}`
+										: `/${hrefLocale}user/${membershipTypeToPath(cookie.membershipType)}/${cookie.username}${pathnameRest}`
 								}
 							>
 								<div>
@@ -114,7 +109,10 @@ const isUserPage =
 							</LinkButton>
 						)}
 						<LinkButton
-							href={getRelativeLocaleUrl(locale, "/logout")}
+							href={getRelativeLocaleUrl(
+								locale,
+								`/logout?redirect=${pathnameRest}`,
+							)}
 						>
 							{t("logout")}
 						</LinkButton>
@@ -124,49 +122,10 @@ const isUserPage =
 						<div class="font-smcp text-base leading-relaxed">
 							{t("browse-yours")}
 						</div>
-						<MiniLoginForm {locale} />
+						<MiniLoginForm {locale} redirect={pathnameRest} />
 					</>
 				))
 		}
-		{
-			!onGrimoire && (
-				<div class="grid grid-cols-2 gap-4">
-					<LinkButton href="/">{t("Grimoire")}</LinkButton>
-					<LinkButton href="/books">
-						{t("Books")}
-						<sup>D2</sup>
-					</LinkButton>
-				</div>
-			)
-		}
-		<select
-			id="footer-language-switcher"
-			class="rounded-md bg-transparent p-4 ring-1 ring-slate-300 transition hover:bg-slate-100"
-		>
-			{
-				localeParams.map((localePath) => {
-					const curL = checkLocale(localePath)
-					return (
-						<option
-							value={`${localePath && localePath != "en" ? localePath : ""}${pathname}`}
-							selected={curL == locale}
-						>
-							{localeNames[curL]}
-						</option>
-					)
-				})
-			}
-		</select>
+		{!onGrimoire && <LinkButton href="/">{t("Home")}</LinkButton>}
 	</div>
 </div>
-
-<script is:inline>
-	document
-		.getElementById("footer-language-switcher")
-		?.addEventListener(
-			"change",
-			(t) =>
-				t.currentTarget instanceof HTMLSelectElement &&
-				(window.location.pathname = t.currentTarget.value),
-		)
-</script>

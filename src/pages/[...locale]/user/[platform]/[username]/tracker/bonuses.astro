@@ -10,7 +10,7 @@ import {
 } from "$utils/helpers"
 import { useTranslations } from "$utils/i18n"
 import Bonus from "$components/Tracker/Bonus.astro"
-import SubHeader from "$components/SubHeader.astro"
+import SubHeader from "$components/Layout/SubHeader.astro"
 
 const { locale, platform, username } = parseParamsWithUser(Astro.params)
 
@@ -34,7 +34,7 @@ const inProgressBonuses = userBonuses.filter(
 ---
 
 <Layout
-	title={`Bonus du Grimoire de ${username}`}
+	title={`${t("Bonus tracker")} · Destiny Grimoire · ${username}`}
 	description={`${activeBonuses} bonus actifs, ${inProgressBonuses} en progression`}
 	userInPath={{ membershipType, membershipId, name: username }}
 	onGrimoireSection

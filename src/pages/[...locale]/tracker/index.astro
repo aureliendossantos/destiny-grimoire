@@ -9,6 +9,31 @@ export async function getStaticPaths() {
 const { t, locale } = Astro.props
 ---
 
-<Layout title="Tracker" description="">
+<Layout title={`${t("Tracker")} · Destiny`} description="" onGrimoirePage>
 	<TrackerIndex {locale} />
 </Layout>
+<div id="locale" data-locale={locale}></div>
+
+<script>
+	import Cookies from "js-cookie"
+	import { validateCookie } from "$utils/helpers"
+
+	// get the cookie grimoireLogin
+	const tryCookie = Cookies.get("grimoireLogin")
+	const loginCookie = tryCookie && validateCookie(JSON.parse(tryCookie))
+
+	if (loginCookie) {
+		// find all links that begin with "/tracker/" and add the user to the path
+		const links = document.querySelectorAll(
+			`a#tracker-card`,
+		) as NodeListOf<HTMLAnchorElement>
+		const platform = loginCookie.membershipType == 1 ? "xbox" : "psn"
+		const username = loginCookie.username
+
+		links.forEach((link) => {
+			const href = link.getAttribute("href")
+			const userPath = `/user/${platform}/${username}/tracker`
+			link.setAttribute("href", href!.replace("/tracker", userPath))
+		})
+	}
+</script>

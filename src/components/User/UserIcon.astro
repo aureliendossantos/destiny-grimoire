@@ -4,10 +4,9 @@ import { getUserSummary } from "$utils/helpers"
 interface Props {
 	membershipType: 1 | 2
 	membershipId: string
-	username: string
 }
 
-const { membershipType, membershipId, username } = Astro.props
+const { membershipType, membershipId } = Astro.props
 
 const summary = await getUserSummary(membershipType, membershipId)
 const bestCharacter = summary.characters.sort(
@@ -16,7 +15,6 @@ const bestCharacter = summary.characters.sort(
 ---
 
 <img
-	class="inline-block h-[1em] w-[1em] rounded-sm align-[-10%]"
+	class="inline-block h-[1em] w-[1em] rounded-sm bg-slate-300 align-[-10%]"
 	src={`https://www.bungie.net${bestCharacter.emblemPath}`}
 />
-<span class="font-medium">{username}</span>

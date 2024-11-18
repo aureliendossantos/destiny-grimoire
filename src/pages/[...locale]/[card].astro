@@ -1,6 +1,6 @@
 ---
 import Layout from "$layouts/Layout.astro"
-import CardPage from "$components/CardPage.astro"
+import CardPage from "$components/CardPage/CardPage.astro"
 import { getCards, getThemes } from "$utils/helpers"
 import { checkLocale, localeParams, useTranslations } from "$utils/i18n"
 
@@ -23,7 +23,7 @@ const { card, cards, themes, t } = Astro.props
 ---
 
 <Layout
-	title={`${card.cardName} · Grimoire`}
+	title={`${card.cardName} · Destiny · ${t("grimoire-cards")}`}
 	description={card.cardIntro || card.cardDescription || ""}
 	contentHeightScreen
 	onGrimoireSection

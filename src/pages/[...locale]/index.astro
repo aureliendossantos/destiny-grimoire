@@ -2,49 +2,41 @@
 import Layout from "$layouts/Layout.astro"
 import Login from "$components/Homepage/Login.astro"
 import SeeAllButton from "$components/Homepage/SeeAllButton.astro"
-import { checkLocale, localeParams, localePaths } from "$utils/i18n"
+import { localePaths } from "$utils/i18n"
+import power from "$images/icons/power.svg"
 
 export async function getStaticPaths() {
 	return localePaths
 }
 const { t, locale } = Astro.props
+
+const bgImage = `url(${power.src})`
 ---
 
-<Layout title="Grimoire de Destiny" description="">
+<style define:vars={{ bgImage }} is:global>
+	ul li::before {
+		content: "";
+		display: inline-block;
+		background-image: var(--bgImage);
+		background-size: contain;
+		width: 8px;
+		height: 8px;
+		margin-right: 8px;
+	}
+</style>
+
+<Layout title="Guardian Compendium · Destiny Lore" description="">
 	<div class="mx-4">
 		<div
 			class="m-auto my-12 grid max-w-3xl grid-cols-1 gap-12 md:grid-cols-2"
 		>
-			<div>
-				<div
-					class="mb-4 grid grid-cols-7 gap-1 whitespace-nowrap text-center text-xs font-medium uppercase text-slate-400"
-				>
-					{
-						localeParams.map((localePath) => {
-							const curL = checkLocale(localePath)
-							if (locale == curL)
-								return (
-									<div class="rounded-md border border-slate-200 bg-slate-200 px-2 py-1">
-										{curL}
-									</div>
-								)
-							return (
-								<a
-									href={`/${localePath ? localePath : ""}`}
-									class="rounded-md border border-slate-200 bg-slate-100 px-2 py-1 transition hover:bg-slate-200"
-								>
-									{curL}
-								</a>
-							)
-						})
-					}
-				</div>
-				<p
-					class="order-last font-serif text-lg md:order-none"
-					set:html={t("description")}
-				/>
+			<div class="m-auto max-w-md">
+				<h2 class="font-serif text-lg italic text-slate-500">
+					What are Grimoire Cards?
+				</h2>
+				<p class="font-serif text-lg" set:html={t("description")} />
 			</div>
-			<div>
+			<div class="order-first md:order-none">
 				<div class="m-auto flex flex-col items-center gap-2">
 					<h2 class="text-center font-smcp text-xl text-slate-400">
 						{t("browse-your-grimoire")}
@@ -58,6 +50,49 @@ const { t, locale } = Astro.props
 					</Login>
 					<SeeAllButton />
 				</div>
+			</div>
+			<div class="m-auto max-w-md">
+				<h2 class="font-serif text-lg italic text-slate-500">
+					Website Features
+				</h2>
+				<ul class="list-inside pl-4 font-serif text-lg text-slate-800">
+					<li class="-indent-8">
+						<em class="font-smcp not-italic text-slate-500"
+							>Discover your own cards:</em
+						> Avoid spoilers and reveal the lore as you unlock cards
+						in-game.
+					</li>
+					<li class="-indent-8">
+						<em class="font-smcp not-italic text-slate-500"
+							>Track your progress:</em
+						> Keep tabs on your unlocked cards and hidden bonuses, and
+						locate secret items with short video guides.
+					</li>
+					<li class="-indent-8">
+						<em class="font-smcp not-italic text-slate-500"
+							>Quick search:</em
+						> Instantly view all the snippets where your keywords appear.
+					</li>
+				</ul>
+			</div>
+			<div class="m-auto max-w-md md:pt-7">
+				<ul class="list-inside pl-4 font-serif text-lg text-slate-800">
+					<li class="-indent-8">
+						<em class="font-smcp not-italic text-slate-500">
+							Multi-language support:
+						</em>
+						<i>Guardian Compendium</i> is the only website that lets
+						you experience Destiny's expertly crafted translations in
+						all supported languages: English, French, German, Italian,
+						Japanese, Russian, Spanish, and Brazilian Portuguese. Note
+						that the <abbr>UI</abbr> is not fully translated;
+						<a
+							class="text-slate-500 underline decoration-1 underline-offset-2"
+							href="https://github.com/aureliendossantos/destiny-grimoire/blob/master/src/utils/i18n.ts"
+							>contributions are welcome</a
+						>.
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>

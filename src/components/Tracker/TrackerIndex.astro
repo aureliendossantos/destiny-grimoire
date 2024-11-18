@@ -1,5 +1,5 @@
 ---
-import SubHeader from "$components/SubHeader.astro"
+import SubHeader from "$components/Layout/SubHeader.astro"
 import { getRelativeLocaleUrl } from "astro:i18n"
 import { useTranslations, type SupportedLocale } from "$utils/i18n"
 import { addAbbrs, getGuides } from "$utils/helpers"
@@ -17,12 +17,13 @@ const t = useTranslations(locale)
 const guides = await getGuides(locale)
 ---
 
-<SubHeader title="Tracker" />
+<SubHeader title={t("Tracker")} />
 <div class="mx-4">
 	<div class="m-auto my-12 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
 		{
 			guides.types.map((guide) => (
 				<a
+					id="tracker-card"
 					class="flex flex-col justify-end rounded-lg border border-slate-300 bg-slate-100 p-4 font-serif shadow-sm transition duration-300 ease-out hover:scale-[1.03] hover:shadow-md"
 					href={getRelativeLocaleUrl(
 						locale,
@@ -36,11 +37,11 @@ const guides = await getGuides(locale)
 						set:html={addAbbrs(guide.name)}
 					/>
 					<div class="font-smcp text-lg leading-snug text-slate-500">
-						{guide.areas.length > 1 ? (
-							<>{guide.areas.length} lieux</>
-						) : guide.areas.length == 1 ? (
-							guide.areas[0].name
-						) : null}
+						{guide.areas.length > 1
+							? `${guide.areas.length} ${t("t-places")}`
+							: guide.areas.length == 1
+								? guide.areas[0].name
+								: null}
 					</div>
 				</a>
 			))
@@ -48,6 +49,7 @@ const guides = await getGuides(locale)
 		{
 			user ? (
 				<a
+					id="tracker-card"
 					class="flex flex-col justify-end rounded-lg border border-slate-300 bg-slate-100 p-4 font-serif shadow-sm transition duration-300 ease-out hover:scale-[1.03] hover:shadow-md"
 					href={getRelativeLocaleUrl(
 						locale,

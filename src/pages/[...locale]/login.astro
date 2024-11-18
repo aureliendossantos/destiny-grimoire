@@ -1,8 +1,8 @@
 ---
 export const prerender = false
 
-import Header from "$components/Header.astro"
 import Layout from "$layouts/Layout.astro"
+import SubHeader from "$components/Layout/SubHeader.astro"
 import { getMembershipId, membershipTypeToPath } from "$utils/helpers"
 import { checkLocale } from "$utils/i18n"
 import { getRelativeLocaleUrl } from "astro:i18n"
@@ -44,8 +44,8 @@ if (membershipId) {
 }
 ---
 
-<Layout title="Connexion échouée" description="Compte Bungie introuvable">
-	<Header h1="Connexion échouée" subtitle="Compte Bungie introuvable" />
+<Layout title="Connection failed" description="Bungie account not found.">
+	<SubHeader title="Connection failed" subtitle="Bungie account not found." />
 	<div class="flex h-96 items-center justify-center">
 		<div class="max-w-md rounded-md bg-slate-200 p-8">
 			{errorMessage}
