@@ -36,7 +36,7 @@ const basePath = platform ? `/user/${platform}/${username}` : ``
 			<HeaderLink
 				href={getRelativeLocaleUrl(
 					locale,
-					platform ? basePath : "/all",
+					platform ? basePath : "/all"
 				)}
 			>
 				{t("Grimoire")}
@@ -103,12 +103,15 @@ const basePath = platform ? `/user/${platform}/${username}` : ``
 </header>
 
 <script>
+	import Cookies from "js-cookie"
+
 	document
 		.getElementById("header-language-switcher")
-		?.addEventListener(
-			"change",
-			(t) =>
-				t.currentTarget instanceof HTMLSelectElement &&
-				(window.location.pathname = t.currentTarget.value),
-		)
+		?.addEventListener("change", (t) => {
+			if (!(t.currentTarget instanceof HTMLSelectElement)) return
+			Cookies.set("userLocale", t.currentTarget.value.split("/")[0], {
+				path: "/",
+			})
+			window.location.pathname = t.currentTarget.value
+		})
 </script>

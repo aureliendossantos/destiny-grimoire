@@ -123,6 +123,7 @@ const headerFooter = {
 
 const home = {
 	en: {
+		"What are Grimoire Cards": "What are Grimoire Cards?",
 		description:
 			"Grimoire Cards contain story elements, poems, and other secrets about the <i>Destiny</i> universe. They can be unlocked in-game by participating in various activities or discovering hidden objects and were once accessible on Bungie's official website. However, with the release of <i>Destiny 2</i>, this section was removed from the site. Although the cards can still be unlocked and confer benefits in the first game, they are no longer officially available online. Using Bungie's <abbr>API</abbr>, still accessible, this site restores those lost features with enhanced readability.",
 		"browse-your-grimoire": "Browse your Grimoire",
@@ -138,6 +139,7 @@ const home = {
 		"grimoire-cards": "Grimoire Cards",
 	},
 	fr: {
+		"What are Grimoire Cards": "Que sont les cartes de Grimoire ?",
 		description:
 			"Les cartes de Grimoire recèlent des éléments d'histoire, des poèmes et d'autres secrets à propos de l'univers de <i>Destiny</i>. Elles se débloquent dans le jeu en participant à des activités ou en trouvant des objets cachés, et se consultaient autrefois le site de Bungie. Cependant, cette section du site officiel a été supprimée à la sortie de <i>Destiny 2</i>, bien que les cartes puissent encore être débloquées et conférer des effets dans le premier jeu. Grâce à l'<abbr>API</abbr> de Bungie, toujours accessible, ce site restaure les fonctionnalités perdues avec un confort de lecture amélioré.",
 		"browse-your-grimoire": "Consultez votre Grimoire",

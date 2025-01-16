@@ -1,14 +1,25 @@
 ---
+export const prerender = false
+
 import Layout from "$layouts/Layout.astro"
 import Login from "$components/Homepage/Login.astro"
 import SeeAllButton from "$components/Homepage/SeeAllButton.astro"
-import { localePaths } from "$utils/i18n"
+import { checkLocale, useTranslations } from "$utils/i18n"
 import power from "$images/icons/power.svg"
 
-export async function getStaticPaths() {
-	return localePaths
+const userLocale = Astro.cookies.get("userLocale")?.value
+console.log("userLocale", userLocale)
+if (userLocale && userLocale != Astro.currentLocale) {
+	console.log("redirecting", Astro.currentLocale, "to", userLocale)
+	return Astro.redirect(`/${userLocale}`)
 }
-const { t, locale } = Astro.props
+if (!userLocale) {
+	const browserLocale = Astro.preferredLocale
+	Astro.cookies.set("userLocale", browserLocale || "en", { path: "/" })
+}
+
+const locale = checkLocale(Astro.currentLocale)
+const t = useTranslations(locale)
 
 const bgImage = `url(${power.src})`
 ---
@@ -31,9 +42,10 @@ const bgImage = `url(${power.src})`
 			class="m-auto my-12 grid max-w-3xl grid-cols-1 gap-12 md:grid-cols-2"
 		>
 			<div class="m-auto max-w-md">
-				<h2 class="font-serif text-lg italic text-slate-500">
-					What are Grimoire Cards?
-				</h2>
+				<h2
+					class="font-serif text-lg italic text-slate-500"
+					set:html={t("What are Grimoire Cards")}
+				/>
 				<p class="font-serif text-lg" set:html={t("description")} />
 			</div>
 			<div class="order-first md:order-none">

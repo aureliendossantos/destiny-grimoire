@@ -5,6 +5,7 @@ import {
 	membershipTypeToPath,
 } from "$utils/helpers"
 import { useTranslations, type SupportedLocale } from "$utils/i18n"
+import { getRelativeLocaleUrl } from "astro:i18n"
 
 interface Props {
 	locale: SupportedLocale
@@ -21,12 +22,15 @@ const [summary, userGrimoire] = await Promise.all([
 	getUserGrimoire(membershipType, membershipId),
 ])
 const bestCharacter = summary.characters.sort(
-	(a: any, b: any) => b.characterBase.powerLevel - a.characterBase.powerLevel,
+	(a: any, b: any) => b.characterBase.powerLevel - a.characterBase.powerLevel
 )[0]
 ---
 
 <a
-	href={`/user/${membershipTypeToPath(membershipType)}/${username}`}
+	href={getRelativeLocaleUrl(
+		locale,
+		`/user/${membershipTypeToPath(membershipType)}/${username}`
+	)}
 	class="relative flex shadow-sm transition duration-300 ease-out hover:scale-105 hover:shadow-md"
 	style={{ height: "48px" }}
 >
