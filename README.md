@@ -10,11 +10,6 @@ This is a very young project built with Astro and hosted with Vercel. Feel free 
 
 The website is available in every language supported by the game in order to display the lore in the correct language. However, if a UI string isn't available, it will fallback to English. For now, everything that can be translated is located in `i18n.ts`, but we'll need a cleaner solution to facilitate contributions.
 
-### To fix
-
--   [] searching for "Alpha Lupi" prints nothing, not even the error message, even though it should display several cards
--   [] he.encode before processing in isolateSentenceWithTerm bc in french special chars like « count as too many chars. i.e. search "cayde" in french. related: we can't search for "éliksni"
-
 ## Working with the Destiny API
 
 ### Getting Destiny 1 Definitions (Grimoire, Grimoire Cards...)
@@ -42,6 +37,23 @@ The original branding guide for Destiny ([archive](https://web.archive.org/web/2
 Not too bothered about fitting exactly into these guidelines, as I'm trying to add a personal touch to enhance readability, I'm using free alternatives: EB Garamond, which is usually my Garamond of choice, and Inter.
 
 I love how Bungie uses Cromwell HPLHS for their in-game maps, and I use it for the main heading. The font is easy to find on various websites but tbh I'm not sure about the license.
+
+## Todo
+
+-[] legal info
+-[] meta descriptions
+-[] mini login form on the left of tracker guides
+-[] mark as read (will be useful when we have D2 books)
+-[] Update to Astro 5 & move translation strings in separate YAML files.
+-[] ios disable zoom, or bigger mini login form
+-[] back to grimoire link : anchor to the card we come from?
+-[] "see more cards" button in grimoire (responsive)
+-[] investigate the strange paths during build, and the weirds hints appearing during build and locally (not always the same though)
+
+### Known issues
+
+-[] searching for "Alpha Lupi" prints nothing, not even the error message, even though it should display several cards
+-[] should he.encode before processing in isolateSentenceWithTerm, because in french, special chars like `«` count as too many chars. i.e. search `cayde` in french. related: we can't search for `éliksni`
 
 ## Astro Commands
 
