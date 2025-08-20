@@ -24,7 +24,7 @@ const cards = Object.entries(Astro.props.cards).map(([_, card]) => card)
 			/>
 			{theme.pageCollection.map((page) => {
 				const userCardsAmount = userGrimoire?.cardCollection.filter(
-					(c) => page.cardBriefs.find((b) => b.cardId == c.cardId),
+					(c) => page.cardBriefs.find((b) => b.cardId == c.cardId)
 				).length
 				if (userCardsAmount == 0) return
 				return (
@@ -52,20 +52,20 @@ const cards = Object.entries(Astro.props.cards).map(([_, card]) => card)
 								</span>
 							)}
 						</div>
-						<div class="grid grid-cols-3 gap-2 overflow-x-clip sm:grid-cols-4 sm:gap-4 md:grid-cols-5 lg:grid-cols-6">
+						<div class="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-4 md:grid-cols-5 lg:grid-cols-6">
 							{page.cardBriefs
 								.filter(
 									(brief) =>
 										!userGrimoire ||
 										userGrimoire.cardCollection.find(
-											(c) => c.cardId == brief.cardId,
-										),
+											(c) => c.cardId == brief.cardId
+										)
 								)
 								.map((brief) => (
 									<CardPreview
 										card={
 											cards.find(
-												(c) => c.cardId == brief.cardId,
+												(c) => c.cardId == brief.cardId
 											)!
 										}
 										membershipType={membershipType}
