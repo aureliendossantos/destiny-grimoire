@@ -1,4 +1,6 @@
-import { defineCollection, z } from "astro:content"
+import { defineCollection } from "astro:content"
+import { z } from "astro/zod"
+import { glob } from "astro/loaders"
 
 export const sizeSchema = z.object({
 	x: z.number(),
@@ -59,7 +61,10 @@ export const cardSchema = z.object({
 // collection. Each key of `collections` matches a directory name in `src/content`.
 export const collections = {
 	grimoire: defineCollection({
-		type: "data",
+		loader: glob({
+			pattern: "*.json",
+			base: "./src/content/grimoire",
+		}),
 		schema: z.object({
 			themeCollection: z.array(
 				z.object({
@@ -87,11 +92,17 @@ export const collections = {
 		}),
 	}),
 	cards: defineCollection({
-		type: "data",
+		loader: glob({
+			pattern: "*.json",
+			base: "./src/content/cards",
+		}),
 		schema: z.record(z.string(), cardSchema),
 	}),
 	guides: defineCollection({
-		type: "data",
+		loader: glob({
+			pattern: "*.yaml",
+			base: "./src/content/guides",
+		}),
 		schema: z.object({
 			types: z.array(
 				z.object({

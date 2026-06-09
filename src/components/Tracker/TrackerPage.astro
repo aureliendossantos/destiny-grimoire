@@ -1,6 +1,7 @@
 ---
 import SubHeader from "$components/Layout/SubHeader.astro"
-import { addAbbrs, getCards, getGuides } from "$utils/helpers"
+import { getCards, getGuides } from "$utils/content"
+import { addAbbrs } from "$utils/helpers"
 import { useTranslations, type SupportedLocale } from "$utils/i18n"
 import type { UserGrimoire } from "$utils/types"
 import { getRelativeLocaleUrl } from "astro:i18n"

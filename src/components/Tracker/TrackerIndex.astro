@@ -2,7 +2,8 @@
 import SubHeader from "$components/Layout/SubHeader.astro"
 import { getRelativeLocaleUrl } from "astro:i18n"
 import { useTranslations, type SupportedLocale } from "$utils/i18n"
-import { addAbbrs, getGuides } from "$utils/helpers"
+import { getGuides } from "$utils/content"
+import { addAbbrs } from "$utils/helpers"
 
 interface Props {
 	locale: SupportedLocale

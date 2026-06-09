@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+	--font-sans:
+		"Inter var", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-sans--font-feature-settings: normal;
+
+	--font-serif:
+		"EB Garamond Variable", ui-serif, Georgia, Cambria, "Times New Roman",
+		Times, serif;
+
+	--font-smcp:
+		"EB Garamond SC", "EB Garamond Variable", ui-serif, Georgia, Cambria, "Times New Roman",
+		Times, serif;
+	--font-smcp--font-feature-settings: "c2sc", "smcp";
+
+	--font-accent:
+		Cromwell, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+	--aspect-card: 323 / 419;
+}

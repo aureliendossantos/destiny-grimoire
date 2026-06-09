@@ -1,5 +1,5 @@
-import type { z } from "astro:content"
-import type { imageSchema } from "$content/config"
+import type { z } from "astro/zod"
+import type { imageSchema } from "src/content.config"
 
 export interface UserGrimoire {
 	score: number

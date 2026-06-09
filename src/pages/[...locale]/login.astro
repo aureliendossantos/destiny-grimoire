@@ -3,7 +3,11 @@ export const prerender = false
 
 import Layout from "$layouts/Layout.astro"
 import SubHeader from "$components/Layout/SubHeader.astro"
-import { getMembershipId, membershipTypeToPath } from "$utils/helpers"
+import {
+	BungieApiError,
+	getMembershipId,
+	membershipTypeToPath,
+} from "$utils/helpers"
 import { checkLocale } from "$utils/i18n"
 import { getRelativeLocaleUrl } from "astro:i18n"
 
@@ -19,10 +23,23 @@ if (typeof username != "string") return Astro.redirect("/")
 
 // platform: "true" is 1 (xbox), "false" is 2 (psn)
 const membershipType = platform ? 1 : 2
-const membershipId = await getMembershipId(membershipType, username)
+let membershipId: string | null = null
+let apiError: BungieApiError | null = null
+
+try {
+	membershipId = await getMembershipId(membershipType, username)
+} catch (error) {
+	if (error instanceof BungieApiError) {
+		apiError = error
+	} else {
+		throw error
+	}
+}
 
 const errorMessage =
-	!membershipId &&
+	apiError ?
+		`Bungie API error (${apiError.status}, code ${apiError.code}): ${apiError.message}`
+	: !membershipId &&
 	`Could not find a Bungie account with ${platform ? "Xbox" : "PSN"} username "${username}". Please check that the username is correct and that you have played Destiny 1 on this platform.`
 
 if (membershipId) {

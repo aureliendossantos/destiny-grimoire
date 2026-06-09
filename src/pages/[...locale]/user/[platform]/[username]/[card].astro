@@ -2,10 +2,9 @@
 export const prerender = false
 
 import Layout from "$layouts/Layout.astro"
+import { getCards, getThemes } from "$utils/content"
 import {
-	getCards,
 	getMembershipId,
-	getThemes,
 	getUserGrimoire,
 	parseParamsWithUser,
 } from "$utils/helpers"

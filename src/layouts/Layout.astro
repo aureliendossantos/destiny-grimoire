@@ -3,8 +3,11 @@ import Footer, { type FooterProps } from "$components/Layout/Footer.astro"
 import FooterFallback from "$components/Layout/FooterFallback.astro"
 import Header from "$components/Layout/Header.astro"
 import { checkLocale } from "$utils/i18n"
+import "$styles/tailwind.css"
 import "$styles/fonts.css"
-import "@fontsource/eb-garamond/700.css"
+// Supports weights 400-800
+import "@fontsource-variable/eb-garamond/wght.css"
+import "@fontsource-variable/eb-garamond/wght-italic.css"
 
 type Props = {
 	title: string

@@ -1,10 +1,32 @@
 import he from "he"
-import { getEntry } from "astro:content"
 import type { UserGrimoire } from "./types"
-import { checkLocale, type SupportedLocale } from "./i18n"
+import { checkLocale } from "./i18n"
 
 const host = "https://www.bungie.net/d1/Platform/Destiny/"
 const d2host = "https://www.bungie.net/Platform"
+
+export class BungieApiError extends Error {
+	code: number
+	status: string
+	throttleSeconds: number
+	messageData: Record<string, unknown>
+
+	constructor(data: {
+		ErrorCode?: number
+		ErrorStatus?: string
+		Message?: string
+		ThrottleSeconds?: number
+		MessageData?: Record<string, unknown>
+	}) {
+		super(data.Message || data.ErrorStatus || "Unknown Bungie API error")
+		this.name = "BungieApiError"
+		this.code = data.ErrorCode ?? 0
+		this.status = data.ErrorStatus ?? "Unknown"
+		this.throttleSeconds = data.ThrottleSeconds ?? 0
+		this.messageData = data.MessageData ?? {}
+	}
+}
+
 export async function bungieQuery(path: string, d2 = false) {
 	try {
 		const response = await fetch((d2 ? d2host : host) + path, {
@@ -13,6 +35,7 @@ export async function bungieQuery(path: string, d2 = false) {
 		const data = await response.json()
 		if (import.meta.env.PROD)
 			console.log("bungieQuery path:", path, "result:", data)
+		if (data.ErrorCode !== 1) throw new BungieApiError(data)
 		return data.Response
 	} catch (error) {
 		console.error("Error in bungieQuery:", error)
@@ -93,30 +116,6 @@ export const validateCookie = (cookie: any) =>
 		? (cookie as Cookie)
 		: null
 
-const themesOrder = [
-	"Allies",
-	"Places",
-	"Enemies",
-	"Guardian",
-	"Inventory",
-	"Activities",
-]
-
-export const getThemes = async (locale: SupportedLocale) =>
-	(await getEntry("grimoire", locale)).data.themeCollection.sort(
-		(a, b) =>
-			themesOrder.indexOf(a.themeId) - themesOrder.indexOf(b.themeId),
-	)
-
-export const getCards = async (locale: SupportedLocale) =>
-	(await getEntry("cards", locale)).data
-
-/**
- * Only english (default) and french guides for now
- */
-export const getGuides = async (locale: SupportedLocale) =>
-	(await getEntry("guides", locale == "fr" ? "fr" : "en")).data
-
 // returns {platform?: string, username?: string, rest?: string} when given "/{psn/xbox}/{username}/rest" or "/rest"
 export const deconstructUrl = (url: string) => {
 	const parts = url.split("/")
@@ -145,10 +144,15 @@ export const parseParamsWithUser = (p: Record<string, string | undefined>) => {
  * Regex to match capital words and style them with small caps.
  * Decoding HTML entities with he library to detect accents in the Grimoire, like in SAVATHÛN (SAVATH&#219;N)
  */
+const abbrRegex =
+	/(?<!<abbr>)(?<![\p{L}\p{N}])[\p{Lu}\p{N}][\p{Lu}\p{N}.'’-]*(?:[ \t\u00a0]+[\p{Lu}\p{N}][\p{Lu}\p{N}.'’-]*)*(?![\p{L}\p{N}])/gu
+
 export const addAbbrs = (str: string) =>
 	he
 		.decode(str)
-		.replace(
-			/\b(?<!<abbr>)(?=[A-ZÀŸŸÉÈÊËÙÛÜÇ]+)[A-Z0-9-ÀŸŸÉÈÊËÙÛÜÇ'.\s]{3,}(?:\.[A-Z0-9-ÀŸŸÉÈÊËÙÛÜÇ'.]+)*\b/g,
-			"<abbr>$&</abbr>",
+		.replace(abbrRegex, (match) =>
+			/\p{Lu}/u.test(match) &&
+			match.replace(/[^\p{L}\p{N}]/gu, "").length >= 3
+				? `<abbr>${match}</abbr>`
+				: match,
 		)
