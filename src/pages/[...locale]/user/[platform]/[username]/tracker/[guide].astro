@@ -9,27 +9,27 @@ import {
 	getUserGrimoire,
 	parseParamsWithUser,
 } from "$utils/helpers"
-import { useTranslations } from "$utils/i18n"
 
 const { locale, platform, username, guideSlug } = parseParamsWithUser(
 	Astro.params,
 )
+if (!locale) return new Response("Not found", { status: 404 })
 
-if (!guideSlug && platform != "psn" && platform != "xbox")
-	return Astro.redirect("/404")
+if (!guideSlug || (platform != "psn" && platform != "xbox"))
+	return new Response("Not found", { status: 404 })
 const membershipType = platform == "xbox" ? 1 : 2
 const membershipId = await getMembershipId(membershipType, username!)
-if (!membershipId) return Astro.redirect("/404")
+if (!membershipId) return new Response("Not found", { status: 404 })
 
 const userGrimoire = await getUserGrimoire(membershipType, membershipId)
-if (!userGrimoire) return Astro.redirect("/404")
+if (!userGrimoire) return new Response("Not found", { status: 404 })
 
-const t = useTranslations(locale)
 const guide = (await getGuides(locale)).types.find((g) => g.slug == guideSlug)
+if (!guide) return new Response("Not found", { status: 404 })
 ---
 
 <Layout
-	title={`${guide?.name} · ${t("Tracker")} · Destiny · ${username}`}
+	title={`${guide?.name} · Destiny 1 Tracker · ${username} · The Grimoire Archive`}
 	description=""
 	onGrimoirePage
 >

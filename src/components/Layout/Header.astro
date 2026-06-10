@@ -1,68 +1,77 @@
 ---
 import { deconstructUrl } from "$utils/helpers"
-import { checkLocale, localeParams } from "$utils/i18n"
-import { useTranslations } from "$utils/i18n"
-import { getRelativeLocaleUrl } from "astro:i18n"
+import {
+	getLocaleFromPathname,
+	getLocalizedPath,
+	localeNames,
+	localeParams,
+	stripLocaleFromPathname,
+	useTranslations,
+} from "$utils/i18n"
 import HeaderLink from "$components/Layout/HeaderLink.astro"
 
-const locale = checkLocale(Astro.currentLocale)
+const locale = getLocaleFromPathname(Astro.url.pathname) || "en"
 const t = useTranslations(locale)
-const pathname =
-	locale == "en"
-		? Astro.url.pathname
-		: Astro.url.pathname.replace(`/${locale}`, "")
-const { platform, username } = deconstructUrl(pathname)
+const pathname = stripLocaleFromPathname(Astro.url.pathname)
+const { platform, username, rest } = deconstructUrl(pathname)
 const basePath = platform ? `/user/${platform}/${username}` : ``
+const sectionPath = platform ? rest || "/" : pathname
+const activeSection = sectionPath.startsWith("/tracker")
+	? "tracker"
+	: sectionPath === "/all" ||
+		  /^\d+$/.test(sectionPath.slice(1)) ||
+		  (platform && sectionPath === "/")
+		? "grimoire"
+		: undefined
 ---
 
 <header class="bg-slate-200 px-4 sm:px-8">
 	<div class="m-auto flex max-w-6xl flex-wrap items-center justify-between">
 		<div>
 			<a
-				href={getRelativeLocaleUrl(locale, "/")}
+				href={getLocalizedPath(locale, "/")}
 				class="py-2 pr-4 text-slate-500 transition hover:text-slate-400"
 			>
 				<span
-					class="hidden font-accent text-xl uppercase leading-none tracking-[0.08em] sm:inline"
+					class="hidden font-accent text-xl leading-none tracking-[0.08em] uppercase sm:inline"
 				>
-					Guardian Compendium
+					The Grimoire Archive
 				</span>
 				<span class="text-sm font-medium sm:hidden">{t("Home")}</span>
 			</a>
 		</div>
 		<div
-			class="group flex items-center py-4 text-sm font-medium text-slate-500 sm:gap-4"
+			class="group flex items-center py-4 text-sm font-medium text-slate-500"
 		>
 			<HeaderLink
-				href={getRelativeLocaleUrl(
-					locale,
-					platform ? basePath : "/all"
-				)}
+				href={getLocalizedPath(locale, platform ? basePath : "/all")}
+				isActive={activeSection === "grimoire"}
 			>
 				{t("Grimoire")}
 			</HeaderLink>
 			<HeaderLink
-				href={getRelativeLocaleUrl(locale, `${basePath}/tracker`)}
+				href={getLocalizedPath(locale, `${basePath}/tracker`)}
+				isActive={activeSection === "tracker"}
 			>
 				{t("Tracker")}
 			</HeaderLink>
 			{
-				/* <HeaderLink href={getRelativeLocaleUrl(locale, "/books")}>
+				/* <HeaderLink href={getLocalizedPath(locale, "/books")}>
 				{t("Books")}<sup>D2</sup>
 			</HeaderLink> */
 			}
 			<form
-				action={getRelativeLocaleUrl(locale, "/search")}
+				action={getLocalizedPath(locale, "/search")}
 				method="get"
 				class="pl-[10px]"
 			>
 				<label
-					class="flex cursor-pointer items-center overflow-hidden rounded-md ring-slate-300 transition has-[:focus]:ring-2"
+					class="flex cursor-pointer items-center overflow-hidden rounded-lg ring-slate-300 transition has-[:focus]:bg-slate-50 has-[:focus]:ring"
 				>
 					<input
 						type="search"
 						name="term"
-						class="peer w-0 border-y-0 bg-slate-200 py-2 font-sans text-sm font-medium text-slate-600 placeholder:text-slate-400 focus:w-[138px] focus:pl-3 focus:outline-none focus:transition-all"
+						class="peer w-0 border-y-0 bg-slate-50 py-2 font-sans text-sm font-medium text-slate-600 placeholder:text-slate-400 focus:w-[138px] focus:pl-3 focus:transition-all focus:outline-none"
 						placeholder={t("Search")}
 					/>
 					<svg
@@ -80,19 +89,17 @@ const basePath = platform ? `/user/${platform}/${username}` : ``
 			</form>
 			<select
 				id="header-language-switcher"
-				class="ml-2 mt-[1px] rounded-md bg-transparent py-1 text-xs uppercase ring-slate-300 transition hover:bg-slate-100 hover:ring-1"
+				class="rounded-lg bg-transparent py-2 pl-3 ring-slate-300 transition hover:bg-slate-100 hover:ring-1"
 			>
 				{
 					localeParams.map((localePath) => {
-						const curL = checkLocale(localePath)
 						return (
 							<option
-								value={`${localePath && localePath != "en" ? localePath : ""}${pathname}`}
-								selected={curL == locale}
+								value={getLocalizedPath(localePath, pathname)}
+								data-locale={localePath}
+								selected={localePath == locale}
 							>
-								{localePath == "pt-br"
-									? "pt"
-									: localePath || "en"}
+								{localeNames[localePath]}
 							</option>
 						)
 					})
@@ -109,9 +116,8 @@ const basePath = platform ? `/user/${platform}/${username}` : ``
 		.getElementById("header-language-switcher")
 		?.addEventListener("change", (t) => {
 			if (!(t.currentTarget instanceof HTMLSelectElement)) return
-			Cookies.set("userLocale", t.currentTarget.value.split("/")[0], {
-				path: "/",
-			})
+			const locale = t.currentTarget.selectedOptions[0]?.dataset.locale
+			if (locale) Cookies.set("userLocale", locale, { path: "/" })
 			window.location.pathname = t.currentTarget.value
 		})
 </script>

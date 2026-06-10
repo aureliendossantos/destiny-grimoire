@@ -1,0 +1,104 @@
+---
+import {
+	getLocaleFromPathname,
+	getLocalizedPath,
+	htmlLang,
+	localeParams,
+	type SupportedLocale,
+	stripLocaleFromPathname,
+} from "$utils/i18n"
+import {
+	getMetaDescription,
+	ogImageHeight,
+	ogImageWidth,
+	siteName,
+} from "$utils/seo"
+
+type Props = {
+	title: string
+	description: string
+	canonical?: string | URL
+	imageAlt?: string
+	ogType?: string
+}
+
+const twitterCard = "summary_large_image"
+
+const ogLocales: Record<SupportedLocale, string> = {
+	de: "de_DE",
+	en: "en_US",
+	es: "es_ES",
+	fr: "fr_FR",
+	it: "it_IT",
+	ja: "ja_JP",
+	"pt-br": "pt_BR",
+}
+
+const {
+	title,
+	description,
+	canonical,
+	imageAlt = `${title} - ${siteName}`,
+	ogType = "website",
+} = Astro.props
+const pathname = Astro.url.pathname
+const locale = getLocaleFromPathname(pathname) || "en"
+const pathnameWithoutLocale = stripLocaleFromPathname(pathname)
+const urlBase = Astro.site || Astro.url
+const canonicalUrl = canonical
+	? new URL(canonical, urlBase)
+	: new URL(getLocalizedPath(locale, pathnameWithoutLocale), urlBase)
+const metaDescription = getMetaDescription(description)
+const ogImagePath =
+	pathnameWithoutLocale === "/"
+		? `/${locale}/index`
+		: `/${locale}${pathnameWithoutLocale}`
+const ogImageUrl = new URL(`/og${ogImagePath}.png`, urlBase)
+ogImageUrl.searchParams.set("title", title)
+ogImageUrl.searchParams.set("description", metaDescription)
+---
+
+<title>{title}</title>
+<meta name="description" content={metaDescription} />
+<link rel="canonical" href={canonicalUrl} />
+{
+	localeParams.map((alternateLocale) => (
+		<link
+			rel="alternate"
+			hreflang={htmlLang(alternateLocale)}
+			href={
+				new URL(
+					getLocalizedPath(alternateLocale, pathnameWithoutLocale),
+					urlBase,
+				)
+			}
+		/>
+	))
+}
+<link rel="alternate" hreflang="x-default" href={new URL("/", urlBase)} />
+
+<meta property="og:title" content={title} />
+<meta property="og:description" content={metaDescription} />
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:width" content={String(ogImageWidth)} />
+<meta property="og:image:height" content={String(ogImageHeight)} />
+<meta property="og:image:alt" content={imageAlt} />
+<meta property="og:locale" content={ogLocales[locale]} />
+{
+	localeParams
+		.filter((alternateLocale) => alternateLocale !== locale)
+		.map((alternateLocale) => (
+			<meta
+				property="og:locale:alternate"
+				content={ogLocales[alternateLocale]}
+			/>
+		))
+}
+
+<meta name="twitter:card" content={twitterCard} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={metaDescription} />
+<meta name="twitter:image" content={ogImageUrl} />

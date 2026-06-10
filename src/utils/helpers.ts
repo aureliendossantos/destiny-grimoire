@@ -1,6 +1,6 @@
 import he from "he"
 import type { UserGrimoire } from "./types"
-import { checkLocale } from "./i18n"
+import { getRouteLocale } from "./i18n"
 
 const host = "https://www.bungie.net/d1/Platform/Destiny/"
 const d2host = "https://www.bungie.net/Platform"
@@ -132,7 +132,7 @@ export const deconstructUrl = (url: string) => {
 }
 
 export const parseParamsWithUser = (p: Record<string, string | undefined>) => {
-	const locale = checkLocale(p.locale)
+	const locale = getRouteLocale(p.locale)
 	const platform = p.platform as "psn" | "xbox"
 	const username = p.username as string
 	const cardId = p.card

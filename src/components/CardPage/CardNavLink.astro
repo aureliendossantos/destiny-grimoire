@@ -1,8 +1,7 @@
 ---
 import { membershipTypeToPath } from "$utils/helpers"
-import { checkLocale } from "$utils/i18n"
+import { getLocaleFromPathname, getLocalizedPath } from "$utils/i18n"
 import type { CollectionEntry } from "astro:content"
-import { getRelativeLocaleUrl } from "astro:i18n"
 
 interface Props {
 	card: CollectionEntry<"cards">["data"][string]
@@ -15,11 +14,11 @@ interface Props {
 }
 
 const { card, themeTitle, next, user } = Astro.props
-const locale = checkLocale(Astro.currentLocale)
+const locale = getLocaleFromPathname(Astro.url.pathname) || "en"
 ---
 
 <a
-	href={getRelativeLocaleUrl(
+	href={getLocalizedPath(
 		locale,
 		user
 			? `/user/${membershipTypeToPath(user.membershipType)}/${user.name}/${card.cardId}`

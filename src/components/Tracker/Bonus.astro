@@ -1,7 +1,6 @@
 ---
 import { cardImageStyle, membershipTypeToPath } from "$utils/helpers"
-import { type SupportedLocale } from "$utils/i18n"
-import { getRelativeLocaleUrl } from "astro:i18n"
+import { getLocalizedPath, type SupportedLocale } from "$utils/i18n"
 
 interface Props {
 	b: any
@@ -16,7 +15,7 @@ const { b, name, locale, user } = Astro.props
 ---
 
 <a
-	href={getRelativeLocaleUrl(
+	href={getLocalizedPath(
 		locale,
 		user
 			? `/user/${membershipTypeToPath(user.membershipType)}/${user.name}/${b.cardId}`
@@ -42,12 +41,12 @@ const { b, name, locale, user } = Astro.props
 	</div>
 	<div class="grow">
 		<h3 class="font-serif leading-tight" set:html={name} />
-		<div class="text-xs uppercase text-slate-500">
+		<div class="text-xs text-slate-500 uppercase">
 			{b.bonusName.replace(" Bonus", "")}
 		</div>
 		{
 			b.value < b.threshold && (
-				<div class="text-xs uppercase leading-normal text-slate-500">
+				<div class="text-xs leading-normal text-slate-500 uppercase">
 					{b.value}/{b.threshold} {b.statName}
 				</div>
 			)

@@ -13,17 +13,19 @@ import Bonus from "$components/Tracker/Bonus.astro"
 import SubHeader from "$components/Layout/SubHeader.astro"
 
 const { locale, platform, username } = parseParamsWithUser(Astro.params)
+if (!locale) return new Response("Not found", { status: 404 })
 
 const t = useTranslations(locale)
 const cards = Object.values(await getCards(locale))
 
-if (platform != "psn" && platform != "xbox") return Astro.redirect("/404")
+if (platform != "psn" && platform != "xbox")
+	return new Response("Not found", { status: 404 })
 const membershipType = platform == "xbox" ? 1 : 2
 const membershipId = await getMembershipId(membershipType, username)
-if (!membershipId) return Astro.redirect("/404")
+if (!membershipId) return new Response("Not found", { status: 404 })
 
 const userGrimoire = await getUserGrimoire(membershipType, membershipId)
-if (!userGrimoire) return Astro.redirect("/404")
+if (!userGrimoire) return new Response("Not found", { status: 404 })
 
 const userBonuses = userGrimoire.bonuses
 
@@ -34,7 +36,7 @@ const inProgressBonuses = userBonuses.filter(
 ---
 
 <Layout
-	title={`${t("Bonus tracker")} · Destiny Grimoire · ${username}`}
+	title={`${t("Bonus tracker")} · Destiny Grimoire · ${username} · The Grimoire Archive`}
 	description={`${activeBonuses} bonus actifs, ${inProgressBonuses} en progression`}
 	userInPath={{ membershipType, membershipId, name: username }}
 	onGrimoireSection

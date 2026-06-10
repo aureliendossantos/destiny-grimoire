@@ -15,23 +15,24 @@ import UserIconFallback from "$components/User/UserIconFallback.astro"
 import UserIcon from "$components/User/UserIcon.astro"
 
 const { locale, platform, username } = parseParamsWithUser(Astro.params)
+if (!locale) return new Response("Not found", { status: 404 })
 
 const t = useTranslations(locale)
 const themes = await getThemes(locale)
 const cards = await getCards(locale)
 
-if (platform != "psn" && platform != "xbox" && !username)
-	return Astro.redirect("/404")
+if ((platform != "psn" && platform != "xbox") || !username)
+	return new Response("Not found", { status: 404 })
 const membershipType = platform == "xbox" ? 1 : 2
 const membershipId = await getMembershipId(membershipType, username)
-if (!membershipId) return Astro.redirect("/404")
+if (!membershipId) return new Response("Not found", { status: 404 })
 
 const userGrimoire = await getUserGrimoire(membershipType, membershipId)
-if (!userGrimoire) return Astro.redirect("/404")
+if (!userGrimoire) return new Response("Not found", { status: 404 })
 ---
 
 <Layout
-	title={`${t("grimoire-cards")} · Destiny · ${username}`}
+	title={`${username} · Destiny Grimoire Cards · The Grimoire Archive`}
 	description={`${userGrimoire.cardCollection.length} ${t("cards")} // ${userGrimoire.score} ${t("points")}`}
 	onGrimoirePage
 	userInPath={{
@@ -51,8 +52,8 @@ if (!userGrimoire) return Astro.redirect("/404")
 			{t("points")}
 		</div>
 	</SubHeader>
-	<div class="ml-10 mr-2 sm:mr-4">
-		<div class="m-auto mb-12 mt-10 max-w-6xl">
+	<div class="mr-2 ml-10 sm:mr-4">
+		<div class="m-auto mt-10 mb-12 max-w-6xl">
 			<Grimoire
 				{themes}
 				{cards}

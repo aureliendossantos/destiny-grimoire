@@ -2,12 +2,12 @@
 import TrackerPage from "$components/Tracker/TrackerPage.astro"
 import Layout from "$layouts/Layout.astro"
 import { getGuides } from "$utils/content"
-import { checkLocale, localeParams, useTranslations } from "$utils/i18n"
+import { checkLocale, localizedRouteParams } from "$utils/i18n"
 
 export async function getStaticPaths() {
 	return (
 		await Promise.all(
-			localeParams.flatMap(async (localePath) => {
+			localizedRouteParams.flatMap(async (localePath) => {
 				const locale = checkLocale(localePath)
 				const guides = await getGuides(locale)
 				return guides.types.map((guide) => ({
@@ -15,18 +15,17 @@ export async function getStaticPaths() {
 					props: {
 						guide,
 						locale,
-						t: useTranslations(locale),
 					},
 				}))
 			}),
 		)
 	).flat()
 }
-const { guide, locale, t } = Astro.props
+const { guide, locale } = Astro.props
 ---
 
 <Layout
-	title={`${guide.name} · ${t("Tracker")} · Destiny`}
+	title={`${guide.name} · Destiny 1 Tracker · The Grimoire Archive`}
 	description=""
 	onGrimoirePage
 >

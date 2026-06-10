@@ -1,15 +1,25 @@
 ---
 import Layout from "$layouts/Layout.astro"
 import TrackerIndex from "$components/Tracker/TrackerIndex.astro"
-import { localePaths } from "$utils/i18n"
+import { checkLocale, localizedRouteParams } from "$utils/i18n"
 
 export async function getStaticPaths() {
-	return localePaths
+	return localizedRouteParams.map((localePath) => {
+		const locale = checkLocale(localePath)
+		return {
+			params: { locale: localePath },
+			props: { locale },
+		}
+	})
 }
-const { t, locale } = Astro.props
+const { locale } = Astro.props
 ---
 
-<Layout title={`${t("Tracker")} · Destiny`} description="" onGrimoirePage>
+<Layout
+	title="Destiny 1 Tracker · The Grimoire Archive"
+	description=""
+	onGrimoirePage
+>
 	<TrackerIndex {locale} />
 </Layout>
 <div id="locale" data-locale={locale}></div>

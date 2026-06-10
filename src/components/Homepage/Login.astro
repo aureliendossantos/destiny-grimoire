@@ -3,8 +3,11 @@ import UserEmblem from "$components/User/UserEmblem.astro"
 import playstation from "$images/icons/playstation.svg?raw"
 import xbox from "$images/icons/xbox.svg?raw"
 import { validateCookie } from "$utils/helpers"
-import { useTranslations, type SupportedLocale } from "$utils/i18n"
-import { getRelativeLocaleUrl } from "astro:i18n"
+import {
+	getLocalizedPath,
+	useTranslations,
+	type SupportedLocale,
+} from "$utils/i18n"
 
 interface Props {
 	locale: SupportedLocale
@@ -30,20 +33,20 @@ if (tryCookie && !cookie) {
 				username={cookie.username}
 			/>
 			<a
-				href={getRelativeLocaleUrl(locale, "/logout")}
-				class="text-center text-xs font-medium leading-[28px] text-slate-400 transition hover:text-slate-500"
+				href={getLocalizedPath(locale, "/logout")}
+				class="text-center text-xs leading-[28px] font-medium text-slate-400 transition hover:text-slate-500"
 			>
 				{t("switch-user")}
 			</a>
 		</>
 	) : (
 		<form
-			action={getRelativeLocaleUrl(locale, "/login")}
+			action={getLocalizedPath(locale, "/login")}
 			method="post"
 			class="flex flex-col gap-2"
 		>
 			<div class="flex justify-center gap-1">
-				<label class="cursor-pointer rounded-md border border-r-0 border-slate-50 px-2 py-1 text-center text-slate-400 transition hover:bg-slate-200 hover:text-slate-500 group-hover:border-slate-400">
+				<label class="cursor-pointer rounded-md border border-r-0 border-slate-50 px-2 py-1 text-center text-slate-400 transition group-hover:border-slate-400 hover:bg-slate-200 hover:text-slate-500">
 					<input
 						type="checkbox"
 						name="platform"
@@ -64,7 +67,7 @@ if (tryCookie && !cookie) {
 					placeholder={t("username")}
 					autofocus
 					required
-					class="w-[16ch] rounded-md bg-slate-100 px-4 py-2 text-base font-medium text-slate-500 shadow-inner ring-slate-400 transition focus:outline-none focus:ring-2"
+					class="w-[16ch] rounded-md bg-slate-100 px-4 py-2 text-base font-medium text-slate-500 shadow-inner ring-slate-400 transition focus:ring-2 focus:outline-none"
 				/>
 			</div>
 			<input

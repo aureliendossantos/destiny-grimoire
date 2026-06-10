@@ -1,13 +1,21 @@
 ---
 import type { HTMLAttributes } from "astro/types"
 
-interface Props extends Omit<HTMLAttributes<"a">, "class"> {}
+interface Props extends Omit<HTMLAttributes<"a">, "class"> {
+	isActive?: boolean
+}
 
-const { ...attributes } = Astro.props
+const { isActive, ...attributes } = Astro.props
 ---
 
 <a
-	class="px-4 py-2 transition hover:text-slate-400 group-has-[input[type='search']:focus]:hidden"
+	class:list={[
+		"rounded-lg px-4 py-2 transition group-has-[input[type='search']:focus]:hidden",
+		isActive
+			? "bg-slate-100 text-slate-600 ring ring-slate-300 hover:text-slate-500"
+			: "hover:text-slate-400",
+	]}
+	aria-current={isActive ? "page" : undefined}
 	{...attributes}
 >
 	<slot />

@@ -1,7 +1,10 @@
 ---
 import SubHeader from "$components/Layout/SubHeader.astro"
-import { getRelativeLocaleUrl } from "astro:i18n"
-import { useTranslations, type SupportedLocale } from "$utils/i18n"
+import {
+	getLocalizedPath,
+	useTranslations,
+	type SupportedLocale,
+} from "$utils/i18n"
 import { getGuides } from "$utils/content"
 import { addAbbrs } from "$utils/helpers"
 
@@ -26,7 +29,7 @@ const guides = await getGuides(locale)
 				<a
 					id="tracker-card"
 					class="flex flex-col justify-end rounded-lg border border-slate-300 bg-slate-100 p-4 font-serif shadow-sm transition duration-300 ease-out hover:scale-[1.03] hover:shadow-md"
-					href={getRelativeLocaleUrl(
+					href={getLocalizedPath(
 						locale,
 						user
 							? `/user/${user.platform}/${user.name}/tracker/${guide.slug}`
@@ -52,7 +55,7 @@ const guides = await getGuides(locale)
 				<a
 					id="tracker-card"
 					class="flex flex-col justify-end rounded-lg border border-slate-300 bg-slate-100 p-4 font-serif shadow-sm transition duration-300 ease-out hover:scale-[1.03] hover:shadow-md"
-					href={getRelativeLocaleUrl(
+					href={getLocalizedPath(
 						locale,
 						`/user/${user.platform}/${user.name}/tracker/bonuses`,
 					)}

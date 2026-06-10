@@ -1,24 +1,15 @@
 ---
-export const prerender = false
-
 import Layout from "$layouts/Layout.astro"
 import Login from "$components/Homepage/Login.astro"
 import SeeAllButton from "$components/Homepage/SeeAllButton.astro"
-import { checkLocale, useTranslations } from "$utils/i18n"
+import { localePaths, useTranslations } from "$utils/i18n"
 import power from "$images/icons/power.svg"
 
-const userLocale = Astro.cookies.get("userLocale")?.value
-console.log("userLocale", userLocale)
-if (userLocale && userLocale != Astro.currentLocale) {
-	console.log("redirecting", Astro.currentLocale, "to", userLocale)
-	return Astro.redirect(`/${userLocale}`)
-}
-if (!userLocale) {
-	const browserLocale = Astro.preferredLocale
-	Astro.cookies.set("userLocale", browserLocale || "en", { path: "/" })
+export async function getStaticPaths() {
+	return localePaths
 }
 
-const locale = checkLocale(Astro.currentLocale)
+const { locale } = Astro.props
 const t = useTranslations(locale)
 
 const bgImage = `url(${power.src})`
@@ -36,14 +27,14 @@ const bgImage = `url(${power.src})`
 	}
 </style>
 
-<Layout title="Guardian Compendium · Destiny Lore" description="">
+<Layout title="The Grimoire Archive · Destiny Grimoire Cards" description="">
 	<div class="mx-4">
 		<div
 			class="m-auto my-12 grid max-w-3xl grid-cols-1 gap-12 md:grid-cols-2"
 		>
 			<div class="m-auto max-w-md">
 				<h2
-					class="font-serif text-lg italic text-slate-500"
+					class="font-serif text-lg text-slate-500 italic"
 					set:html={t("What are Grimoire Cards")}
 				/>
 				<p class="font-serif text-lg" set:html={t("description")} />
@@ -64,24 +55,23 @@ const bgImage = `url(${power.src})`
 				</div>
 			</div>
 			<div class="m-auto max-w-md">
-				<h2 class="font-serif text-lg italic text-slate-500">
+				<h2 class="font-serif text-lg text-slate-500 italic">
 					Website Features
 				</h2>
 				<ul class="list-inside pl-4 font-serif text-lg text-slate-800">
 					<li class="-indent-8">
-						<em class="font-smcp not-italic text-slate-500"
+						<em class="font-smcp text-slate-500 not-italic"
 							>Discover your own cards:</em
-						> Avoid spoilers and reveal the lore as you unlock cards
-						in-game.
+						> Avoid spoilers and reveal the lore as you unlock cards in-game.
 					</li>
 					<li class="-indent-8">
-						<em class="font-smcp not-italic text-slate-500"
+						<em class="font-smcp text-slate-500 not-italic"
 							>Track your progress:</em
 						> Keep tabs on your unlocked cards and hidden bonuses, and
 						locate secret items with short video guides.
 					</li>
 					<li class="-indent-8">
-						<em class="font-smcp not-italic text-slate-500"
+						<em class="font-smcp text-slate-500 not-italic"
 							>Quick search:</em
 						> Instantly view all the snippets where your keywords appear.
 					</li>
@@ -90,14 +80,14 @@ const bgImage = `url(${power.src})`
 			<div class="m-auto max-w-md md:pt-7">
 				<ul class="list-inside pl-4 font-serif text-lg text-slate-800">
 					<li class="-indent-8">
-						<em class="font-smcp not-italic text-slate-500">
+						<em class="font-smcp text-slate-500 not-italic">
 							Multi-language support:
 						</em>
-						<i>Guardian Compendium</i> is the only website that lets
-						you experience Destiny's expertly crafted translations in
-						all supported languages: English, French, German, Italian,
-						Japanese, Russian, Spanish, and Brazilian Portuguese. Note
-						that the <abbr>UI</abbr> is not fully translated;
+						<i>The Grimoire Archive</i> is the only website that lets you
+						experience Destiny's expertly crafted translations in all
+						supported languages: English, French, German, Italian, Japanese,
+						Russian, Spanish, and Brazilian Portuguese. Note that the
+						<abbr>UI</abbr> is not fully translated;
 						<a
 							class="text-slate-500 underline decoration-1 underline-offset-2"
 							href="https://github.com/aureliendossantos/destiny-grimoire/blob/master/src/utils/i18n.ts"

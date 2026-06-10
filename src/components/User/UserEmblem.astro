@@ -4,8 +4,11 @@ import {
 	getUserSummary,
 	membershipTypeToPath,
 } from "$utils/helpers"
-import { useTranslations, type SupportedLocale } from "$utils/i18n"
-import { getRelativeLocaleUrl } from "astro:i18n"
+import {
+	getLocalizedPath,
+	useTranslations,
+	type SupportedLocale,
+} from "$utils/i18n"
 
 interface Props {
 	locale: SupportedLocale
@@ -22,14 +25,14 @@ const [summary, userGrimoire] = await Promise.all([
 	getUserGrimoire(membershipType, membershipId),
 ])
 const bestCharacter = summary.characters.sort(
-	(a: any, b: any) => b.characterBase.powerLevel - a.characterBase.powerLevel
+	(a: any, b: any) => b.characterBase.powerLevel - a.characterBase.powerLevel,
 )[0]
 ---
 
 <a
-	href={getRelativeLocaleUrl(
+	href={getLocalizedPath(
 		locale,
-		`/user/${membershipTypeToPath(membershipType)}/${username}`
+		`/user/${membershipTypeToPath(membershipType)}/${username}`,
 	)}
 	class="relative flex shadow-sm transition duration-300 ease-out hover:scale-105 hover:shadow-md"
 	style={{ height: "48px" }}
@@ -45,7 +48,7 @@ const bestCharacter = summary.characters.sort(
 		src={`https://www.bungie.net${bestCharacter.backgroundPath}`}
 	/>
 	<div
-		class="absolute left-12 top-0 flex h-full flex-col justify-center px-2 text-base font-semibold leading-tight text-slate-50 drop-shadow"
+		class="absolute top-0 left-12 flex h-full flex-col justify-center px-2 text-base leading-tight font-semibold text-slate-50 drop-shadow"
 	>
 		<div>{username}</div>
 		<div class="pb-[1px] text-xs font-semibold">

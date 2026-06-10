@@ -1,6 +1,6 @@
 export type SupportedLocale = "de" | "en" | "es" | "fr" | "it" | "ja" | "pt-br"
 
-const supportedLocales: SupportedLocale[] = [
+export const supportedLocales: SupportedLocale[] = [
 	"de",
 	"en",
 	"es",
@@ -11,7 +11,16 @@ const supportedLocales: SupportedLocale[] = [
 ]
 export const defaultLanguage: SupportedLocale = "en"
 
-export const localeParams: (SupportedLocale | undefined)[] = [
+export const localeParams: SupportedLocale[] = [
+	"en",
+	"fr",
+	"pt-br",
+	"de",
+	"es",
+	"it",
+	"ja",
+]
+export const localizedRouteParams: (SupportedLocale | undefined)[] = [
 	undefined,
 	"fr",
 	"pt-br",
@@ -19,7 +28,9 @@ export const localeParams: (SupportedLocale | undefined)[] = [
 	"es",
 	"it",
 	"ja",
-] // undefined is root, the default language
+]
+export const prefixedRouteParams: SupportedLocale[] =
+	localizedRouteParams.filter((locale): locale is SupportedLocale => !!locale)
 export const localeNames = {
 	en: "English",
 	fr: "Français",
@@ -30,22 +41,58 @@ export const localeNames = {
 	ja: "日本語",
 }
 
-export const localePaths = localeParams.map((localePath) => {
+export const getLocalizedRouteParams = (locale?: SupportedLocale) => ({
+	locale,
+})
+
+export const localePaths = localizedRouteParams.map((localePath) => {
 	const locale = checkLocale(localePath)
 	return {
-		params: { locale: localePath },
+		params: getLocalizedRouteParams(localePath),
 		props: { t: useTranslations(locale), locale },
 	}
 })
 
 /**
- * Check if the given string is an available language in the website routes. Used to type the value returned by Astro.currentLocale.
+ * Check if the given string is an available language in the website routes.
  */
+export function isSupportedLocale(lang?: string): lang is SupportedLocale {
+	return supportedLocales.includes(lang as SupportedLocale)
+}
+
 export function checkLocale(lang?: string) {
-	lang ??= defaultLanguage
-	if (!supportedLocales.includes(lang as SupportedLocale))
-		lang = defaultLanguage
-	return lang as SupportedLocale
+	return isSupportedLocale(lang) ? lang : defaultLanguage
+}
+
+export function getRouteLocale(lang?: string) {
+	if (lang == undefined) return defaultLanguage
+	if (lang.includes("/")) return undefined
+	return isSupportedLocale(lang) ? lang : undefined
+}
+
+export function getLocaleFromPathname(pathname: string) {
+	return isSupportedLocale(pathname.split("/")[1])
+		? (pathname.split("/")[1] as SupportedLocale)
+		: undefined
+}
+
+export function stripLocaleFromPathname(pathname: string) {
+	const parts = pathname.split("/")
+	if (isSupportedLocale(parts[1])) {
+		const rest = `/${parts.slice(2).join("/")}`
+		return rest === "/" ? "/" : rest.replace(/\/$/, "")
+	}
+	return pathname || "/"
+}
+
+export function getLocalizedPath(locale: SupportedLocale, path = "/") {
+	const normalizedPath = path.startsWith("/") ? path : `/${path}`
+	if (locale === defaultLanguage) return normalizedPath
+	return normalizedPath === "/" ? `/${locale}` : `/${locale}${normalizedPath}`
+}
+
+export function htmlLang(locale: SupportedLocale) {
+	return locale == "pt-br" ? "pt-BR" : locale
 }
 
 export type Translator = ReturnType<typeof useTranslations>

@@ -1,13 +1,16 @@
 ---
 export const prerender = false
 
-import { getRelativeLocaleUrl } from "astro:i18n"
-import { checkLocale } from "$utils/i18n"
+import { getLocalizedPath, getRouteLocale } from "$utils/i18n"
+
+const locale = getRouteLocale(Astro.params.locale)
+if (!locale) return new Response("Not found", { status: 404 })
 
 const redirect = Astro.url.searchParams.get("redirect")
 
 Astro.cookies.delete("grimoireLogin", { path: "/" })
-return Astro.redirect(
-	getRelativeLocaleUrl(checkLocale(Astro.currentLocale), redirect || "/"),
-)
+const redirectPath = getLocalizedPath(locale, redirect || "/")
+if (!redirectPath.startsWith("/"))
+	throw new Error("Invalid logout redirect path")
+return Astro.redirect(redirectPath)
 ---

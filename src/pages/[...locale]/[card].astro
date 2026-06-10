@@ -2,18 +2,23 @@
 import Layout from "$layouts/Layout.astro"
 import CardPage from "$components/CardPage/CardPage.astro"
 import { getCards, getThemes } from "$utils/content"
-import { checkLocale, localeParams, useTranslations } from "$utils/i18n"
+import { checkLocale, localizedRouteParams, useTranslations } from "$utils/i18n"
 
 export async function getStaticPaths() {
 	return (
 		await Promise.all(
-			localeParams.flatMap(async (localePath) => {
+			localizedRouteParams.flatMap(async (localePath) => {
 				const locale = checkLocale(localePath)
 				const themes = await getThemes(locale)
 				const cards = await getCards(locale)
 				return Object.values(cards).map((card) => ({
 					params: { locale: localePath, card: String(card.cardId) },
-					props: { card, cards, themes, t: useTranslations(locale) },
+					props: {
+						card,
+						cards,
+						themes,
+						t: useTranslations(locale),
+					},
 				}))
 			}),
 		)
@@ -23,7 +28,7 @@ const { card, cards, themes, t } = Astro.props
 ---
 
 <Layout
-	title={`${card.cardName} · Destiny · ${t("grimoire-cards")}`}
+	title={`${card.cardName} · Destiny Grimoire Card · The Grimoire Archive`}
 	description={card.cardIntro || card.cardDescription || ""}
 	contentHeightScreen
 	onGrimoireSection

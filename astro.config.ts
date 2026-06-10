@@ -21,14 +21,7 @@ export default defineConfig({
 	i18n: {
 		defaultLocale: "en",
 		locales: ["de", "en", "es", "fr", "it", "ja", "pt-br"],
-		fallback: {
-			de: "en",
-			es: "en",
-			fr: "en",
-			it: "en",
-			ja: "en",
-			"pt-br": "en",
-		},
+		routing: "manual",
 	},
 	vite: {
 		plugins: [tailwindcss()],

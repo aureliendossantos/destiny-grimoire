@@ -7,16 +7,18 @@ import {
 	getUserGrimoire,
 	getUserSummary,
 } from "$utils/helpers"
+import { getRouteLocale } from "$utils/i18n"
 
-const { platform, username } = Astro.params
-if (platform != "psn" && platform != "xbox" && !username)
-	return Astro.redirect("/404")
+const { locale, platform, username } = Astro.params
+if (!getRouteLocale(locale)) return new Response("Not found", { status: 404 })
+if ((platform != "psn" && platform != "xbox") || !username)
+	return new Response("Not found", { status: 404 })
 const membershipType = platform == "xbox" ? 1 : 2
 const membershipId = await getMembershipId(membershipType, username!)
-if (!membershipId) return Astro.redirect("/404")
+if (!membershipId) return new Response("Not found", { status: 404 })
 
 const userGrimoire = await getUserGrimoire(membershipType, membershipId)
-if (!userGrimoire) return Astro.redirect("/404")
+if (!userGrimoire) return new Response("Not found", { status: 404 })
 
 const summary = await getUserSummary(membershipType, membershipId)
 const bestCharacter = summary.characters.sort(
@@ -32,7 +34,7 @@ const bestCharacter = summary.characters.sort(
 				src={`https://www.bungie.net${bestCharacter.backgroundPath}`}
 			/>
 			<div
-				class="absolute left-12 top-0 flex h-full flex-col justify-center px-2 text-base font-semibold leading-tight text-slate-50 drop-shadow"
+				class="absolute top-0 left-12 flex h-full flex-col justify-center px-2 text-base leading-tight font-semibold text-slate-50 drop-shadow"
 			>
 				<div>{username}</div>
 				<div class="pb-[1px] text-xs font-semibold">

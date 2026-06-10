@@ -1,20 +1,29 @@
 ---
 import Layout from "$layouts/Layout.astro"
 import Grimoire from "$components/Grimoire/Grimoire.astro"
-import { checkLocale, localeParams, useTranslations } from "$utils/i18n"
+import {
+	checkLocale,
+	getLocalizedPath,
+	localizedRouteParams,
+	useTranslations,
+} from "$utils/i18n"
 import { getCards, getThemes } from "$utils/content"
 import SubHeader from "$components/Layout/SubHeader.astro"
-import { getRelativeLocaleUrl } from "astro:i18n"
 
 export async function getStaticPaths() {
 	return await Promise.all(
-		localeParams.map(async (localePath) => {
+		localizedRouteParams.map(async (localePath) => {
 			const locale = checkLocale(localePath)
 			const themes = await getThemes(locale)
 			const cards = await getCards(locale)
 			return {
 				params: { locale: localePath },
-				props: { cards, themes, locale, t: useTranslations(locale) },
+				props: {
+					cards,
+					themes,
+					locale,
+					t: useTranslations(locale),
+				},
 			}
 		}),
 	)
@@ -24,7 +33,7 @@ const { cards, themes, locale, t } = Astro.props
 ---
 
 <Layout
-	title={`${t("grimoire-cards")} · Destiny`}
+	title="The Grimoire Archive · Destiny Grimoire Cards"
 	description=""
 	onGrimoirePage
 >
@@ -33,13 +42,13 @@ const { cards, themes, locale, t } = Astro.props
 			{`${t("global-data")} `}
 			<a
 				class="font-medium underline"
-				href={getRelativeLocaleUrl(locale, "/")}>{t("g-Login")}</a
+				href={getLocalizedPath(locale, "/")}>{t("g-Login")}</a
 			>
 			{t("g-to see yours")}
 		</Fragment>
 	</SubHeader>
-	<div class="ml-10 mr-2 sm:mr-4">
-		<div class="m-auto mb-12 mt-10 max-w-6xl">
+	<div class="mr-2 ml-10 sm:mr-4">
+		<div class="m-auto mt-10 mb-12 max-w-6xl">
 			<Grimoire {themes} {cards} />
 		</div>
 	</div>

@@ -5,10 +5,12 @@ import CardPreview from "$components/Grimoire/CardPreview.astro"
 import SubHeader from "$components/Layout/SubHeader.astro"
 import Layout from "$layouts/Layout.astro"
 import { getCards } from "$utils/content"
-import { checkLocale, useTranslations } from "$utils/i18n"
+import { getRouteLocale, useTranslations } from "$utils/i18n"
 import type { CollectionEntry } from "astro:content"
 
-const locale = checkLocale(Astro.currentLocale)
+const locale = getRouteLocale(Astro.params.locale)
+if (!locale) return new Response("Not found", { status: 404 })
+
 const t = useTranslations(locale)
 const cards = await getCards(locale)
 
@@ -82,7 +84,7 @@ const isolateSentenceWithTerm = (
 ---
 
 <Layout
-	title={`${term ? `“${term}” · ` : ""}${t("s-Search results")}`}
+	title={`${term ? `“${term}” · ` : ""}${t("s-Search results")} · The Grimoire Archive`}
 	description={t("s-Search results")}
 >
 	<SubHeader
@@ -92,8 +94,8 @@ const isolateSentenceWithTerm = (
 	/>
 	{
 		term && relevantCards.length > 0 ? (
-			<div class="ml-10 mr-2 sm:mr-4">
-				<div class="m-auto mb-12 mt-10 max-w-6xl">
+			<div class="mr-2 ml-10 sm:mr-4">
+				<div class="m-auto mt-10 mb-12 max-w-6xl">
 					<div class="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-4 md:grid-cols-5 lg:grid-cols-6">
 						{Array.isArray(relevantCards) &&
 							relevantCards.map((card) => {

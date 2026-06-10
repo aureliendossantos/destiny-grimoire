@@ -4,8 +4,12 @@ import {
 	membershipTypeToPath,
 	validateCookie,
 } from "$utils/helpers"
-import { useTranslations, type SupportedLocale } from "$utils/i18n"
-import { getRelativeLocaleUrl } from "astro:i18n"
+import {
+	getLocalizedPath,
+	stripLocaleFromPathname,
+	useTranslations,
+	type SupportedLocale,
+} from "$utils/i18n"
 import LinkButton from "$components/Layout/LinkButton.astro"
 import MiniLoginForm from "$components/User/MiniLoginForm.astro"
 import Username from "$components/User/Username.astro"
@@ -28,11 +32,7 @@ type Props = {
 const { locale, onGrimoireSection, onGrimoirePage, userInPath } = Astro.props
 const onGrimoire = onGrimoireSection || onGrimoirePage
 
-const hrefLocale = locale == "en" ? "" : `${locale}/`
-const pathname =
-	locale == "en"
-		? Astro.props.pathname
-		: Astro.props.pathname.replace(`/${locale}`, "")
+const pathname = stripLocaleFromPathname(Astro.props.pathname)
 const pathnameRest = deconstructUrl(pathname).rest
 const t = useTranslations(locale)
 
@@ -58,7 +58,10 @@ const isUserPage =
 							<div>
 								{t("data-from")}
 								<a
-									href={`/${hrefLocale}user/${membershipTypeToPath(userInPath.membershipType)}/${userInPath.name}`}
+									href={getLocalizedPath(
+										locale,
+										`/user/${membershipTypeToPath(userInPath.membershipType)}/${userInPath.name}`,
+									)}
 									class="-mx-[1px] -my-[1px] rounded-md px-1 py-[1px] ring-1 ring-slate-300 transition hover:bg-slate-100"
 								>
 									{t("collection-of")}
@@ -77,7 +80,9 @@ const isUserPage =
 						<>
 							<div>{t("global-data")}</div>
 							{onGrimoireSection && (
-								<LinkButton href={`/${hrefLocale}all`}>
+								<LinkButton
+									href={getLocalizedPath(locale, "/all")}
+								>
 									{t("back-to-grimoire")}
 								</LinkButton>
 							)}
@@ -92,8 +97,14 @@ const isUserPage =
 							<LinkButton
 								href={
 									isUserPage
-										? `/${hrefLocale}user/${membershipTypeToPath(userInPath.membershipType)}/${userInPath.name}`
-										: `/${hrefLocale}user/${membershipTypeToPath(cookie.membershipType)}/${cookie.username}${pathnameRest}`
+										? getLocalizedPath(
+												locale,
+												`/user/${membershipTypeToPath(userInPath.membershipType)}/${userInPath.name}`,
+											)
+										: getLocalizedPath(
+												locale,
+												`/user/${membershipTypeToPath(cookie.membershipType)}/${cookie.username}${pathnameRest}`,
+											)
 								}
 							>
 								<div>
@@ -109,7 +120,7 @@ const isUserPage =
 							</LinkButton>
 						)}
 						<LinkButton
-							href={getRelativeLocaleUrl(
+							href={getLocalizedPath(
 								locale,
 								`/logout?redirect=${pathnameRest}`,
 							)}
@@ -126,6 +137,12 @@ const isUserPage =
 					</>
 				))
 		}
-		{!onGrimoire && <LinkButton href="/">{t("Home")}</LinkButton>}
+		{
+			!onGrimoire && (
+				<LinkButton href={getLocalizedPath(locale, "/")}>
+					{t("Home")}
+				</LinkButton>
+			)
+		}
 	</div>
 </div>

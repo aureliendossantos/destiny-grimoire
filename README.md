@@ -1,4 +1,4 @@
-# Guardian Compendium
+# The Grimoire Archive
 
 This website allows to browse lore entries from the game _Destiny_ (2014, Bungie). Users can login with their PlayStation/Xbox username to see their own Grimoire Card collection and track their progress for various secret items. The website might later be expanded with _Destiny 2_ lore entries.
 

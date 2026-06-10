@@ -2,9 +2,12 @@
 import SubHeader from "$components/Layout/SubHeader.astro"
 import { getCards, getGuides } from "$utils/content"
 import { addAbbrs } from "$utils/helpers"
-import { useTranslations, type SupportedLocale } from "$utils/i18n"
+import {
+	getLocalizedPath,
+	useTranslations,
+	type SupportedLocale,
+} from "$utils/i18n"
 import type { UserGrimoire } from "$utils/types"
-import { getRelativeLocaleUrl } from "astro:i18n"
 
 interface Props {
 	locale: SupportedLocale
@@ -20,7 +23,7 @@ const t = useTranslations(locale)
 
 const guides = await getGuides(locale)
 const guide = guides.types.find((t) => t.slug == guideSlug)
-if (!guide) return Astro.redirect("/404")
+if (!guide) return new Response("Not found", { status: 404 })
 
 const cards = await getCards(locale)
 
@@ -59,7 +62,7 @@ if (guide.other)
 						.filter((type) => type.name != guide.name)
 						.map((type) => (
 							<a
-								href={getRelativeLocaleUrl(
+								href={getLocalizedPath(
 									locale,
 									user
 										? `/user/${user.platform}/${user.name}/tracker/${type.slug}`
@@ -94,7 +97,7 @@ if (guide.other)
 									{area.name}
 									<span class="inline-block w-[0.2em]" />
 									<span
-										class="whitespace-nowrap text-sm"
+										class="text-sm whitespace-nowrap"
 										style={{
 											fontFeatureSettings: '"lnum"',
 										}}
@@ -144,7 +147,7 @@ if (guide.other)
 												</svg>
 											)}
 											<a
-												href={getRelativeLocaleUrl(
+												href={getLocalizedPath(
 													locale,
 													user
 														? `/user/${user.platform}/${user.name}/${card.cardId}`
@@ -153,9 +156,9 @@ if (guide.other)
 												class:list={[
 													"grow",
 													{
-														"pb-2 pl-8 pt-3":
+														"pt-3 pb-2 pl-8":
 															!card.obtained,
-														"pb-2 pt-3 transition":
+														"pt-3 pb-2 transition":
 															card.obtained,
 													},
 												]}

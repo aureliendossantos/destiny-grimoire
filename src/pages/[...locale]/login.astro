@@ -8,18 +8,23 @@ import {
 	getMembershipId,
 	membershipTypeToPath,
 } from "$utils/helpers"
-import { checkLocale } from "$utils/i18n"
-import { getRelativeLocaleUrl } from "astro:i18n"
+import { getLocalizedPath, getRouteLocale } from "$utils/i18n"
 
-if (Astro.request.method != "POST") return Astro.redirect("/", 308)
+const locale = getRouteLocale(Astro.params.locale)
+if (!locale) return new Response("Not found", { status: 404 })
+
+const homePath = getLocalizedPath(locale, "/")
+if (!homePath.startsWith("/")) throw new Error("Invalid locale home path")
+if (Astro.request.method != "POST") return Astro.redirect(homePath, 308)
 
 // POST request must include parameters "platform", "username", and optionally a redirect path
 const formData = await Astro.request.formData()
 const platform = formData.get("platform")
 const username = formData.get("username")
 const redirect = formData.get("redirect")
+const redirectPath = typeof redirect == "string" ? redirect : ""
 
-if (typeof username != "string") return Astro.redirect("/")
+if (typeof username != "string") return Astro.redirect(homePath)
 
 // platform: "true" is 1 (xbox), "false" is 2 (psn)
 const membershipType = platform ? 1 : 2
@@ -36,11 +41,10 @@ try {
 	}
 }
 
-const errorMessage =
-	apiError ?
-		`Bungie API error (${apiError.status}, code ${apiError.code}): ${apiError.message}`
+const errorMessage = apiError
+	? `Bungie API error (${apiError.status}, code ${apiError.code}): ${apiError.message}`
 	: !membershipId &&
-	`Could not find a Bungie account with ${platform ? "Xbox" : "PSN"} username "${username}". Please check that the username is correct and that you have played Destiny 1 on this platform.`
+		`Could not find a Bungie account with ${platform ? "Xbox" : "PSN"} username "${username}". Please check that the username is correct and that you have played Destiny 1 on this platform.`
 
 if (membershipId) {
 	Astro.cookies.set(
@@ -52,12 +56,12 @@ if (membershipId) {
 		},
 		{ path: "/" },
 	)
-	return Astro.redirect(
-		getRelativeLocaleUrl(
-			checkLocale(Astro.currentLocale),
-			`/user/${membershipTypeToPath(membershipType)}/${username}${redirect ? redirect : ""}`,
-		),
+	const userPath = getLocalizedPath(
+		locale,
+		`/user/${membershipTypeToPath(membershipType)}/${username}${redirectPath}`,
 	)
+	if (!userPath.startsWith("/")) throw new Error("Invalid user redirect path")
+	return Astro.redirect(userPath)
 }
 ---
 
