@@ -7,6 +7,7 @@
 		"dev": "astro dev",
 		"start": "astro dev",
 		"build": "astro check && astro build",
+		"download:card-images": "node scripts/download-card-images.mjs",
 		"preview": "astro preview",
 		"astro": "astro"
 	},

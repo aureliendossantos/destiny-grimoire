@@ -13,6 +13,7 @@ import {
 	ogImageWidth,
 	siteName,
 } from "$utils/seo"
+import { getStaticOgImagePath } from "$utils/og-path"
 
 type Props = {
 	title: string
@@ -49,13 +50,8 @@ const canonicalUrl = canonical
 	? new URL(canonical, urlBase)
 	: new URL(getLocalizedPath(locale, pathnameWithoutLocale), urlBase)
 const metaDescription = getMetaDescription(description)
-const ogImagePath =
-	pathnameWithoutLocale === "/"
-		? `/${locale}/index`
-		: `/${locale}${pathnameWithoutLocale}`
-const ogImageUrl = new URL(`/og${ogImagePath}.png`, urlBase)
-ogImageUrl.searchParams.set("title", title)
-ogImageUrl.searchParams.set("description", metaDescription)
+const ogImagePath = getStaticOgImagePath(pathnameWithoutLocale)
+const ogImageUrl = new URL(`/og/${locale}/${ogImagePath}.png`, urlBase)
 ---
 
 <title>{title}</title>

@@ -1,4 +1,6 @@
 import { readFile } from "node:fs/promises"
+import { createRequire } from "node:module"
+import { extname } from "node:path"
 import satori from "satori"
 import sharp from "sharp"
 import {
@@ -24,6 +26,7 @@ type OgImageInput = {
 	subtitle: string
 	eyebrow?: string
 	cardArtUrl?: string
+	cardArtPath?: string
 }
 
 const colors = {
@@ -37,23 +40,17 @@ const colors = {
 	faint: "#e2e8f0",
 }
 
-const interFontData = readFile(
-	new URL(
-		"../../node_modules/@fontsource/inter/files/inter-latin-700-normal.woff",
-		import.meta.url,
-	),
+const require = createRequire(import.meta.url)
+const readPackageFile = (id: string) => readFile(require.resolve(id))
+
+const interFontData = readPackageFile(
+	"@fontsource/inter/files/inter-latin-700-normal.woff",
 )
-const ebGaramondFontData = readFile(
-	new URL(
-		"../../node_modules/@fontsource/eb-garamond/files/eb-garamond-latin-400-normal.woff",
-		import.meta.url,
-	),
+const ebGaramondFontData = readPackageFile(
+	"@fontsource/eb-garamond/files/eb-garamond-latin-400-normal.woff",
 )
-const notoSerifJpFontData = readFile(
-	new URL(
-		"../../node_modules/@fontsource/noto-serif-jp/files/noto-serif-jp-japanese-400-normal.woff",
-		import.meta.url,
-	),
+const notoSerifJpFontData = readPackageFile(
+	"@fontsource/noto-serif-jp/files/noto-serif-jp-japanese-400-normal.woff",
 )
 
 const containsCjk = (value: string) =>
@@ -73,7 +70,16 @@ const h = (
 
 const upper = (value: string) => value.toLocaleUpperCase("en")
 
-const getImageDataUri = async (url: string) => {
+const imageDataUriCache = new Map<string, Promise<string | undefined>>()
+
+const imageContentTypes: Record<string, string> = {
+	".jpg": "image/jpeg",
+	".jpeg": "image/jpeg",
+	".png": "image/png",
+	".webp": "image/webp",
+}
+
+const fetchImageDataUri = async (url: string) => {
 	const response = await fetch(url)
 	if (!response.ok) return undefined
 
@@ -81,6 +87,32 @@ const getImageDataUri = async (url: string) => {
 	const image = Buffer.from(await response.arrayBuffer())
 
 	return `data:${contentType};base64,${image.toString("base64")}`
+}
+
+const readImageDataUri = async (path: string) => {
+	const contentType =
+		imageContentTypes[extname(path).toLocaleLowerCase("en")] || "image/jpeg"
+	const image = await readFile(path)
+
+	return `data:${contentType};base64,${image.toString("base64")}`
+}
+
+const getImageDataUri = async (url: string) => {
+	const cached = imageDataUriCache.get(url)
+	if (cached) return cached
+
+	const dataUri = fetchImageDataUri(url)
+	imageDataUriCache.set(url, dataUri)
+	return dataUri
+}
+
+const getLocalImageDataUri = async (path: string) => {
+	const cached = imageDataUriCache.get(path)
+	if (cached) return cached
+
+	const dataUri = readImageDataUri(path)
+	imageDataUriCache.set(path, dataUri)
+	return dataUri
 }
 
 const cardArt = (src: string) =>
@@ -307,7 +339,11 @@ export const renderOgImage = async (input: OgImageInput) => {
 			interFontData,
 			ebGaramondFontData,
 			notoSerifJpFontData,
-			input.cardArtUrl ? getImageDataUri(input.cardArtUrl) : undefined,
+			input.cardArtPath
+				? getLocalImageDataUri(input.cardArtPath)
+				: input.cardArtUrl
+					? getImageDataUri(input.cardArtUrl)
+					: undefined,
 		])
 	const svg = await satori(template(input, cardArtDataUri), {
 		width: ogImageWidth,
