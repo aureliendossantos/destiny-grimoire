@@ -1,6 +1,10 @@
 ---
 import { cardImageStyle, membershipTypeToPath } from "$utils/helpers"
-import { getLocalizedPath, type SupportedLocale } from "$utils/i18n"
+import {
+	getLocalizedPath,
+	useTranslations,
+	type SupportedLocale,
+} from "$utils/i18n"
 
 interface Props {
 	b: any
@@ -12,6 +16,7 @@ interface Props {
 	}
 }
 const { b, name, locale, user } = Astro.props
+const t = useTranslations(locale)
 ---
 
 <a
@@ -26,7 +31,7 @@ const { b, name, locale, user } = Astro.props
 	<div class="relative h-12 w-12 overflow-hidden rounded-sm">
 		<img
 			src={"https://www.bungie.net" + b.smallImage.sheetPath}
-			alt="Illustration de carte"
+			alt={t("card-illustration-alt")}
 			class:list={[
 				"absolute bg-slate-400 object-fill",
 				{

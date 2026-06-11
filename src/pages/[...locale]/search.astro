@@ -14,7 +14,7 @@ if (!locale) return new Response("Not found", { status: 404 })
 const t = useTranslations(locale)
 const cards = await getCards(locale)
 
-const term = Astro.url.searchParams.get("term")
+const term = Astro.url.searchParams.get("term")?.trim() || undefined
 // if search term is present in card name or description
 const relevantCards = term
 	? Object.values(cards).filter(
@@ -81,6 +81,7 @@ const isolateSentenceWithTerm = (
 						: ""
 	return { sentence, sentenceStart, sentenceEnd, sourceLength }
 }
+const escapedTerm = term?.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
 ---
 
 <Layout
@@ -89,7 +90,7 @@ const isolateSentenceWithTerm = (
 >
 	<SubHeader
 		sans
-		title={term ? `“${term}”` : "Recherche vide"}
+		title={term ? `“${term}”` : t("s-Empty search")}
 		subtitle={t("s-Search results")}
 	/>
 	{
@@ -135,7 +136,10 @@ const isolateSentenceWithTerm = (
 												.replaceAll("<br/><br/>", " ")
 												.replaceAll("<br/>", " ")
 												.replaceAll(
-													new RegExp(term, "gi"),
+													new RegExp(
+														escapedTerm!,
+														"gi",
+													),
 													'<span class="bg-slate-500 text-slate-100 font-bold rounded-sm">$&</span>',
 												)}
 										/>
@@ -148,7 +152,9 @@ const isolateSentenceWithTerm = (
 		) : (
 			<div class="m-auto my-12 max-w-3xl">
 				<p class="text-center font-medium text-slate-500">
-					{t("s-No results")} “{term}”.
+					{term
+						? `${t("s-No results")} “${term}”.`
+						: t("s-Empty search help")}
 				</p>
 			</div>
 		)

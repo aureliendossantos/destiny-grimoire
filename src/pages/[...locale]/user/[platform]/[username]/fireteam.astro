@@ -7,12 +7,14 @@ import {
 	getUserGrimoire,
 	getUserSummary,
 } from "$utils/helpers"
-import { getRouteLocale } from "$utils/i18n"
+import { getRouteLocale, useTranslations } from "$utils/i18n"
 
-const { locale, platform, username } = Astro.params
-if (!getRouteLocale(locale)) return new Response("Not found", { status: 404 })
+const routeLocale = getRouteLocale(Astro.params.locale)
+if (!routeLocale) return new Response("Not found", { status: 404 })
+const { platform, username } = Astro.params
 if ((platform != "psn" && platform != "xbox") || !username)
 	return new Response("Not found", { status: 404 })
+const t = useTranslations(routeLocale)
 const membershipType = platform == "xbox" ? 1 : 2
 const membershipId = await getMembershipId(membershipType, username!)
 if (!membershipId) return new Response("Not found", { status: 404 })
@@ -38,9 +40,9 @@ const bestCharacter = summary.characters.sort(
 			>
 				<div>{username}</div>
 				<div class="pb-[1px] text-xs font-semibold">
-					{userGrimoire.cardCollection.length} cartes // {
-						userGrimoire.score
-					} points
+					{userGrimoire.cardCollection.length}
+					{t("cards")} // {userGrimoire.score}
+					{t("points")}
 				</div>
 			</div>
 		</div>

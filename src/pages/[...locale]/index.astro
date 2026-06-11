@@ -4,6 +4,7 @@ import Login from "$components/Homepage/Login.astro"
 import SeeAllButton from "$components/Homepage/SeeAllButton.astro"
 import { localePaths, useTranslations } from "$utils/i18n"
 import power from "$images/icons/power.svg"
+import { getImage } from "astro:assets"
 
 export async function getStaticPaths() {
 	return localePaths
@@ -12,7 +13,8 @@ export async function getStaticPaths() {
 const { locale } = Astro.props
 const t = useTranslations(locale)
 
-const bgImage = `url(${power.src})`
+const powerIcon = await getImage({ src: power })
+const bgImage = `url(${powerIcon.src})`
 ---
 
 <style define:vars={{ bgImage }} is:global>
@@ -56,24 +58,26 @@ const bgImage = `url(${power.src})`
 			</div>
 			<div class="m-auto max-w-md">
 				<h2 class="font-serif text-lg text-slate-500 italic">
-					Website Features
+					{t("Website Features")}
 				</h2>
 				<ul class="list-inside pl-4 font-serif text-lg text-slate-800">
 					<li class="-indent-8">
 						<em class="font-smcp text-slate-500 not-italic"
-							>Discover your own cards:</em
-						> Avoid spoilers and reveal the lore as you unlock cards in-game.
+							>{t("feature-discover-title")}:</em
+						>
+						{t("feature-discover-text")}
 					</li>
 					<li class="-indent-8">
 						<em class="font-smcp text-slate-500 not-italic"
-							>Track your progress:</em
-						> Keep tabs on your unlocked cards and hidden bonuses, and
-						locate secret items with short video guides.
+							>{t("feature-progress-title")}:</em
+						>
+						{t("feature-progress-text")}
 					</li>
 					<li class="-indent-8">
 						<em class="font-smcp text-slate-500 not-italic"
-							>Quick search:</em
-						> Instantly view all the snippets where your keywords appear.
+							>{t("feature-search-title")}:</em
+						>
+						{t("feature-search-text")}
 					</li>
 				</ul>
 			</div>
@@ -81,18 +85,14 @@ const bgImage = `url(${power.src})`
 				<ul class="list-inside pl-4 font-serif text-lg text-slate-800">
 					<li class="-indent-8">
 						<em class="font-smcp text-slate-500 not-italic">
-							Multi-language support:
+							{t("feature-language-title")}:
 						</em>
-						<i>The Grimoire Archive</i> is the only website that lets you
-						experience Destiny's expertly crafted translations in all
-						supported languages: English, French, German, Italian, Japanese,
-						Russian, Spanish, and Brazilian Portuguese. Note that the
-						<abbr>UI</abbr> is not fully translated;
+						<span set:html={t("feature-language-body")} />
 						<a
 							class="text-slate-500 underline decoration-1 underline-offset-2"
 							href="https://github.com/aureliendossantos/destiny-grimoire/blob/master/src/utils/i18n.ts"
-							>contributions are welcome</a
-						>.
+							>{t("feature-language-contribute")}</a
+						>{t("feature-language-suffix")}
 					</li>
 				</ul>
 			</div>

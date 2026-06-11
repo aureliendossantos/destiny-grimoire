@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets"
+import { getCardImage } from "$utils/card-images"
 import { addAbbrs } from "$utils/helpers"
 import type { UserBonus, UserCard, UserGrimoire } from "$utils/types"
 import type { CollectionEntry } from "astro:content"
@@ -23,6 +25,7 @@ interface Props {
 const { t, card, cards, themes, user } = Astro.props
 
 const description = card.cardDescription && addAbbrs(card.cardDescription)
+const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
 ---
 
 <div class="mx-4">
@@ -30,9 +33,9 @@ const description = card.cardDescription && addAbbrs(card.cardDescription)
 		class="m-auto mt-12 grid w-full max-w-xl grid-cols-1 md:grid-cols-3 md:gap-x-12"
 	>
 		<div class="grid grid-cols-3 gap-x-4 text-slate-700 md:block">
-			<img
-				width={323}
-				height={419}
+			<Image
+				src={cardImage}
+				alt={t("card-illustration-alt")}
 				class:list={[
 					"order-last mb-4 rounded-sm bg-slate-400 shadow md:order-first",
 					{
@@ -40,17 +43,26 @@ const description = card.cardDescription && addAbbrs(card.cardDescription)
 							user && !user.card,
 					},
 				]}
-				src={"https://www.bungie.net" +
-					card.highResolution.image.sheetPath}
+				width={560}
+				format="webp"
+				quality="high"
+				loading="eager"
+				decoding="async"
 			/>
 			<div class="col-span-2 mb-7 md:mb-0">
 				<h1
-					class="mb-[2px] font-bold leading-snug"
+					class="mb-[2px] leading-snug font-bold"
 					set:html={card.cardName}
 				/>
 				<div class="text-sm text-slate-700">
 					<div>{t(`rarity-${card.rarity}`)}</div>
-					{card.points > 0 && <div>{card.points} points</div>}
+					{
+						card.points > 0 && (
+							<div>
+								{card.points} {t("points")}
+							</div>
+						)
+					}
 					{
 						user && !user.card && (
 							<div class="text-slate-400">{t("not-found")}</div>
@@ -155,7 +167,7 @@ const description = card.cardDescription && addAbbrs(card.cardDescription)
 																		</div>
 																		<div
 																			class:list={[
-																				"pt-1 text-right text-xs font-medium leading-none",
+																				"pt-1 text-right text-xs leading-none font-medium",
 																				{
 																					"text-green-600":
 																						userRank,
@@ -172,7 +184,9 @@ const description = card.cardDescription && addAbbrs(card.cardDescription)
 																			{
 																				rank.points
 																			}{" "}
-																			pts
+																			{t(
+																				"points-short",
+																			)}
 																		</div>
 																	</div>
 																)
@@ -190,7 +204,7 @@ const description = card.cardDescription && addAbbrs(card.cardDescription)
 					{
 						user?.bonus && (
 							<>
-								<h2 class="mt-4 font-bold">Bonus</h2>
+								<h2 class="mt-4 font-bold">{t("Bonus")}</h2>
 								<h3
 									class:list={[
 										"font-medium",

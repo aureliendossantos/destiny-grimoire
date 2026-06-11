@@ -1,5 +1,5 @@
 import { extname, join } from "node:path"
-import type { APIRoute, GetStaticPaths } from "astro"
+import type { APIRoute } from "astro"
 import { getCards, getGuides } from "$utils/content"
 import { localeParams, type SupportedLocale } from "$utils/i18n"
 import { renderOgImage } from "$utils/og"
@@ -7,10 +7,7 @@ import { defaultDescription, getMetaDescription, siteName } from "$utils/seo"
 
 type OgImageData = Parameters<typeof renderOgImage>[0]
 
-type StaticOgImage = {
-	path: string
-	image: OgImageData
-}
+export const prerender = false
 
 const localCardArtPath = (cardId: string | number, sourcePath: string) =>
 	join(
@@ -22,118 +19,94 @@ const localCardArtPath = (cardId: string | number, sourcePath: string) =>
 		`${cardId}${extname(sourcePath) || ".jpg"}`,
 	)
 
-const getGenericOgImages = async (
+const getGenericOgImage = async (
 	locale: SupportedLocale,
-): Promise<StaticOgImage[]> => {
+	path: string,
+): Promise<OgImageData | undefined> => {
 	const guides = await getGuides(locale)
 
-	return [
-		{
-			path: "index",
-			image: {
-				title: "The Grimoire Archive",
-				subtitle: defaultDescription,
-				eyebrow: "Destiny Archive",
-			},
+	const images: Record<string, OgImageData> = {
+		index: {
+			title: "The Grimoire Archive",
+			subtitle: defaultDescription,
+			eyebrow: "Destiny Archive",
 		},
-		{
-			path: "all",
-			image: {
-				title: "Destiny Grimoire Cards",
-				subtitle: "Browse the complete Destiny Grimoire archive.",
-				eyebrow: "Grimoire",
-			},
+		all: {
+			title: "Destiny Grimoire Cards",
+			subtitle: "Browse the complete Destiny Grimoire archive.",
+			eyebrow: "Grimoire",
 		},
-		{
-			path: "search",
-			image: {
-				title: "Search the Grimoire Archive",
-				subtitle: "Find Destiny Grimoire cards by keyword.",
-				eyebrow: "Search",
-			},
+		search: {
+			title: "Search the Grimoire Archive",
+			subtitle: "Find Destiny Grimoire cards by keyword.",
+			eyebrow: "Search",
 		},
-		{
-			path: "tracker",
-			image: {
-				title: "Destiny 1 Tracker",
-				subtitle:
-					"Track dead ghosts, calcified fragments, SIVA clusters, and hidden bonuses.",
-				eyebrow: "Tracker",
-			},
+		tracker: {
+			title: "Destiny 1 Tracker",
+			subtitle:
+				"Track dead ghosts, calcified fragments, SIVA clusters, and hidden bonuses.",
+			eyebrow: "Tracker",
 		},
-		...guides.types.map((guide) => ({
-			path: `tracker/${guide.slug}`,
-			image: {
-				title: guide.name,
-				subtitle: "Destiny Grimoire Tracker",
-				eyebrow: "Tracker",
-			},
-		})),
-		{
-			path: "about",
-			image: {
-				title: `About ${siteName}`,
-				subtitle: defaultDescription,
-				eyebrow: "About",
-			},
+		about: {
+			title: `About ${siteName}`,
+			subtitle: defaultDescription,
+			eyebrow: "About",
 		},
-		{
-			path: "books",
-			image: {
-				title: "Destiny 2 Books",
-				subtitle: "A developing archive of Destiny lore books.",
-				eyebrow: "Books",
-			},
+		books: {
+			title: "Destiny 2 Books",
+			subtitle: "A developing archive of Destiny lore books.",
+			eyebrow: "Books",
 		},
-	]
+	}
+
+	for (const guide of guides.types) {
+		images[`tracker/${guide.slug}`] = {
+			title: guide.name,
+			subtitle: "Destiny Grimoire Tracker",
+			eyebrow: "Tracker",
+		}
+	}
+
+	return images[path]
 }
 
-const getCardOgImages = async (
+const getCardOgImage = async (
 	locale: SupportedLocale,
-): Promise<StaticOgImage[]> => {
+	path: string,
+): Promise<OgImageData | undefined> => {
 	const cards = await getCards(locale)
+	const card = Object.values(cards).find((card) => String(card.cardId) === path)
 
-	return Object.values(cards).map((card) => ({
-		path: String(card.cardId),
-		image: {
-			title: card.cardName,
-			subtitle: getMetaDescription(
-				card.cardIntro || card.cardDescription || "",
-			),
-			eyebrow: "Destiny Grimoire Card",
-			cardArtPath: localCardArtPath(
-				card.cardId,
-				card.highResolution.image.sheetPath,
-			),
-		},
-	}))
+	if (!card) return undefined
+
+	return {
+		title: card.cardName,
+		subtitle: getMetaDescription(card.cardIntro || card.cardDescription || ""),
+		eyebrow: "Destiny Grimoire Card",
+		cardArtPath: localCardArtPath(
+			card.cardId,
+			card.highResolution.image.sheetPath,
+		),
+	}
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-	const pathsByLocale = await Promise.all(
-		localeParams.map(async (locale) => {
-			const images = [
-				...(await getGenericOgImages(locale)),
-				...(await getCardOgImages(locale)),
-			]
-
-			return images.map(({ path, image }) => ({
-				params: { locale, path },
-				props: image,
-			}))
-		}),
-	)
-
-	return pathsByLocale.flat()
+const getOgImage = async (
+	locale: SupportedLocale,
+	path: string,
+): Promise<OgImageData | undefined> => {
+	if (/^\d+$/.test(path)) return getCardOgImage(locale, path)
+	return getGenericOgImage(locale, path)
 }
 
-export const GET: APIRoute = async ({ props }) => {
-	const image = await renderOgImage(props as OgImageData)
+export const GET: APIRoute = async ({ params }) => {
+	const locale = params.locale
+	const path = params.path || "index"
 
-	return new Response(new Uint8Array(image), {
-		headers: {
-			"Content-Type": "image/png",
-			"Cache-Control": "public, max-age=31536000, immutable",
-		},
-	})
+	if (!localeParams.includes(locale as SupportedLocale))
+		return new Response(null, { status: 404 })
+
+	const image = await getOgImage(locale as SupportedLocale, path)
+	if (!image) return new Response(null, { status: 404 })
+
+	return await renderOgImage(image)
 }

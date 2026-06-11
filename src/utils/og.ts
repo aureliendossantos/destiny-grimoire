@@ -1,8 +1,7 @@
 import { readFile } from "node:fs/promises"
 import { createRequire } from "node:module"
 import { extname } from "node:path"
-import satori from "satori"
-import sharp from "sharp"
+import { ImageResponse } from "@vercel/og"
 import {
 	cleanDescription,
 	ogImageHeight,
@@ -41,7 +40,14 @@ const colors = {
 }
 
 const require = createRequire(import.meta.url)
-const readPackageFile = (id: string) => readFile(require.resolve(id))
+const readPackageFile = async (id: string) => {
+	const data = await readFile(require.resolve(id))
+
+	return data.buffer.slice(
+		data.byteOffset,
+		data.byteOffset + data.byteLength,
+	) as ArrayBuffer
+}
 
 const interFontData = readPackageFile(
 	"@fontsource/inter/files/inter-latin-700-normal.woff",
@@ -345,7 +351,8 @@ export const renderOgImage = async (input: OgImageInput) => {
 					? getImageDataUri(input.cardArtUrl)
 					: undefined,
 		])
-	const svg = await satori(template(input, cardArtDataUri), {
+
+	return new ImageResponse(template(input, cardArtDataUri) as never, {
 		width: ogImageWidth,
 		height: ogImageHeight,
 		fonts: [
@@ -368,7 +375,9 @@ export const renderOgImage = async (input: OgImageInput) => {
 				style: "normal",
 			},
 		],
+		headers: {
+			"Cache-Control":
+				"public, max-age=0, s-maxage=31536000, stale-while-revalidate=86400",
+		},
 	})
-
-	return await sharp(Buffer.from(svg)).png().toBuffer()
 }

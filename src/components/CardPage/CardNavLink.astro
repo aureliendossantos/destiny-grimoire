@@ -1,6 +1,12 @@
 ---
+import { Image } from "astro:assets"
+import { getCardImage } from "$utils/card-images"
 import { membershipTypeToPath } from "$utils/helpers"
-import { getLocaleFromPathname, getLocalizedPath } from "$utils/i18n"
+import {
+	getLocaleFromPathname,
+	getLocalizedPath,
+	useTranslations,
+} from "$utils/i18n"
 import type { CollectionEntry } from "astro:content"
 
 interface Props {
@@ -15,6 +21,8 @@ interface Props {
 
 const { card, themeTitle, next, user } = Astro.props
 const locale = getLocaleFromPathname(Astro.url.pathname) || "en"
+const t = useTranslations(locale)
+const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
 ---
 
 <a
@@ -29,11 +37,15 @@ const locale = getLocaleFromPathname(Astro.url.pathname) || "en"
 		{ "col-start-2 flex-row-reverse text-right": next },
 	]}
 >
-	<img
-		width={323}
-		height={419}
+	<Image
+		src={cardImage}
+		alt={t("card-illustration-alt")}
 		class="h-16 w-auto rounded-sm bg-slate-400 shadow-sm"
-		src={"https://www.bungie.net" + card.highResolution.image.sheetPath}
+		height={64}
+		format="webp"
+		quality="mid"
+		loading="lazy"
+		decoding="async"
 	/>
 	<div>
 		{
