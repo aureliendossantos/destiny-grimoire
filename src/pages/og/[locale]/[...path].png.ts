@@ -98,7 +98,7 @@ const getOgImage = async (
 	return getGenericOgImage(locale, path)
 }
 
-export const GET: APIRoute = async ({ params }) => {
+export const GET: APIRoute = async ({ params, request }) => {
 	const locale = params.locale
 	const path = params.path || "index"
 
@@ -108,5 +108,5 @@ export const GET: APIRoute = async ({ params }) => {
 	const image = await getOgImage(locale as SupportedLocale, path)
 	if (!image) return new Response(null, { status: 404 })
 
-	return await renderOgImage(image)
+	return await renderOgImage(image, new URL(request.url).origin)
 }

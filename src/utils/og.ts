@@ -1,7 +1,9 @@
 import { readFile } from "node:fs/promises"
-import { createRequire } from "node:module"
 import { extname } from "node:path"
 import { ImageResponse } from "@vercel/og"
+import ebGaramondFontUrl from "@fontsource/eb-garamond/files/eb-garamond-latin-400-normal.woff?url"
+import interFontUrl from "@fontsource/inter/files/inter-latin-700-normal.woff?url"
+import notoSerifJpFontUrl from "@fontsource/noto-serif-jp/files/noto-serif-jp-japanese-400-normal.woff?url"
 import {
 	cleanDescription,
 	ogImageHeight,
@@ -39,25 +41,23 @@ const colors = {
 	faint: "#e2e8f0",
 }
 
-const require = createRequire(import.meta.url)
-const readPackageFile = async (id: string) => {
-	const data = await readFile(require.resolve(id))
+const fontDataCache = new Map<string, Promise<ArrayBuffer>>()
 
-	return data.buffer.slice(
-		data.byteOffset,
-		data.byteOffset + data.byteLength,
-	) as ArrayBuffer
+const getAssetData = (assetUrl: string, origin: string | URL) => {
+	const url = new URL(assetUrl, origin).toString()
+	const cached = fontDataCache.get(url)
+	if (cached) return cached
+
+	const data = fetch(url).then(async (response) => {
+		if (!response.ok)
+			throw new Error(`Unable to load OG font asset: ${url}`)
+
+		return response.arrayBuffer()
+	})
+
+	fontDataCache.set(url, data)
+	return data
 }
-
-const interFontData = readPackageFile(
-	"@fontsource/inter/files/inter-latin-700-normal.woff",
-)
-const ebGaramondFontData = readPackageFile(
-	"@fontsource/eb-garamond/files/eb-garamond-latin-400-normal.woff",
-)
-const notoSerifJpFontData = readPackageFile(
-	"@fontsource/noto-serif-jp/files/noto-serif-jp-japanese-400-normal.woff",
-)
 
 const containsCjk = (value: string) =>
 	/[\u3040-\u30ff\u3400-\u9fff]/u.test(value)
@@ -339,12 +339,15 @@ const template = (input: OgImageInput, cardArtDataUri?: string) =>
 		),
 	)
 
-export const renderOgImage = async (input: OgImageInput) => {
+export const renderOgImage = async (
+	input: OgImageInput,
+	origin: string | URL,
+) => {
 	const [interFont, ebGaramondFont, notoSerifJpFont, cardArtDataUri] =
 		await Promise.all([
-			interFontData,
-			ebGaramondFontData,
-			notoSerifJpFontData,
+			getAssetData(interFontUrl, origin),
+			getAssetData(ebGaramondFontUrl, origin),
+			getAssetData(notoSerifJpFontUrl, origin),
 			input.cardArtPath
 				? getLocalImageDataUri(input.cardArtPath)
 				: input.cardArtUrl
