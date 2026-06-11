@@ -1,15 +1,10 @@
 import { readFile } from "node:fs/promises"
-import { extname } from "node:path"
+import { extname, join } from "node:path"
 import { ImageResponse } from "@vercel/og"
 import ebGaramondFontUrl from "@fontsource/eb-garamond/files/eb-garamond-latin-400-normal.woff?url"
 import interFontUrl from "@fontsource/inter/files/inter-latin-700-normal.woff?url"
 import notoSerifJpFontUrl from "@fontsource/noto-serif-jp/files/noto-serif-jp-japanese-400-normal.woff?url"
-import {
-	cleanDescription,
-	ogImageHeight,
-	ogImageWidth,
-	siteName,
-} from "$utils/seo"
+import { cleanDescription, ogImageHeight, ogImageWidth } from "$utils/seo"
 
 type ElementChild = ElementNode | string | number | false | null | undefined
 
@@ -31,7 +26,7 @@ type OgImageInput = {
 }
 
 const colors = {
-	background: "#f8fafc",
+	background: "#ECEAD6",
 	panel: "#f1f5f9",
 	panelDark: "#e2e8f0",
 	border: "#cbd5e1",
@@ -40,6 +35,14 @@ const colors = {
 	muted: "#475569",
 	faint: "#e2e8f0",
 }
+
+const genericArtPath = join(
+	process.cwd(),
+	"src",
+	"images",
+	"og",
+	"piotr-jablonski-1sk.jpg",
+)
 
 const fontDataCache = new Map<string, Promise<ArrayBuffer>>()
 
@@ -143,90 +146,124 @@ const cardArt = (src: string) =>
 		}),
 	)
 
-const archiveMotif = () =>
+const genericArt = (src: string) =>
 	h(
 		"div",
 		{
 			style: {
 				display: "flex",
-				position: "relative",
-				width: 360,
-				height: 430,
+				position: "absolute",
+				left: 0,
+				top: 0,
+				width: 650,
+				height: ogImageHeight,
+				overflow: "hidden",
 			},
 		},
-		h("div", {
+		h("img", {
+			src,
 			style: {
 				display: "flex",
 				position: "absolute",
-				left: 30,
-				top: 20,
-				width: 275,
-				height: 350,
-				backgroundColor: colors.panelDark,
-				border: `1px solid ${colors.border}`,
-				transform: "rotate(-4deg)",
+				left: 0,
+				top: 0,
+				width: 460,
+				height: ogImageHeight + 20,
+				objectFit: "cover",
+				objectPosition: "top",
 			},
 		}),
 		h("div", {
 			style: {
 				display: "flex",
 				position: "absolute",
-				left: 52,
-				top: 44,
-				width: 285,
-				height: 360,
-				backgroundColor: colors.panel,
-				border: `1px solid ${colors.borderDark}`,
-				boxShadow: "0 18px 34px rgba(23, 32, 51, 0.12)",
-			},
-		}),
-		h("div", {
-			style: {
-				display: "flex",
-				position: "absolute",
-				left: 82,
-				top: 96,
-				width: 225,
-				height: 1,
-				backgroundColor: colors.border,
-			},
-		}),
-		h("div", {
-			style: {
-				display: "flex",
-				position: "absolute",
-				left: 82,
-				top: 146,
-				width: 170,
-				height: 1,
-				backgroundColor: colors.faint,
-			},
-		}),
-		h("div", {
-			style: {
-				display: "flex",
-				position: "absolute",
-				left: 82,
-				top: 196,
-				width: 205,
-				height: 1,
-				backgroundColor: colors.faint,
-			},
-		}),
-		h("div", {
-			style: {
-				display: "flex",
-				position: "absolute",
-				left: 82,
-				top: 246,
-				width: 150,
-				height: 1,
-				backgroundColor: colors.faint,
+				left: 0,
+				top: 0,
+				width: 460,
+				height: ogImageHeight,
+				backgroundImage: `linear-gradient(to right, rgba(255, 255, 255, 0) 70%, ${colors.background} 100%)`,
 			},
 		}),
 	)
 
-const template = (input: OgImageInput, cardArtDataUri?: string) =>
+const textColumn = (
+	input: OgImageInput,
+	style: Record<string, string | number>,
+) =>
+	h(
+		"div",
+		{
+			style: {
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "center",
+				width: 610,
+				height: 470,
+				...style,
+			},
+		},
+		h(
+			"div",
+			{
+				style: {
+					display: "flex",
+					color: colors.muted,
+					fontSize: 26,
+					letterSpacing: 3,
+					marginBottom: 24,
+				},
+			},
+			upper(input.eyebrow || "Destiny Archive"),
+		),
+		h(
+			"div",
+			{
+				style: {
+					display: "flex",
+					color: colors.text,
+					fontFamily: containsCjk(input.title)
+						? "Noto Serif JP"
+						: "Inter",
+					fontSize: 78,
+					fontWeight: 700,
+					lineHeight: 1.04,
+					marginBottom: 28,
+					maxHeight: 240,
+					overflow: "hidden",
+				},
+			},
+			cleanDescription(input.title),
+		),
+		h("div", {
+			style: {
+				display: "flex",
+				width: 92,
+				height: 1,
+				backgroundColor: colors.borderDark,
+				marginBottom: 30,
+			},
+		}),
+		h(
+			"div",
+			{
+				style: {
+					display: "flex",
+					color: colors.muted,
+					fontSize: 33,
+					lineHeight: 1.18,
+					maxHeight: 118,
+					overflow: "hidden",
+				},
+			},
+			cleanDescription(input.subtitle),
+		),
+	)
+
+const template = (
+	input: OgImageInput,
+	cardArtDataUri?: string,
+	genericArtDataUri?: string,
+) =>
 	h(
 		"div",
 		{
@@ -235,7 +272,7 @@ const template = (input: OgImageInput, cardArtDataUri?: string) =>
 				position: "relative",
 				width: ogImageWidth,
 				height: ogImageHeight,
-				padding: 54,
+				padding: cardArtDataUri ? 54 : 0,
 				backgroundColor: colors.background,
 				color: colors.text,
 				fontFamily: containsCjk(`${input.title} ${input.subtitle}`)
@@ -243,100 +280,40 @@ const template = (input: OgImageInput, cardArtDataUri?: string) =>
 					: "EB Garamond",
 			},
 		},
-		h(
-			"div",
-			{
-				style: {
-					display: "flex",
-					flexDirection: "row",
-					alignItems: "center",
-					gap: 62,
-					width: "100%",
-					height: "100%",
-				},
-			},
-			cardArtDataUri ? cardArt(cardArtDataUri) : archiveMotif(),
-			h(
-				"div",
-				{
-					style: {
-						display: "flex",
-						flexDirection: "column",
-						justifyContent: "center",
-						width: 610,
-						height: 470,
-					},
-				},
-				h(
+		cardArtDataUri
+			? h(
 					"div",
 					{
 						style: {
 							display: "flex",
-							color: colors.muted,
-							fontSize: 26,
-							letterSpacing: 3,
-							marginBottom: 24,
+							flexDirection: "row",
+							alignItems: "center",
+							gap: 62,
+							width: "100%",
+							height: "100%",
 						},
 					},
-					upper(input.eyebrow || siteName),
-				),
-				h(
+					cardArt(cardArtDataUri),
+					textColumn(input, {}),
+				)
+			: h(
 					"div",
 					{
 						style: {
 							display: "flex",
-							color: colors.text,
-							fontFamily: containsCjk(input.title)
-								? "Noto Serif JP"
-								: "Inter",
-							fontSize: 78,
-							fontWeight: 700,
-							lineHeight: 0.95,
-							marginBottom: 28,
-							maxHeight: 220,
-							overflow: "hidden",
+							position: "absolute",
+							inset: 0,
+							width: ogImageWidth,
+							height: ogImageHeight,
 						},
 					},
-					cleanDescription(input.title),
+					genericArtDataUri ? genericArt(genericArtDataUri) : null,
+					textColumn(input, {
+						position: "absolute",
+						left: 526,
+						top: 80,
+					}),
 				),
-				h("div", {
-					style: {
-						display: "flex",
-						width: 92,
-						height: 1,
-						backgroundColor: colors.borderDark,
-						marginBottom: 30,
-					},
-				}),
-				h(
-					"div",
-					{
-						style: {
-							display: "flex",
-							color: colors.muted,
-							fontSize: 33,
-							lineHeight: 1.18,
-							maxHeight: 118,
-							overflow: "hidden",
-						},
-					},
-					cleanDescription(input.subtitle),
-				),
-				h(
-					"div",
-					{
-						style: {
-							display: "flex",
-							color: colors.muted,
-							fontSize: 23,
-							letterSpacing: 2,
-							marginTop: 42,
-						},
-					},
-					upper(siteName),
-				),
-			),
-		),
 	)
 
 export const renderOgImage = async (
@@ -354,33 +331,39 @@ export const renderOgImage = async (
 					? getImageDataUri(input.cardArtUrl)
 					: undefined,
 		])
+	const genericArtDataUri = cardArtDataUri
+		? undefined
+		: await getLocalImageDataUri(genericArtPath)
 
-	return new ImageResponse(template(input, cardArtDataUri) as never, {
-		width: ogImageWidth,
-		height: ogImageHeight,
-		fonts: [
-			{
-				name: "Inter",
-				data: interFont,
-				weight: 700,
-				style: "normal",
+	return new ImageResponse(
+		template(input, cardArtDataUri, genericArtDataUri) as never,
+		{
+			width: ogImageWidth,
+			height: ogImageHeight,
+			fonts: [
+				{
+					name: "Inter",
+					data: interFont,
+					weight: 700,
+					style: "normal",
+				},
+				{
+					name: "EB Garamond",
+					data: ebGaramondFont,
+					weight: 400,
+					style: "normal",
+				},
+				{
+					name: "Noto Serif JP",
+					data: notoSerifJpFont,
+					weight: 400,
+					style: "normal",
+				},
+			],
+			headers: {
+				"Cache-Control":
+					"public, max-age=0, s-maxage=31536000, stale-while-revalidate=86400",
 			},
-			{
-				name: "EB Garamond",
-				data: ebGaramondFont,
-				weight: 400,
-				style: "normal",
-			},
-			{
-				name: "Noto Serif JP",
-				data: notoSerifJpFont,
-				weight: 400,
-				style: "normal",
-			},
-		],
-		headers: {
-			"Cache-Control":
-				"public, max-age=0, s-maxage=31536000, stale-while-revalidate=86400",
 		},
-	})
+	)
 }
