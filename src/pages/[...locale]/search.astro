@@ -15,6 +15,8 @@ const t = useTranslations(locale)
 const cards = await getCards(locale)
 
 const term = Astro.url.searchParams.get("term")?.trim() || undefined
+const escapeRegExp = (value: string) =>
+	value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
 // if search term is present in card name or description
 const relevantCards = term
 	? Object.values(cards).filter(
@@ -81,7 +83,9 @@ const isolateSentenceWithTerm = (
 						: ""
 	return { sentence, sentenceStart, sentenceEnd, sourceLength }
 }
-const escapedTerm = term?.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+const highlightedTermPattern = term
+	? new RegExp(escapeRegExp(term), "gi")
+	: null
 ---
 
 <Layout
@@ -136,10 +140,7 @@ const escapedTerm = term?.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
 												.replaceAll("<br/><br/>", " ")
 												.replaceAll("<br/>", " ")
 												.replaceAll(
-													new RegExp(
-														escapedTerm!,
-														"gi",
-													),
+													highlightedTermPattern!,
 													'<span class="bg-slate-500 text-slate-100 font-bold rounded-sm">$&</span>',
 												)}
 										/>
