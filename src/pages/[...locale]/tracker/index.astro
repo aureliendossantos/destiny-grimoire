@@ -1,7 +1,12 @@
 ---
 import Layout from "$layouts/Layout.astro"
 import TrackerIndex from "$components/Tracker/TrackerIndex.astro"
-import { checkLocale, localizedRouteParams } from "$utils/i18n"
+import {
+	checkLocale,
+	getLocalizedPath,
+	localizedRouteParams,
+} from "$utils/i18n"
+import { getCollectionPageStructuredData } from "$utils/seo"
 
 export async function getStaticPaths() {
 	return localizedRouteParams.map((localePath) => {
@@ -13,13 +18,17 @@ export async function getStaticPaths() {
 	})
 }
 const { locale } = Astro.props
+const title = "Destiny 1 Grimoire Tracker · The Grimoire Archive"
+const description =
+	"Track Destiny 1 Grimoire Cards, hidden dead ghosts, bonus progress, and collectible locations with guide pages."
+const structuredData = getCollectionPageStructuredData({
+	name: title,
+	description,
+	url: new URL(getLocalizedPath(locale, "/tracker"), Astro.site || Astro.url),
+})
 ---
 
-<Layout
-	title="Destiny 1 Tracker · The Grimoire Archive"
-	description=""
-	onGrimoirePage
->
+<Layout {title} {description} {structuredData} onGrimoirePage>
 	<TrackerIndex {locale} />
 </Layout>
 <div id="locale" data-locale={locale}></div>
@@ -33,9 +42,9 @@ const { locale } = Astro.props
 	const loginCookie = tryCookie && validateCookie(JSON.parse(tryCookie))
 
 	if (loginCookie) {
-		// find all links that begin with "/tracker/" and add the user to the path
+		// find tracker links and add the user to the path
 		const links = document.querySelectorAll(
-			`a#tracker-card`,
+			`a[data-nav-card="tracker"]`,
 		) as NodeListOf<HTMLAnchorElement>
 		const platform = loginCookie.membershipType == 1 ? "xbox" : "psn"
 		const username = loginCookie.username

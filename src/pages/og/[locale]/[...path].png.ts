@@ -1,5 +1,6 @@
 import { extname, join } from "node:path"
 import type { APIRoute } from "astro"
+import { getLoreBookManifest } from "$utils/books"
 import { getCards, getGuides } from "$utils/content"
 import { localeParams, type SupportedLocale } from "$utils/i18n"
 import { renderOgImage } from "$utils/og"
@@ -17,6 +18,15 @@ const localCardArtPath = (cardId: string | number, sourcePath: string) =>
 		"cards",
 		"high-resolution",
 		`${cardId}${extname(sourcePath) || ".jpg"}`,
+	)
+
+const localBookCoverPath = (bookHash: string | number, sourcePath: string) =>
+	join(
+		process.cwd(),
+		"src",
+		"images",
+		"books",
+		`${bookHash}${extname(sourcePath) || ".jpg"}`,
 	)
 
 const getGenericOgImage = async (
@@ -75,13 +85,17 @@ const getCardOgImage = async (
 	path: string,
 ): Promise<OgImageData | undefined> => {
 	const cards = await getCards(locale)
-	const card = Object.values(cards).find((card) => String(card.cardId) === path)
+	const card = Object.values(cards).find(
+		(card) => String(card.cardId) === path,
+	)
 
 	if (!card) return undefined
 
 	return {
 		title: card.cardName,
-		subtitle: getMetaDescription(card.cardIntro || card.cardDescription || ""),
+		subtitle: getMetaDescription(
+			card.cardIntro || card.cardDescription || "",
+		),
 		eyebrow: "Destiny Grimoire Card",
 		cardArtPath: localCardArtPath(
 			card.cardId,
@@ -90,10 +104,39 @@ const getCardOgImage = async (
 	}
 }
 
+const getBookOgImage = async (
+	locale: SupportedLocale,
+	path: string,
+): Promise<OgImageData | undefined> => {
+	const pageId = path.replace(/^books\//, "")
+	const manifest = await getLoreBookManifest(locale)
+
+	for (const book of manifest.books) {
+		const record = book.records.find(
+			({ record }) => String(record.hash) === pageId,
+		)
+
+		if (!record) continue
+
+		return {
+			title: record.lore.displayProperties.name,
+			subtitle: getMetaDescription(
+				record.lore.displayProperties.description ||
+					book.node.displayProperties.name,
+			),
+			eyebrow: book.node.displayProperties.name,
+			cardArtPath: book.coverPath
+				? localBookCoverPath(book.node.hash, book.coverPath)
+				: undefined,
+		}
+	}
+}
+
 const getOgImage = async (
 	locale: SupportedLocale,
 	path: string,
 ): Promise<OgImageData | undefined> => {
+	if (path.startsWith("books/")) return getBookOgImage(locale, path)
 	if (/^\d+$/.test(path)) return getCardOgImage(locale, path)
 	return getGenericOgImage(locale, path)
 }

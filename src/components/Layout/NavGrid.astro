@@ -1,0 +1,87 @@
+---
+interface NavItem {
+	title: string
+	subtitle?: string | null
+	href?: string
+	disabled?: boolean
+	html?: boolean
+	id?: string
+	dataCard?: string
+	subtitleStyle?: "body" | "smcp"
+}
+
+interface Props {
+	items: NavItem[]
+	class?: string
+}
+
+const { items, class: className = "" } = Astro.props
+
+const baseClass =
+	"flex min-h-36 flex-col justify-end rounded-lg border p-4 font-serif shadow-sm shadow-slate-200 transition duration-300 ease-out"
+const activeClass =
+	"border-slate-300 bg-slate-100 hover:scale-[1.03] hover:shadow-md"
+const inactiveClass = "border-slate-300 bg-slate-50 text-slate-500"
+---
+
+<div
+	class:list={[
+		"grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3",
+		className,
+	]}
+>
+	{
+		items.map((item) => {
+			const classes = [
+				baseClass,
+				item.disabled || !item.href ? inactiveClass : activeClass,
+			]
+			const content = (
+				<>
+					{item.html ? (
+						<h2
+							class="mt-[1lh] text-2xl leading-[1.15] text-slate-800"
+							set:html={item.title}
+						/>
+					) : (
+						<h2 class="mt-[1lh] text-2xl text-slate-800">
+							{item.title}
+						</h2>
+					)}
+					{item.subtitle && (
+						<div
+							class:list={[
+								"text-lg leading-tight text-slate-500",
+								{
+									"font-smcp": item.subtitleStyle === "smcp",
+									"font-serif": item.subtitleStyle !== "smcp",
+								},
+							]}
+						>
+							{item.subtitle}
+						</div>
+					)}
+				</>
+			)
+
+			return item.href && !item.disabled ? (
+				<a
+					id={item.id}
+					data-nav-card={item.dataCard}
+					class:list={classes}
+					href={item.href}
+				>
+					{content}
+				</a>
+			) : (
+				<div
+					id={item.id}
+					data-nav-card={item.dataCard}
+					class:list={classes}
+				>
+					{content}
+				</div>
+			)
+		})
+	}
+</div>

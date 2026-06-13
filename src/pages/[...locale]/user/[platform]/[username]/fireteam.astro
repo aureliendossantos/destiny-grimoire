@@ -28,7 +28,11 @@ const bestCharacter = summary.characters.sort(
 )[0]
 ---
 
-<Layout title={`${username} Fireteam`} description="">
+<Layout
+	title={`${username} Destiny Fireteam · The Grimoire Archive`}
+	description={`${username}'s Destiny character and Grimoire collection summary.`}
+	noindex
+>
 	<div class="m-12">
 		<div class="relative flex h-[48px]">
 			<img src={`https://www.bungie.net${bestCharacter.emblemPath}`} />

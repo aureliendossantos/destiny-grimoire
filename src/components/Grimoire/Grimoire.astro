@@ -9,24 +9,39 @@ interface Props {
 	userGrimoire?: UserGrimoire
 	membershipType?: 1 | 2
 	username?: string
+	showSpoilers?: boolean
 }
 
-const { themes, userGrimoire, membershipType, username } = Astro.props
+const {
+	themes,
+	userGrimoire,
+	membershipType,
+	username,
+	showSpoilers = false,
+} = Astro.props
 const cards = Object.entries(Astro.props.cards).map(([_, card]) => card)
+const userCardIds = new Set(userGrimoire?.cardCollection.map((c) => c.cardId))
 ---
 
 {
 	themes.map((theme) => (
 		<div>
 			<h2
-				class="-mb-5 -ml-10 -mt-2 font-serif text-[72px] text-slate-300 sm:-mb-7 sm:-mt-5 sm:text-[96px]"
+				class="-mt-2 -mb-5 -ml-10 font-serif text-[72px] text-slate-300 sm:-mt-5 sm:-mb-7 sm:text-[96px]"
 				set:html={theme.themeName}
 			/>
 			{theme.pageCollection.map((page) => {
 				const userCardsAmount = userGrimoire?.cardCollection.filter(
-					(c) => page.cardBriefs.find((b) => b.cardId == c.cardId)
+					(c) => page.cardBriefs.find((b) => b.cardId == c.cardId),
 				).length
-				if (userCardsAmount == 0) return
+				if (userGrimoire && !showSpoilers && userCardsAmount == 0)
+					return
+				const briefs =
+					userGrimoire && !showSpoilers
+						? page.cardBriefs.filter((brief) =>
+								userCardIds.has(brief.cardId),
+							)
+						: page.cardBriefs
 				return (
 					<div class="relative mb-2 sm:mb-4">
 						<div class="absolute top-0 flex origin-top-left rotate-90 items-baseline gap-3 border-l border-slate-200 bg-slate-50/70 py-2 pl-4">
@@ -39,39 +54,47 @@ const cards = Object.entries(Astro.props.cards).map(([_, card]) => card)
 							/>
 							{userCardsAmount && (
 								<span
-									class="align-super font-serif text-xs text-slate-500"
+									class="align-super font-serif text-xs text-slate-400"
 									style={{ fontFeatureSettings: '"lnum"' }}
 								>
-									<span class="inline-block -rotate-90">
+									<span class="inline-block -rotate-90 font-bold">
 										{userCardsAmount}
 									</span>
-									|
-									<span class="inline-block -rotate-90">
+									<span
+										class:list={[
+											"inline-block -translate-y-0.5",
+											{
+												"ml-[3px]":
+													userCardsAmount < 10,
+												"mr-[3px]":
+													page.cardBriefs.length < 10,
+											},
+										]}
+									>
+										|
+									</span>
+									<span class="inline-block -rotate-90 font-bold">
 										{page.cardBriefs.length}
 									</span>
 								</span>
 							)}
 						</div>
 						<div class="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-4 md:grid-cols-5 lg:grid-cols-6">
-							{page.cardBriefs
-								.filter(
-									(brief) =>
-										!userGrimoire ||
-										userGrimoire.cardCollection.find(
-											(c) => c.cardId == brief.cardId
-										)
-								)
-								.map((brief) => (
-									<CardPreview
-										card={
-											cards.find(
-												(c) => c.cardId == brief.cardId
-											)!
-										}
-										membershipType={membershipType}
-										username={username}
-									/>
-								))}
+							{briefs.map((brief) => (
+								<CardPreview
+									card={
+										cards.find(
+											(c) => c.cardId == brief.cardId,
+										)!
+									}
+									membershipType={membershipType}
+									username={username}
+									isObscured={
+										!!userGrimoire &&
+										!userCardIds.has(brief.cardId)
+									}
+								/>
+							))}
 						</div>
 						{/* page.cardBriefs.length > 6 ? (
 							<div class="flex items-center gap-1">

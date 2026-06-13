@@ -1,0 +1,200 @@
+---
+import { Image } from "astro:assets"
+import SubHeader from "$components/Layout/SubHeader.astro"
+import Layout from "$layouts/Layout.astro"
+import { getBookImage } from "$utils/book-images"
+import { getLoreBookManifest } from "$utils/books"
+import {
+	checkLocale,
+	getLocalizedPath,
+	localizedRouteParams,
+} from "$utils/i18n"
+import { getCollectionPageStructuredData } from "$utils/seo"
+
+export async function getStaticPaths() {
+	return await Promise.all(
+		localizedRouteParams.map(async (localePath) => {
+			const locale = checkLocale(localePath)
+			const manifest = await getLoreBookManifest(locale)
+
+			return {
+				params: { locale: localePath },
+				props: { locale, manifest },
+			}
+		}),
+	)
+}
+
+const { locale, manifest } = Astro.props
+const title = "Destiny 2 Lore Books · The Grimoire Archive"
+const description =
+	"Browse Destiny 2 lore books and collectible lore entries in The Grimoire Archive."
+const structuredData = getCollectionPageStructuredData({
+	name: title,
+	description,
+	url: new URL(getLocalizedPath(locale, "/books"), Astro.site || Astro.url),
+})
+---
+
+<Layout {title} {description} {structuredData}>
+	<SubHeader
+		title="Destiny 2 Books"
+		subtitle="The complete shelf of Destiny 2 lore books, arranged by theme."
+	/>
+	<main class="mx-4">
+		<div class="mx-auto my-12 max-w-6xl">
+			<h2 class="font-smcp text-slate-500">Table of contents</h2>
+			<div
+				class="mb-12 grid gap-6 border-b border-slate-200 pb-12 text-slate-700 lg:grid-cols-[minmax(0,1fr)_auto]"
+			>
+				<nav
+					aria-label="Book sections"
+					class="grid gap-x-2 sm:grid-cols-2 sm:gap-y-2 lg:grid-cols-4"
+				>
+					{
+						manifest.groups.map((group) => (
+							<a
+								href={`#group-${group.node.hash}`}
+								class="group border-l border-slate-200 py-1 pl-4 lg:first:border-l-0 lg:first:pl-0"
+							>
+								<span class="block font-serif text-xl leading-tight text-slate-800 transition group-hover:text-slate-600">
+									{group.node.displayProperties.name}
+								</span>
+							</a>
+						))
+					}
+				</nav>
+			</div>
+
+			<div class="space-y-14">
+				{
+					manifest.groups.map((group) => (
+						<section
+							id={`group-${group.node.hash}`}
+							aria-labelledby={`group-${group.node.hash}-title`}
+						>
+							<h2
+								id={`group-${group.node.hash}-title`}
+								class="mb-8 font-serif text-3xl leading-tight text-slate-800"
+							>
+								{group.node.displayProperties.name}
+							</h2>
+							<div class="grid gap-4 md:grid-cols-2">
+								{group.books.map((book) => {
+									const firstRecord = book.records[0]?.record
+									const description =
+										firstRecord?.displayProperties
+											.description
+									const coverImage =
+										book.coverPath &&
+										getBookImage(
+											book.node.hash,
+											book.coverPath,
+										)
+									return (
+										<article class="grid grid-cols-[96px_minmax(0,1fr)] gap-4 border border-slate-200 bg-white/60 p-2 shadow-[0_1px_0_rgba(148,163,184,0.12)] sm:grid-cols-[128px_minmax(0,1fr)]">
+											{coverImage && (
+												<a
+													href={getLocalizedPath(
+														locale,
+														`/books/${firstRecord.hash}`,
+													)}
+													aria-hidden="true"
+													tabindex="-1"
+													class="block overflow-hidden bg-slate-100"
+												>
+													<Image
+														src={coverImage}
+														alt=""
+														class="aspect-5/7 h-full w-full object-cover"
+														width={256}
+													/>
+												</a>
+											)}
+											<div class="min-w-0 pt-1.5">
+												<div class="mb-2">
+													<h3 class="font-serif text-xl leading-tight text-slate-800">
+														<a
+															href={getLocalizedPath(
+																locale,
+																`/books/${firstRecord.hash}`,
+															)}
+															class="transition hover:text-slate-500"
+														>
+															{
+																book.node
+																	.displayProperties
+																	.name
+															}
+														</a>
+													</h3>
+												</div>
+												{book.node.redacted && (
+													<p class="mb-2 text-xs font-semibold tracking-[0.08em] text-slate-500 uppercase">
+														Redacted
+													</p>
+												)}
+												{description && (
+													<p class="line-clamp-2 font-serif text-base leading-snug text-slate-600 italic">
+														{description}
+													</p>
+												)}
+												<ol class="entries-scrollbar mt-3 max-h-33.25 space-y-1 overflow-auto border-t border-slate-100 pt-3 pr-2 font-serif text-sm text-slate-600">
+													{book.records.map(
+														({ record }) => (
+															<li>
+																<a
+																	href={getLocalizedPath(
+																		locale,
+																		`/books/${record.hash}`,
+																	)}
+																	class="block truncate transition hover:text-slate-950"
+																>
+																	{
+																		record
+																			.displayProperties
+																			.name
+																	}
+																</a>
+															</li>
+														),
+													)}
+												</ol>
+											</div>
+										</article>
+									)
+								})}
+							</div>
+						</section>
+					))
+				}
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.entries-scrollbar {
+		scrollbar-color: rgb(203 213 225 / 0.75) transparent;
+		scrollbar-width: thin;
+	}
+
+	.entries-scrollbar::-webkit-scrollbar {
+		width: 7px;
+	}
+
+	.entries-scrollbar::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.entries-scrollbar::-webkit-scrollbar-thumb {
+		background-color: rgb(203 213 225 / 0.65);
+		border: 2px solid transparent;
+		border-radius: 0px;
+		background-clip: content-box;
+	}
+
+	.entries-scrollbar:hover::-webkit-scrollbar-thumb {
+		background-color: rgb(148 163 184 / 0.65);
+	}
+</style>

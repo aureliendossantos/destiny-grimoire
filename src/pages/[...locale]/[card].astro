@@ -2,7 +2,13 @@
 import Layout from "$layouts/Layout.astro"
 import CardPage from "$components/CardPage/CardPage.astro"
 import { getCards, getThemes } from "$utils/content"
-import { checkLocale, localizedRouteParams, useTranslations } from "$utils/i18n"
+import {
+	checkLocale,
+	getLocalizedPath,
+	localizedRouteParams,
+	useTranslations,
+} from "$utils/i18n"
+import { getBreadcrumbListStructuredData } from "$utils/seo"
 
 export async function getStaticPaths() {
 	return (
@@ -16,6 +22,7 @@ export async function getStaticPaths() {
 					props: {
 						card,
 						cards,
+						locale,
 						themes,
 						t: useTranslations(locale),
 					},
@@ -24,12 +31,26 @@ export async function getStaticPaths() {
 		)
 	).flat()
 }
-const { card, cards, themes, t } = Astro.props
+const { card, cards, locale, themes, t } = Astro.props
+const structuredData = getBreadcrumbListStructuredData([
+	{
+		name: "Destiny Grimoire Cards",
+		url: new URL(getLocalizedPath(locale, "/all"), Astro.site || Astro.url),
+	},
+	{
+		name: card.cardName,
+		url: new URL(
+			getLocalizedPath(locale, `/${card.cardId}`),
+			Astro.site || Astro.url,
+		),
+	},
+])
 ---
 
 <Layout
 	title={`${card.cardName} · Destiny Grimoire Card · The Grimoire Archive`}
 	description={card.cardIntro || card.cardDescription || ""}
+	{structuredData}
 	contentHeightScreen
 	onGrimoireSection
 >

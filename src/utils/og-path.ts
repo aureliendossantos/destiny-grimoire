@@ -32,11 +32,16 @@ export const getStaticOgImagePath = (pathnameWithoutLocale: string) => {
 
 	if (cardIdPattern.test(parts[0])) return parts[0]
 
+	if (parts[0] === "books") {
+		const bookPageId = parts[1]
+		return bookPageId ? `books/${bookPageId}` : "books"
+	}
+
 	if (parts[0] === "tracker") {
 		return parts[1] ? `tracker/${parts[1]}` : "tracker"
 	}
 
-	if (["about", "all", "books", "search"].includes(parts[0])) return parts[0]
+	if (["about", "all", "search"].includes(parts[0])) return parts[0]
 
 	return "index"
 }

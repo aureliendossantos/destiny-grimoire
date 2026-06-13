@@ -26,11 +26,13 @@ if (!userGrimoire) return new Response("Not found", { status: 404 })
 
 const guide = (await getGuides(locale)).types.find((g) => g.slug == guideSlug)
 if (!guide) return new Response("Not found", { status: 404 })
+const description = `Track ${username}'s ${guide.name} progress for Destiny 1 Grimoire Cards.`
 ---
 
 <Layout
-	title={`${guide?.name} · Destiny 1 Tracker · ${username} · The Grimoire Archive`}
-	description=""
+	title={`${guide?.name} · Destiny 1 Grimoire Tracker · ${username} · The Grimoire Archive`}
+	{description}
+	noindex
 	onGrimoirePage
 >
 	<TrackerPage

@@ -12,12 +12,13 @@ interface Props {
 		name: string
 		grimoire: UserGrimoire
 	}
+	showSpoilers?: boolean
 }
 
-const { cardId, cards, themes, user } = Astro.props
+const { cardId, cards, themes, user, showSpoilers = false } = Astro.props
 
-const userHasCard = user?.grimoire.cardCollection.some(
-	(userCard) => userCard.cardId == cardId,
+const userCardIds = new Set(
+	user?.grimoire.cardCollection.map((card) => card.cardId),
 )
 
 const data = themes
@@ -32,11 +33,7 @@ const data = themes
 	)
 	.filter(
 		(entry) =>
-			!user ||
-			!userHasCard ||
-			user.grimoire.cardCollection.find(
-				(c) => c.cardId == entry.card.cardId,
-			),
+			!user || showSpoilers || userCardIds.has(Number(entry.card.cardId)),
 	)
 const currentIndex = data.findIndex((entry) => entry.card.cardId === cardId)
 const currentEntry = data[currentIndex]
@@ -48,10 +45,14 @@ const nextEntry = data[currentIndex + 1]
 	class="col-span-3 mt-12 grid grid-cols-2 items-center gap-x-4 gap-y-10 border-t border-slate-200 pt-10 font-serif"
 >
 	{
-		previousEntry && (
+		currentEntry && previousEntry && (
 			<CardNavLink
 				card={previousEntry.card}
 				user={user}
+				isObscured={
+					!!user &&
+					!userCardIds.has(Number(previousEntry.card.cardId))
+				}
 				themeTitle={
 					previousEntry.theme != currentEntry.theme
 						? previousEntry.theme
@@ -61,10 +62,13 @@ const nextEntry = data[currentIndex + 1]
 		)
 	}
 	{
-		nextEntry && (
+		currentEntry && nextEntry && (
 			<CardNavLink
 				card={nextEntry.card}
 				user={user}
+				isObscured={
+					!!user && !userCardIds.has(Number(nextEntry.card.cardId))
+				}
 				themeTitle={
 					nextEntry.theme != currentEntry.theme
 						? nextEntry.theme

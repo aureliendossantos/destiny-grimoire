@@ -17,6 +17,7 @@ import Username from "$components/User/Username.astro"
 export type FooterProps = {
 	onGrimoireSection?: boolean
 	onGrimoirePage?: boolean
+	onIndexPage?: boolean
 	userInPath?: {
 		membershipType: 1 | 2
 		membershipId: string
@@ -29,7 +30,8 @@ type Props = {
 	pathname: string
 } & FooterProps
 
-const { locale, onGrimoireSection, onGrimoirePage, userInPath } = Astro.props
+const { locale, onGrimoireSection, onGrimoirePage, onIndexPage, userInPath } =
+	Astro.props
 const onGrimoire = onGrimoireSection || onGrimoirePage
 
 const pathname = stripLocaleFromPathname(Astro.props.pathname)
@@ -129,20 +131,23 @@ const isUserPage =
 						</LinkButton>
 					</>
 				) : (
-					<>
+					<div class="mb-4">
 						<div class="font-smcp text-base leading-relaxed">
 							{t("browse-yours")}
 						</div>
 						<MiniLoginForm {locale} redirect={pathnameRest} />
-					</>
+					</div>
 				))
 		}
 		{
-			!onGrimoire && (
+			!onIndexPage && (
 				<LinkButton href={getLocalizedPath(locale, "/")}>
 					{t("Home")}
 				</LinkButton>
 			)
 		}
+		<LinkButton href={getLocalizedPath(locale, "/about")}>
+			{t("About")}
+		</LinkButton>
 	</div>
 </div>

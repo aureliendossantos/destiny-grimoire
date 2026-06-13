@@ -29,11 +29,13 @@ if (!membershipId) return new Response("Not found", { status: 404 })
 
 const userGrimoire = await getUserGrimoire(membershipType, membershipId)
 if (!userGrimoire) return new Response("Not found", { status: 404 })
+const showSpoilers = Astro.cookies.get("grimoireShowSpoilers")?.value === "true"
 ---
 
 <Layout
 	title={`${username} · Destiny Grimoire Cards · The Grimoire Archive`}
 	description={`${userGrimoire.cardCollection.length} ${t("cards")} // ${userGrimoire.score} ${t("points")}`}
+	noindex
 	onGrimoirePage
 	userInPath={{
 		membershipType,
@@ -43,13 +45,26 @@ if (!userGrimoire) return new Response("Not found", { status: 404 })
 >
 	<SubHeader title={t("grimoire-cards")}>
 		<div slot="subtitle">
-			{t("g-Collection of")}
-			<UserIcon server:defer {membershipType} {membershipId}>
-				<UserIconFallback slot="fallback" />
-			</UserIcon>
-			{username} // {userGrimoire.cardCollection.length}
-			{t("cards")} // {userGrimoire.score}
-			{t("points")}
+			<div>
+				{t("g-Collection of")}
+				<UserIcon server:defer {membershipType} {membershipId}>
+					<UserIconFallback slot="fallback" />
+				</UserIcon>
+				{username} // {userGrimoire.cardCollection.length}
+				{t("cards")} // {userGrimoire.score}
+				{t("points")}
+			</div>
+			<label
+				class="mt-1 flex cursor-pointer items-center gap-2 text-slate-500"
+			>
+				<input
+					id="show-unobtained-cards"
+					type="checkbox"
+					checked={showSpoilers}
+					class="h-3 w-3 accent-slate-600"
+				/>
+				<span>{t("show-unobtained-cards")}</span>
+			</label>
 		</div>
 	</SubHeader>
 	<div class="mr-2 ml-10 sm:mr-4">
@@ -60,7 +75,26 @@ if (!userGrimoire) return new Response("Not found", { status: 404 })
 				{userGrimoire}
 				{membershipType}
 				{username}
+				{showSpoilers}
 			/>
 		</div>
 	</div>
 </Layout>
+
+<script>
+	import Cookies from "js-cookie"
+
+	document
+		.getElementById("show-unobtained-cards")
+		?.addEventListener("change", (event) => {
+			if (!(event.currentTarget instanceof HTMLInputElement)) return
+			Cookies.set(
+				"grimoireShowSpoilers",
+				String(event.currentTarget.checked),
+				{
+					path: "/",
+				},
+			)
+			window.location.reload()
+		})
+</script>

@@ -13,9 +13,10 @@ interface Props {
 	card: CollectionEntry<"cards">["data"][string]
 	membershipType?: 1 | 2
 	username?: string
+	isObscured?: boolean
 }
 
-const { card, membershipType, username } = Astro.props
+const { card, membershipType, username, isObscured = false } = Astro.props
 const locale = getLocaleFromPathname(Astro.url.pathname) || "en"
 const t = useTranslations(locale)
 const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
@@ -29,16 +30,15 @@ const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
 			: `/${card.cardId}`,
 	)}
 	class="relative flex aspect-card flex-col justify-end overflow-hidden rounded-sm px-3 py-3 shadow transition duration-300 ease-out hover:scale-105 hover:shadow-xl sm:px-4 md:px-5 md:py-[17px]"
+	class:list={{
+		"opacity-60 grayscale hover:opacity-100 hover:grayscale-0": isObscured,
+	}}
 >
 	<Image
 		src={cardImage}
 		alt={t("card-illustration-alt")}
 		class="absolute inset-0 h-full w-full bg-slate-400 object-cover"
-		loading="lazy"
-		decoding="async"
 		width={320}
-		format="webp"
-		quality="mid"
 	/>
 	<h3
 		class="z-10 text-xs font-semibold text-balance text-slate-100 sm:text-sm lg:text-base lg:leading-snug"

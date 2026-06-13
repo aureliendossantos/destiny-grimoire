@@ -4,6 +4,7 @@ import FooterFallback from "$components/Layout/FooterFallback.astro"
 import Header from "$components/Layout/Header.astro"
 import Seo from "$components/Layout/Seo.astro"
 import { getLocaleFromPathname, htmlLang } from "$utils/i18n"
+import type { StructuredData } from "$utils/seo"
 import "$styles/tailwind.css"
 import "$styles/fonts.css"
 // Supports weights 400-800
@@ -14,8 +15,17 @@ type Props = {
 	title: string
 	description: string
 	contentHeightScreen?: boolean
+	noindex?: boolean
+	structuredData?: StructuredData | StructuredData[]
 } & FooterProps
-const { title, description, contentHeightScreen, ...footerProps } = Astro.props
+const {
+	title,
+	description,
+	contentHeightScreen,
+	noindex,
+	structuredData,
+	...footerProps
+} = Astro.props
 const pathname = Astro.url.pathname
 const locale = getLocaleFromPathname(pathname) || "en"
 ---
@@ -24,7 +34,7 @@ const locale = getLocaleFromPathname(pathname) || "en"
 <html lang={htmlLang(locale)}>
 	<head>
 		<meta charset="UTF-8" />
-		<Seo {title} {description} />
+		<Seo {title} {description} {noindex} {structuredData} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />

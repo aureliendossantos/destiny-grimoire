@@ -22,11 +22,16 @@ export async function getStaticPaths() {
 	).flat()
 }
 const { guide, locale } = Astro.props
+const guideItemCount = guide.areas.reduce(
+	(total, area) => total + area.items.length,
+	0,
+)
+const description = `Find all ${guideItemCount} ${guide.name} entries for Destiny 1 Grimoire Cards with area-by-area tracker guidance.`
 ---
 
 <Layout
-	title={`${guide.name} · Destiny 1 Tracker · The Grimoire Archive`}
-	description=""
+	title={`${guide.name} · Destiny 1 Grimoire Tracker · The Grimoire Archive`}
+	{description}
 	onGrimoirePage
 >
 	<TrackerPage {locale} guideSlug={guide.slug} />

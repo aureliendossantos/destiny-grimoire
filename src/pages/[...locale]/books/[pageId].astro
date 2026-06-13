@@ -1,0 +1,195 @@
+---
+import { Image } from "astro:assets"
+import Layout from "$layouts/Layout.astro"
+import { getBookImage } from "$utils/book-images"
+import { getLoreBookManifest, type LoreBook } from "$utils/books"
+import { addAbbrs } from "$utils/helpers"
+import {
+	checkLocale,
+	getLocalizedPath,
+	localizedRouteParams,
+} from "$utils/i18n"
+import { getBreadcrumbListStructuredData, getMetaDescription } from "$utils/seo"
+import type { Lore, RecordDef } from "$utils/types"
+
+export async function getStaticPaths() {
+	const localePaths = await Promise.all(
+		localizedRouteParams.map(async (localePath) => {
+			const locale = checkLocale(localePath)
+			const manifest = await getLoreBookManifest(locale)
+
+			return manifest.groups.flatMap((group) =>
+				group.books.flatMap((book) =>
+					book.records.map(({ record, lore }, index) => {
+						const previousRecord =
+							index > 0 ? book.records[index - 1]?.record : null
+						const nextRecord =
+							index < book.records.length - 1
+								? book.records[index + 1]?.record
+								: null
+
+						return {
+							params: {
+								locale: localePath,
+								pageId: String(record.hash),
+							},
+							props: {
+								locale,
+								group: group.node,
+								book,
+								record,
+								lore,
+								previousRecord,
+								nextRecord,
+							},
+						}
+					}),
+				),
+			)
+		}),
+	)
+
+	return localePaths.flat()
+}
+
+const { locale, group, book, record, lore, previousRecord, nextRecord } =
+	Astro.props as {
+		locale: ReturnType<typeof checkLocale>
+		group: LoreBook["node"]
+		book: LoreBook
+		record: RecordDef
+		lore: Lore
+		previousRecord: RecordDef | null
+		nextRecord: RecordDef | null
+	}
+
+const description = addAbbrs(lore.displayProperties.description)
+const coverImage =
+	book.coverPath && getBookImage(book.node.hash, book.coverPath)
+const title = `${lore.displayProperties.name} · ${book.node.displayProperties.name} · Destiny 2 Lore Book · The Grimoire Archive`
+const structuredData = getBreadcrumbListStructuredData([
+	{
+		name: "Books",
+		url: new URL(
+			getLocalizedPath(locale, "/books"),
+			Astro.site || Astro.url,
+		),
+	},
+	{
+		name: group.displayProperties.name,
+		url: new URL(
+			`${getLocalizedPath(locale, "/books")}#group-${group.hash}`,
+			Astro.site || Astro.url,
+		),
+	},
+	{
+		name: book.node.displayProperties.name,
+		url: new URL(
+			getLocalizedPath(locale, `/books/${record.hash}`),
+			Astro.site || Astro.url,
+		),
+	},
+])
+---
+
+<Layout {title} description={getMetaDescription(description)} {structuredData}>
+	<main class="mx-4">
+		<article class="mx-auto my-8 mt-10 max-w-2xl">
+			<header
+				class="mt-16.5 mb-16.25 grid gap-8 border-slate-200 sm:grid-cols-[52px_minmax(0,1fr)]"
+			>
+				{
+					coverImage && (
+						<Image
+							src={coverImage}
+							alt=""
+							class="hidden aspect-5/7 w-13 bg-slate-100 object-cover shadow-sm sm:block"
+							width={104}
+						/>
+					)
+				}
+				<div class="flex flex-col">
+					<nav
+						aria-label="Breadcrumb"
+						class="mb-3.75 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate-500"
+					>
+						<a
+							href={`${getLocalizedPath(locale, "/books")}#group-${group.hash}`}
+							class="font-medium transition hover:text-slate-800"
+						>
+							{group.displayProperties.name}
+						</a>
+						<span aria-hidden="true">/</span>
+						<div class="font-normal text-slate-600">
+							{book.node.displayProperties.name}
+						</div>
+					</nav>
+					<div>
+						<h1
+							class="-mb-2 font-serif text-4xl leading-[1.2] text-balance text-slate-900"
+						>
+							{record.displayProperties.name}
+						</h1>
+					</div>
+				</div>
+			</header>
+
+			<div
+				class="book-entry font-serif text-base leading-relaxed text-slate-800 sm:text-xl"
+				set:html={description}
+			/>
+
+			<nav
+				aria-label="Book pages"
+				class="mt-12 grid gap-4 border-t border-slate-200 pt-6 sm:grid-cols-2"
+			>
+				{
+					previousRecord && (
+						<a
+							href={getLocalizedPath(
+								locale,
+								`/books/${previousRecord.hash}`,
+							)}
+							class="group py-4"
+						>
+							<div class="font-smcp text-slate-500 transition group-hover:text-slate-700">
+								Previous
+							</div>
+							<div class="mt-1 font-serif text-xl leading-tight text-balance text-slate-800">
+								{previousRecord.displayProperties.name}
+							</div>
+						</a>
+					)
+				}
+				{
+					nextRecord && (
+						<a
+							href={getLocalizedPath(
+								locale,
+								`/books/${nextRecord.hash}`,
+							)}
+							class="group py-4 text-right sm:col-start-2"
+						>
+							<div class="font-smcp text-slate-500 transition group-hover:text-slate-700">
+								Next
+							</div>
+							<div class="mt-1 font-serif text-xl leading-tight text-balance text-slate-800">
+								{nextRecord.displayProperties.name}
+							</div>
+						</a>
+					)
+				}
+			</nav>
+		</article>
+	</main>
+</Layout>
+
+<style>
+	.book-entry {
+		white-space: pre-line;
+	}
+
+	.book-entry :global(p + p) {
+		margin-top: 1.25lh;
+	}
+</style>

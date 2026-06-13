@@ -1,10 +1,9 @@
 ---
 import Layout from "$layouts/Layout.astro"
-import Login from "$components/Homepage/Login.astro"
-import SeeAllButton from "$components/Homepage/SeeAllButton.astro"
-import { localePaths, useTranslations } from "$utils/i18n"
-import power from "$images/icons/power.svg"
-import { getImage } from "astro:assets"
+import DashboardControls from "$components/Layout/DashboardControls.astro"
+import NavGrid from "$components/Layout/NavGrid.astro"
+import { getLocalizedPath, localePaths, useTranslations } from "$utils/i18n"
+import { getWebSiteStructuredData } from "$utils/seo"
 
 export async function getStaticPaths() {
 	return localePaths
@@ -12,90 +11,78 @@ export async function getStaticPaths() {
 
 const { locale } = Astro.props
 const t = useTranslations(locale)
-
-const powerIcon = await getImage({ src: power })
-const bgImage = `url(${powerIcon.src})`
+const description =
+	"Browse Destiny Grimoire Cards, lore entries, and Destiny 1 collection trackers in The Grimoire Archive."
+const structuredData = getWebSiteStructuredData(
+	new URL(getLocalizedPath(locale, "/"), Astro.site || Astro.url),
+	new URL(getLocalizedPath(locale, "/search"), Astro.site || Astro.url),
+)
+const items = [
+	{
+		id: "dashboard-grimoire-card",
+		dataCard: "grimoire",
+		title: t("dashboard-grimoire-title"),
+		subtitle: t("dashboard-grimoire-subtitle"),
+		href: getLocalizedPath(locale, "/all"),
+	},
+	{
+		id: "dashboard-tracker-card",
+		dataCard: "tracker",
+		title: t("dashboard-tracker-title"),
+		subtitle: t("dashboard-tracker-subtitle"),
+		href: getLocalizedPath(locale, "/tracker"),
+	},
+	{
+		title: t("Books"),
+		subtitle: "Destiny 2 lore books",
+		href: getLocalizedPath(locale, "/books"),
+	},
+]
 ---
 
-<style define:vars={{ bgImage }} is:global>
-	ul li::before {
-		content: "";
-		display: inline-block;
-		background-image: var(--bgImage);
-		background-size: contain;
-		width: 8px;
-		height: 8px;
-		margin-right: 8px;
-	}
-</style>
-
-<Layout title="The Grimoire Archive · Destiny Grimoire Cards" description="">
+<Layout
+	title="Destiny Grimoire Cards · The Grimoire Archive"
+	{description}
+	{structuredData}
+	onIndexPage
+>
+	<DashboardControls server:defer {locale} showUnobtainedControl>
+		<div slot="fallback" class="mx-auto mt-10 h-20 max-w-3xl"></div>
+	</DashboardControls>
 	<div class="mx-4">
-		<div
-			class="m-auto my-12 grid max-w-3xl grid-cols-1 gap-12 md:grid-cols-2"
-		>
-			<div class="m-auto max-w-md">
-				<h2
-					class="font-serif text-lg text-slate-500 italic"
-					set:html={t("What are Grimoire Cards")}
-				/>
-				<p class="font-serif text-lg" set:html={t("description")} />
-			</div>
-			<div class="order-first md:order-none">
-				<div class="m-auto flex flex-col items-center gap-2">
-					<h2 class="text-center font-smcp text-xl text-slate-400">
-						{t("browse-your-grimoire")}
-					</h2>
-					<Login server:defer {locale}>
-						<div
-							slot="fallback"
-							class="h-32 w-3/4 animate-pulse rounded-xl bg-slate-100"
-						>
-						</div>
-					</Login>
-					<SeeAllButton />
-				</div>
-			</div>
-			<div class="m-auto max-w-md">
-				<h2 class="font-serif text-lg text-slate-500 italic">
-					{t("Website Features")}
-				</h2>
-				<ul class="list-inside pl-4 font-serif text-lg text-slate-800">
-					<li class="-indent-8">
-						<em class="font-smcp text-slate-500 not-italic"
-							>{t("feature-discover-title")}:</em
-						>
-						{t("feature-discover-text")}
-					</li>
-					<li class="-indent-8">
-						<em class="font-smcp text-slate-500 not-italic"
-							>{t("feature-progress-title")}:</em
-						>
-						{t("feature-progress-text")}
-					</li>
-					<li class="-indent-8">
-						<em class="font-smcp text-slate-500 not-italic"
-							>{t("feature-search-title")}:</em
-						>
-						{t("feature-search-text")}
-					</li>
-				</ul>
-			</div>
-			<div class="m-auto max-w-md md:pt-7">
-				<ul class="list-inside pl-4 font-serif text-lg text-slate-800">
-					<li class="-indent-8">
-						<em class="font-smcp text-slate-500 not-italic">
-							{t("feature-language-title")}:
-						</em>
-						<span set:html={t("feature-language-body")} />
-						<a
-							class="text-slate-500 underline decoration-1 underline-offset-2"
-							href="https://github.com/aureliendossantos/destiny-grimoire/blob/master/src/utils/i18n.ts"
-							>{t("feature-language-contribute")}</a
-						>{t("feature-language-suffix")}
-					</li>
-				</ul>
-			</div>
-		</div>
+		<NavGrid {items} class="m-auto my-12 max-w-3xl" />
 	</div>
 </Layout>
+
+<script>
+	import Cookies from "js-cookie"
+	import { validateCookie } from "$utils/helpers"
+
+	const tryCookie = Cookies.get("grimoireLogin")
+	const loginCookie = tryCookie && validateCookie(JSON.parse(tryCookie))
+
+	if (loginCookie) {
+		const platform = loginCookie.membershipType == 1 ? "xbox" : "psn"
+		const username = loginCookie.username
+		const grimoireLink = document.getElementById("dashboard-grimoire-card")
+		const trackerLink = document.getElementById("dashboard-tracker-card")
+		const grimoireHref = grimoireLink?.getAttribute("href")
+		const trackerHref = trackerLink?.getAttribute("href")
+
+		if (grimoireHref) {
+			grimoireLink?.setAttribute(
+				"href",
+				grimoireHref.replace(/\/all$/, `/user/${platform}/${username}`),
+			)
+		}
+		if (trackerHref) {
+			trackerLink?.setAttribute(
+				"href",
+				trackerHref.replace(
+					/\/tracker$/,
+					`/user/${platform}/${username}/tracker`,
+				),
+			)
+		}
+	}
+</script>

@@ -1,5 +1,6 @@
 ---
 import SubHeader from "$components/Layout/SubHeader.astro"
+import NavGrid from "$components/Layout/NavGrid.astro"
 import {
 	getLocalizedPath,
 	useTranslations,
@@ -19,63 +20,45 @@ const { locale, user } = Astro.props
 const t = useTranslations(locale)
 
 const guides = await getGuides(locale)
+const items = [
+	...guides.types.map((guide) => ({
+		dataCard: "tracker",
+		title: addAbbrs(guide.name),
+		html: true,
+		subtitle:
+			guide.areas.length > 1
+				? `${guide.areas.length} ${t("t-places")}`
+				: guide.areas.length == 1
+					? guide.areas[0].name
+					: null,
+		subtitleStyle: "smcp" as const,
+		href: getLocalizedPath(
+			locale,
+			user
+				? `/user/${user.platform}/${user.name}/tracker/${guide.slug}`
+				: `/tracker/${guide.slug}`,
+		),
+	})),
+	user
+		? {
+				dataCard: "tracker",
+				title: t("Bonus tracker"),
+				html: true,
+				href: getLocalizedPath(
+					locale,
+					`/user/${user.platform}/${user.name}/tracker/bonuses`,
+				),
+			}
+		: {
+				title: t("Bonus tracker"),
+				html: true,
+				subtitle: t("Must be logged in"),
+				disabled: true,
+			},
+]
 ---
 
 <SubHeader title={t("Tracker")} />
 <div class="mx-4">
-	<div class="m-auto my-12 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
-		{
-			guides.types.map((guide) => (
-				<a
-					id="tracker-card"
-					class="flex flex-col justify-end rounded-lg border border-slate-300 bg-slate-100 p-4 font-serif shadow-sm transition duration-300 ease-out hover:scale-[1.03] hover:shadow-md"
-					href={getLocalizedPath(
-						locale,
-						user
-							? `/user/${user.platform}/${user.name}/tracker/${guide.slug}`
-							: `/tracker/${guide.slug}`,
-					)}
-				>
-					<h2
-						class="mt-[1lh] text-2xl leading-[1.15] text-slate-800"
-						set:html={addAbbrs(guide.name)}
-					/>
-					<div class="font-smcp text-lg leading-snug text-slate-500">
-						{guide.areas.length > 1
-							? `${guide.areas.length} ${t("t-places")}`
-							: guide.areas.length == 1
-								? guide.areas[0].name
-								: null}
-					</div>
-				</a>
-			))
-		}
-		{
-			user ? (
-				<a
-					id="tracker-card"
-					class="flex flex-col justify-end rounded-lg border border-slate-300 bg-slate-100 p-4 font-serif shadow-sm transition duration-300 ease-out hover:scale-[1.03] hover:shadow-md"
-					href={getLocalizedPath(
-						locale,
-						`/user/${user.platform}/${user.name}/tracker/bonuses`,
-					)}
-				>
-					<h2
-						class="mt-[1lh] text-2xl leading-[1.15] text-slate-800"
-						set:html={t("Bonus tracker")}
-					/>
-				</a>
-			) : (
-				<div class="flex flex-col justify-end rounded-lg border border-slate-300 bg-slate-50 p-4 font-serif">
-					<h2
-						class="mt-[1lh] text-2xl text-slate-600"
-						set:html={t("Bonus tracker")}
-					/>
-					<div class="text-lg leading-tight text-slate-500">
-						{t("Must be logged in")}
-					</div>
-				</div>
-			)
-		}
-	</div>
+	<NavGrid {items} class="m-auto my-12 max-w-3xl sm:grid-cols-3" />
 </div>

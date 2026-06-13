@@ -13,13 +13,14 @@ interface Props {
 	card: CollectionEntry<"cards">["data"][string]
 	themeTitle?: string
 	next?: boolean
+	isObscured?: boolean
 	user?: {
 		membershipType: 1 | 2
 		name: string
 	}
 }
 
-const { card, themeTitle, next, user } = Astro.props
+const { card, themeTitle, next, user, isObscured = false } = Astro.props
 const locale = getLocaleFromPathname(Astro.url.pathname) || "en"
 const t = useTranslations(locale)
 const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
@@ -34,18 +35,17 @@ const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
 	)}
 	class:list={[
 		"flex items-center gap-4 leading-snug",
-		{ "col-start-2 flex-row-reverse text-right": next },
+		{
+			"col-start-2 flex-row-reverse text-right": next,
+			"opacity-60 grayscale": isObscured,
+		},
 	]}
 >
 	<Image
 		src={cardImage}
 		alt={t("card-illustration-alt")}
-		class="h-16 w-auto rounded-sm bg-slate-400 shadow-sm"
-		height={64}
-		format="webp"
-		quality="mid"
-		loading="lazy"
-		decoding="async"
+		class="h-16 w-auto rounded-[1.5px] bg-slate-400 shadow-sm"
+		height={128}
 	/>
 	<div>
 		{

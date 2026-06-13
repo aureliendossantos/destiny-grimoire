@@ -1,0 +1,122 @@
+---
+import UserEmblem from "$components/User/UserEmblem.astro"
+import playstation from "$images/icons/playstation.svg?raw"
+import xbox from "$images/icons/xbox.svg?raw"
+import { validateCookie } from "$utils/helpers"
+import {
+	getLocalizedPath,
+	useTranslations,
+	type SupportedLocale,
+} from "$utils/i18n"
+
+interface Props {
+	locale: SupportedLocale
+	redirect?: string
+	showUnobtainedControl?: boolean
+}
+
+const { locale, redirect = "/", showUnobtainedControl = false } = Astro.props
+const t = useTranslations(locale)
+
+const tryCookie = Astro.cookies.get("grimoireLogin")
+const cookie = validateCookie(tryCookie?.json())
+if (tryCookie && !cookie) {
+	console.warn("Deleting invalid cookie:", cookie)
+	Astro.cookies.delete("grimoireLogin", { path: "/" })
+}
+
+const showSpoilers = Astro.cookies.get("grimoireShowSpoilers")?.value === "true"
+---
+
+<div class="mx-4">
+	<div
+		class="m-auto mt-12 grid max-w-3xl grid-cols-1 items-start gap-4 md:grid-cols-[1fr_auto]"
+	>
+		<form action={getLocalizedPath(locale, "/search")} method="get">
+			<label class="block">
+				<span class="sr-only">{t("Search")}</span>
+				<input
+					type="search"
+					name="term"
+					class="w-full border-b border-slate-300 bg-transparent px-0 py-2 font-serif text-xl text-slate-700 transition placeholder:text-slate-400 focus:border-slate-500 focus:outline-none"
+					placeholder={t("Search")}
+				/>
+			</label>
+		</form>
+		<div class="flex flex-col gap-2">
+			{
+				cookie ? (
+					<>
+						<UserEmblem
+							{locale}
+							membershipType={cookie.membershipType}
+							membershipId={cookie.membershipId}
+							username={cookie.username}
+						/>
+						<div class="mt-1 flex flex-row justify-between text-xs font-medium">
+							{showUnobtainedControl ? (
+								<label class="flex cursor-pointer items-center gap-2 text-slate-500">
+									<input
+										id="show-unobtained-cards"
+										type="checkbox"
+										checked={showSpoilers}
+										class="h-3 w-3 accent-slate-600"
+									/>
+									<span>{t("show-unobtained-cards")}</span>
+								</label>
+							) : (
+								<div />
+							)}
+							<a
+								href={getLocalizedPath(
+									locale,
+									`/logout?redirect=${redirect}`,
+								)}
+								class="text-slate-400 transition hover:text-slate-500"
+							>
+								{t("switch-user")}
+							</a>
+						</div>
+					</>
+				) : (
+					<form
+						action={getLocalizedPath(locale, "/login")}
+						method="post"
+						class="flex flex-col gap-2"
+					>
+						<input type="hidden" name="redirect" value={redirect} />
+						<div class="flex justify-center gap-1">
+							<label class="cursor-pointer rounded-md border border-r-0 border-slate-50 px-2 py-1 text-center text-slate-400 transition group-hover:border-slate-400 hover:bg-slate-200 hover:text-slate-500">
+								<input
+									type="checkbox"
+									name="platform"
+									class="peer hidden"
+								/>
+								<div
+									class="inline-block align-text-bottom peer-checked:hidden"
+									set:html={playstation}
+								/>
+								<div
+									class="hidden align-text-bottom peer-checked:inline-block"
+									set:html={xbox}
+								/>
+							</label>
+							<input
+								type="text"
+								name="username"
+								placeholder={t("username")}
+								required
+								class="w-[16ch] rounded-md bg-slate-100 px-4 py-2 text-base font-medium text-slate-500 shadow-inner ring-slate-400 transition focus:ring-2 focus:outline-none"
+							/>
+						</div>
+						<input
+							type="submit"
+							value={t("login")}
+							class="cursor-pointer rounded-md bg-slate-200/60 px-4 py-[10px] font-medium text-slate-400 transition hover:bg-slate-200 hover:text-slate-500"
+						/>
+					</form>
+				)
+			}
+		</div>
+	</div>
+</div>

@@ -12,6 +12,7 @@ import {
 	ogImageHeight,
 	ogImageWidth,
 	siteName,
+	type StructuredData,
 } from "$utils/seo"
 import { getStaticOgImagePath } from "$utils/og-path"
 
@@ -20,7 +21,9 @@ type Props = {
 	description: string
 	canonical?: string | URL
 	imageAlt?: string
+	noindex?: boolean
 	ogType?: string
+	structuredData?: StructuredData | StructuredData[]
 }
 
 const twitterCard = "summary_large_image"
@@ -40,7 +43,9 @@ const {
 	description,
 	canonical,
 	imageAlt = `${title} - ${siteName}`,
+	noindex = false,
 	ogType = "website",
+	structuredData = [],
 } = Astro.props
 const pathname = Astro.url.pathname
 const locale = getLocaleFromPathname(pathname) || "en"
@@ -52,10 +57,14 @@ const canonicalUrl = canonical
 const metaDescription = getMetaDescription(description)
 const ogImagePath = getStaticOgImagePath(pathnameWithoutLocale)
 const ogImageUrl = new URL(`/og/${locale}/${ogImagePath}.png`, urlBase)
+const structuredDataItems = Array.isArray(structuredData)
+	? structuredData
+	: [structuredData]
 ---
 
 <title>{title}</title>
 <meta name="description" content={metaDescription} />
+{noindex && <meta name="robots" content="noindex,follow" />}
 <link rel="canonical" href={canonicalUrl} />
 {
 	localeParams.map((alternateLocale) => (
@@ -98,3 +107,12 @@ const ogImageUrl = new URL(`/og/${locale}/${ogImagePath}.png`, urlBase)
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={metaDescription} />
 <meta name="twitter:image" content={ogImageUrl} />
+{
+	structuredDataItems.map((data) => (
+		<script
+			type="application/ld+json"
+			is:inline
+			set:html={JSON.stringify(data)}
+		/>
+	))
+}

@@ -9,11 +9,13 @@ const { locale, platform, username } = parseParamsWithUser(Astro.params)
 if (!locale) return new Response("Not found", { status: 404 })
 if (platform != "psn" && platform != "xbox")
 	return new Response("Not found", { status: 404 })
+const description = `Track ${username}'s Destiny 1 Grimoire Card collection, hidden entries, and bonus progress.`
 ---
 
 <Layout
-	title={`${username} · Destiny 1 Tracker · The Grimoire Archive`}
-	description=""
+	title={`${username} · Destiny 1 Grimoire Tracker · The Grimoire Archive`}
+	{description}
+	noindex
 	onGrimoirePage
 >
 	<TrackerIndex {locale} user={{ platform, name: username }} />

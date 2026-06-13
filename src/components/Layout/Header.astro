@@ -22,26 +22,24 @@ const activeSection = sectionPath.startsWith("/tracker")
 		  /^\d+$/.test(sectionPath.slice(1)) ||
 		  (platform && sectionPath === "/")
 		? "grimoire"
-		: undefined
+		: sectionPath.startsWith("/books")
+			? "books"
+			: sectionPath === "/about"
+				? "about"
+				: undefined
 ---
 
-<header class="bg-slate-200 px-4 sm:px-8">
-	<div class="m-auto flex max-w-6xl flex-wrap items-center justify-between">
-		<div>
-			<a
-				href={getLocalizedPath(locale, "/")}
-				class="py-2 pr-4 text-slate-500 transition hover:text-slate-400"
-			>
-				<span
-					class="hidden font-accent text-xl leading-none tracking-[0.08em] uppercase sm:inline"
-				>
-					The Grimoire Archive
-				</span>
-				<span class="text-sm font-medium sm:hidden">{t("Home")}</span>
-			</a>
-		</div>
+<header class="bg-slate-200 pl-4 sm:px-8">
+	<div class="m-auto flex min-h-17 flex-wrap items-center gap-x-4">
+		<a
+			href={getLocalizedPath(locale, "/")}
+			class="pt-4 pr-4 md:pb-4 font-accent text-xl leading-none tracking-[0.08em] text-slate-500 uppercase transition hover:text-slate-400"
+		>
+			The Grimoire Archive
+		</a>
+		<div class="grow"></div>
 		<div
-			class="group flex items-center py-4 text-sm font-medium text-slate-500"
+			class="group flex max-w-full flex-wrap items-center -mx-2 md:mx-0 py-4 text-sm font-medium text-slate-500"
 		>
 			<HeaderLink
 				href={getLocalizedPath(locale, platform ? basePath : "/all")}
@@ -55,11 +53,12 @@ const activeSection = sectionPath.startsWith("/tracker")
 			>
 				{t("Tracker")}
 			</HeaderLink>
-			{
-				/* <HeaderLink href={getLocalizedPath(locale, "/books")}>
-				{t("Books")}<sup>D2</sup>
-			</HeaderLink> */
-			}
+			<HeaderLink
+				href={getLocalizedPath(locale, "/books")}
+				isActive={activeSection === "books"}
+			>
+				{t("Books")}
+			</HeaderLink>
 			<form
 				action={getLocalizedPath(locale, "/search")}
 				method="get"
@@ -89,7 +88,7 @@ const activeSection = sectionPath.startsWith("/tracker")
 			</form>
 			<select
 				id="header-language-switcher"
-				class="rounded-lg bg-transparent py-2 pl-3 ring-slate-300 transition hover:bg-slate-100 hover:ring-1"
+				class="rounded-lg bg-transparent py-2 pl-1 sm:pl-3 ring-slate-300 transition hover:bg-slate-100 hover:ring-1"
 			>
 				{
 					localeParams.map((localePath) => {

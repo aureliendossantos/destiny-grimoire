@@ -38,6 +38,7 @@ const inProgressBonuses = userBonuses.filter(
 <Layout
 	title={`${t("Bonus tracker")} · Destiny Grimoire · ${username} · The Grimoire Archive`}
 	description={`${activeBonuses} ${t("active bonuses")}, ${inProgressBonuses} ${t("in progress")}`}
+	noindex
 	userInPath={{ membershipType, membershipId, name: username }}
 	onGrimoireSection
 >

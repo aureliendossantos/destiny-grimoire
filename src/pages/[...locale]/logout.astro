@@ -12,5 +12,11 @@ Astro.cookies.delete("grimoireLogin", { path: "/" })
 const redirectPath = getLocalizedPath(locale, redirect || "/")
 if (!redirectPath.startsWith("/"))
 	throw new Error("Invalid logout redirect path")
-return Astro.redirect(redirectPath)
+return new Response(null, {
+	status: 302,
+	headers: {
+		Location: redirectPath,
+		"X-Robots-Tag": "noindex, nofollow",
+	},
+})
 ---

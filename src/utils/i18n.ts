@@ -251,6 +251,7 @@ const headerFooter = {
 		Books: "Books",
 		Grimoire: "Grimoire",
 		Tracker: "Tracker",
+		About: "About this website",
 		Search: "Search…",
 		Home: "Home",
 	},
@@ -352,29 +353,29 @@ const home = {
 		"browse-your-grimoire": "Browse your Grimoire",
 		"see-all-cards": "See all cards",
 		spoilers: "Spoilers",
+		"show-unobtained-cards": "Show unobtained cards",
+		"dashboard-grimoire-title": "Grimoire Cards",
+		"dashboard-grimoire-subtitle": "Browse the Destiny 1 archive",
+		"dashboard-tracker-title": "Tracker",
+		"dashboard-tracker-subtitle": "Hidden items and guides",
+		"dashboard-about-title": "About",
+		"about-title": "About",
+		"about-summary":
+			"Privacy, credits, and context for The Grimoire Archive.",
+		"privacy-title": "Privacy",
+		"privacy-body":
+			"<p>The site stores a <code>userLocale</code> cookie when you change language, so future visits can keep the selected locale.</p><p>When you log in with a Destiny username, the site stores a <code>grimoireLogin</code> cookie containing your platform, Bungie membership ID, and username. This keeps you logged in and lets the grimoire show your collection.</p><p>The show unobtained cards preference is stored locally in a cookie and only controls how your collection is displayed on this site.</p><p>Vercel Analytics is enabled to understand aggregate page traffic and site performance.</p><p>Username lookups are sent to the Bungie API to find the matching Destiny 1 membership and load public grimoire collection data. The site does not ask for your Bungie password or OAuth access.</p>",
+		"credits-title": "Credits",
+		"credits-body":
+			"<p>Destiny, Grimoire text, card images, and related game data belong to Bungie.</p><p>The Grimoire Archive restores access to Destiny 1 grimoire browsing with data from Bungie's public API and archived game manifests.</p>",
 		card: "card",
 		cards: "cards",
 		points: "points",
 		username: "Username",
 		login: "Login",
+		"no-account": "No account required. Use your Destiny 1 username.",
 		"switch-user": "Switch user",
-		"no-account": "No account on Destiny?",
 		"grimoire-cards": "Grimoire Cards",
-		"Website Features": "Website Features",
-		"feature-discover-title": "Discover your own cards",
-		"feature-discover-text":
-			"Avoid spoilers and reveal the lore as you unlock cards in-game.",
-		"feature-progress-title": "Track your progress",
-		"feature-progress-text":
-			"Keep tabs on your unlocked cards and hidden bonuses, and locate secret items with short video guides.",
-		"feature-search-title": "Quick search",
-		"feature-search-text":
-			"Instantly view all the snippets where your keywords appear.",
-		"feature-language-title": "Multi-language support",
-		"feature-language-body":
-			"<i>The Grimoire Archive</i> lets you experience Destiny's official Grimoire text in English, French, German, Italian, Japanese, Spanish, and Brazilian Portuguese. The interface is now translated more broadly too; if you spot a rough string,",
-		"feature-language-contribute": "contributions are welcome",
-		"feature-language-suffix": ".",
 	},
 	fr: {
 		"What are Grimoire Cards": "Que sont les cartes de Grimoire ?",
@@ -389,23 +390,7 @@ const home = {
 		username: "Pseudo",
 		login: "Se connecter",
 		"switch-user": "Changer d'utilisateur",
-		"no-account": "Pas de compte sur Destiny ?",
 		"grimoire-cards": "Cartes de Grimoire",
-		"Website Features": "Fonctionnalités du site",
-		"feature-discover-title": "Découvrez vos propres cartes",
-		"feature-discover-text":
-			"Évitez les spoilers et révélez l'histoire au fil des cartes débloquées en jeu.",
-		"feature-progress-title": "Suivez votre progression",
-		"feature-progress-text":
-			"Gardez un œil sur vos cartes débloquées et vos bonus cachés, puis retrouvez les objets secrets grâce à de courts guides vidéo.",
-		"feature-search-title": "Recherche rapide",
-		"feature-search-text":
-			"Affichez instantanément les extraits où apparaissent vos mots-clés.",
-		"feature-language-title": "Prise en charge multilingue",
-		"feature-language-body":
-			"<i>The Grimoire Archive</i> vous permet de lire les textes officiels du Grimoire de Destiny en anglais, français, allemand, italien, japonais, espagnol et portugais brésilien. L'interface est désormais plus largement traduite ; si une formulation vous semble maladroite,",
-		"feature-language-contribute": "les contributions sont les bienvenues",
-		"feature-language-suffix": ".",
 	},
 	de: {
 		"What are Grimoire Cards": "Was sind Grimoire-Karten?",
@@ -420,23 +405,7 @@ const home = {
 		username: "Benutzername",
 		login: "Anmelden",
 		"switch-user": "Benutzer wechseln",
-		"no-account": "Kein Konto auf Destiny?",
 		"grimoire-cards": "Grimoire-Karten",
-		"Website Features": "Website-Funktionen",
-		"feature-discover-title": "Entdecke deine eigenen Karten",
-		"feature-discover-text":
-			"Vermeide Spoiler und enthülle die Lore erst, wenn du Karten im Spiel freischaltest.",
-		"feature-progress-title": "Verfolge deinen Fortschritt",
-		"feature-progress-text":
-			"Behalte freigeschaltete Karten und versteckte Boni im Blick und finde geheime Gegenstände mit kurzen Videoguides.",
-		"feature-search-title": "Schnelle Suche",
-		"feature-search-text":
-			"Zeige sofort alle Textstellen an, in denen deine Suchbegriffe vorkommen.",
-		"feature-language-title": "Mehrsprachige Unterstützung",
-		"feature-language-body":
-			"<i>The Grimoire Archive</i> lässt dich Destinys offizielle Grimoire-Texte auf Englisch, Französisch, Deutsch, Italienisch, Japanisch, Spanisch und brasilianischem Portugiesisch erleben. Auch die Oberfläche ist jetzt breiter übersetzt; wenn dir eine holprige Formulierung auffällt,",
-		"feature-language-contribute": "Beiträge sind willkommen",
-		"feature-language-suffix": ".",
 	},
 	es: {
 		"What are Grimoire Cards": "¿Qué son las cartas del Grimorio?",
@@ -451,23 +420,7 @@ const home = {
 		username: "Nombre de usuario",
 		login: "Iniciar sesión",
 		"switch-user": "Cambiar de usuario",
-		"no-account": "¿No tienes una cuenta en Destiny?",
 		"grimoire-cards": "Cartas del Grimorio",
-		"Website Features": "Funciones del sitio",
-		"feature-discover-title": "Descubre tus propias cartas",
-		"feature-discover-text":
-			"Evita spoilers y revela la historia a medida que desbloqueas cartas en el juego.",
-		"feature-progress-title": "Sigue tu progreso",
-		"feature-progress-text":
-			"Controla tus cartas desbloqueadas y bonificaciones ocultas, y localiza objetos secretos con guías breves en vídeo.",
-		"feature-search-title": "Búsqueda rápida",
-		"feature-search-text":
-			"Ve al instante todos los fragmentos donde aparecen tus palabras clave.",
-		"feature-language-title": "Soporte multilingüe",
-		"feature-language-body":
-			"<i>The Grimoire Archive</i> te permite disfrutar el texto oficial del Grimorio de Destiny en inglés, francés, alemán, italiano, japonés, español y portugués brasileño. La interfaz también está más traducida ahora; si ves una cadena mejorable,",
-		"feature-language-contribute": "las contribuciones son bienvenidas",
-		"feature-language-suffix": ".",
 	},
 	it: {
 		"What are Grimoire Cards": "Cosa sono le carte del Grimorio?",
@@ -482,23 +435,7 @@ const home = {
 		username: "Nome utente",
 		login: "Accedi",
 		"switch-user": "Cambia utente",
-		"no-account": "Nessun account su Destiny?",
 		"grimoire-cards": "Carte del Grimorio",
-		"Website Features": "Funzioni del sito",
-		"feature-discover-title": "Scopri le tue carte",
-		"feature-discover-text":
-			"Evita gli spoiler e svela la storia man mano che sblocchi le carte in gioco.",
-		"feature-progress-title": "Segui i progressi",
-		"feature-progress-text":
-			"Tieni d'occhio le carte sbloccate e i bonus nascosti, e trova gli oggetti segreti con brevi guide video.",
-		"feature-search-title": "Ricerca rapida",
-		"feature-search-text":
-			"Visualizza subito tutti gli estratti in cui compaiono le parole chiave.",
-		"feature-language-title": "Supporto multilingue",
-		"feature-language-body":
-			"<i>The Grimoire Archive</i> ti permette di leggere i testi ufficiali del Grimorio di Destiny in inglese, francese, tedesco, italiano, giapponese, spagnolo e portoghese brasiliano. Anche l'interfaccia ora è tradotta in modo più completo; se noti una stringa da migliorare,",
-		"feature-language-contribute": "i contributi sono benvenuti",
-		"feature-language-suffix": ".",
 	},
 	"pt-br": {
 		"What are Grimoire Cards": "O que são as cartas do Grimório?",
@@ -513,23 +450,7 @@ const home = {
 		username: "Nome de usuário",
 		login: "Entrar",
 		"switch-user": "Trocar usuário",
-		"no-account": "Sem conta no Destiny?",
 		"grimoire-cards": "Cartas do Grimório",
-		"Website Features": "Recursos do site",
-		"feature-discover-title": "Descubra suas cartas",
-		"feature-discover-text":
-			"Evite spoilers e revele a história conforme desbloqueia cartas no jogo.",
-		"feature-progress-title": "Acompanhe seu progresso",
-		"feature-progress-text":
-			"Acompanhe suas cartas desbloqueadas e bônus ocultos, e encontre itens secretos com guias curtos em vídeo.",
-		"feature-search-title": "Busca rápida",
-		"feature-search-text":
-			"Veja imediatamente todos os trechos em que suas palavras-chave aparecem.",
-		"feature-language-title": "Suporte multilíngue",
-		"feature-language-body":
-			"<i>The Grimoire Archive</i> permite ler os textos oficiais do Grimório de Destiny em inglês, francês, alemão, italiano, japonês, espanhol e português brasileiro. A interface também está mais traduzida agora; se encontrar uma frase estranha,",
-		"feature-language-contribute": "contribuições são bem-vindas",
-		"feature-language-suffix": ".",
 	},
 	ja: {
 		"What are Grimoire Cards": "グリモアカードとは？",
@@ -544,23 +465,7 @@ const home = {
 		username: "ユーザー名",
 		login: "ログイン",
 		"switch-user": "ユーザーを切り替え",
-		"no-account": "Destinyのアカウントがありませんか？",
 		"grimoire-cards": "グリモアカード",
-		"Website Features": "サイト機能",
-		"feature-discover-title": "自分のカードを発見",
-		"feature-discover-text":
-			"ネタバレを避けながら、ゲーム内でカードをアンロックするたびに物語を読めます。",
-		"feature-progress-title": "進行状況を追跡",
-		"feature-progress-text":
-			"アンロック済みカードと隠しボーナスを確認し、短い動画ガイドで秘密のアイテムを見つけられます。",
-		"feature-search-title": "クイック検索",
-		"feature-search-text":
-			"キーワードが含まれるすべての抜粋をすぐに表示します。",
-		"feature-language-title": "多言語対応",
-		"feature-language-body":
-			"<i>The Grimoire Archive</i>では、Destinyの公式グリモア本文を英語、フランス語、ドイツ語、イタリア語、日本語、スペイン語、ブラジルポルトガル語で読めます。UIの翻訳範囲も広げました。不自然な文言を見つけた場合は、",
-		"feature-language-contribute": "コントリビューションを歓迎します",
-		"feature-language-suffix": "。",
 	},
 }
 
