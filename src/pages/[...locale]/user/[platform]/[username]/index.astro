@@ -36,7 +36,7 @@ const showSpoilers = Astro.cookies.get("grimoireShowSpoilers")?.value === "true"
 	title={`${username} · Destiny Grimoire Cards · The Grimoire Archive`}
 	description={`${userGrimoire.cardCollection.length} ${t("cards")} // ${userGrimoire.score} ${t("points")}`}
 	noindex
-	onGrimoirePage
+	onGrimoireHomePage
 	userInPath={{
 		membershipType,
 		membershipId,

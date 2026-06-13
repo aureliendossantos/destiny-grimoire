@@ -15,8 +15,8 @@ import MiniLoginForm from "$components/User/MiniLoginForm.astro"
 import Username from "$components/User/Username.astro"
 
 export type FooterProps = {
-	onGrimoireSection?: boolean
-	onGrimoirePage?: boolean
+	onGrimoireCardPage?: boolean
+	onGrimoireHomePage?: boolean
 	onIndexPage?: boolean
 	userInPath?: {
 		membershipType: 1 | 2
@@ -30,9 +30,14 @@ type Props = {
 	pathname: string
 } & FooterProps
 
-const { locale, onGrimoireSection, onGrimoirePage, onIndexPage, userInPath } =
-	Astro.props
-const onGrimoire = onGrimoireSection || onGrimoirePage
+const {
+	locale,
+	onGrimoireCardPage,
+	onGrimoireHomePage,
+	onIndexPage,
+	userInPath,
+} = Astro.props
+const onGrimoire = onGrimoireCardPage || onGrimoireHomePage
 
 const pathname = stripLocaleFromPathname(Astro.props.pathname)
 const pathnameRest = deconstructUrl(pathname).rest
@@ -81,7 +86,7 @@ const isUserPage =
 				: onGrimoire && (
 						<>
 							<div>{t("global-data")}</div>
-							{onGrimoireSection && (
+							{onGrimoireCardPage && (
 								<LinkButton
 									href={getLocalizedPath(locale, "/all")}
 								>
@@ -92,52 +97,51 @@ const isUserPage =
 					)
 		}
 		{
-			onGrimoire &&
-				(cookie ? (
-					<>
-						{!(onGrimoirePage && isUserPage) && (
-							<LinkButton
-								href={
-									isUserPage
-										? getLocalizedPath(
-												locale,
-												`/user/${membershipTypeToPath(userInPath.membershipType)}/${userInPath.name}`,
-											)
-										: getLocalizedPath(
-												locale,
-												`/user/${membershipTypeToPath(cookie.membershipType)}/${cookie.username}${pathnameRest}`,
-											)
-								}
-							>
-								<div>
-									{isUserPage
-										? t("back-to-grimoire")
-										: t("switch-to-your-collection")}
-								</div>
-								<Username
-									membershipType={cookie.membershipType}
-									membershipId={cookie.membershipId}
-									username={cookie.username}
-								/>
-							</LinkButton>
-						)}
+			cookie ? (
+				<>
+					{onGrimoireCardPage && (
 						<LinkButton
-							href={getLocalizedPath(
-								locale,
-								`/logout?redirect=${pathnameRest}`,
-							)}
+							href={
+								isUserPage
+									? getLocalizedPath(
+											locale,
+											`/user/${membershipTypeToPath(userInPath.membershipType)}/${userInPath.name}`,
+										)
+									: getLocalizedPath(
+											locale,
+											`/user/${membershipTypeToPath(cookie.membershipType)}/${cookie.username}${pathnameRest}`,
+										)
+							}
 						>
-							{t("logout")}
+							<div>
+								{isUserPage
+									? t("back-to-grimoire")
+									: t("switch-to-your-collection")}
+							</div>
+							<Username
+								membershipType={cookie.membershipType}
+								membershipId={cookie.membershipId}
+								username={cookie.username}
+							/>
 						</LinkButton>
-					</>
-				) : (
-					<div class="mb-4">
-						<div class="font-smcp text-base leading-relaxed">
-							{t("browse-yours")}
-						</div>
-						<MiniLoginForm {locale} redirect={pathnameRest} />
+					)}
+					<LinkButton
+						href={getLocalizedPath(
+							locale,
+							`/logout?redirect=${pathnameRest}`,
+						)}
+					>
+						{t("logout")}
+					</LinkButton>
+				</>
+			) : (
+				<div class="mb-4">
+					<div class="font-smcp text-base leading-relaxed">
+						{t("browse-yours")}
 					</div>
-				))
+					<MiniLoginForm {locale} redirect={pathnameRest} />
+				</div>
+			)
 		}
 		{
 			!onIndexPage && (

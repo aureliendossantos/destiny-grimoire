@@ -32,8 +32,8 @@ const description = `Track ${username}'s ${guide.name} progress for Destiny 1 Gr
 <Layout
 	title={`${guide?.name} · Destiny 1 Grimoire Tracker · ${username} · The Grimoire Archive`}
 	{description}
+	userInPath={{ membershipType, membershipId, name: username }}
 	noindex
-	onGrimoirePage
 >
 	<TrackerPage
 		{locale}

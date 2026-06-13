@@ -40,7 +40,6 @@ const inProgressBonuses = userBonuses.filter(
 	description={`${activeBonuses} ${t("active bonuses")}, ${inProgressBonuses} ${t("in progress")}`}
 	noindex
 	userInPath={{ membershipType, membershipId, name: username }}
-	onGrimoireSection
 >
 	<SubHeader
 		title={`${t("Grimoire bonuses of")} ${username}`}

@@ -33,21 +33,23 @@ const activeSection = sectionPath.startsWith("/tracker")
 	<div class="m-auto flex min-h-17 flex-wrap items-center gap-x-4">
 		<a
 			href={getLocalizedPath(locale, "/")}
-			class="pt-4 pr-4 md:pb-4 font-accent text-xl leading-none tracking-[0.08em] text-slate-500 uppercase transition hover:text-slate-400"
+			class="pt-4 pr-4 font-accent text-xl leading-none tracking-[0.08em] text-slate-500 uppercase transition hover:text-slate-400 md:pb-4"
 		>
 			The Grimoire Archive
 		</a>
 		<div class="grow"></div>
 		<div
-			class="group flex max-w-full flex-wrap items-center -mx-2 md:mx-0 py-4 text-sm font-medium text-slate-500"
+			class="group -mx-2 flex max-w-full flex-wrap items-center py-4 text-sm font-medium text-slate-500 md:mx-0"
 		>
 			<HeaderLink
+				id="header-grimoire-link"
 				href={getLocalizedPath(locale, platform ? basePath : "/all")}
 				isActive={activeSection === "grimoire"}
 			>
 				{t("Grimoire")}
 			</HeaderLink>
 			<HeaderLink
+				id="header-tracker-link"
 				href={getLocalizedPath(locale, `${basePath}/tracker`)}
 				isActive={activeSection === "tracker"}
 			>
@@ -88,7 +90,7 @@ const activeSection = sectionPath.startsWith("/tracker")
 			</form>
 			<select
 				id="header-language-switcher"
-				class="rounded-lg bg-transparent py-2 pl-1 sm:pl-3 ring-slate-300 transition hover:bg-slate-100 hover:ring-1"
+				class="rounded-lg bg-transparent py-2 pl-1 ring-slate-300 transition hover:bg-slate-100 hover:ring-1 sm:pl-3"
 			>
 				{
 					localeParams.map((localePath) => {
@@ -110,6 +112,7 @@ const activeSection = sectionPath.startsWith("/tracker")
 
 <script>
 	import Cookies from "js-cookie"
+	import { validateCookie } from "$utils/helpers"
 
 	document
 		.getElementById("header-language-switcher")
@@ -119,4 +122,20 @@ const activeSection = sectionPath.startsWith("/tracker")
 			if (locale) Cookies.set("userLocale", locale, { path: "/" })
 			window.location.pathname = t.currentTarget.value
 		})
+
+	const tryCookie = Cookies.get("grimoireLogin")
+	const loginCookie = tryCookie && validateCookie(JSON.parse(tryCookie))
+
+	if (loginCookie) {
+		const platform = loginCookie.membershipType == 1 ? "xbox" : "psn"
+		const username = loginCookie.username
+		const grimoireLink = document.getElementById("header-grimoire-link")
+		const trackerLink = document.getElementById("header-tracker-link")
+
+		grimoireLink?.setAttribute("href", `/user/${platform}/${username}`)
+		trackerLink?.setAttribute(
+			"href",
+			`/user/${platform}/${username}/tracker`,
+		)
+	}
 </script>

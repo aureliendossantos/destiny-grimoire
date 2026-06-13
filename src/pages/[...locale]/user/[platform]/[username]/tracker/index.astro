@@ -3,12 +3,17 @@ export const prerender = false
 
 import Layout from "$layouts/Layout.astro"
 import TrackerIndex from "$components/Tracker/TrackerIndex.astro"
-import { parseParamsWithUser } from "$utils/helpers"
+import { getMembershipId, parseParamsWithUser } from "$utils/helpers"
 
 const { locale, platform, username } = parseParamsWithUser(Astro.params)
 if (!locale) return new Response("Not found", { status: 404 })
+
 if (platform != "psn" && platform != "xbox")
 	return new Response("Not found", { status: 404 })
+const membershipType = platform == "xbox" ? 1 : 2
+const membershipId = await getMembershipId(membershipType, username!)
+if (!membershipId) return new Response("Not found", { status: 404 })
+
 const description = `Track ${username}'s Destiny 1 Grimoire Card collection, hidden entries, and bonus progress.`
 ---
 
@@ -16,7 +21,7 @@ const description = `Track ${username}'s Destiny 1 Grimoire Card collection, hid
 	title={`${username} · Destiny 1 Grimoire Tracker · The Grimoire Archive`}
 	{description}
 	noindex
-	onGrimoirePage
+	userInPath={{ membershipType, membershipId, name: username }}
 >
 	<TrackerIndex {locale} user={{ platform, name: username }} />
 </Layout>
