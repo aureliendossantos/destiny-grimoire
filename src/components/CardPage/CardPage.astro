@@ -20,10 +20,9 @@ interface Props {
 		name: string
 		grimoire: UserGrimoire
 	}
-	showSpoilers?: boolean
 }
 
-const { t, card, cards, themes, user, showSpoilers = false } = Astro.props
+const { t, card, cards, themes, user } = Astro.props
 
 const description = card.cardDescription && addAbbrs(card.cardDescription)
 const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
@@ -276,12 +275,6 @@ const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
 	<div
 		class="m-auto mb-12 grid w-full max-w-xl grid-cols-1 md:grid-cols-3 md:gap-x-12"
 	>
-		<CardNav
-			cardId={Number(card.cardId)}
-			{cards}
-			{themes}
-			{user}
-			{showSpoilers}
-		/>
+		<CardNav cardId={Number(card.cardId)} {cards} {themes} {user} />
 	</div>
 </div>

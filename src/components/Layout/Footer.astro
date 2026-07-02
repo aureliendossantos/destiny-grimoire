@@ -98,7 +98,10 @@ const t = useTranslations(locale)
 				)
 			}
 			<LinkButton
-				href={getLocalizedPath(locale, `/logout?redirect=${pathnameRest}`)}
+				href={getLocalizedPath(
+					locale,
+					`/logout?redirect=${pathnameRest}`,
+				)}
 			>
 				{t("logout")}
 			</LinkButton>
@@ -148,7 +151,13 @@ const t = useTranslations(locale)
 			typeof cookie.membershipId === "string" &&
 			typeof cookie.username === "string" &&
 			(cookie.emblemPath === undefined ||
-				typeof cookie.emblemPath === "string")
+				typeof cookie.emblemPath === "string") &&
+			(cookie.backgroundPath === undefined ||
+				typeof cookie.backgroundPath === "string") &&
+			(cookie.cardCount === undefined ||
+				typeof cookie.cardCount === "number") &&
+			(cookie.grimoireScore === undefined ||
+				typeof cookie.grimoireScore === "number")
 				? cookie
 				: null
 
@@ -171,7 +180,8 @@ const t = useTranslations(locale)
 		const userSource = footer.querySelector("[data-footer-user-source]")
 		const userMembershipId = footer.dataset.userMembershipId
 		const isUserPage =
-			Boolean(userMembershipId) && cookie.membershipId === userMembershipId
+			Boolean(userMembershipId) &&
+			cookie.membershipId === userMembershipId
 
 		if (isUserPage) userSource?.setAttribute("hidden", "")
 
@@ -206,13 +216,16 @@ const t = useTranslations(locale)
 			cardLink instanceof HTMLAnchorElement
 		) {
 			if (isUserPage) {
-				const userMembershipType = Number(footer.dataset.userMembershipType)
+				const userMembershipType = Number(
+					footer.dataset.userMembershipType,
+				)
 				const userName = footer.dataset.userName
 				cardLink.href = localizedPath(
 					`/user/${membershipTypeToPath(userMembershipType)}/${userName}`,
 				)
 				if (cardLinkLabel instanceof HTMLElement) {
-					cardLinkLabel.textContent = cardLinkLabel.dataset.backLabel || ""
+					cardLinkLabel.textContent =
+						cardLinkLabel.dataset.backLabel || ""
 				}
 			} else {
 				cardLink.href = localizedPath(

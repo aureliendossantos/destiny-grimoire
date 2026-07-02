@@ -107,6 +107,9 @@ interface Cookie {
 	membershipId: string
 	username: string
 	emblemPath?: string
+	backgroundPath?: string
+	cardCount?: number
+	grimoireScore?: number
 }
 
 export const validateCookie = (cookie: any) =>
@@ -114,7 +117,12 @@ export const validateCookie = (cookie: any) =>
 	(cookie.membershipType === 1 || cookie.membershipType === 2) &&
 	typeof cookie.membershipId == "string" &&
 	typeof cookie.username == "string" &&
-	(cookie.emblemPath == undefined || typeof cookie.emblemPath == "string")
+	(cookie.emblemPath == undefined || typeof cookie.emblemPath == "string") &&
+	(cookie.backgroundPath == undefined ||
+		typeof cookie.backgroundPath == "string") &&
+	(cookie.cardCount == undefined || typeof cookie.cardCount == "number") &&
+	(cookie.grimoireScore == undefined ||
+		typeof cookie.grimoireScore == "number")
 		? (cookie as Cookie)
 		: null
 

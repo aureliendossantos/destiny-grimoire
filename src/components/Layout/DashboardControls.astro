@@ -1,8 +1,6 @@
 ---
-import UserEmblem from "$components/User/UserEmblem.astro"
 import playstation from "$images/icons/playstation.svg?raw"
 import xbox from "$images/icons/xbox.svg?raw"
-import { validateCookie } from "$utils/helpers"
 import {
 	getLocalizedPath,
 	useTranslations,
@@ -17,18 +15,16 @@ interface Props {
 
 const { locale, redirect = "/", showUnobtainedControl = false } = Astro.props
 const t = useTranslations(locale)
-
-const tryCookie = Astro.cookies.get("grimoireLogin")
-const cookie = validateCookie(tryCookie?.json())
-if (tryCookie && !cookie) {
-	console.warn("Deleting invalid cookie:", cookie)
-	Astro.cookies.delete("grimoireLogin", { path: "/" })
-}
-
-const showSpoilers = Astro.cookies.get("grimoireShowSpoilers")?.value === "true"
 ---
 
-<div class="mx-4">
+<div
+	class="mx-4"
+	data-dashboard-controls
+	data-locale={locale}
+	data-user-path-base={getLocalizedPath(locale, "/user")}
+	data-cards-label={t("cards")}
+	data-points-label={t("points")}
+>
 	<div
 		class="m-auto mt-12 grid max-w-3xl grid-cols-1 items-start gap-4 md:grid-cols-[1fr_auto]"
 	>
@@ -44,79 +40,208 @@ const showSpoilers = Astro.cookies.get("grimoireShowSpoilers")?.value === "true"
 			</label>
 		</form>
 		<div class="flex flex-col gap-2">
-			{
-				cookie ? (
-					<>
-						<UserEmblem
-							{locale}
-							membershipType={cookie.membershipType}
-							membershipId={cookie.membershipId}
-							username={cookie.username}
-						/>
-						<div class="mt-1 flex flex-row justify-between text-xs font-medium">
-							{showUnobtainedControl ? (
-								<label class="flex cursor-pointer items-center gap-2 text-slate-500">
-									<input
-										id="show-unobtained-cards"
-										type="checkbox"
-										checked={showSpoilers}
-										class="h-3 w-3 accent-slate-600"
-									/>
-									<span>{t("show-unobtained-cards")}</span>
-								</label>
-							) : (
-								<div />
-							)}
-							<a
-								href={getLocalizedPath(
-									locale,
-									`/logout?redirect=${redirect}`,
-								)}
-								class="text-slate-400 transition hover:text-slate-500"
-							>
-								{t("switch-user")}
-							</a>
-						</div>
-					</>
-				) : (
-					<form
-						action={getLocalizedPath(locale, "/login")}
-						method="post"
-						class="flex flex-col gap-2"
+			<div class="flex flex-col gap-2" data-dashboard-logged-in hidden>
+				<a
+					href={getLocalizedPath(locale, "/")}
+					class="relative flex overflow-hidden rounded-sm bg-slate-400 shadow-sm transition duration-300 ease-out hover:scale-105 hover:shadow-md"
+					style={{ height: "48px" }}
+					data-dashboard-user-banner
+				>
+					<div
+						class="absolute inset-0 bg-slate-400"
+						data-dashboard-banner-fallback
 					>
-						<input type="hidden" name="redirect" value={redirect} />
-						<div class="flex justify-center gap-1">
-							<label class="cursor-pointer rounded-md border border-r-0 border-slate-50 px-2 py-1 text-center text-slate-400 transition group-hover:border-slate-400 hover:bg-slate-200 hover:text-slate-500">
-								<input
-									type="checkbox"
-									name="platform"
-									class="peer hidden"
-								/>
-								<div
-									class="inline-block align-text-bottom peer-checked:hidden"
-									set:html={playstation}
-								/>
-								<div
-									class="hidden align-text-bottom peer-checked:inline-block"
-									set:html={xbox}
-								/>
-							</label>
-							<input
-								type="text"
-								name="username"
-								placeholder={t("username")}
-								required
-								class="w-[16ch] rounded-md bg-slate-100 px-4 py-2 text-base font-medium text-slate-500 shadow-inner ring-slate-400 transition focus:ring-2 focus:outline-none"
-							/>
+					</div>
+					<img
+						class="relative z-10 hidden shrink-0 grow-0 rounded-l-sm"
+						style={{ width: "48px", height: "48px" }}
+						alt=""
+						data-dashboard-emblem
+					/>
+					<img
+						class="relative z-10 hidden shrink grow-0 rounded-r-sm"
+						style={{ width: "237px", height: "48px" }}
+						alt=""
+						data-dashboard-background
+					/>
+					<div
+						class="absolute top-0 left-12 z-20 flex h-full flex-col justify-center px-2 text-base leading-tight font-semibold text-slate-50 drop-shadow"
+					>
+						<div data-dashboard-username></div>
+						<div
+							class="hidden pb-[1px] text-xs font-semibold"
+							data-dashboard-stats
+						>
 						</div>
+					</div>
+				</a>
+				<div
+					class="mt-1 flex flex-row justify-between text-xs font-medium"
+				>
+					{
+						showUnobtainedControl ? (
+							<label class="flex cursor-pointer items-center gap-2 text-slate-500">
+								<input
+									id="show-unobtained-cards"
+									type="checkbox"
+									data-spoiler-toggle
+									class="h-3 w-3 accent-slate-600"
+								/>
+								<span>{t("show-unobtained-cards")}</span>
+							</label>
+						) : (
+							<div />
+						)
+					}
+					<a
+						href={getLocalizedPath(
+							locale,
+							`/logout?redirect=${redirect}`,
+						)}
+						class="text-slate-400 transition hover:text-slate-500"
+					>
+						{t("switch-user")}
+					</a>
+				</div>
+			</div>
+			<form
+				action={getLocalizedPath(locale, "/login")}
+				method="post"
+				class="flex flex-col gap-2"
+				data-dashboard-logged-out
+			>
+				<input type="hidden" name="redirect" value={redirect} />
+				<div class="flex justify-center gap-1">
+					<label
+						class="cursor-pointer rounded-md border border-r-0 border-slate-50 px-2 py-1 text-center text-slate-400 transition group-hover:border-slate-400 hover:bg-slate-200 hover:text-slate-500"
+					>
 						<input
-							type="submit"
-							value={t("login")}
-							class="cursor-pointer rounded-md bg-slate-200/60 px-4 py-[10px] font-medium text-slate-400 transition hover:bg-slate-200 hover:text-slate-500"
+							type="checkbox"
+							name="platform"
+							class="peer hidden"
 						/>
-					</form>
-				)
-			}
+						<div
+							class="inline-block align-text-bottom peer-checked:hidden"
+							set:html={playstation}
+						/>
+						<div
+							class="hidden align-text-bottom peer-checked:inline-block"
+							set:html={xbox}
+						/>
+					</label>
+					<input
+						type="text"
+						name="username"
+						placeholder={t("username")}
+						required
+						class="w-[16ch] rounded-md bg-slate-100 px-4 py-2 text-base font-medium text-slate-500 shadow-inner ring-slate-400 transition focus:ring-2 focus:outline-none"
+					/>
+				</div>
+				<input
+					type="submit"
+					value={t("login")}
+					class="cursor-pointer rounded-md bg-slate-200/60 px-4 py-[10px] font-medium text-slate-400 transition hover:bg-slate-200 hover:text-slate-500"
+				/>
+			</form>
 		</div>
 	</div>
 </div>
+
+<script is:inline>
+	;(() => {
+		const dashboard = document.querySelector("[data-dashboard-controls]")
+		if (!(dashboard instanceof HTMLElement)) return
+
+		const getCookie = (name) => {
+			const prefix = `${name}=`
+			const value = document.cookie
+				.split("; ")
+				.find((part) => part.startsWith(prefix))
+				?.slice(prefix.length)
+			if (!value) return null
+
+			try {
+				return decodeURIComponent(value)
+			} catch {
+				return value
+			}
+		}
+
+		const validateLoginCookie = (cookie) =>
+			cookie &&
+			(cookie.membershipType === 1 || cookie.membershipType === 2) &&
+			typeof cookie.membershipId === "string" &&
+			typeof cookie.username === "string" &&
+			(cookie.emblemPath === undefined ||
+				typeof cookie.emblemPath === "string") &&
+			(cookie.backgroundPath === undefined ||
+				typeof cookie.backgroundPath === "string") &&
+			(cookie.cardCount === undefined ||
+				typeof cookie.cardCount === "number") &&
+			(cookie.grimoireScore === undefined ||
+				typeof cookie.grimoireScore === "number")
+				? cookie
+				: null
+
+		let cookie = null
+		try {
+			cookie = validateLoginCookie(JSON.parse(getCookie("grimoireLogin")))
+		} catch {
+			cookie = null
+		}
+		if (!cookie) return
+
+		const membershipTypeToPath = (membershipType) =>
+			membershipType === 1 ? "xbox" : "psn"
+		const userPathBase = dashboard.dataset.userPathBase || "/user"
+		const userPath = `${userPathBase}/${membershipTypeToPath(cookie.membershipType)}/${cookie.username}`
+
+		dashboard
+			.querySelector("[data-dashboard-logged-out]")
+			?.setAttribute("hidden", "")
+		dashboard
+			.querySelector("[data-dashboard-logged-in]")
+			?.removeAttribute("hidden")
+
+		const banner = dashboard.querySelector("[data-dashboard-user-banner]")
+		if (banner instanceof HTMLAnchorElement) banner.href = userPath
+
+		const username = dashboard.querySelector("[data-dashboard-username]")
+		if (username) username.textContent = cookie.username
+
+		const emblem = dashboard.querySelector("[data-dashboard-emblem]")
+		if (
+			emblem instanceof HTMLImageElement &&
+			cookie.emblemPath &&
+			cookie.emblemPath.startsWith("/")
+		) {
+			emblem.src = `https://www.bungie.net${cookie.emblemPath}`
+			emblem.classList.remove("hidden")
+		}
+
+		const background = dashboard.querySelector(
+			"[data-dashboard-background]",
+		)
+		if (
+			background instanceof HTMLImageElement &&
+			cookie.backgroundPath &&
+			cookie.backgroundPath.startsWith("/")
+		) {
+			background.src = `https://www.bungie.net${cookie.backgroundPath}`
+			background.classList.remove("hidden")
+			dashboard
+				.querySelector("[data-dashboard-banner-fallback]")
+				?.setAttribute("hidden", "")
+		}
+
+		const stats = dashboard.querySelector("[data-dashboard-stats]")
+		if (
+			stats instanceof HTMLElement &&
+			typeof cookie.cardCount === "number" &&
+			typeof cookie.grimoireScore === "number"
+		) {
+			stats.textContent = `${cookie.cardCount} ${dashboard.dataset.cardsLabel} // ${cookie.grimoireScore} ${dashboard.dataset.pointsLabel}`
+			stats.classList.remove("hidden")
+		}
+	})()
+</script>

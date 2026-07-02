@@ -29,6 +29,8 @@ const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
 			? `/user/${membershipTypeToPath(membershipType)}/${username}/${card.cardId}`
 			: `/${card.cardId}`,
 	)}
+	data-spoiler-hidden={isObscured ? "" : undefined}
+	hidden={isObscured}
 	class="relative flex aspect-card flex-col justify-end overflow-hidden rounded-sm px-3 py-3 shadow transition duration-300 ease-out hover:scale-105 hover:shadow-xl sm:px-4 md:px-5 md:py-[17px]"
 	class:list={{
 		"opacity-60 grayscale hover:opacity-100 hover:grayscale-0": isObscured,

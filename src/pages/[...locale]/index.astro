@@ -46,9 +46,7 @@ const items = [
 	{structuredData}
 	onIndexPage
 >
-	<DashboardControls server:defer {locale} showUnobtainedControl>
-		<div slot="fallback" class="mx-auto mt-10 h-20 max-w-3xl"></div>
-	</DashboardControls>
+	<DashboardControls {locale} showUnobtainedControl />
 	<div class="mx-4">
 		<NavGrid {items} class="m-auto my-12 max-w-3xl" />
 	</div>

@@ -11,8 +11,6 @@ import {
 import Grimoire from "$components/Grimoire/Grimoire.astro"
 import { useTranslations } from "$utils/i18n"
 import SubHeader from "$components/Layout/SubHeader.astro"
-import UserIconFallback from "$components/User/UserIconFallback.astro"
-import UserIcon from "$components/User/UserIcon.astro"
 
 const { locale, platform, username } = parseParamsWithUser(Astro.params)
 if (!locale) return new Response("Not found", { status: 404 })
@@ -29,7 +27,6 @@ if (!membershipId) return new Response("Not found", { status: 404 })
 
 const userGrimoire = await getUserGrimoire(membershipType, membershipId)
 if (!userGrimoire) return new Response("Not found", { status: 404 })
-const showSpoilers = Astro.cookies.get("grimoireShowSpoilers")?.value === "true"
 ---
 
 <Layout
@@ -47,9 +44,12 @@ const showSpoilers = Astro.cookies.get("grimoireShowSpoilers")?.value === "true"
 		<div slot="subtitle">
 			<div>
 				{t("g-Collection of")}
-				<UserIcon server:defer {membershipType} {membershipId}>
-					<UserIconFallback slot="fallback" />
-				</UserIcon>
+				<img
+					class="hidden h-[1em] w-[1em] rounded-sm bg-slate-300 align-[-10%]"
+					alt=""
+					data-current-user-icon
+					data-membership-id={membershipId}
+				/>
 				{username} // {userGrimoire.cardCollection.length}
 				{t("cards")} // {userGrimoire.score}
 				{t("points")}
@@ -60,7 +60,7 @@ const showSpoilers = Astro.cookies.get("grimoireShowSpoilers")?.value === "true"
 				<input
 					id="show-unobtained-cards"
 					type="checkbox"
-					checked={showSpoilers}
+					data-spoiler-toggle
 					class="h-3 w-3 accent-slate-600"
 				/>
 				<span>{t("show-unobtained-cards")}</span>
@@ -75,26 +75,54 @@ const showSpoilers = Astro.cookies.get("grimoireShowSpoilers")?.value === "true"
 				{userGrimoire}
 				{membershipType}
 				{username}
-				{showSpoilers}
 			/>
 		</div>
 	</div>
 </Layout>
 
-<script>
-	import Cookies from "js-cookie"
+<script is:inline>
+	;(() => {
+		const getCookie = (name) => {
+			const prefix = `${name}=`
+			const value = document.cookie
+				.split("; ")
+				.find((part) => part.startsWith(prefix))
+				?.slice(prefix.length)
+			if (!value) return null
 
-	document
-		.getElementById("show-unobtained-cards")
-		?.addEventListener("change", (event) => {
-			if (!(event.currentTarget instanceof HTMLInputElement)) return
-			Cookies.set(
-				"grimoireShowSpoilers",
-				String(event.currentTarget.checked),
-				{
-					path: "/",
-				},
-			)
-			window.location.reload()
-		})
+			try {
+				return decodeURIComponent(value)
+			} catch {
+				return value
+			}
+		}
+
+		let cookie = null
+		try {
+			cookie = JSON.parse(getCookie("grimoireLogin"))
+		} catch {
+			cookie = null
+		}
+		if (
+			!cookie ||
+			typeof cookie.membershipId !== "string" ||
+			typeof cookie.emblemPath !== "string" ||
+			!cookie.emblemPath.startsWith("/")
+		) {
+			return
+		}
+
+		for (const icon of document.querySelectorAll(
+			"[data-current-user-icon]",
+		)) {
+			if (
+				icon instanceof HTMLImageElement &&
+				icon.dataset.membershipId === cookie.membershipId
+			) {
+				icon.src = `https://www.bungie.net${cookie.emblemPath}`
+				icon.classList.remove("hidden")
+				icon.classList.add("inline-block")
+			}
+		}
+	})()
 </script>

@@ -12,70 +12,145 @@ interface Props {
 		name: string
 		grimoire: UserGrimoire
 	}
-	showSpoilers?: boolean
 }
 
-const { cardId, cards, themes, user, showSpoilers = false } = Astro.props
+const { cardId, cards, themes, user } = Astro.props
 
 const userCardIds = new Set(
 	user?.grimoire.cardCollection.map((card) => card.cardId),
 )
 
-const data = themes
-	.flatMap((theme) =>
-		theme.pageCollection.flatMap((page) =>
-			page.cardBriefs.map((brief) => ({
-				theme: theme.themeName,
-				page: page.pageName,
-				card: cards[brief.cardId],
-			})),
-		),
+const data = themes.flatMap((theme) =>
+	theme.pageCollection.flatMap((page) =>
+		page.cardBriefs.map((brief) => ({
+			theme: theme.themeName,
+			page: page.pageName,
+			card: cards[brief.cardId],
+		})),
+	),
+)
+
+const defaultData = user
+	? data.filter((entry) => userCardIds.has(Number(entry.card.cardId)))
+	: data
+
+const getNavData = (entries: typeof data) => {
+	const currentIndex = entries.findIndex(
+		(entry) => entry.card.cardId === cardId,
 	)
-	.filter(
-		(entry) =>
-			!user || showSpoilers || userCardIds.has(Number(entry.card.cardId)),
-	)
-const currentIndex = data.findIndex((entry) => entry.card.cardId === cardId)
-const currentEntry = data[currentIndex]
-const previousEntry = data[currentIndex - 1]
-const nextEntry = data[currentIndex + 1]
+	return {
+		currentEntry: entries[currentIndex],
+		previousEntry: entries[currentIndex - 1],
+		nextEntry: entries[currentIndex + 1],
+	}
+}
+
+const defaultNav = getNavData(defaultData)
+const spoilerNav = getNavData(data)
 ---
 
-<div
-	class="col-span-3 mt-12 grid grid-cols-2 items-center gap-x-4 gap-y-10 border-t border-slate-200 pt-10 font-serif"
->
-	{
-		currentEntry && previousEntry && (
-			<CardNavLink
-				card={previousEntry.card}
-				user={user}
-				isObscured={
-					!!user &&
-					!userCardIds.has(Number(previousEntry.card.cardId))
-				}
-				themeTitle={
-					previousEntry.theme != currentEntry.theme
-						? previousEntry.theme
-						: undefined
-				}
-			/>
-		)
-	}
-	{
-		currentEntry && nextEntry && (
-			<CardNavLink
-				card={nextEntry.card}
-				user={user}
-				isObscured={
-					!!user && !userCardIds.has(Number(nextEntry.card.cardId))
-				}
-				themeTitle={
-					nextEntry.theme != currentEntry.theme
-						? nextEntry.theme
-						: undefined
-				}
-				next
-			/>
-		)
-	}
-</div>
+{
+	user ? (
+		<div
+			data-spoiler-default
+			class="col-span-3 mt-12 grid grid-cols-2 items-center gap-x-4 gap-y-10 border-t border-slate-200 pt-10 font-serif"
+		>
+			{defaultNav.currentEntry && defaultNav.previousEntry && (
+				<CardNavLink
+					card={defaultNav.previousEntry.card}
+					user={user}
+					themeTitle={
+						defaultNav.previousEntry.theme !=
+						defaultNav.currentEntry.theme
+							? defaultNav.previousEntry.theme
+							: undefined
+					}
+				/>
+			)}
+			{defaultNav.currentEntry && defaultNav.nextEntry && (
+				<CardNavLink
+					card={defaultNav.nextEntry.card}
+					user={user}
+					themeTitle={
+						defaultNav.nextEntry.theme !=
+						defaultNav.currentEntry.theme
+							? defaultNav.nextEntry.theme
+							: undefined
+					}
+					next
+				/>
+			)}
+		</div>
+	) : (
+		<div class="col-span-3 mt-12 grid grid-cols-2 items-center gap-x-4 gap-y-10 border-t border-slate-200 pt-10 font-serif">
+			{defaultNav.currentEntry && defaultNav.previousEntry && (
+				<CardNavLink
+					card={defaultNav.previousEntry.card}
+					themeTitle={
+						defaultNav.previousEntry.theme !=
+						defaultNav.currentEntry.theme
+							? defaultNav.previousEntry.theme
+							: undefined
+					}
+				/>
+			)}
+			{defaultNav.currentEntry && defaultNav.nextEntry && (
+				<CardNavLink
+					card={defaultNav.nextEntry.card}
+					themeTitle={
+						defaultNav.nextEntry.theme !=
+						defaultNav.currentEntry.theme
+							? defaultNav.nextEntry.theme
+							: undefined
+					}
+					next
+				/>
+			)}
+		</div>
+	)
+}
+{
+	user && (
+		<div
+			data-spoiler-hidden
+			hidden
+			class="col-span-3 mt-12 grid grid-cols-2 items-center gap-x-4 gap-y-10 border-t border-slate-200 pt-10 font-serif"
+		>
+			{spoilerNav.currentEntry && spoilerNav.previousEntry && (
+				<CardNavLink
+					card={spoilerNav.previousEntry.card}
+					user={user}
+					isObscured={
+						!userCardIds.has(
+							Number(spoilerNav.previousEntry.card.cardId),
+						)
+					}
+					themeTitle={
+						spoilerNav.previousEntry.theme !=
+						spoilerNav.currentEntry.theme
+							? spoilerNav.previousEntry.theme
+							: undefined
+					}
+				/>
+			)}
+			{spoilerNav.currentEntry && spoilerNav.nextEntry && (
+				<CardNavLink
+					card={spoilerNav.nextEntry.card}
+					user={user}
+					isObscured={
+						!userCardIds.has(
+							Number(spoilerNav.nextEntry.card.cardId),
+						)
+					}
+					themeTitle={
+						spoilerNav.nextEntry.theme !=
+						spoilerNav.currentEntry.theme
+							? spoilerNav.nextEntry.theme
+							: undefined
+					}
+					next
+				/>
+			)}
+		</div>
+	)
+}

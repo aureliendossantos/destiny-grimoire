@@ -33,7 +33,6 @@ const userCard = userGrimoire.cardCollection.find(
 )
 // It's safe to assume there is only one bonus per card (I checked)
 const userBonus = userGrimoire.bonuses.find((b) => b.cardId == card.cardId)
-const showSpoilers = Astro.cookies.get("grimoireShowSpoilers")?.value === "true"
 ---
 
 <Layout
@@ -57,6 +56,5 @@ const showSpoilers = Astro.cookies.get("grimoireShowSpoilers")?.value === "true"
 			name: username,
 			grimoire: userGrimoire,
 		}}
-		{showSpoilers}
 	/>
 </Layout>

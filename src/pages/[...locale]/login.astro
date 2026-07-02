@@ -6,6 +6,7 @@ import SubHeader from "$components/Layout/SubHeader.astro"
 import {
 	BungieApiError,
 	getMembershipId,
+	getUserGrimoire,
 	getUserSummary,
 	membershipTypeToPath,
 } from "$utils/helpers"
@@ -49,6 +50,9 @@ const errorMessage = apiError
 
 if (membershipId) {
 	let emblemPath: string | undefined
+	let backgroundPath: string | undefined
+	let cardCount: number | undefined
+	let grimoireScore: number | undefined
 	try {
 		const summary = await getUserSummary(membershipType, membershipId)
 		const bestCharacter = summary.characters.sort(
@@ -56,8 +60,17 @@ if (membershipId) {
 				b.characterBase.powerLevel - a.characterBase.powerLevel,
 		)[0]
 		emblemPath = bestCharacter?.emblemPath
+		backgroundPath = bestCharacter?.backgroundPath
+		grimoireScore = summary.grimoireScore
 	} catch (error) {
-		console.warn("Could not cache user emblem path:", error)
+		console.warn("Could not cache user banner summary:", error)
+	}
+	try {
+		const userGrimoire = await getUserGrimoire(membershipType, membershipId)
+		cardCount = userGrimoire.cardCollection.length
+		grimoireScore ??= userGrimoire.score
+	} catch (error) {
+		console.warn("Could not cache user grimoire count:", error)
 	}
 
 	Astro.cookies.set(
@@ -67,6 +80,9 @@ if (membershipId) {
 			membershipId: membershipId,
 			username: username,
 			emblemPath,
+			backgroundPath,
+			cardCount,
+			grimoireScore,
 		},
 		{ path: "/" },
 	)
