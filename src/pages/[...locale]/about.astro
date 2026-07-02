@@ -33,11 +33,11 @@ const t = useTranslations(locale)
 			</section>
 			<section>
 				<h2 class="mb-3 font-serif text-2xl text-slate-700">
-					{t("privacy-title")}
+					{t("open-source-title")}
 				</h2>
 				<div
-					class="space-y-4 font-serif text-lg leading-relaxed text-slate-800"
-					set:html={t("privacy-body")}
+					class="space-y-4 font-serif text-lg leading-relaxed text-slate-800 [&_a]:underline [&_a]:underline-offset-4"
+					set:html={t("open-source-body")}
 				/>
 			</section>
 			<section>
@@ -47,6 +47,15 @@ const t = useTranslations(locale)
 				<div
 					class="space-y-4 font-serif text-lg leading-relaxed text-slate-800"
 					set:html={t("credits-body")}
+				/>
+			</section>
+			<section>
+				<h2 class="mb-3 font-serif text-2xl text-slate-700">
+					{t("privacy-title")}
+				</h2>
+				<div
+					class="space-y-4 font-serif text-lg leading-relaxed text-slate-800 [&_code]:text-sm [&_code]:text-slate-600"
+					set:html={t("privacy-body")}
 				/>
 			</section>
 		</div>

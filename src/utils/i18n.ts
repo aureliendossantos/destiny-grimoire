@@ -362,12 +362,15 @@ const home = {
 		"about-title": "About",
 		"about-summary":
 			"Privacy, credits, and context for The Grimoire Archive.",
+		"open-source-title": "About me",
+		"open-source-body":
+			'<p>This website is open source on <a href="https://github.com/aureliendossantos/destiny-grimoire" target="_blank">GitHub</a> and contributions are welcome. I intend to keep the website up for the long term. If it ever goes down, you can always download the source code, which includes archived Grimoire data.</p><p>If you feel like supporting my work, you can wishlist my own game, <a href="https://store.steampowered.com/app/4202020/Koimori" target="_blank" rel="noopener noreferrer">Koimori</a>, on Steam. Thanks!</p><p>I am also available for web & game dev work, feel free to get my contact info on GitHub.</p>',
 		"privacy-title": "Privacy",
 		"privacy-body":
 			"<p>The site stores a <code>userLocale</code> cookie when you change language, so future visits can keep the selected locale.</p><p>When you log in with a Destiny username, the site stores a <code>grimoireLogin</code> cookie containing your platform, Bungie membership ID, username, and small display details for your banner. This keeps you logged in and lets the grimoire show your collection.</p><p>The show unobtained cards preference is stored locally in a cookie and only controls how your collection is displayed on this site.</p><p>Vercel Analytics is enabled to understand aggregate page traffic and site performance.</p><p>Username lookups are sent to the Bungie API to find the matching Destiny 1 membership and load public grimoire collection data. The site does not ask for your Bungie password or OAuth access.</p>",
-		"credits-title": "Credits",
+		"credits-title": "Bungie credits",
 		"credits-body":
-			"<p>Destiny, Grimoire text, card images, and related game data belong to Bungie.</p><p>The Grimoire Archive restores access to Destiny 1 grimoire browsing with data from Bungie's public API and archived game manifests.</p>",
+			"<p>Destiny, Grimoire text, card images, and related game data belong to Bungie.</p><p>The Grimoire Archive restores access to lost functionality with data available from Bungie's public API, some of which are archived to ensure long-term availability.</p>",
 		card: "card",
 		cards: "cards",
 		points: "points",
@@ -391,6 +394,12 @@ const home = {
 		login: "Se connecter",
 		"switch-user": "Changer d'utilisateur",
 		"grimoire-cards": "Cartes de Grimoire",
+		"open-source-title": "À propos de moi",
+		"open-source-body":
+			'<p>Ce site est open source sur <a href="https://github.com/aureliendossantos/destiny-grimoire" target="_blank">GitHub</a> et les contributions sont les bienvenues. J’ai l’intention de le maintenir en ligne sur le long terme. S’il venait à disparaître, vous pourrez toujours télécharger le code source, qui inclut les données archivées du Grimoire.</p><p>Si vous souhaitez soutenir mon travail, vous pouvez ajouter mon propre jeu, <a href="https://store.steampowered.com/app/4202020/Koimori" target="_blank" rel="noopener noreferrer">Koimori</a>, à votre liste de souhaits sur Steam. Merci !</p><p>Je suis aussi disponible pour des missions de développement web &amp; jeu vidéo ; vous pouvez trouver mes coordonnées sur GitHub.</p>',
+		"credits-title": "Crédits Bungie",
+		"credits-body":
+			"<p>Destiny, les textes du Grimoire, les images des cartes et les données de jeu associées appartiennent à Bungie.</p><p>The Grimoire Archive restaure l’accès à des fonctionnalités disparues grâce aux données disponibles dans l’API publique de Bungie, dont une partie est archivée afin d’assurer leur disponibilité à long terme.</p>",
 	},
 	de: {
 		"What are Grimoire Cards": "Was sind Grimoire-Karten?",
@@ -406,6 +415,12 @@ const home = {
 		login: "Anmelden",
 		"switch-user": "Benutzer wechseln",
 		"grimoire-cards": "Grimoire-Karten",
+		"open-source-title": "Über mich",
+		"open-source-body":
+			'<p>Diese Website ist auf <a href="https://github.com/aureliendossantos/destiny-grimoire" target="_blank">GitHub</a> quelloffen, und Beiträge sind willkommen. Ich möchte die Website langfristig online halten. Falls sie irgendwann nicht mehr erreichbar sein sollte, kannst du jederzeit den Quellcode herunterladen; er enthält archivierte Grimoire-Daten.</p><p>Wenn du meine Arbeit unterstützen möchtest, kannst du mein eigenes Spiel <a href="https://store.steampowered.com/app/4202020/Koimori" target="_blank" rel="noopener noreferrer">Koimori</a> auf Steam auf deine Wunschliste setzen. Danke!</p><p>Ich bin außerdem für Web- und Game-Development-Arbeiten verfügbar; meine Kontaktdaten findest du auf GitHub.</p>',
+		"credits-title": "Bungie-Credits",
+		"credits-body":
+			"<p>Destiny, Grimoire-Texte, Kartenbilder und zugehörige Spieldaten gehören Bungie.</p><p>The Grimoire Archive stellt verlorene Funktionen mithilfe von Daten wieder her, die über Bungies öffentliche API verfügbar sind. Einige davon werden archiviert, um ihre langfristige Verfügbarkeit zu sichern.</p>",
 	},
 	es: {
 		"What are Grimoire Cards": "¿Qué son las cartas del Grimorio?",
@@ -421,6 +436,12 @@ const home = {
 		login: "Iniciar sesión",
 		"switch-user": "Cambiar de usuario",
 		"grimoire-cards": "Cartas del Grimorio",
+		"open-source-title": "Sobre mí",
+		"open-source-body":
+			'<p>Este sitio web es de código abierto en <a href="https://github.com/aureliendossantos/destiny-grimoire" target="_blank">GitHub</a> y las contribuciones son bienvenidas. Mi intención es mantenerlo disponible a largo plazo. Si algún día deja de estar en línea, siempre podrás descargar el código fuente, que incluye datos archivados del Grimorio.</p><p>Si quieres apoyar mi trabajo, puedes añadir mi propio juego, <a href="https://store.steampowered.com/app/4202020/Koimori" target="_blank" rel="noopener noreferrer">Koimori</a>, a tu lista de deseados en Steam. ¡Gracias!</p><p>También estoy disponible para trabajos de desarrollo web y de videojuegos; puedes encontrar mi información de contacto en GitHub.</p>',
+		"credits-title": "Créditos de Bungie",
+		"credits-body":
+			"<p>Destiny, los textos del Grimorio, las imágenes de las cartas y los datos de juego relacionados pertenecen a Bungie.</p><p>The Grimoire Archive restaura el acceso a funcionalidades perdidas con datos disponibles en la API pública de Bungie, algunos de los cuales se archivan para garantizar su disponibilidad a largo plazo.</p>",
 	},
 	it: {
 		"What are Grimoire Cards": "Cosa sono le carte del Grimorio?",
@@ -436,6 +457,12 @@ const home = {
 		login: "Accedi",
 		"switch-user": "Cambia utente",
 		"grimoire-cards": "Carte del Grimorio",
+		"open-source-title": "Chi sono",
+		"open-source-body":
+			'<p>Questo sito è open source su <a href="https://github.com/aureliendossantos/destiny-grimoire" target="_blank">GitHub</a> e i contributi sono benvenuti. Intendo mantenerlo online a lungo termine. Se un giorno non fosse più disponibile, potrai sempre scaricare il codice sorgente, che include i dati archiviati del Grimorio.</p><p>Se vuoi sostenere il mio lavoro, puoi aggiungere alla lista dei desideri il mio gioco, <a href="https://store.steampowered.com/app/4202020/Koimori" target="_blank" rel="noopener noreferrer">Koimori</a>, su Steam. Grazie!</p><p>Sono anche disponibile per lavori di sviluppo web e videogiochi; puoi trovare le mie informazioni di contatto su GitHub.</p>',
+		"credits-title": "Crediti Bungie",
+		"credits-body":
+			"<p>Destiny, i testi del Grimorio, le immagini delle carte e i dati di gioco correlati appartengono a Bungie.</p><p>The Grimoire Archive ripristina l’accesso a funzionalità perdute usando dati disponibili dall’API pubblica di Bungie, alcuni dei quali sono archiviati per garantirne la disponibilità a lungo termine.</p>",
 	},
 	"pt-br": {
 		"What are Grimoire Cards": "O que são as cartas do Grimório?",
@@ -451,6 +478,12 @@ const home = {
 		login: "Entrar",
 		"switch-user": "Trocar usuário",
 		"grimoire-cards": "Cartas do Grimório",
+		"open-source-title": "Sobre mim",
+		"open-source-body":
+			'<p>Este site é open source no <a href="https://github.com/aureliendossantos/destiny-grimoire" target="_blank">GitHub</a> e contribuições são bem-vindas. Pretendo manter o site no ar a longo prazo. Se um dia ele sair do ar, você sempre poderá baixar o código-fonte, que inclui dados arquivados do Grimório.</p><p>Se quiser apoiar meu trabalho, você pode adicionar meu próprio jogo, <a href="https://store.steampowered.com/app/4202020/Koimori" target="_blank" rel="noopener noreferrer">Koimori</a>, à sua lista de desejos no Steam. Obrigado!</p><p>Também estou disponível para trabalhos de desenvolvimento web e de jogos; minhas informações de contato estão no GitHub.</p>',
+		"credits-title": "Créditos da Bungie",
+		"credits-body":
+			"<p>Destiny, os textos do Grimório, as imagens das cartas e os dados de jogo relacionados pertencem à Bungie.</p><p>The Grimoire Archive restaura o acesso a funcionalidades perdidas com dados disponíveis na API pública da Bungie, alguns dos quais são arquivados para garantir disponibilidade a longo prazo.</p>",
 	},
 	ja: {
 		"What are Grimoire Cards": "グリモアカードとは？",
@@ -466,6 +499,12 @@ const home = {
 		login: "ログイン",
 		"switch-user": "ユーザーを切り替え",
 		"grimoire-cards": "グリモアカード",
+		"open-source-title": "作者について",
+		"open-source-body":
+			'<p>このウェブサイトは<a href="https://github.com/aureliendossantos/destiny-grimoire" target="_blank">GitHub</a>でオープンソースとして公開されており、コントリビューションを歓迎しています。サイトは長期的に公開し続けるつもりです。もし将来サイトが利用できなくなっても、アーカイブ済みのグリモアデータを含むソースコードはいつでもダウンロードできます。</p><p>私の活動を支援したい場合は、Steamで私自身のゲーム<a href="https://store.steampowered.com/app/4202020/Koimori" target="_blank" rel="noopener noreferrer">Koimori</a>をウィッシュリストに追加していただけると助かります。ありがとうございます！</p><p>Webおよびゲーム開発の仕事も受け付けています。連絡先はGitHubで確認できます。</p>',
+		"credits-title": "Bungieのクレジット",
+		"credits-body":
+			"<p>Destiny、グリモアのテキスト、カード画像、および関連するゲームデータはBungieに帰属します。</p><p>The Grimoire Archiveは、Bungieの公開APIから取得できるデータを使って失われた機能へのアクセスを復元しています。その一部は長期的な利用可能性を確保するためにアーカイブされています。</p>",
 	},
 }
 
