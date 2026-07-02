@@ -361,8 +361,10 @@ export const renderOgImage = async (
 				},
 			],
 			headers: {
-				"Cache-Control":
-					"public, max-age=0, s-maxage=31536000, stale-while-revalidate=86400",
+				"Cache-Control": "public, max-age=86400",
+				"CDN-Cache-Control": "public, max-age=31536000",
+				"Vercel-CDN-Cache-Control":
+					"public, max-age=31536000, stale-while-revalidate=86400",
 			},
 		},
 	)

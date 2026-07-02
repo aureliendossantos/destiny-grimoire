@@ -12,7 +12,7 @@
 
 @font-face {
 	font-family: "Cromwell";
-	src: url("/CromwellHPLHS.ttf") format("truetype");
+	src: url("../fonts/CromwellHPLHS.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
 	font-display: block;
@@ -20,7 +20,7 @@
 
 @font-face {
 	font-family: "EB Garamond SC";
-	src: url("/EBGaramond12-AllSC.woff2") format("woff2");
+	src: url("../fonts/EBGaramond12-AllSC.woff2") format("woff2");
 	font-weight: 400;
 	font-style: normal;
 	font-display: block;
