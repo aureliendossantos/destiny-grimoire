@@ -1,6 +1,5 @@
 ---
 import Footer, { type FooterProps } from "$components/Layout/Footer.astro"
-import FooterFallback from "$components/Layout/FooterFallback.astro"
 import Header from "$components/Layout/Header.astro"
 import Seo from "$components/Layout/Seo.astro"
 import { getLocaleFromPathname, htmlLang } from "$utils/i18n"
@@ -52,9 +51,7 @@ const locale = getLocaleFromPathname(pathname) || "en"
 				<Header />
 				<slot />
 			</div>
-			<Footer server:defer {locale} {pathname} {...footerProps}>
-				<FooterFallback slot="fallback" />
-			</Footer>
+			<Footer {locale} {pathname} {...footerProps} />
 		</div>
 	</body>
 </html>

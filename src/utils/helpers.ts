@@ -106,13 +106,15 @@ interface Cookie {
 	membershipType: 1 | 2
 	membershipId: string
 	username: string
+	emblemPath?: string
 }
 
 export const validateCookie = (cookie: any) =>
 	cookie &&
 	(cookie.membershipType === 1 || cookie.membershipType === 2) &&
 	typeof cookie.membershipId == "string" &&
-	typeof cookie.username == "string"
+	typeof cookie.username == "string" &&
+	(cookie.emblemPath == undefined || typeof cookie.emblemPath == "string")
 		? (cookie as Cookie)
 		: null
 

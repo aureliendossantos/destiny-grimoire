@@ -6,6 +6,7 @@ import SubHeader from "$components/Layout/SubHeader.astro"
 import {
 	BungieApiError,
 	getMembershipId,
+	getUserSummary,
 	membershipTypeToPath,
 } from "$utils/helpers"
 import { getLocalizedPath, getRouteLocale } from "$utils/i18n"
@@ -47,12 +48,25 @@ const errorMessage = apiError
 		`Could not find a Bungie account with ${platform ? "Xbox" : "PSN"} username "${username}". Please check that the username is correct and that you have played Destiny 1 on this platform.`
 
 if (membershipId) {
+	let emblemPath: string | undefined
+	try {
+		const summary = await getUserSummary(membershipType, membershipId)
+		const bestCharacter = summary.characters.sort(
+			(a: any, b: any) =>
+				b.characterBase.powerLevel - a.characterBase.powerLevel,
+		)[0]
+		emblemPath = bestCharacter?.emblemPath
+	} catch (error) {
+		console.warn("Could not cache user emblem path:", error)
+	}
+
 	Astro.cookies.set(
 		"grimoireLogin",
 		{
 			membershipType: membershipType,
 			membershipId: membershipId,
 			username: username,
+			emblemPath,
 		},
 		{ path: "/" },
 	)

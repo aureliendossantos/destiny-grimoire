@@ -1,9 +1,5 @@
 ---
-import {
-	deconstructUrl,
-	membershipTypeToPath,
-	validateCookie,
-} from "$utils/helpers"
+import { deconstructUrl, membershipTypeToPath } from "$utils/helpers"
 import {
 	getLocalizedPath,
 	stripLocaleFromPathname,
@@ -12,7 +8,6 @@ import {
 } from "$utils/i18n"
 import LinkButton from "$components/Layout/LinkButton.astro"
 import MiniLoginForm from "$components/User/MiniLoginForm.astro"
-import Username from "$components/User/Username.astro"
 
 export type FooterProps = {
 	onGrimoireCardPage?: boolean
@@ -42,107 +37,78 @@ const onGrimoire = onGrimoireCardPage || onGrimoireHomePage
 const pathname = stripLocaleFromPathname(Astro.props.pathname)
 const pathnameRest = deconstructUrl(pathname).rest
 const t = useTranslations(locale)
-
-const tryCookie = Astro.cookies.get("grimoireLogin")
-const cookie = validateCookie(tryCookie?.json())
-if (tryCookie && !cookie) {
-	console.warn("Deleting invalid cookie:", cookie)
-	Astro.cookies.delete("grimoireLogin", { path: "/" })
-}
-
-const isUserPage =
-	cookie && userInPath && cookie.membershipId == userInPath.membershipId
 ---
 
 <div class="bg-slate-200 px-4 py-12">
 	<div
 		class="m-auto flex max-w-xl flex-col gap-4 text-sm font-medium text-slate-500"
+		data-footer
+		data-locale={locale}
+		data-pathname-rest={pathnameRest}
+		data-card-page={String(Boolean(onGrimoireCardPage))}
+		data-user-membership-type={userInPath?.membershipType ?? ""}
+		data-user-membership-id={userInPath?.membershipId ?? ""}
+		data-user-name={userInPath?.name ?? ""}
 	>
 		{
-			userInPath
-				? (!cookie || !isUserPage) && (
-						<>
-							<div>
-								{t("data-from")}
-								<a
-									href={getLocalizedPath(
-										locale,
-										`/user/${membershipTypeToPath(userInPath.membershipType)}/${userInPath.name}`,
-									)}
-									class="-mx-[1px] -my-[1px] rounded-md px-1 py-[1px] ring-1 ring-slate-300 transition hover:bg-slate-100"
-								>
-									{t("collection-of")}
-									<Username
-										membershipType={
-											userInPath.membershipType
-										}
-										membershipId={userInPath.membershipId}
-										username={userInPath.name}
-									/>
-								</a>
-							</div>
-						</>
-					)
-				: onGrimoire && (
-						<>
-							<div>{t("global-data")}</div>
-							{onGrimoireCardPage && (
-								<LinkButton
-									href={getLocalizedPath(locale, "/all")}
-								>
-									{t("back-to-grimoire")}
-								</LinkButton>
-							)}
-						</>
-					)
-		}
-		{
-			cookie ? (
-				<>
-					{onGrimoireCardPage && (
-						<LinkButton
-							href={
-								isUserPage
-									? getLocalizedPath(
-											locale,
-											`/user/${membershipTypeToPath(userInPath.membershipType)}/${userInPath.name}`,
-										)
-									: getLocalizedPath(
-											locale,
-											`/user/${membershipTypeToPath(cookie.membershipType)}/${cookie.username}${pathnameRest}`,
-										)
-							}
-						>
-							<div>
-								{isUserPage
-									? t("back-to-grimoire")
-									: t("switch-to-your-collection")}
-							</div>
-							<Username
-								membershipType={cookie.membershipType}
-								membershipId={cookie.membershipId}
-								username={cookie.username}
-							/>
-						</LinkButton>
-					)}
-					<LinkButton
+			userInPath ? (
+				<div data-footer-user-source>
+					{t("data-from")}
+					<a
 						href={getLocalizedPath(
 							locale,
-							`/logout?redirect=${pathnameRest}`,
+							`/user/${membershipTypeToPath(userInPath.membershipType)}/${userInPath.name}`,
 						)}
+						class="-mx-[1px] -my-[1px] rounded-md px-1 py-[1px] ring-1 ring-slate-300 transition hover:bg-slate-100"
 					>
-						{t("logout")}
-					</LinkButton>
-				</>
-			) : (
-				<div class="mb-4">
-					<div class="font-smcp text-base leading-relaxed">
-						{t("browse-yours")}
-					</div>
-					<MiniLoginForm {locale} redirect={pathnameRest} />
+						{t("collection-of")}
+						<span class="font-medium">{userInPath.name}</span>
+					</a>
 				</div>
+			) : (
+				onGrimoire && (
+					<>
+						<div>{t("global-data")}</div>
+						{onGrimoireCardPage && (
+							<LinkButton href={getLocalizedPath(locale, "/all")}>
+								{t("back-to-grimoire")}
+							</LinkButton>
+						)}
+					</>
+				)
 			)
 		}
+		<div class="flex flex-col gap-4" data-footer-logged-in hidden>
+			{
+				onGrimoireCardPage && (
+					<LinkButton href={getLocalizedPath(locale, "/")}>
+						<div
+							data-footer-card-link-label
+							data-back-label={t("back-to-grimoire")}
+						>
+							{t("switch-to-your-collection")}
+						</div>
+						<img
+							class="hidden h-[1em] w-[1em] rounded-sm bg-slate-300 align-[-10%]"
+							data-footer-user-icon
+							alt=""
+						/>
+						<span class="font-medium" data-footer-username />
+					</LinkButton>
+				)
+			}
+			<LinkButton
+				href={getLocalizedPath(locale, `/logout?redirect=${pathnameRest}`)}
+			>
+				{t("logout")}
+			</LinkButton>
+		</div>
+		<div class="mb-4" data-footer-logged-out>
+			<div class="font-smcp text-base leading-relaxed">
+				{t("browse-yours")}
+			</div>
+			<MiniLoginForm {locale} redirect={pathnameRest} />
+		</div>
 		{
 			!onIndexPage && (
 				<LinkButton href={getLocalizedPath(locale, "/")}>
@@ -155,3 +121,104 @@ const isUserPage =
 		</LinkButton>
 	</div>
 </div>
+
+<script is:inline>
+	;(() => {
+		const footer = document.querySelector("[data-footer]")
+		if (!(footer instanceof HTMLElement)) return
+
+		const getCookie = (name) => {
+			const prefix = `${name}=`
+			const value = document.cookie
+				.split("; ")
+				.find((part) => part.startsWith(prefix))
+				?.slice(prefix.length)
+			if (!value) return null
+
+			try {
+				return decodeURIComponent(value)
+			} catch {
+				return value
+			}
+		}
+
+		const validateLoginCookie = (cookie) =>
+			cookie &&
+			(cookie.membershipType === 1 || cookie.membershipType === 2) &&
+			typeof cookie.membershipId === "string" &&
+			typeof cookie.username === "string" &&
+			(cookie.emblemPath === undefined ||
+				typeof cookie.emblemPath === "string")
+				? cookie
+				: null
+
+		let cookie = null
+		try {
+			cookie = validateLoginCookie(JSON.parse(getCookie("grimoireLogin")))
+		} catch {
+			cookie = null
+		}
+
+		if (!cookie) return
+
+		const locale = footer.dataset.locale
+		const localePrefix = locale && locale !== "en" ? `/${locale}` : ""
+		const localizedPath = (path) =>
+			path === "/" ? `${localePrefix || "/"}` : `${localePrefix}${path}`
+		const membershipTypeToPath = (membershipType) =>
+			membershipType === 1 ? "xbox" : "psn"
+
+		const userSource = footer.querySelector("[data-footer-user-source]")
+		const userMembershipId = footer.dataset.userMembershipId
+		const isUserPage =
+			Boolean(userMembershipId) && cookie.membershipId === userMembershipId
+
+		if (isUserPage) userSource?.setAttribute("hidden", "")
+
+		footer
+			.querySelector("[data-footer-logged-out]")
+			?.setAttribute("hidden", "")
+		footer
+			.querySelector("[data-footer-logged-in]")
+			?.removeAttribute("hidden")
+
+		const cardLink = footer.querySelector(
+			"[data-footer-logged-in] a:first-child",
+		)
+		const cardLinkLabel = footer.querySelector(
+			"[data-footer-card-link-label]",
+		)
+		const username = footer.querySelector("[data-footer-username]")
+		if (username) username.textContent = cookie.username
+		const userIcon = footer.querySelector("[data-footer-user-icon]")
+		if (
+			userIcon instanceof HTMLImageElement &&
+			cookie.emblemPath &&
+			cookie.emblemPath.startsWith("/")
+		) {
+			userIcon.src = `https://www.bungie.net${cookie.emblemPath}`
+			userIcon.classList.remove("hidden")
+			userIcon.classList.add("inline-block")
+		}
+
+		if (
+			footer.dataset.cardPage === "true" &&
+			cardLink instanceof HTMLAnchorElement
+		) {
+			if (isUserPage) {
+				const userMembershipType = Number(footer.dataset.userMembershipType)
+				const userName = footer.dataset.userName
+				cardLink.href = localizedPath(
+					`/user/${membershipTypeToPath(userMembershipType)}/${userName}`,
+				)
+				if (cardLinkLabel instanceof HTMLElement) {
+					cardLinkLabel.textContent = cardLinkLabel.dataset.backLabel || ""
+				}
+			} else {
+				cardLink.href = localizedPath(
+					`/user/${membershipTypeToPath(cookie.membershipType)}/${cookie.username}${footer.dataset.pathnameRest}`,
+				)
+			}
+		}
+	})()
+</script>
