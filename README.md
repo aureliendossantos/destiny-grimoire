@@ -4,7 +4,7 @@ This website allows to browse lore entries from the game _Destiny_ (2014, Bungie
 
 ## Contributing
 
-The project is built with Astro and hosted with Vercel. Feel free to submit issues or contribute on the design, features, translations...
+The project is built with Astro and hosted with Vercel. Feel free to submit issues or contribute on the design, features and translations.
 
 ## Translating
 
