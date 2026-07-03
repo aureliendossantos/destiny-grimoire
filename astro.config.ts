@@ -6,7 +6,7 @@ import tailwindcss from "@tailwindcss/vite"
 // https://astro.build/config
 export default defineConfig({
 	output: "static",
-	adapter: vercel({ webAnalytics: { enabled: true } }),
+	adapter: vercel({ webAnalytics: { enabled: false } }),
 	site: "https://grimoire.aureliendossantos.com",
 	integrations: [
 		sitemap({
