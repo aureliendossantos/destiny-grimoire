@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets"
+import { getImage } from "astro:assets"
 import { getCardImage } from "$utils/card-images"
 import { membershipTypeToPath } from "$utils/helpers"
 import {
@@ -7,6 +7,7 @@ import {
 	getLocalizedPath,
 	useTranslations,
 } from "$utils/i18n"
+import { getStaticImage } from "$utils/static-images"
 import type { CollectionEntry } from "astro:content"
 
 interface Props {
@@ -18,12 +19,32 @@ interface Props {
 		membershipType: 1 | 2
 		name: string
 	}
+	useStaticImages?: boolean
 }
 
-const { card, themeTitle, next, user, isObscured = false } = Astro.props
+const {
+	card,
+	themeTitle,
+	next,
+	user,
+	isObscured = false,
+	useStaticImages = false,
+} = Astro.props
 const locale = getLocaleFromPathname(Astro.url.pathname) || "en"
 const t = useTranslations(locale)
 const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
+const image = useStaticImages
+	? getStaticImage({
+			src: cardImage,
+			alt: t("card-illustration-alt"),
+			height: 128,
+		})
+	: await getImage({
+			src: cardImage,
+			alt: t("card-illustration-alt"),
+			height: 128,
+		})
+const { class: _className, ...imageAttributes } = image.attributes
 ---
 
 <a
@@ -41,11 +62,10 @@ const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
 		},
 	]}
 >
-	<Image
-		src={cardImage}
-		alt={t("card-illustration-alt")}
+	<img
+		src={image.src}
+		{...imageAttributes}
 		class="h-16 w-auto rounded-[1.5px] bg-slate-400 shadow-sm"
-		height={128}
 	/>
 	<div>
 		{

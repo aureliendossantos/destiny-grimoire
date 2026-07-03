@@ -1,7 +1,8 @@
 ---
-import { Image } from "astro:assets"
+import { getImage } from "astro:assets"
 import { getCardImage } from "$utils/card-images"
 import { addAbbrs } from "$utils/helpers"
+import { getStaticImage } from "$utils/static-images"
 import type { UserBonus, UserCard, UserGrimoire } from "$utils/types"
 import type { CollectionEntry } from "astro:content"
 import CardNav from "./CardNav.astro"
@@ -20,12 +21,25 @@ interface Props {
 		name: string
 		grimoire: UserGrimoire
 	}
+	useStaticImages?: boolean
 }
 
-const { t, card, cards, themes, user } = Astro.props
+const { t, card, cards, themes, user, useStaticImages = false } = Astro.props
 
 const description = card.cardDescription && addAbbrs(card.cardDescription)
 const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
+const image = useStaticImages
+	? getStaticImage({
+			src: cardImage,
+			alt: t("card-illustration-alt"),
+			width: 560,
+		})
+	: await getImage({
+			src: cardImage,
+			alt: t("card-illustration-alt"),
+			width: 560,
+		})
+const { class: _className, ...imageAttributes } = image.attributes
 ---
 
 <div class="mx-4">
@@ -33,9 +47,9 @@ const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
 		class="m-auto mt-12 grid w-full max-w-xl grid-cols-1 md:grid-cols-3 md:gap-x-12"
 	>
 		<div class="flex gap-x-4 text-slate-700 md:block">
-			<Image
-				src={cardImage}
-				alt={t("card-illustration-alt")}
+			<img
+				src={image.src}
+				{...imageAttributes}
 				class:list={[
 					"order-last mb-4 max-h-28 w-auto rounded-sm bg-slate-400 shadow transition duration-300 ease-out md:order-first md:max-h-none",
 					{
@@ -43,7 +57,6 @@ const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
 							user && !user.card,
 					},
 				]}
-				width={560}
 			/>
 			<div class="col-span-2 mb-7 grow md:mb-0">
 				<h1
@@ -275,6 +288,12 @@ const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
 	<div
 		class="m-auto mb-12 grid w-full max-w-xl grid-cols-1 md:grid-cols-3 md:gap-x-12"
 	>
-		<CardNav cardId={Number(card.cardId)} {cards} {themes} {user} />
+		<CardNav
+			cardId={Number(card.cardId)}
+			{cards}
+			{themes}
+			{user}
+			{useStaticImages}
+		/>
 	</div>
 </div>
