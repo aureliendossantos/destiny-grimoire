@@ -14,6 +14,8 @@
 export const CARD_PREVIEW_WIDTH = 320
 /** Hero image on a single card page ("/[card]", CardPage). */
 export const CARD_PAGE_WIDTH = 560
+/** Prev/next thumbnails on a single card page (CardNavLink), sized by height. */
+export const CARD_NAV_HEIGHT = 128
 
 export interface OptimizedImage {
 	src: string
@@ -24,6 +26,7 @@ export interface OptimizedImage {
 export interface CardImageEntry {
 	preview: OptimizedImage
 	page: OptimizedImage
+	nav: OptimizedImage
 }
 
 export type CardImageManifest = Record<string, CardImageEntry>

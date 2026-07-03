@@ -8,6 +8,7 @@ import CardNav from "./CardNav.astro"
 import type { Translator } from "$utils/i18n"
 import {
 	CARD_PAGE_WIDTH,
+	type CardImageManifest,
 	type OptimizedImage,
 } from "$utils/card-image-manifest"
 
@@ -30,9 +31,11 @@ interface Props {
 	 * instead of `<Image>`, so on-demand pages avoid the `/_image` endpoint.
 	 */
 	image?: OptimizedImage
+	/** Full manifest, forwarded to the prev/next navigation thumbnails. */
+	imageManifest?: CardImageManifest
 }
 
-const { t, card, cards, themes, user, image } = Astro.props
+const { t, card, cards, themes, user, image, imageManifest } = Astro.props
 
 const description = card.cardDescription && addAbbrs(card.cardDescription)
 const cardImage = image
@@ -302,6 +305,12 @@ const cardImageClass = [
 	<div
 		class="m-auto mb-12 grid w-full max-w-xl grid-cols-1 md:grid-cols-3 md:gap-x-12"
 	>
-		<CardNav cardId={Number(card.cardId)} {cards} {themes} {user} />
+		<CardNav
+			cardId={Number(card.cardId)}
+			{cards}
+			{themes}
+			{user}
+			{imageManifest}
+		/>
 	</div>
 </div>

@@ -2,6 +2,7 @@
 import type { UserGrimoire } from "$utils/types"
 import type { CollectionEntry } from "astro:content"
 import CardNavLink from "./CardNavLink.astro"
+import type { CardImageManifest } from "$utils/card-image-manifest"
 
 interface Props {
 	cardId: number
@@ -12,9 +13,11 @@ interface Props {
 		name: string
 		grimoire: UserGrimoire
 	}
+	/** Static card image paths, used by on-demand pages to skip `/_image`. */
+	imageManifest?: CardImageManifest
 }
 
-const { cardId, cards, themes, user } = Astro.props
+const { cardId, cards, themes, user, imageManifest } = Astro.props
 
 const userCardIds = new Set(
 	user?.grimoire.cardCollection.map((card) => card.cardId),
@@ -58,6 +61,7 @@ const spoilerNav = getNavData(data)
 			{defaultNav.currentEntry && defaultNav.previousEntry && (
 				<CardNavLink
 					card={defaultNav.previousEntry.card}
+					image={imageManifest?.[defaultNav.previousEntry.card.cardId]?.nav}
 					user={user}
 					themeTitle={
 						defaultNav.previousEntry.theme !=
@@ -70,6 +74,7 @@ const spoilerNav = getNavData(data)
 			{defaultNav.currentEntry && defaultNav.nextEntry && (
 				<CardNavLink
 					card={defaultNav.nextEntry.card}
+					image={imageManifest?.[defaultNav.nextEntry.card.cardId]?.nav}
 					user={user}
 					themeTitle={
 						defaultNav.nextEntry.theme !=
@@ -86,6 +91,7 @@ const spoilerNav = getNavData(data)
 			{defaultNav.currentEntry && defaultNav.previousEntry && (
 				<CardNavLink
 					card={defaultNav.previousEntry.card}
+					image={imageManifest?.[defaultNav.previousEntry.card.cardId]?.nav}
 					themeTitle={
 						defaultNav.previousEntry.theme !=
 						defaultNav.currentEntry.theme
@@ -97,6 +103,7 @@ const spoilerNav = getNavData(data)
 			{defaultNav.currentEntry && defaultNav.nextEntry && (
 				<CardNavLink
 					card={defaultNav.nextEntry.card}
+					image={imageManifest?.[defaultNav.nextEntry.card.cardId]?.nav}
 					themeTitle={
 						defaultNav.nextEntry.theme !=
 						defaultNav.currentEntry.theme
@@ -119,6 +126,7 @@ const spoilerNav = getNavData(data)
 			{spoilerNav.currentEntry && spoilerNav.previousEntry && (
 				<CardNavLink
 					card={spoilerNav.previousEntry.card}
+					image={imageManifest?.[spoilerNav.previousEntry.card.cardId]?.nav}
 					user={user}
 					isObscured={
 						!userCardIds.has(
@@ -136,6 +144,7 @@ const spoilerNav = getNavData(data)
 			{spoilerNav.currentEntry && spoilerNav.nextEntry && (
 				<CardNavLink
 					card={spoilerNav.nextEntry.card}
+					image={imageManifest?.[spoilerNav.nextEntry.card.cardId]?.nav}
 					user={user}
 					isObscured={
 						!userCardIds.has(

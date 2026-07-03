@@ -3,6 +3,7 @@ import { getImage } from "astro:assets"
 import { getCardImage } from "$utils/card-images"
 import { getCards } from "$utils/content"
 import {
+	CARD_NAV_HEIGHT,
 	CARD_PAGE_WIDTH,
 	CARD_PREVIEW_WIDTH,
 	type CardImageManifest,
@@ -25,7 +26,9 @@ export const GET: APIRoute = async () => {
 				card.cardId,
 				card.highResolution.image.sheetPath,
 			)
-			const resolve = async (width: number): Promise<OptimizedImage> => {
+			const resolveByWidth = async (
+				width: number,
+			): Promise<OptimizedImage> => {
 				const optimized = await getImage({ src: source, width })
 				return {
 					src: optimized.src,
@@ -33,11 +36,22 @@ export const GET: APIRoute = async () => {
 					height: Math.round((width * source.height) / source.width),
 				}
 			}
-			const [preview, page] = await Promise.all([
-				resolve(CARD_PREVIEW_WIDTH),
-				resolve(CARD_PAGE_WIDTH),
+			const resolveByHeight = async (
+				height: number,
+			): Promise<OptimizedImage> => {
+				const optimized = await getImage({ src: source, height })
+				return {
+					src: optimized.src,
+					width: Math.round((height * source.width) / source.height),
+					height,
+				}
+			}
+			const [preview, page, nav] = await Promise.all([
+				resolveByWidth(CARD_PREVIEW_WIDTH),
+				resolveByWidth(CARD_PAGE_WIDTH),
+				resolveByHeight(CARD_NAV_HEIGHT),
 			])
-			manifest[card.cardId] = { preview, page }
+			manifest[card.cardId] = { preview, page, nav }
 		}),
 	)
 

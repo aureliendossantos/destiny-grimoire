@@ -8,6 +8,7 @@ export default defineConfig({
 	output: "static",
 	adapter: vercel({ webAnalytics: { enabled: false } }),
 	site: "https://grimoire.aureliendossantos.com",
+	compressHTML: true /* keeps whitespace like in Astro 6 */,
 	integrations: [
 		sitemap({
 			filter: (page) => {
