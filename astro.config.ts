@@ -1,12 +1,12 @@
 import { defineConfig } from "astro/config"
 import sitemap from "@astrojs/sitemap"
-import vercel from "@astrojs/vercel"
+import cloudflare from "@astrojs/cloudflare"
 import tailwindcss from "@tailwindcss/vite"
 
 // https://astro.build/config
 export default defineConfig({
 	output: "static",
-	adapter: vercel({ webAnalytics: { enabled: false } }),
+	adapter: cloudflare(),
 	site: "https://grimoire.aureliendossantos.com",
 	integrations: [
 		sitemap({
@@ -25,5 +25,8 @@ export default defineConfig({
 	},
 	vite: {
 		plugins: [tailwindcss()],
+		optimizeDeps: {
+			exclude: ["takumi-js"],
+		},
 	},
 })

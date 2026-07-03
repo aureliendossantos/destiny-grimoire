@@ -1,6 +1,7 @@
-import { extname, join } from "node:path"
 import type { APIRoute } from "astro"
+import { getBookImage } from "$utils/book-images"
 import { getLoreBookManifest } from "$utils/books"
+import { getCardImage } from "$utils/card-images"
 import { getCards, getGuides } from "$utils/content"
 import { localeParams, type SupportedLocale } from "$utils/i18n"
 import { renderOgImage } from "$utils/og"
@@ -9,25 +10,6 @@ import { defaultDescription, getMetaDescription, siteName } from "$utils/seo"
 type OgImageData = Parameters<typeof renderOgImage>[0]
 
 export const prerender = false
-
-const localCardArtPath = (cardId: string | number, sourcePath: string) =>
-	join(
-		process.cwd(),
-		"src",
-		"images",
-		"cards",
-		"high-resolution",
-		`${cardId}${extname(sourcePath) || ".jpg"}`,
-	)
-
-const localBookCoverPath = (bookHash: string | number, sourcePath: string) =>
-	join(
-		process.cwd(),
-		"src",
-		"images",
-		"books",
-		`${bookHash}${extname(sourcePath) || ".jpg"}`,
-	)
 
 const getGenericOgImage = async (
 	locale: SupportedLocale,
@@ -97,10 +79,10 @@ const getCardOgImage = async (
 			card.cardIntro || card.cardDescription || "",
 		),
 		eyebrow: "Destiny Grimoire Card",
-		cardArtPath: localCardArtPath(
+		cardArtUrl: getCardImage(
 			card.cardId,
 			card.highResolution.image.sheetPath,
-		),
+		).src,
 	}
 }
 
@@ -125,8 +107,8 @@ const getBookOgImage = async (
 					book.node.displayProperties.name,
 			),
 			eyebrow: book.node.displayProperties.name,
-			cardArtPath: book.coverPath
-				? localBookCoverPath(book.node.hash, book.coverPath)
+			cardArtUrl: book.coverPath
+				? getBookImage(book.node.hash, book.coverPath).src
 				: undefined,
 		}
 	}

@@ -1,10 +1,9 @@
-import { readFile } from "node:fs/promises"
-import { extname, join } from "node:path"
-import { ImageResponse } from "@vercel/og"
+import { render, type FontDetails, type RenderOptions } from "takumi-js"
 import ebGaramondFontUrl from "@fontsource/eb-garamond/files/eb-garamond-latin-400-normal.woff?url"
 import interFontUrl from "@fontsource/inter/files/inter-latin-700-normal.woff?url"
 import notoSerifJpFontUrl from "@fontsource/noto-serif-jp/files/noto-serif-jp-japanese-400-normal.woff?url"
 import { cleanDescription, ogImageHeight, ogImageWidth } from "$utils/seo"
+import genericOgArt from "$images/og/piotr-jablonski-1sk.jpg"
 
 type ElementChild = ElementNode | string | number | false | null | undefined
 
@@ -22,7 +21,10 @@ type OgImageInput = {
 	subtitle: string
 	eyebrow?: string
 	cardArtUrl?: string
-	cardArtPath?: string
+}
+
+type TakumiRenderOptions = RenderOptions & {
+	fonts: FontDetails[]
 }
 
 const colors = {
@@ -35,14 +37,6 @@ const colors = {
 	muted: "#475569",
 	faint: "#e2e8f0",
 }
-
-const genericArtPath = join(
-	process.cwd(),
-	"src",
-	"images",
-	"og",
-	"piotr-jablonski-1sk.jpg",
-)
 
 const fontDataCache = new Map<string, Promise<ArrayBuffer>>()
 
@@ -81,11 +75,18 @@ const upper = (value: string) => value.toLocaleUpperCase("en")
 
 const imageDataUriCache = new Map<string, Promise<string | undefined>>()
 
-const imageContentTypes: Record<string, string> = {
-	".jpg": "image/jpeg",
-	".jpeg": "image/jpeg",
-	".png": "image/png",
-	".webp": "image/webp",
+const arrayBufferToBase64 = (buffer: ArrayBuffer) => {
+	const bytes = new Uint8Array(buffer)
+	let binary = ""
+	const chunkSize = 0x8000
+
+	for (let offset = 0; offset < bytes.length; offset += chunkSize) {
+		binary += String.fromCharCode(
+			...bytes.subarray(offset, offset + chunkSize),
+		)
+	}
+
+	return btoa(binary)
 }
 
 const fetchImageDataUri = async (url: string) => {
@@ -93,17 +94,9 @@ const fetchImageDataUri = async (url: string) => {
 	if (!response.ok) return undefined
 
 	const contentType = response.headers.get("content-type") || "image/jpeg"
-	const image = Buffer.from(await response.arrayBuffer())
+	const image = arrayBufferToBase64(await response.arrayBuffer())
 
-	return `data:${contentType};base64,${image.toString("base64")}`
-}
-
-const readImageDataUri = async (path: string) => {
-	const contentType =
-		imageContentTypes[extname(path).toLocaleLowerCase("en")] || "image/jpeg"
-	const image = await readFile(path)
-
-	return `data:${contentType};base64,${image.toString("base64")}`
+	return `data:${contentType};base64,${image}`
 }
 
 const getImageDataUri = async (url: string) => {
@@ -112,15 +105,6 @@ const getImageDataUri = async (url: string) => {
 
 	const dataUri = fetchImageDataUri(url)
 	imageDataUriCache.set(url, dataUri)
-	return dataUri
-}
-
-const getLocalImageDataUri = async (path: string) => {
-	const cached = imageDataUriCache.get(path)
-	if (cached) return cached
-
-	const dataUri = readImageDataUri(path)
-	imageDataUriCache.set(path, dataUri)
 	return dataUri
 }
 
@@ -320,52 +304,58 @@ export const renderOgImage = async (
 	input: OgImageInput,
 	origin: string | URL,
 ) => {
+	const cardArtUrl = input.cardArtUrl
+		? new URL(input.cardArtUrl, origin).toString()
+		: undefined
+	const genericArtUrl = new URL(genericOgArt.src, origin).toString()
 	const [interFont, ebGaramondFont, notoSerifJpFont, cardArtDataUri] =
 		await Promise.all([
 			getAssetData(interFontUrl, origin),
 			getAssetData(ebGaramondFontUrl, origin),
 			getAssetData(notoSerifJpFontUrl, origin),
-			input.cardArtPath
-				? getLocalImageDataUri(input.cardArtPath)
-				: input.cardArtUrl
-					? getImageDataUri(input.cardArtUrl)
-					: undefined,
+			cardArtUrl ? getImageDataUri(cardArtUrl) : undefined,
 		])
 	const genericArtDataUri = cardArtDataUri
 		? undefined
-		: await getLocalImageDataUri(genericArtPath)
+		: await getImageDataUri(genericArtUrl)
 
-	return new ImageResponse(
-		template(input, cardArtDataUri, genericArtDataUri) as never,
-		{
-			width: ogImageWidth,
-			height: ogImageHeight,
-			fonts: [
-				{
-					name: "Inter",
-					data: interFont,
-					weight: 700,
-					style: "normal",
-				},
-				{
-					name: "EB Garamond",
-					data: ebGaramondFont,
-					weight: 400,
-					style: "normal",
-				},
-				{
-					name: "Noto Serif JP",
-					data: notoSerifJpFont,
-					weight: 400,
-					style: "normal",
-				},
-			],
-			headers: {
-				"Cache-Control": "public, max-age=86400",
-				"CDN-Cache-Control": "public, max-age=31536000",
-				"Vercel-CDN-Cache-Control":
-					"public, max-age=31536000, stale-while-revalidate=86400",
+	const options: TakumiRenderOptions = {
+		width: ogImageWidth,
+		height: ogImageHeight,
+		format: "png",
+		fontFamilies: ["Inter", "EB Garamond", "Noto Serif JP"],
+		fonts: [
+			{
+				name: "Inter",
+				data: interFont,
+				weight: 700,
+				style: "normal",
 			},
-		},
+			{
+				name: "EB Garamond",
+				data: ebGaramondFont,
+				weight: 400,
+				style: "normal",
+			},
+			{
+				name: "Noto Serif JP",
+				data: notoSerifJpFont,
+				weight: 400,
+				style: "normal",
+			},
+		],
+	}
+
+	const image = await render(
+		template(input, cardArtDataUri, genericArtDataUri),
+		options,
 	)
+
+	return new Response(image, {
+		headers: {
+			"Content-Type": "image/png",
+			"Cache-Control": "public, max-age=86400",
+			"CDN-Cache-Control": "public, max-age=31536000",
+		},
+	})
 }

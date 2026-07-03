@@ -10,25 +10,26 @@
 		"download:card-images": "node scripts/download-card-images.mjs",
 		"download:book-images": "node scripts/download-book-images.mjs",
 		"preview": "astro preview",
-		"astro": "astro"
+		"astro": "astro",
+		"generate-types": "wrangler types"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.9",
+		"@astrojs/cloudflare": "^14.1.1",
 		"@astrojs/sitemap": "^3.7.3",
-		"@astrojs/vercel": "^10.0.8",
 		"@fontsource-variable/eb-garamond": "^5.2.7",
 		"@fontsource/eb-garamond": "^5.2.7",
 		"@fontsource/inter": "^5.2.8",
 		"@fontsource/noto-serif-jp": "^5.2.8",
 		"@tailwindcss/vite": "^4.3.0",
-		"@vercel/analytics": "^2.0.1",
-		"@vercel/og": "^0.11.1",
-		"astro": "^6.4.5",
+		"astro": "^7.0.6",
 		"he": "^1.2.0",
 		"js-cookie": "^3.0.8",
 		"sharp": "^0.34.5",
 		"tailwindcss": "^4.3.0",
-		"typescript": "^6.0.3"
+		"takumi-js": "2.0.0-rc.3",
+		"typescript": "^6.0.3",
+		"wrangler": "^4.107.0"
 	},
 	"devDependencies": {
 		"@types/he": "^1.2.3",

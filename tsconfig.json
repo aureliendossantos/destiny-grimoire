@@ -11,5 +11,6 @@
 			"$utils/*": ["src/utils/*"],
 			"$styles/*": ["src/styles/*"]
 		}
-	}
+	},
+	"include": ["./worker-configuration.d.ts"]
 }
