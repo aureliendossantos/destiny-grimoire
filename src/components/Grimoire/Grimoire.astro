@@ -2,6 +2,7 @@
 import type { CollectionEntry } from "astro:content"
 import CardPreview from "$components/Grimoire/CardPreview.astro"
 import type { UserGrimoire } from "$utils/types"
+import type { CardImageManifest } from "$utils/card-image-manifest"
 
 interface Props {
 	themes: CollectionEntry<"grimoire">["data"]["themeCollection"]
@@ -9,9 +10,12 @@ interface Props {
 	userGrimoire?: UserGrimoire
 	membershipType?: 1 | 2
 	username?: string
+	/** Static card image paths, used by on-demand pages to skip `/_image`. */
+	imageManifest?: CardImageManifest
 }
 
-const { themes, userGrimoire, membershipType, username } = Astro.props
+const { themes, userGrimoire, membershipType, username, imageManifest } =
+	Astro.props
 const cards = Object.entries(Astro.props.cards).map(([_, card]) => card)
 const userCardIds = new Set(userGrimoire?.cardCollection.map((c) => c.cardId))
 ---
@@ -84,6 +88,7 @@ const userCardIds = new Set(userGrimoire?.cardCollection.map((c) => c.cardId))
 										!!userGrimoire &&
 										!userCardIds.has(brief.cardId)
 									}
+									image={imageManifest?.[brief.cardId]?.preview}
 								/>
 							))}
 						</div>

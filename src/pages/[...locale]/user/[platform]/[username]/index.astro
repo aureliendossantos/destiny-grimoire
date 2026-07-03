@@ -11,6 +11,7 @@ import {
 import Grimoire from "$components/Grimoire/Grimoire.astro"
 import { useTranslations } from "$utils/i18n"
 import SubHeader from "$components/Layout/SubHeader.astro"
+import { fetchCardImageManifest } from "$utils/card-image-manifest"
 
 const { locale, platform, username } = parseParamsWithUser(Astro.params)
 if (!locale) return new Response("Not found", { status: 404 })
@@ -27,6 +28,13 @@ if (!membershipId) return new Response("Not found", { status: 404 })
 
 const userGrimoire = await getUserGrimoire(membershipType, membershipId)
 if (!userGrimoire) return new Response("Not found", { status: 404 })
+
+// Reuse the statically-built card images instead of the on-demand `/_image`
+// endpoint (which always cache-misses on Vercel). Degrade gracefully to
+// `<Image>` if the manifest can't be fetched.
+const imageManifest = await fetchCardImageManifest(Astro.url.origin).catch(
+	() => undefined,
+)
 ---
 
 <Layout
@@ -75,6 +83,7 @@ if (!userGrimoire) return new Response("Not found", { status: 404 })
 				{userGrimoire}
 				{membershipType}
 				{username}
+				{imageManifest}
 			/>
 		</div>
 	</div>

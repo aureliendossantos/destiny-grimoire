@@ -10,6 +10,7 @@ import {
 } from "$utils/helpers"
 import CardPage from "$components/CardPage/CardPage.astro"
 import { useTranslations } from "$utils/i18n"
+import { fetchCardImageManifest } from "$utils/card-image-manifest"
 
 const { locale, platform, username, cardId } = parseParamsWithUser(Astro.params)
 if (!locale) return new Response("Not found", { status: 404 })
@@ -33,6 +34,13 @@ const userCard = userGrimoire.cardCollection.find(
 )
 // It's safe to assume there is only one bonus per card (I checked)
 const userBonus = userGrimoire.bonuses.find((b) => b.cardId == card.cardId)
+
+// Reuse the statically-built card image instead of the on-demand `/_image`
+// endpoint (which always cache-misses on Vercel). Degrade gracefully to
+// `<Image>` if the manifest can't be fetched.
+const image = await fetchCardImageManifest(Astro.url.origin)
+	.then((manifest) => manifest[card.cardId]?.page)
+	.catch(() => undefined)
 ---
 
 <Layout
@@ -48,6 +56,7 @@ const userBonus = userGrimoire.bonuses.find((b) => b.cardId == card.cardId)
 		{card}
 		{cards}
 		{themes}
+		{image}
 		user={{
 			card: userCard,
 			bonus: userBonus,

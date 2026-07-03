@@ -7,6 +7,10 @@ import {
 	getLocalizedPath,
 	useTranslations,
 } from "$utils/i18n"
+import {
+	CARD_PREVIEW_WIDTH,
+	type OptimizedImage,
+} from "$utils/card-image-manifest"
 import type { CollectionEntry } from "astro:content"
 
 interface Props {
@@ -14,12 +18,26 @@ interface Props {
 	membershipType?: 1 | 2
 	username?: string
 	isObscured?: boolean
+	/**
+	 * Pre-resolved static image (from the card image manifest). When provided,
+	 * a plain `<img>` pointing at the prebuilt `/_astro/…` file is rendered
+	 * instead of `<Image>`, so on-demand pages avoid the `/_image` endpoint.
+	 */
+	image?: OptimizedImage
 }
 
-const { card, membershipType, username, isObscured = false } = Astro.props
+const {
+	card,
+	membershipType,
+	username,
+	isObscured = false,
+	image,
+} = Astro.props
 const locale = getLocaleFromPathname(Astro.url.pathname) || "en"
 const t = useTranslations(locale)
-const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
+const cardImage = image
+	? undefined
+	: getCardImage(card.cardId, card.highResolution.image.sheetPath)
 ---
 
 <a
@@ -36,12 +54,26 @@ const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
 		"opacity-60 grayscale hover:opacity-100 hover:grayscale-0": isObscured,
 	}}
 >
-	<Image
-		src={cardImage}
-		alt={t("card-illustration-alt")}
-		class="absolute inset-0 h-full w-full bg-slate-400 object-cover"
-		width={320}
-	/>
+	{
+		image ? (
+			<img
+				src={image.src}
+				alt={t("card-illustration-alt")}
+				width={image.width}
+				height={image.height}
+				loading="lazy"
+				decoding="async"
+				class="absolute inset-0 h-full w-full bg-slate-400 object-cover"
+			/>
+		) : (
+			<Image
+				src={cardImage!}
+				alt={t("card-illustration-alt")}
+				class="absolute inset-0 h-full w-full bg-slate-400 object-cover"
+				width={CARD_PREVIEW_WIDTH}
+			/>
+		)
+	}
 	<h3
 		class="z-10 text-xs font-semibold text-balance text-slate-100 sm:text-sm lg:text-base lg:leading-snug"
 		style={{ textShadow: "0 0 0.1em #000" }}

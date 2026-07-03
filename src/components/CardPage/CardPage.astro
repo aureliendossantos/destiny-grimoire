@@ -6,6 +6,10 @@ import type { UserBonus, UserCard, UserGrimoire } from "$utils/types"
 import type { CollectionEntry } from "astro:content"
 import CardNav from "./CardNav.astro"
 import type { Translator } from "$utils/i18n"
+import {
+	CARD_PAGE_WIDTH,
+	type OptimizedImage,
+} from "$utils/card-image-manifest"
 
 interface Props {
 	t: Translator
@@ -20,12 +24,28 @@ interface Props {
 		name: string
 		grimoire: UserGrimoire
 	}
+	/**
+	 * Pre-resolved static image (from the card image manifest). When provided,
+	 * a plain `<img>` pointing at the prebuilt `/_astro/…` file is rendered
+	 * instead of `<Image>`, so on-demand pages avoid the `/_image` endpoint.
+	 */
+	image?: OptimizedImage
 }
 
-const { t, card, cards, themes, user } = Astro.props
+const { t, card, cards, themes, user, image } = Astro.props
 
 const description = card.cardDescription && addAbbrs(card.cardDescription)
-const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
+const cardImage = image
+	? undefined
+	: getCardImage(card.cardId, card.highResolution.image.sheetPath)
+
+const cardImageClass = [
+	"order-last mb-4 max-h-28 w-auto rounded-sm bg-slate-400 shadow transition duration-300 ease-out md:order-first md:max-h-none",
+	{
+		"opacity-60 grayscale hover:opacity-100 hover:grayscale-0":
+			user && !user.card,
+	},
+]
 ---
 
 <div class="mx-4">
@@ -33,18 +53,25 @@ const cardImage = getCardImage(card.cardId, card.highResolution.image.sheetPath)
 		class="m-auto mt-12 grid w-full max-w-xl grid-cols-1 md:grid-cols-3 md:gap-x-12"
 	>
 		<div class="flex gap-x-4 text-slate-700 md:block">
-			<Image
-				src={cardImage}
-				alt={t("card-illustration-alt")}
-				class:list={[
-					"order-last mb-4 max-h-28 w-auto rounded-sm bg-slate-400 shadow transition duration-300 ease-out md:order-first md:max-h-none",
-					{
-						"opacity-60 grayscale hover:opacity-100 hover:grayscale-0":
-							user && !user.card,
-					},
-				]}
-				width={560}
-			/>
+			{
+				image ? (
+					<img
+						src={image.src}
+						alt={t("card-illustration-alt")}
+						width={image.width}
+						height={image.height}
+						decoding="async"
+						class:list={cardImageClass}
+					/>
+				) : (
+					<Image
+						src={cardImage!}
+						alt={t("card-illustration-alt")}
+						class:list={cardImageClass}
+						width={CARD_PAGE_WIDTH}
+					/>
+				)
+			}
 			<div class="col-span-2 mb-7 grow md:mb-0">
 				<h1
 					class="mb-[2px] leading-snug font-bold"
