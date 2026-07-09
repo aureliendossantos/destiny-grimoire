@@ -13,6 +13,7 @@ const { locale } = Astro.props
 const t = useTranslations(locale)
 const description =
 	"Browse Destiny Grimoire Cards, lore entries, and Destiny 1 collection trackers in The Grimoire Archive."
+const logoutPath = getLocalizedPath(locale, "/logout?redirect=/")
 const structuredData = getWebSiteStructuredData(
 	new URL(getLocalizedPath(locale, "/"), Astro.site || Astro.url),
 	new URL(getLocalizedPath(locale, "/search"), Astro.site || Astro.url),
@@ -46,6 +47,44 @@ const items = [
 	{structuredData}
 	onIndexPage
 >
+	<section class="mx-4 mt-8" aria-label="Service notice">
+		<div
+			class="m-auto flex max-w-3xl gap-3 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-950 shadow-sm"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				stroke-width="2"
+				class="mt-0.5 h-5 w-5 shrink-0 text-amber-600"
+				aria-hidden="true"
+			>
+				<path
+					d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"
+				></path>
+				<path d="M12 9v4"></path>
+				<path d="M12 17h.01"></path>
+			</svg>
+			<p>
+				We're having trouble getting Bungie user info. Please
+				<a
+					href={logoutPath}
+					data-login-warning-logout
+					class="hidden font-semibold text-amber-900 underline decoration-amber-700/50 underline-offset-2 hover:text-amber-700"
+				>
+					log out
+				</a>
+				<span data-login-warning-logout-text class="font-semibold"
+					>log out</span
+				>
+				if some pages are not loading. We will deploy a fix in the next few
+				days. Thank you for your patience.
+			</p>
+		</div>
+	</section>
 	<DashboardControls {locale} showUnobtainedControl />
 	<div class="mx-4">
 		<NavGrid {items} class="m-auto my-12 max-w-3xl" />
@@ -64,11 +103,17 @@ const items = [
 		const username = loginCookie.username
 		const grimoireLink = document.getElementById("dashboard-grimoire-card")
 		const trackerLink = document.getElementById("dashboard-tracker-card")
+		const logoutLink = document.querySelector("[data-login-warning-logout]")
+		const logoutText = document.querySelector(
+			"[data-login-warning-logout-text]",
+		)
 
 		grimoireLink?.setAttribute("href", `/user/${platform}/${username}`)
 		trackerLink?.setAttribute(
 			"href",
 			`/user/${platform}/${username}/tracker`,
 		)
+		logoutLink?.classList.remove("hidden")
+		logoutText?.classList.add("hidden")
 	}
 </script>
