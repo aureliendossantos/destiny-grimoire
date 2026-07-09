@@ -1,10 +1,11 @@
 allowBuilds:
-    esbuild: true
-    sharp: true
+  '@parcel/watcher': true
+  esbuild: true
+  sharp: true
 minimumReleaseAge: 60
 minimumReleaseAgeExclude:
-    - astro@6.4.5
-    - "@astrojs/internal-helpers@0.10.1"
-    - "@astrojs/markdown-satteri@0.3.3"
-    - "@astrojs/vercel@11.0.2"
-    - astro@7.0.6
+  - astro@6.4.5
+  - "@astrojs/internal-helpers@0.10.1"
+  - "@astrojs/markdown-satteri@0.3.3"
+  - "@astrojs/vercel@11.0.2"
+  - astro@7.0.6

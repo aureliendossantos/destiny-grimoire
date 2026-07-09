@@ -1,12 +1,12 @@
 import { defineConfig } from "astro/config"
 import sitemap from "@astrojs/sitemap"
-import vercel from "@astrojs/vercel"
+import netlify from "@astrojs/netlify"
 import tailwindcss from "@tailwindcss/vite"
 
 // https://astro.build/config
 export default defineConfig({
 	output: "static",
-	adapter: vercel({ webAnalytics: { enabled: false } }),
+	adapter: netlify(),
 	site: "https://grimoire.aureliendossantos.com",
 	compressHTML: true /* keeps whitespace like in Astro 6 */,
 	integrations: [
