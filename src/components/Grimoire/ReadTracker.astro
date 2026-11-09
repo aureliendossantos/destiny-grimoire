@@ -1,0 +1,168 @@
+---
+// Client-side "read" tracking. Read cards are stored in localStorage, so they
+// stay private to the browser and are shared between users and global pages.
+---
+
+<script is:inline>
+	;(() => {
+		const READ_KEY = "grimoire-read-cards"
+		const HIDE_KEY = "grimoire-hide-read"
+		const AUTO_KEY = "grimoire-auto-read"
+
+		const storage = {
+			get: (key) => {
+				try {
+					return localStorage.getItem(key)
+				} catch {
+					return null
+				}
+			},
+			set: (key, value) => {
+				try {
+					localStorage.setItem(key, value)
+				} catch {
+					// Storage can be unavailable, e.g. in private windows.
+				}
+			},
+		}
+
+		let read = new Set()
+		let hideRead = false
+		let autoRead = false
+		const load = () => {
+			try {
+				const ids = JSON.parse(storage.get(READ_KEY) ?? "[]")
+				read = new Set(Array.isArray(ids) ? ids.map(String) : [])
+			} catch {
+				read = new Set()
+			}
+			hideRead = storage.get(HIDE_KEY) === "true"
+			autoRead = storage.get(AUTO_KEY) === "true"
+		}
+
+		const saveRead = () => storage.set(READ_KEY, JSON.stringify([...read]))
+
+		const toggles = document.querySelectorAll("[data-read-toggle]")
+		const gridCards = document.querySelectorAll("[data-grimoire-card]")
+		if (toggles.length === 0 && gridCards.length === 0) return
+
+		const idOf = (element) => element.closest("[data-card-id]")?.dataset.cardId
+
+		/** A card counts as visible unless the spoiler toggle or "hide read" removes it. */
+		const isVisible = (element) =>
+			!element.hidden && !element.classList.contains("hidden")
+
+		const render = () => {
+			for (const card of gridCards) {
+				const isRead = read.has(card.dataset.cardId)
+				card.toggleAttribute("data-read", isRead)
+				card.classList.toggle("hidden", hideRead && isRead)
+			}
+
+			for (const toggle of document.querySelectorAll("[data-read-toggle]")) {
+				const isRead = read.has(idOf(toggle))
+				const label = isRead
+					? toggle.dataset.labelUnread
+					: toggle.dataset.labelRead
+				toggle.setAttribute("aria-pressed", String(isRead))
+				const text = toggle.querySelector("[data-read-text]")
+				if (text) text.textContent = label
+				else toggle.setAttribute("aria-label", label)
+			}
+
+			// Hide subcategories and categories that have no visible card left.
+			for (const page of document.querySelectorAll("[data-page-group]")) {
+				const cards = page.querySelectorAll("[data-grimoire-card]")
+				page.classList.toggle("hidden", ![...cards].some(isVisible))
+			}
+			for (const theme of document.querySelectorAll("[data-theme-group]")) {
+				const pages = theme.querySelectorAll("[data-page-group]")
+				theme.classList.toggle("hidden", ![...pages].some(isVisible))
+			}
+
+			for (const box of document.querySelectorAll("[data-hide-read-toggle]")) {
+				box.checked = hideRead
+			}
+			for (const box of document.querySelectorAll("[data-auto-read-toggle]")) {
+				box.checked = autoRead
+			}
+			const unlocked = [...gridCards].filter((card) => !card.hidden)
+			const readCount = unlocked.filter((card) =>
+				read.has(card.dataset.cardId),
+			).length
+			for (const count of document.querySelectorAll("[data-read-count]")) {
+				count.textContent = `${readCount} / ${unlocked.length} ${count.dataset.readLabel}`
+			}
+		}
+
+		const sync = () => {
+			load()
+			render()
+		}
+
+		document.addEventListener("click", (event) => {
+			const toggle = event.target.closest?.("[data-read-toggle]")
+			const id = toggle && idOf(toggle)
+			if (!id) return
+
+			if (!read.delete(id)) read.add(id)
+			saveRead()
+			render()
+		})
+
+		document.addEventListener("change", (event) => {
+			if (event.target.matches?.("[data-hide-read-toggle]")) {
+				hideRead = event.target.checked
+				storage.set(HIDE_KEY, String(hideRead))
+			} else if (event.target.matches?.("[data-auto-read-toggle]")) {
+				autoRead = event.target.checked
+				storage.set(AUTO_KEY, String(autoRead))
+			} else {
+				return
+			}
+			render()
+		})
+
+		/** Marks a card as read if "mark as read when opened" is on. */
+		const markOpened = (id) => {
+			if (!autoRead || !id || read.has(id)) return
+			read.add(id)
+			saveRead()
+		}
+
+		// The card reader opened a card in its popup.
+		document.addEventListener("grimoire:card-opened", (event) => {
+			markOpened(event.detail?.cardId)
+			render()
+		})
+
+		// The unobtained toggle in Layout changes `hidden` on cards and pages.
+		let queued = false
+		new MutationObserver(() => {
+			if (queued) return
+			queued = true
+			queueMicrotask(() => {
+				queued = false
+				render()
+			})
+		}).observe(document.body, {
+			subtree: true,
+			attributes: true,
+			attributeFilter: ["hidden"],
+		})
+
+		// Pick up changes made in another tab or restored from the back/forward cache.
+		window.addEventListener("storage", sync)
+		window.addEventListener("pageshow", (event) => {
+			if (event.persisted) sync()
+		})
+
+		load()
+		// A card page visited directly counts as opened.
+		markOpened(
+			document.querySelector("[data-card-reader-content] [data-read-toggle]")
+				?.dataset.cardId,
+		)
+		render()
+	})()
+</script>

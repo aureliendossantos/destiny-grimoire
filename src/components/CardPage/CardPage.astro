@@ -51,9 +51,11 @@ const cardImageClass = [
 ]
 ---
 
-<div class="mx-4">
+<div class="mx-4 mt-12">
+	<!-- The grid card reader fetches this page and shows this block in a popup. -->
 	<div
-		class="m-auto mt-12 grid w-full max-w-xl grid-cols-1 md:grid-cols-3 md:gap-x-12"
+		data-card-reader-content
+		class="m-auto grid w-full max-w-xl grid-cols-1 md:grid-cols-3 md:gap-x-12"
 	>
 		<div class="flex gap-x-4 text-slate-700 md:block">
 			{
@@ -297,6 +299,30 @@ const cardImageClass = [
 					/>
 				)
 			}
+			<button
+				type="button"
+				data-read-toggle
+				data-card-id={card.cardId}
+				data-label-read={t("mark-as-read")}
+				data-label-unread={t("read-mark-as-unread")}
+				aria-pressed="false"
+				class="group mt-8 inline-flex cursor-pointer items-center gap-2 rounded-md bg-slate-200 px-4 py-[10px] text-sm font-medium text-slate-600 transition hover:bg-slate-300 hover:text-slate-800 aria-pressed:bg-transparent aria-pressed:ring-1 aria-pressed:ring-slate-300 aria-pressed:ring-inset aria-pressed:hover:bg-slate-200"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="3"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					class="hidden h-3.5 w-3.5 group-aria-pressed:block"
+					aria-hidden="true"
+				>
+					<path d="m5 12.5 4.5 4.5L19 7.5" />
+				</svg>
+				<span data-read-text>{t("mark-as-read")}</span>
+			</button>
 		</div>
 	</div>
 </div>

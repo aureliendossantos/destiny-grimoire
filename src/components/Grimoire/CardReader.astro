@@ -1,0 +1,276 @@
+---
+// Opens grid cards in a popup instead of leaving the grid. The popup shows the
+// card page's own content block, fetched from the real card URL, so the text,
+// stats and read button stay identical to the full page. The URL follows the
+// open card, so back closes the popup and links can still be shared.
+import { getLocaleFromPathname, useTranslations } from "$utils/i18n"
+
+const locale = getLocaleFromPathname(Astro.url.pathname) || "en"
+const t = useTranslations(locale)
+
+const toolbarButton =
+	"inline-flex min-h-10 min-w-10 cursor-pointer items-center justify-center gap-1 rounded-md px-2 py-1 transition sm:min-h-0 sm:min-w-0 hover:bg-slate-200 hover:text-slate-700 disabled:cursor-default disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-slate-500"
+---
+
+<dialog
+	data-card-reader
+	data-label-loading={t("reader-loading")}
+	data-label-error={t("reader-error")}
+	aria-label={t("reader-title")}
+	class="m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-3xl overflow-y-auto overscroll-contain rounded-sm border border-slate-200 bg-slate-50 p-0 text-slate-950 shadow-xl backdrop:bg-slate-900/30"
+>
+	<div
+		class="sticky top-0 z-10 flex items-center gap-1 border-b border-slate-200 bg-slate-50/95 px-2 py-1.5 text-sm text-slate-500 sm:px-3"
+	>
+		<button type="button" data-reader-prev class={toolbarButton}>
+			<span aria-hidden="true">‹</span>
+			<span class="max-sm:sr-only">{t("reader-previous")}</span>
+		</button>
+		<span
+			data-reader-position
+			class="px-1 text-xs text-slate-400 tabular-nums"></span>
+		<button type="button" data-reader-next class={toolbarButton}>
+			<span class="max-sm:sr-only">{t("reader-next")}</span>
+			<span aria-hidden="true">›</span>
+		</button>
+		<span class="grow"></span>
+		<a data-reader-full href="" class={toolbarButton}>
+			{t("reader-full-page")}
+		</a>
+		<button
+			type="button"
+			data-reader-close
+			aria-label={t("reader-close")}
+			class={toolbarButton}
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				class="h-4 w-4"
+				aria-hidden="true"
+			>
+				<path d="M6 6l12 12M18 6 6 18"></path>
+			</svg>
+		</button>
+	</div>
+	<div
+		data-reader-body
+		class="px-4 pt-8 pb-10 transition-opacity aria-busy:opacity-40 sm:px-8"
+	>
+	</div>
+</dialog>
+
+<script is:inline>
+	;(() => {
+		const dialog = document.querySelector("[data-card-reader]")
+		if (!(dialog instanceof HTMLDialogElement)) return
+
+		const body = dialog.querySelector("[data-reader-body]")
+		const fullLink = dialog.querySelector("[data-reader-full]")
+		const prevButton = dialog.querySelector("[data-reader-prev]")
+		const nextButton = dialog.querySelector("[data-reader-next]")
+		const position = dialog.querySelector("[data-reader-position]")
+
+		const pageTitle = document.title
+		/** Fetch promises by URL, so neighbours can be prefetched and reopened instantly. */
+		const cache = new Map()
+		let current = null
+		let token = 0
+
+		const linkOf = (card) => card.querySelector(":scope > a")
+		const allCards = () => [
+			...document.querySelectorAll("[data-grimoire-card]"),
+		]
+		/** Skips cards removed by the unobtained toggle or by "hide read cards". */
+		const isShown = (card) => card.getClientRects().length > 0
+
+		// Walks from the open card even when it was just hidden, e.g. marked as
+		// read while "hide read cards" is on.
+		const neighbour = (direction) => {
+			const cards = allCards()
+			for (
+				let i = cards.indexOf(current) + direction;
+				i >= 0 && i < cards.length;
+				i += direction
+			) {
+				if (isShown(cards[i])) return cards[i]
+			}
+			return null
+		}
+
+		const fetchCard = (url) => {
+			if (cache.has(url)) return cache.get(url)
+			const request = fetch(url, { credentials: "same-origin" }).then(
+				async (response) => {
+					if (!response.ok) throw new Error(String(response.status))
+					const doc = new DOMParser().parseFromString(
+						await response.text(),
+						"text/html",
+					)
+					const content = doc.querySelector("[data-card-reader-content]")
+					if (!content) throw new Error("Missing card content")
+					return { content, title: doc.title }
+				},
+			)
+			cache.set(url, request)
+			request.catch(() => cache.delete(url))
+			return request
+		}
+
+		const status = (text) => {
+			const line = document.createElement("p")
+			line.className = "py-16 text-center font-serif text-lg text-slate-400 italic"
+			line.textContent = text
+			return line
+		}
+
+		const updateNav = () => {
+			if (!current) return
+			prevButton.disabled = !neighbour(-1)
+			nextButton.disabled = !neighbour(1)
+			// Keep the open card counted, even once "hide read cards" removes it.
+			const shown = allCards().filter(
+				(card) => card === current || isShown(card),
+			)
+			const index = shown.indexOf(current)
+			position.textContent =
+				index >= 0 ? `${index + 1} / ${shown.length}` : ""
+		}
+
+		/** historyMode is "push" from the grid, "replace" inside the reader, or null on popstate. */
+		const show = async (card, historyMode) => {
+			const link = card && linkOf(card)
+			if (!link) return
+
+			current = card
+			const id = ++token
+			const url = link.href
+			fullLink.href = url
+			const state = { cardReader: card.dataset.cardId }
+			if (historyMode === "push") history.pushState(state, "", url)
+			if (historyMode === "replace") history.replaceState(state, "", url)
+
+			if (!dialog.open) {
+				body.replaceChildren(status(dialog.dataset.labelLoading))
+				dialog.showModal()
+				document.documentElement.style.overflow = "hidden"
+			}
+			updateNav()
+			body.setAttribute("aria-busy", "true")
+
+			try {
+				const { content, title } = await fetchCard(url)
+				if (id !== token) return
+				body.replaceChildren(document.importNode(content, true))
+				document.title = title
+				// Lets the read tracker set up the page's read button and apply
+				// "mark as read when opened".
+				document.dispatchEvent(
+					new CustomEvent("grimoire:card-opened", {
+						detail: { cardId: card.dataset.cardId },
+					}),
+				)
+			} catch {
+				if (id !== token) return
+				body.replaceChildren(status(dialog.dataset.labelError))
+			}
+			updateNav()
+			body.removeAttribute("aria-busy")
+			dialog.scrollTop = 0
+
+			for (const next of [neighbour(1), neighbour(-1)]) {
+				if (next) fetchCard(linkOf(next).href).catch(() => {})
+			}
+		}
+
+		const step = (direction) => {
+			const card = neighbour(direction)
+			if (card) show(card, "replace")
+		}
+
+		dialog.addEventListener("close", () => {
+			token++
+			current = null
+			document.documentElement.style.overflow = ""
+			document.title = pageTitle
+			if (history.state?.cardReader) history.back()
+		})
+
+		dialog.addEventListener("click", (event) => {
+			// The dialog itself is only hit outside its content, i.e. on the backdrop.
+			if (event.target === dialog) dialog.close()
+			// Marking as read can hide the card from the grid, which changes the neighbours.
+			if (event.target.closest?.("[data-read-toggle]")) setTimeout(updateNav)
+		})
+		prevButton.addEventListener("click", () => step(-1))
+		nextButton.addEventListener("click", () => step(1))
+		dialog
+			.querySelector("[data-reader-close]")
+			.addEventListener("click", () => dialog.close())
+
+		dialog.addEventListener("keydown", (event) => {
+			if (event.altKey || event.ctrlKey || event.metaKey) return
+			if (event.key === "ArrowLeft") step(-1)
+			else if (event.key === "ArrowRight") step(1)
+		})
+
+		// Swiping sideways on touch screens moves to the previous or next card.
+		// Mostly vertical gestures are left alone, so the popup still scrolls.
+		let touchStart = null
+		dialog.addEventListener(
+			"touchstart",
+			(event) => {
+				const touch = event.touches[0]
+				touchStart =
+					event.touches.length === 1
+						? { x: touch.clientX, y: touch.clientY }
+						: null
+			},
+			{ passive: true },
+		)
+		dialog.addEventListener("touchend", (event) => {
+			if (!touchStart) return
+			const touch = event.changedTouches[0]
+			const dx = touch.clientX - touchStart.x
+			const dy = touch.clientY - touchStart.y
+			touchStart = null
+			if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+				step(dx < 0 ? 1 : -1)
+			}
+		})
+
+		// Plain clicks open the reader. Modified clicks still open the card page.
+		document.addEventListener("click", (event) => {
+			if (
+				event.defaultPrevented ||
+				event.button !== 0 ||
+				event.metaKey ||
+				event.ctrlKey ||
+				event.shiftKey ||
+				event.altKey
+			) {
+				return
+			}
+			const link = event.target.closest?.("[data-grimoire-card] > a")
+			if (!link) return
+
+			event.preventDefault()
+			show(link.parentElement, dialog.open ? "replace" : "push")
+		})
+
+		window.addEventListener("popstate", (event) => {
+			const id = event.state?.cardReader
+			const card =
+				id &&
+				document.querySelector(
+					`[data-grimoire-card][data-card-id="${CSS.escape(id)}"]`,
+				)
+			if (card) show(card, null)
+			else if (dialog.open) dialog.close()
+		})
+	})()
+</script>
