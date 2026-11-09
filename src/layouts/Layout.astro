@@ -2,6 +2,7 @@
 import Footer, { type FooterProps } from "$components/Layout/Footer.astro"
 import Header from "$components/Layout/Header.astro"
 import Seo from "$components/Layout/Seo.astro"
+import ReadTracker from "$components/Grimoire/ReadTracker.astro"
 import { getLocaleFromPathname, htmlLang } from "$utils/i18n"
 import type { StructuredData } from "$utils/seo"
 import "$styles/tailwind.css"
@@ -111,5 +112,6 @@ const locale = getLocaleFromPathname(pathname) || "en"
 				})
 			})()
 		</script>
+		<ReadTracker />
 	</body>
 </html>

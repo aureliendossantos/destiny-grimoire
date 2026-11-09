@@ -1,0 +1,33 @@
+---
+import { useTranslations, type SupportedLocale } from "$utils/i18n"
+
+interface Props {
+	locale: SupportedLocale
+}
+
+const t = useTranslations(Astro.props.locale)
+---
+
+<!-- The sub-header caps its subtitle at 66% wide. On phones, use the full width. -->
+<div
+	class="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 max-sm:w-[calc(100vw-2rem)]"
+>
+	<label class="flex cursor-pointer items-center gap-2 text-slate-500">
+		<input
+			type="checkbox"
+			data-hide-read-toggle
+			class="h-3 w-3 accent-slate-600"
+		/>
+		<span>{t("hide-read-cards")}</span>
+	</label>
+	<label class="flex cursor-pointer items-center gap-2 text-slate-500">
+		<input
+			type="checkbox"
+			data-auto-read-toggle
+			class="h-3 w-3 accent-slate-600"
+		/>
+		<span>{t("auto-read-cards")}</span>
+	</label>
+	<span class="text-slate-400" data-read-count data-read-label={t("read-label")}
+	></span>
+</div>

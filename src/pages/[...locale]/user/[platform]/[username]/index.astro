@@ -11,6 +11,7 @@ import {
 import Grimoire from "$components/Grimoire/Grimoire.astro"
 import { useTranslations } from "$utils/i18n"
 import SubHeader from "$components/Layout/SubHeader.astro"
+import ReadControls from "$components/Grimoire/ReadControls.astro"
 import { fetchCardImageManifest } from "$utils/card-image-manifest"
 
 const { locale, platform, username } = parseParamsWithUser(Astro.params)
@@ -73,6 +74,7 @@ const imageManifest = await fetchCardImageManifest(Astro.url.origin).catch(
 				/>
 				<span>{t("show-unobtained-cards")}</span>
 			</label>
+			<ReadControls {locale} />
 		</div>
 	</SubHeader>
 	<div class="mr-2 ml-10 sm:mr-4">

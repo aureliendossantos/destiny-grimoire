@@ -40,43 +40,84 @@ const cardImage = image
 	: getCardImage(card.cardId, card.highResolution.image.sheetPath)
 ---
 
-<a
-	href={getLocalizedPath(
-		locale,
-		membershipType && username
-			? `/user/${membershipTypeToPath(membershipType)}/${username}/${card.cardId}`
-			: `/${card.cardId}`,
-	)}
+<div
+	data-grimoire-card
+	data-card-id={card.cardId}
 	data-spoiler-hidden={isObscured ? "" : undefined}
 	hidden={isObscured}
-	class="relative flex aspect-card flex-col justify-end overflow-hidden rounded-sm px-3 py-3 shadow transition duration-300 ease-out hover:scale-105 hover:shadow-xl sm:px-4 md:px-5 md:py-[17px]"
+	class="group relative rounded-sm shadow transition duration-300 ease-out hover:scale-105 hover:shadow-xl"
 	class:list={{
 		"opacity-60 grayscale hover:opacity-100 hover:grayscale-0": isObscured,
 	}}
 >
+	<a
+		href={getLocalizedPath(
+			locale,
+			membershipType && username
+				? `/user/${membershipTypeToPath(membershipType)}/${username}/${card.cardId}`
+				: `/${card.cardId}`,
+		)}
+		class="relative flex aspect-card flex-col justify-end overflow-hidden rounded-sm px-3 py-3 sm:px-4 md:px-5 md:py-[17px]"
+	>
+		{
+			image ? (
+				<img
+					src={image.src}
+					alt={t("card-illustration-alt")}
+					width={image.width}
+					height={image.height}
+					loading="lazy"
+					decoding="async"
+					class="absolute inset-0 h-full w-full bg-slate-400 object-cover"
+				/>
+			) : (
+				<Image
+					src={cardImage!}
+					alt={t("card-illustration-alt")}
+					class="absolute inset-0 h-full w-full bg-slate-400 object-cover"
+					width={CARD_PREVIEW_WIDTH}
+				/>
+			)
+		}
+		<h3
+			class="z-10 text-xs font-semibold text-balance text-slate-100 sm:text-sm lg:text-base lg:leading-snug"
+			style={{ textShadow: "0 0 0.1em #000" }}
+			set:html={card.cardName}
+		/>
+	</a>
 	{
-		image ? (
-			<img
-				src={image.src}
-				alt={t("card-illustration-alt")}
-				width={image.width}
-				height={image.height}
-				loading="lazy"
-				decoding="async"
-				class="absolute inset-0 h-full w-full bg-slate-400 object-cover"
-			/>
-		) : (
-			<Image
-				src={cardImage!}
-				alt={t("card-illustration-alt")}
-				class="absolute inset-0 h-full w-full bg-slate-400 object-cover"
-				width={CARD_PREVIEW_WIDTH}
-			/>
+		!isObscured && (
+			<button
+				type="button"
+				data-read-toggle
+				data-label-read={t("mark-as-read")}
+				data-label-unread={t("mark-as-unread")}
+				aria-label={t("mark-as-read")}
+				aria-pressed="false"
+				class="group/read absolute top-0 right-2.5 z-20 h-[30px] w-5 cursor-pointer text-slate-400 opacity-0 transition group-hover:opacity-100 hover:text-slate-700 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-50 aria-pressed:text-slate-700 aria-pressed:opacity-100 pointer-coarse:opacity-100 pointer-coarse:after:absolute pointer-coarse:after:-inset-x-3 pointer-coarse:after:top-0 pointer-coarse:after:-bottom-3 pointer-coarse:after:content-['']"
+			>
+				{/* A bookmark ribbon hanging from the card's top edge. The shape is on
+				an inner span so the clip-path doesn't cut off the focus outline.
+				Touch screens can't hover, so there it always shows and gets a
+				larger tap area. */}
+				<span
+					class="flex h-full w-full items-center justify-center bg-slate-50/90 pb-1.5 [clip-path:polygon(0_0,100%_0,100%_100%,50%_76%,0_100%)] group-aria-pressed/read:bg-slate-50"
+					aria-hidden="true"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="3.5"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						class="h-3 w-3"
+					>
+						<path d="m5 12.5 4.5 4.5L19 7.5" />
+					</svg>
+				</span>
+			</button>
 		)
 	}
-	<h3
-		class="z-10 text-xs font-semibold text-balance text-slate-100 sm:text-sm lg:text-base lg:leading-snug"
-		style={{ textShadow: "0 0 0.1em #000" }}
-		set:html={card.cardName}
-	/>
-</a>
+</div>

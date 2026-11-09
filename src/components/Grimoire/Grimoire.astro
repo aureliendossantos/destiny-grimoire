@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content"
 import CardPreview from "$components/Grimoire/CardPreview.astro"
+import CardReader from "$components/Grimoire/CardReader.astro"
 import type { UserGrimoire } from "$utils/types"
 import type { CardImageManifest } from "$utils/card-image-manifest"
 
@@ -22,7 +23,7 @@ const userCardIds = new Set(userGrimoire?.cardCollection.map((c) => c.cardId))
 
 {
 	themes.map((theme) => (
-		<div>
+		<div data-theme-group>
 			<h2
 				class="-mt-2 -mb-5 -ml-10 font-serif text-[72px] text-slate-300 sm:-mt-5 sm:-mb-7 sm:text-[96px]"
 				set:html={theme.themeName}
@@ -36,6 +37,7 @@ const userCardIds = new Set(userGrimoire?.cardCollection.map((c) => c.cardId))
 				return (
 					<div
 						class="relative mb-2 sm:mb-4"
+						data-page-group
 						data-spoiler-hidden={pageIsSpoilerOnly ? "" : undefined}
 						hidden={pageIsSpoilerOnly}
 					>
@@ -128,3 +130,5 @@ const userCardIds = new Set(userGrimoire?.cardCollection.map((c) => c.cardId))
 		</div>
 	))
 }
+
+<CardReader />
